@@ -1,0 +1,690 @@
+/* 
+ * 字体定义模块
+ * 功能：定义文档中使用的所有字体文件，包括中英文字体和等宽字体
+ * 效果：
+ *   - Geist: 主要英文字体，支持100-900字重，正常样式
+ *   - Geist Italic: 英文斜体字体，支持100-900字重
+ *   - GeistMono: 英文等宽字体，用于代码显示
+ *   - LXGWWenKai: 中文霞鹜文楷字体，用于中文文本
+ *   - LXGWWenKaiMono: 中文等宽字体，用于中文代码显示
+ */
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/Geist[wght].woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GeistMono";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/GeistMono[wght].woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Geist";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/InterVariable-Italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "LXGWWenKai";
+  font-style: normal;
+  font-weight: normal;
+  src: url("/fonts/LXGWWenKai-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "LXGWWenKaiMono";
+  font-style: normal;
+  font-weight: normal;
+  src: url("/fonts/LXGWWenKaiMono-Regular.ttf") format("truetype");
+}
+
+/* 
+ * CSS变量定义模块
+ * 功能：定义整个主题使用的颜色、字体等CSS自定义属性
+ * 效果：
+ *   - 建立统一的色彩系统，方便整体主题色彩管理
+ *   - 定义灰度色阶、主题色、背景色等
+ *   - 设置字体栈，确保中英文显示兼容性
+ */
+:root {
+  /* 颜色系统 */
+  --v-white-100: #ffffff;      /* 纯白色 */
+  --v-white-200: #fafafa;      /* 浅灰色背景 */
+  --v-gray-1000: #171717;      /* 深灰色文字 */
+  --v-gray-900: #666666;       /* 次级文字灰色 */
+  --v-gray-800: #7d7d7d;       /* 注释文字颜色 */
+  --v-gray-700: #8f8f8f;       /* 较浅文字灰色 */
+  --v-gray-600: #a8a8a8;       /* 边框灰色 */
+  --v-gray-500: #c9c9c9;       /* 代码块背景灰色 */
+  --v-gray-400: #eaeaea;       /* 浅灰色边框 */
+  --v-purple-700: #8e4ec6;     /* 紫色主题色 */
+  --v-purple-900: #7820bc;     /* 深紫色 */
+  --v-red-700: #e5484d;        /* 红色警告色 */
+  --v-red-900: #cb2a2f;        /* 深红色 */
+  --v-amber-700: #f5b047;      /* 琥珀色 */
+  --v-amber-900: #a35200;      /* 深琥珀色 */
+  --v-green-700: #45a557;      /* 绿色成功色 */
+  --v-green-900: #297a3a;      /* 深绿色 */
+  --v-blue-600: #52aeff;       /* 浅蓝色 */
+  --v-blue-700: #0072f5;       /* 链接蓝色 */
+  --v-blue-900: #0068d6;       /* 深蓝色 */
+  --v-background: #282c34;     /* 代码块深色背景 */
+
+  /* 字体设置 */
+  --monospace: "GeistMono", "LXGWWenKaiMono";  /* 等宽字体栈 */
+
+  /* 背景颜色 */
+  --bg-color: rgb(250, 250, 252);    /* 主背景色 */
+  --bg-color2: rgb(236, 236, 238);   /* 次级背景色，用于表格隔行 */
+
+  /* 文字颜色 */
+  --text-color: #000;           /* 主要文字颜色 */
+  --text-grey: #666;            /* 灰色文字 */
+  --text-code: #2f479f;         /* 代码文字颜色 */
+  --title-color: #070909;       /* 标题颜色 */
+
+  /* 边框颜色 */
+  --border-color: #d2d2d2;      /* 通用边框颜色 */
+
+  /* 主题色系 - 用于不同类型的内容块 */
+  --color-1: #3e69d7;           /* 蓝色系 - 笔记类型 */
+  --color-1-0-a: rgba(62, 105, 215, 0.15);  /* 蓝色半透明背景 */
+  --color-1-0-b: rgba(62, 105, 215, 0.06);  /* 蓝色浅背景 */
+
+  --color-2: #f59102;           /* 橙色系 - 注意/警告类型 */
+  --color-2-0-a: rgba(245, 145, 2, 0.15);
+  --color-2-0-b: rgba(245, 145, 2, 0.06);
+  --color-2-0-c: rgba(245, 145, 2, 0.3);
+
+  --color-3: #03b736;           /* 绿色系 - 提示类型 */
+  --color-3-0-a: rgba(3, 183, 54, 0.15);
+  --color-3-0-b: rgba(3, 183, 54, 0.06);
+
+  --color-4: #8250df;           /* 紫色系 - 重要类型 */
+  --color-4-0-a: rgba(130, 80, 223, 0.15);
+  --color-4-0-b: rgba(130, 80, 223, 0.06);
+
+  --color-5: #e30f2e;           /* 红色系 - 警告类型 */
+  --color-5-0-a: rgba(227, 15, 46, 0.15);
+  --color-5-0-b: rgba(227, 15, 46, 0.06);
+
+  /* 高亮颜色 */
+  --tw-highlight-color: #fde047;  /* 文本高亮背景色 */
+
+  /* 主题色彩 */
+  --theme-900: #0f172a;         /* 深主题色，用于标题 */
+  --theme-400: #94a3b8;         /* 中灰色，用于次要元素 */
+  --tw-prose-headings: var(--theme-900);  /* 标题颜色引用 */
+
+  /* 标题指示器颜色 - 每个标题级别有不同颜色 */
+  --h1-ind-color: #E4374B;      /* 一级标题指示色 - 红色 */
+  --h2-ind-color: #0EB54F;      /* 二级标题指示色 - 绿色 */
+  --h3-ind-color: #076DDD;      /* 三级标题指示色 - 蓝色 */
+  --h4-ind-color: #876CE0;      /* 四级标题指示色 - 紫色 */
+  --h5-ind-color: #D2A852;      /* 五级标题指示色 - 金色 */
+  --h6-ind-color: #E0E5D5;      /* 六级标题指示色 - 浅灰色 */
+}
+
+/* 
+ * 打印样式模块
+ * 功能：优化文档打印时的显示效果
+ * 效果：
+ *   - 调整打印时的字体大小
+ *   - 避免代码块在打印时被分割到不同页面
+ *   - 调整引用块的打印边距
+ */
+@media print {
+  html {
+    font-size: 14px;          /* 打印时使用稍小的字体 */
+  }
+  pre {
+    page-break-inside: avoid; /* 防止代码块跨页断裂 */
+    word-wrap: break-word;    /* 允许长单词换行 */
+  }
+  blockquote p {
+    margin-left: 30px;        /* 引用段落增加左边距 */
+  }
+}
+
+/* 
+ * 基础样式模块
+ * 功能：设置HTML和Body的基础样式
+ * 效果：
+ *   - 设置基准字体大小和抗锯齿
+ *   - 定义页面背景色和文字颜色
+ *   - 设置舒适的行高
+ */
+html {
+  font-size: 17px;                   /* 设置基准字体大小 */
+  -webkit-font-smoothing: antialiased; /* 字体抗锯齿，使文字更清晰 */
+}
+
+body {
+  background-color: var(--v-white-200);  /* 使用定义的浅灰色背景 */
+  color: var(--v-gray-1000);             /* 使用深灰色文字 */
+  line-height: 1.6;                      /* 设置1.6倍行高，提高可读性 */
+  font-family: "Geist", "LXGWWenKai";    /* 设置中英文字体栈 */
+}
+
+/* 
+ * 内容容器模块
+ * 功能：定义文章内容的布局和样式
+ * 效果：
+ *   - 限制内容最大宽度，提高长文本可读性
+ *   - 设置合适的内边距
+ *   - 在大屏幕上自动增加内容宽度
+ */
+.post-body, .markdown-body {
+  margin: 0 auto;                      /* 水平居中 */
+  padding: 30px;                       /* 四周内边距 */
+  max-width: 860px;                    /* 默认最大宽度 */
+  font-family: "Geist", "LXGWWenKai";  /* 继承body字体设置 */
+}
+
+/* 大屏幕适配 - 在宽度超过1400px时增加内容区域宽度 */
+@media only screen and (min-width: 1400px) {
+  .post-body, .markdown-body {
+    max-width: 1024px;                 /* 中等屏幕增加宽度 */
+  }
+}
+
+/* 超大屏幕适配 - 在宽度超过1800px时进一步增加宽度 */
+@media only screen and (min-width: 1800px) {
+  .post-body, .markdown-body {
+    max-width: 1200px;                 /* 大屏幕最大宽度 */
+  }
+}
+
+/* 
+ * 标题样式模块
+ * 功能：定义所有标题级别（h1-h6）的样式
+ * 效果：
+ *   - 为每个标题添加左侧彩色指示条
+ *   - 设置不同级别的字体大小、粗细和颜色
+ *   - 优化标题间距和层级关系
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  position: relative;                  /* 为伪元素定位做准备 */
+  padding-left: 10px;                  /* 为左侧指示条留出空间 */
+  color: var(--tw-prose-headings);     /* 使用统一的标题颜色 */
+}
+
+/* 标题左侧指示条基础样式 */
+h1::before,
+h2::before,
+h3::before,
+h4::before,
+h5::before,
+h6::before {
+  content: '';                         /* 必须内容 */
+  position: absolute;                  /* 绝对定位 */
+  left: 0;                            /* 紧贴左侧 */
+  width: 3px;                         /* 指示条宽度 */
+  top: 2px;                           /* 上下留出2px边距 */
+  bottom: 2px;
+  height: calc(100% - 4px);           /* 计算高度，减去上下边距 */
+}
+
+/* 为每个标题级别设置不同的指示条颜色 */
+h1::before {
+  background-color: var(--h1-ind-color);  /* 一级标题 - 红色 */
+}
+
+h2::before {
+  background-color: var(--h2-ind-color);  /* 二级标题 - 绿色 */
+}
+
+h3::before {
+  background-color: var(--h3-ind-color);  /* 三级标题 - 蓝色 */
+}
+
+h4::before {
+  background-color: var(--h4-ind-color);  /* 四级标题 - 紫色 */
+}
+
+h5::before {
+  background-color: var(--h5-ind-color);  /* 五级标题 - 金色 */
+}
+
+h6::before {
+  background-color: var(--h6-ind-color);  /* 六级标题 - 浅灰色 */
+}
+
+/* 一级标题详细样式 */
+h1 {
+  font-weight: 800;                   /* 较粗的字重 */
+  font-size: 2em;                     /* 2倍基准字体大小 */
+  margin-top: 0;                      /* 去除默认上边距 */
+  margin-bottom: 0;                   /* 去除默认下边距 */
+  line-height: 1.2;                   /* 较紧凑的行高 */
+}
+
+h1 strong {
+  font-weight: 900;                   /* 加粗时使用最重字重 */
+}
+
+/* 二级标题详细样式 */
+h2 {
+  font-weight: 700;                   /* 稍细于h1的字重 */
+  font-size: 1.7em;                   /* 1.7倍基准字体大小 */
+  line-height: 1.3;                   /* 适中行高 */
+}
+
+h2 strong {
+  font-weight: 800;                   /* 加粗时使用h1的字重 */
+}
+
+/* 三级标题详细样式 */
+h3 {
+  font-weight: 600;                   /* 中等字重 */
+  font-size: 1.5em;                   /* 1.5倍基准字体大小 */
+  line-height: 1.4;                   /* 稍松的行高 */
+}
+
+h3 strong {
+  font-weight: 700;                   /* 加粗时使用h2的字重 */
+}
+
+/* 四级标题详细样式 */
+h4 {
+  font-weight: 600;                   /* 与h3相同的字重 */
+  line-height: 1.7;                   /* 更宽松的行高 */
+}
+
+h4 strong {
+  font-weight: 700;                   /* 加粗字重 */
+}
+
+/* 五级标题详细样式 */
+h5 {
+  font-weight: 500;                   /* 常规字重 */
+  line-height: 1.8;                   /* 宽松行高 */
+  font-size: 0.9em;                   /* 稍小于基准字体 */
+}
+
+h5 strong {
+  font-weight: 500;                   /* 加粗保持相同字重 */
+}
+
+/* 六级标题详细样式 */
+h6 {
+  font-weight: 400;                   /* 较细字重 */
+  line-height: 1.9;                   /* 最宽松的行高 */
+  font-size: 0.9em;                   /* 与h5相同大小 */
+}
+
+/* 标题内代码字体大小调整 */
+h2 code {
+  font-size: 0.8611111em;             /* 二级标题内代码稍小 */
+}
+
+h3 code {
+  font-size: 0.9em;                   /* 三级标题内代码大小 */
+}
+
+/* 标题后元素间距优化 */
+h2+* {
+  margin-top: 0;                      /* 去除二级标题后元素的上边距 */
+}
+
+h3+* {
+  margin-top: 0;                      /* 去除三级标题后元素的上边距 */
+}
+
+h4+* {
+  margin-top: 0;                      /* 去除四级标题后元素的上边距 */
+}
+
+/* 
+ * 引用块样式模块
+ * 功能：美化blockquote元素的显示效果
+ * 效果：
+ *   - 添加左侧彩色边框和浅色背景
+ *   - 设置圆角边框和合适的内边距
+ *   - 优化内部元素的间距
+ */
+blockquote {
+  margin-top: 16px !important;        /* 上方间距 */
+  margin-bottom: 0;                   /* 去除底部间距 */
+  padding: 8px;                       /* 内边距 */
+  background: var(--color-1-0-b);     /* 浅蓝色背景 */
+  box-sizing: border-box;             /* 盒模型计算 */
+  border-radius: 8px;                 /* 圆角边框 */
+  border-left: 4px solid var(--text-grey);  /* 左侧灰色边框 */
+  border-right: 0.1px solid transparent;    /* 透明右边框 */
+  border-bottom: 0.1px solid transparent;   /* 透明底边框 */
+  border-top: 0.1px solid transparent;      /* 透明上边框 */
+}
+
+/* 引用块内第一个元素去除上边距 */
+blockquote > *:first-child {
+  margin-top: 0 !important;
+}
+
+/* 引用块内最后一个元素去除下边距 */
+blockquote > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* 
+ * 链接样式模块
+ * 功能：美化超链接的显示效果和交互状态
+ * 效果：
+ *   - 设置链接颜色和下划线效果
+ *   - 鼠标悬停时显示优雅的下划线动画
+ *   - 控制链接字重和装饰
+ */
+.post-body a,
+.markdown-body a {
+  font-weight: 500;                   /* 中等字重 */
+  color: var(--v-blue-700);           /* 蓝色链接 */
+  text-decoration: none;              /* 去除默认下划线 */
+}
+
+/* 链接悬停效果 */
+.post-body a:hover,
+.markdown-body a:hover {
+  background-image: linear-gradient(var(--v-blue-700), var(--v-blue-700));  /* 蓝色渐变 */
+  background-size: 100% 1px;          /* 1像素高的线条 */
+  background-position: 0 100%;        /* 底部对齐 */
+  background-repeat: no-repeat;       /* 不重复 */
+}
+
+/* 
+ * 键盘按键样式模块
+ * 功能：美化kbd标签，模拟键盘按键外观
+ * 效果：
+ *   - 创建类似真实键盘按键的视觉效果
+ *   - 设置合适的圆角、阴影和颜色
+ */
+kbd {
+  font-family: "GeistMono", "LXGWWenKai";  /* 使用等宽字体 */
+  padding: 2px 8px;                   /* 内边距 */
+  vertical-align: baseline;           /* 垂直对齐 */
+  font-size: 0.9rem;                  /* 稍小字体 */
+  color: var(--v-white-100);          /* 白色文字 */
+  border: none;                       /* 去除边框 */
+  box-shadow: none;                   /* 去除阴影 */
+  border-radius: 4px;                 /* 小圆角 */
+  background-color: var(--v-gray-800); /* 灰色背景 */
+}
+
+/* 
+ * 文本高亮样式模块
+ * 功能：美化mark标签的高亮效果
+ * 效果：
+ *   - 设置醒目的高亮背景色
+ *   - 添加圆角使高亮更柔和
+ */
+.post-body mark,
+.markdown-body mark {
+  background-color: var(--tw-highlight-color);  /* 黄色高亮 */
+  border-radius: 3px;                 /* 小圆角 */
+}
+
+/* 
+ * 水平分割线样式模块
+ * 功能：美化hr标签的分割线效果
+ * 效果：
+ *   - 创建简洁的灰色分割线
+ *   - 设置合适的上下间距
+ */
+hr {
+  margin: 10px 0px;                   /* 上下边距 */
+  border: none;                       /* 去除默认边框 */
+  border-bottom: 1px solid var(--v-gray-500);  /* 底部灰色边框 */
+}
+
+/* 
+ * 上标和脚注样式模块
+ * 功能：美化上标和脚注的显示
+ * 效果：
+ *   - 设置脚注的字体和颜色
+ *   - 确保与正文的视觉协调
+ */
+sup {
+  font-family: "GeistMono", "LXGWWenKai";  /* 使用等宽字体 */
+  color: var(--v-gray-800);           /* 灰色文字 */
+}
+
+/* 
+ * 数学公式样式模块
+ * 功能：美化行内数学公式的显示
+ * 效果：
+ *   - 设置数学公式的特殊颜色
+ *   - 与普通文本形成区分
+ */
+.md-inline-math {
+  color: var(--v-blue-800);           /* 蓝色公式文字 */
+}
+
+/* 
+ * 行内代码样式模块
+ * 功能：美化code标签的显示效果
+ * 效果：
+ *   - 创建代码块的视觉区分
+ *   - 设置等宽字体和背景色
+ *   - 添加内边距和圆角
+ */
+.post-body code,
+.markdown-body code {
+  padding: 2px 4px;                   /* 小内边距 */
+  font-family: "GeistMono", "LXGWWenKai";  /* 等宽字体 */
+  font-size: 0.9rem;                  /* 稍小字体 */
+  background-color: var(--v-gray-500); /* 灰色背景 */
+  border-radius: 4px;                 /* 小圆角 */
+}
+
+/* 
+ * 列表样式模块
+ * 功能：自定义无序列表的显示效果
+ * 效果：
+ *   - 去除默认列表样式
+ *   - 使用自定义的短横线作为列表标记
+ *   - 精确定位列表标记位置
+ */
+.post-body ul,
+.markdown-body ul {
+  list-style: none;                   /* 去除默认列表样式 */
+}
+
+/* 列表项前的自定义标记 */
+.post-body ul li::before,
+.markdown-body ul li::before {
+  content: "";                        /* 空内容 */
+  position: absolute;                 /* 绝对定位 */
+  left: -16px;                        /* 定位到列表项左侧 */
+  top: 11.5px;                        /* 垂直居中 */
+  width: 9px;                         /* 标记宽度 */
+  height: 2px;                        /* 标记高度 - 短横线 */
+  background-color: #3d3d3d;          /* 深灰色 */
+}
+
+/* 
+ * 图片样式模块
+ * 功能：美化图片的显示效果
+ * 效果：
+ *   - 添加圆角和阴影效果
+ *   - 去除默认边框
+ *   - 创建卡片式图片效果
+ */
+img {
+  color: transparent;                 /* 去除alt文字颜色 */
+  border: none;                       /* 去除边框 */
+  border-radius: 8px;                 /* 圆角 */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);  /* 阴影效果 */
+}
+
+/* 
+ * 表格样式模块
+ * 功能：全面美化表格的显示效果
+ * 效果：
+ *   - 设置表格边框和圆角
+ *   - 隔行变色提高可读性
+ *   - 优化表格内边距和边框
+ */
+table {
+  width: 100%;                        /* 全宽表格 */
+  margin-bottom: 0;                   /* 去除底部边距 */
+  border-radius: 8px;                 /* 圆角表格 */
+  padding: 0 !important;              /* 去除内边距 */
+  border-collapse: separate;          /* 分离边框模型 */
+  border-spacing: 0;                  /* 单元格间距为0 */
+  margin-top: 0;                      /* 去除顶部边距 */
+  border: 1px solid var(--border-color) !important;  /* 外边框 */
+  overflow: hidden;                   /* 隐藏溢出内容 */
+}
+
+/* 表头背景色 */
+table thead tr th {
+  background: var(--bg-color2);       /* 浅灰色背景 */
+}
+
+/* 表格隔行变色 - 偶数行 */
+table tbody tr:nth-child(even) td {
+  background: var(--bg-color2);       /* 浅灰色背景 */
+}
+
+/* 表格隔行变色 - 奇数行 */
+table tbody tr:nth-child(odd) td {
+  background: var(--bg-color);        /* 更浅的背景色 */
+}
+
+/* 表格单元格样式 */
+table tr th, table tr td {
+  padding: 8px !important;            /* 单元格内边距 */
+  white-space: pre-wrap !important;   /* 允许换行 */
+}
+
+/* 表格单元格左边框 */
+table tr td,
+table thead tr th {
+  border-left: 1px solid var(--border-color) !important;  /* 垂直分隔线 */
+}
+
+/* 去除第一列的左边框 */
+table tbody tr td:first-of-type,
+table thead tr th:first-of-type {
+  border-left: none !important;       /* 第一列无左边框 */
+}
+
+/* 
+ * 代码块样式模块
+ * 功能：全面美化代码块的显示效果
+ * 效果：
+ *   - 添加macOS风格的窗口控件
+ *   - 设置深色背景和语法高亮
+ *   - 优化代码块的圆角和内边距
+ */
+pre {
+  padding-top: 34px;                  /* 顶部留出控件空间 */
+  padding-left: 10px;                 /* 左侧内边距 */
+  background-color: var(--v-background);  /* 深色背景 */
+  border-radius: 7px;                 /* 圆角 */
+  position: relative;                 /* 为伪元素定位 */
+}
+
+/* macOS风格窗口控件 */
+pre::before {
+  position: absolute;                 /* 绝对定位 */
+  left: 12px;                         /* 左侧位置 */
+  top: 12px;                          /* 顶部位置 */
+  content: "";                        /* 必须内容 */
+  width: 13px;                        /* 控件大小 */
+  height: 13px;                       /* 控件大小 */
+  border-radius: 50%;                 /* 圆形 */
+  background: #ff5f56;                /* 红色关闭按钮 */
+  box-shadow: 22px 0px #ffbd2e, 44px 0px #27c93f;  /* 黄色最小化、绿色最大化 */
+}
+
+/* 代码高亮容器 */
+.highlight, pre code {
+  font-family: "GeistMono", "LXGWWenKai";  /* 等宽字体 */
+  font-size: 0.9rem;                  /* 稍小字体 */
+  font-weight: 400;                   /* 正常字重 */
+  line-height: 1.4rem;                /* 紧凑行高 */
+  color: var(--v-gray-400);           /* 浅灰色文字 */
+  border-bottom-left-radius: 7px;     /* 底部圆角 */
+  border-bottom-right-radius: 7px;    /* 底部圆角 */
+  display: block;                     /* 块级显示 */
+  overflow-x: auto;                   /* 水平滚动 */
+}
+
+/* 
+ * 代码语法高亮颜色模块
+ * 功能：为不同类型的代码token设置颜色
+ * 效果：
+ *   - 注释：灰色，降低视觉重要性
+ *   - 字符串：绿色，易于识别文本内容
+ *   - 变量：红色，突出变量名
+ *   - 数字：橙色，区分数值
+ *   - 关键字：紫色，标识语言关键字
+ *   - 函数：蓝色，突出函数调用
+ */
+.cm-comment {
+  color: #5c6370 !important;          /* 注释 - 中灰色 */
+}
+.cm-string {
+  color: #98c379 !important;          /* 字符串 - 绿色 */
+}
+.cm-variable {
+  color: #e06c75 !important;          /* 变量 - 红色 */
+}
+.cm-variable-2 {
+  color: #e5aa69 !important;          /* 二级变量 - 橙色 */
+}
+.cm-variable-3 {
+  color: #61afef !important;          /* 三级变量 - 蓝色 */
+}
+.cm-number {
+  color: #d19a66 !important;          /* 数字 - 棕色 */
+}
+.cm-property {
+  color: #61afef !important;          /* 属性 - 蓝色 */
+}
+.cm-atom {
+  color: #c678dd !important;          /* 原子 - 紫色 */
+}
+.cm-keyword {
+  color: #c678dd !important;          /* 关键字 - 紫色 */
+}
+.cm-builtin {
+  color: #56b6c2 !important;          /* 内置函数 - 青色 */
+}
+.cm-def {
+  color: #61afef !important;          /* 定义 - 蓝色 */
+}
+.cm-operator {
+  color: #56b6c2 !important;          /* 操作符 - 青色 */
+}
+.cm-meta {
+  color: #abb2bf !important;          /* 元数据 - 浅灰色 */
+}
+.cm-tag {
+  color: #e06c75 !important;          /* HTML标签 - 红色 */
+}
+.cm-attribute {
+  color: #61afef !important;          /* HTML属性 - 蓝色 */
+}
+.cm-regexp {
+  color: #98c379 !important;          /* 正则表达式 - 绿色 */
+}
+.cm-link {
+  color: #61afef !important;          /* 链接 - 蓝色 */
+}
+.cm-header {
+  color: #e06c63 !important;          /* 标题 - 橙红色 */
+}

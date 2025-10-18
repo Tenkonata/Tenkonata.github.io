@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Second theme</title>
+    
+    <!-- 字体图片库 -->
+    
+<link rel="stylesheet" href="/Tenkonata/Tenkonata.github.io.git/lib/font-awesome/css/font-awesome.min.css">
+
+
+    <!-- 代码高亮库 -->
+    
+<link rel="stylesheet" href="/Tenkonata/Tenkonata.github.io.git/lib/highlight/styles/atom-one-dark.css">
+
+
+    <!-- 引入主题样式 -->
+    
+<link rel="stylesheet" href="/Tenkonata/Tenkonata.github.io.git/css/AIR-v2.css">
+
+<meta name="generator" content="Hexo 8.0.0"></head>
+
+<body class="post-body">
+    <div id="main">
+        <!-- 引入侧边栏 -->
+        <aside id="aside">
+            <div class="sidebar">
+    <div class="sidebar-header">
+        <h3>文章目录</h3>
+
+        
+        <a href="/Tenkonata/Tenkonata.github.io.git/" class="home-link" title="主页">
+            <i class="fa fa-home"></i>
+        </a>
+        
+    </div>
+    <nav class="sidebar-nav">
+        
+        
+        <!-- 遍历所有分类 -->
+        
+            <div class="category-group">
+                <div class="category-title">
+                    <i class="fa fa-folder"></i>
+                    未分类
+                </div>
+                <ul class="post-list">
+                    
+                        <li class="post-item">
+                            <a href="/Tenkonata/Tenkonata.github.io.git/2025/10/17/%F0%9F%9B%A0%EF%B8%8F%20%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%B8%B8%E7%8E%A9ATM10%E6%95%B4%E5%90%88%E5%8C%85%E6%8C%87%E5%8D%97/" class="post-link">
+                                <span class="post-date">10-17</span>
+                                <span class="post-title"></span>
+                            </a>
+                        </li>
+                    
+                        <li class="post-item">
+                            <a href="/Tenkonata/Tenkonata.github.io.git/2025/10/14/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="post-link">
+                                <span class="post-date">10-14</span>
+                                <span class="post-title">第一篇博客</span>
+                            </a>
+                        </li>
+                    
+                        <li class="post-item">
+                            <a href="/Tenkonata/Tenkonata.github.io.git/2025/10/12/hello-world/" class="post-link">
+                                <span class="post-date">10-12</span>
+                                <span class="post-title">Hello World</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+            </div>
+        
+    </nav>
+</div>
+        </aside>
+
+        <!-- 主内容区域 -->
+        <main class="main-content" id="pjax-container">
+            <div id="content">
+                <div id="articleList">
+	<ul>
+		
+
+			<li class="article-li">
+				<span class="article-date">2025-10-12</span>
+				<a class="article-title" href="/Tenkonata/Tenkonata.github.io.git/2025/10/12/hello-world/">hello-world</a>
+				<div class="article-digest">
+					Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any pro
+					...
+				</div>
+			</li>
+			
+		
+
+			<li class="article-li">
+				<span class="article-date">2025-10-17</span>
+				<a class="article-title" href="/Tenkonata/Tenkonata.github.io.git/2025/10/17/🛠️ 从零开始游玩ATM10整合包指南/">🛠️ 从零开始游玩ATM10整合包指南</a>
+				<div class="article-digest">
+					玩ATM10（All The Mods 10）整合包确实能带来不少乐趣。我为你整理了一份从零开始，使用PCL2启动器和柠娜汉化包游玩ATM10整合包的流程图，希望能帮你一目了然地看清整个步骤：
+flo
+					...
+				</div>
+			</li>
+			
+		
+
+			<li class="article-li">
+				<span class="article-date">2025-10-14</span>
+				<a class="article-title" href="/Tenkonata/Tenkonata.github.io.git/2025/10/14/这是一个文件夹/第一篇博客/">第一篇博客</a>
+				<div class="article-digest">
+					一、标题我去我不明白为什么就这篇文章有问题
+这是二级标题三级标题二、段落小换行小换行
+分割线使用—或***
+
+这是粗体删除线下划线这是斜体&#x3D;&#x3D;这是高亮&#x3D;&#x3D;
+#这
+					...
+				</div>
+			</li>
+			
+		
+	</ul>
+</div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 引入jQuery -->
+    
+<script src="/Tenkonata/Tenkonata.github.io.git/lib/jquery-3.7.1.min.js"></script>
+
+
+    <!-- 引入pjax -->
+    
+<script src="/Tenkonata/Tenkonata.github.io.git/lib/jquery.pjax.js"></script>
+
+        <script>
+        // 初始化 PJAX
+        $(document).pjax('.sidebar a[href]', '#pjax-container', {
+            timeout: 5000,
+            scrollTo: false
+        });
+        
+        // PJAX 开始事件
+        $(document).on('pjax:start', function() {
+            // 显示加载指示器（可选）
+            $('#content').fadeTo(200, 0.7);
+        });
+        
+        // PJAX 完成事件
+        $(document).on('pjax:end', function() {
+            // 恢复内容透明度
+            $('#content').fadeTo(200, 1);
+            
+            // 重新高亮代码块
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+            
+            // 更新侧边栏活动状态
+            updateSidebarActiveState();
+            
+            // 滚动到顶部
+            window.scrollTo(0, 0);
+        });
+        
+        // PJAX 错误处理
+        $(document).on('pjax:error', function(xhr, textStatus, error) {
+            console.error('PJAX Error:', error);
+            // 可以在这里添加错误处理逻辑
+        });
+        
+        // 初始化侧边栏活动状态
+        function updateSidebarActiveState() {
+            $('.post-item').removeClass('active');
+            var currentPath = window.location.pathname;
+            $('.sidebar a[href="' + currentPath + '"]').closest('.post-item').addClass('active');
+        }
+    </script>
+
+    <!-- 引入代码高亮的 js -->
+    
+<script src="/Tenkonata/Tenkonata.github.io.git/lib/highlight/highlight.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // 高亮所有代码块
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        });
+    </script>
+
+    <!-- 引入主题 js 文件 -->
+    
+<script src="/Tenkonata/Tenkonata.github.io.git/js/AIR-v2.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1301 @@
+@charset "UTF-8";
+
+
+/* ==========================================================================
+   Hexo字体引入框架
+   ========================================================================== */
+
+/* 
+功能: 定义和引入网站使用的字体文件
+说明: 只包含字体定义和引入，不包含字体应用规则
+*/
+
+/* Geist 可变字体 - 正常样式 */
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: 
+    url("/fonts/Geist[wght].woff2") format("woff2");
+}
+
+/* Geist Mono 可变等宽字体 */
+@font-face {
+  font-family: "GeistMono";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: 
+    url("/fonts/GeistMono[wght].woff2") format("woff2");
+}
+
+/* Geist 可变字体 - 斜体样式 */
+@font-face {
+  font-family: "Geist";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: 
+    url("/fonts/Geist-Italic[wght].woff2") format("woff2");
+}
+
+/* 霞鹜文楷字体 - 常规样式 */
+@font-face {
+  font-family: "LXGWWenKai";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: 
+    url("/fonts/LXGWWenKai-Regular.ttf") format("truetype");
+}
+
+/* 霞鹜文楷等宽字体 */
+@font-face {
+  font-family: "LXGWWenKaiMono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: 
+    url("/fonts/LXGWWenKaiMono-Regular.ttf") format("truetype");
+}
+
+
+
+
+
+
+/* 
+ * CSS变量定义模块
+ * 功能：定义整个主题使用的颜色、字体等CSS自定义属性
+ * 效果：
+ *   - 建立统一的色彩系统，方便整体主题色彩管理
+ *   - 定义灰度色阶、主题色、背景色等
+ *   - 设置字体栈，确保中英文显示兼容性
+ */
+:root {
+  /* 颜色系统 */
+  --v-white-100: #ffffff;      /* 纯白色 */
+  --v-white-200: #fafafa;      /* 浅灰色背景 */
+  --v-gray-1000: #171717;      /* 深灰色文字 */
+  --v-gray-900: #666666;       /* 次级文字灰色 */
+  --v-gray-800: #7d7d7d;       /* 注释文字颜色 */
+  --v-gray-700: #8f8f8f;       /* 较浅文字灰色 */
+  --v-gray-600: #a8a8a8;       /* 边框灰色 */
+  --v-gray-500: #c9c9c9;       /* 代码块背景灰色 */
+  --v-gray-400: #eaeaea;       /* 浅灰色边框 */
+  --v-purple-700: #8e4ec6;     /* 紫色主题色 */
+  --v-purple-900: #7820bc;     /* 深紫色 */
+  --v-red-700: #e5484d;        /* 红色警告色 */
+  --v-red-900: #cb2a2f;        /* 深红色 */
+  --v-amber-700: #f5b047;      /* 琥珀色 */
+  --v-amber-900: #a35200;      /* 深琥珀色 */
+  --v-green-700: #45a557;      /* 绿色成功色 */
+  --v-green-900: #297a3a;      /* 深绿色 */
+  --v-blue-600: #52aeff;       /* 浅蓝色 */
+  --v-blue-700: #0072f5;       /* 链接蓝色 */
+  --v-blue-900: #0068d6;       /* 深蓝色 */
+  --v-background: #282c34;     /* 代码块深色背景 */
+
+  /* 字体设置 */
+  --monospace: "GeistMono", "LXGWWenKaiMono";  /* 等宽字体栈 */
+
+  /* 背景颜色 */
+  --bg-color: rgb(250, 250, 252);    /* 主背景色 */
+  --bg-color2: rgb(236, 236, 238);   /* 次级背景色，用于表格隔行 */
+
+  /* 文字颜色 */
+  --text-color: #000;           /* 主要文字颜色 */
+  --text-grey: #666;            /* 灰色文字 */
+  --text-code: #2f479f;         /* 代码文字颜色 */
+  --title-color: #070909;       /* 标题颜色 */
+
+  /* 边框颜色 */
+  --border-color: #d2d2d2;      /* 通用边框颜色 */
+
+  /* 主题色系 - 用于不同类型的内容块 */
+  --color-1: #3e69d7;           /* 蓝色系 - 笔记类型 */
+  --color-1-0-a: rgba(62, 105, 215, 0.15);  /* 蓝色半透明背景 */
+  --color-1-0-b: rgba(62, 105, 215, 0.06);  /* 蓝色浅背景 */
+
+  --color-2: #f59102;           /* 橙色系 - 注意/警告类型 */
+  --color-2-0-a: rgba(245, 145, 2, 0.15);
+  --color-2-0-b: rgba(245, 145, 2, 0.06);
+  --color-2-0-c: rgba(245, 145, 2, 0.3);
+
+  --color-3: #03b736;           /* 绿色系 - 提示类型 */
+  --color-3-0-a: rgba(3, 183, 54, 0.15);
+  --color-3-0-b: rgba(3, 183, 54, 0.06);
+
+  --color-4: #8250df;           /* 紫色系 - 重要类型 */
+  --color-4-0-a: rgba(130, 80, 223, 0.15);
+  --color-4-0-b: rgba(130, 80, 223, 0.06);
+
+  --color-5: #e30f2e;           /* 红色系 - 警告类型 */
+  --color-5-0-a: rgba(227, 15, 46, 0.15);
+  --color-5-0-b: rgba(227, 15, 46, 0.06);
+
+  /* 高亮颜色 */
+  --tw-highlight-color: #fde047;  /* 文本高亮背景色 */
+
+  /* 主题色彩 */
+  --theme-900: #0f172a;         /* 深主题色，用于标题 */
+  --theme-400: #94a3b8;         /* 中灰色，用于次要元素 */
+  --tw-prose-headings: var(--theme-900);  /* 标题颜色引用 */
+
+  /* 标题指示器颜色 - 每个标题级别有不同颜色 */
+  --h1-ind-color: #E4374B;      /* 一级标题指示色 - 红色 */
+  --h2-ind-color: #0EB54F;      /* 二级标题指示色 - 绿色 */
+  --h3-ind-color: #076DDD;      /* 三级标题指示色 - 蓝色 */
+  --h4-ind-color: #876CE0;      /* 四级标题指示色 - 紫色 */
+  --h5-ind-color: #D2A852;      /* 五级标题指示色 - 金色 */
+  --h6-ind-color: #E0E5D5;      /* 六级标题指示色 - 浅灰色 */
+
+
+  --link-color: var(--v-blue-700);          /* 链接颜色 */
+  --code-inline-color: var(--text-code);    /* 行内代码颜色 */
+  --text-secondary: var(--v-gray-700);      /* 次要文字颜色 */
+  --hover-color: rgba(0, 0, 0, 0.02);       /* 悬停背景色 */
+  --color-1-1-b: rgba(62, 105, 215, 0.12);  /* 嵌套引用背景色 */
+  --text-grey-dark: #555;                   /* 深灰色边框 */
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   全局重置与基础样式
+   ========================================================================== */
+
+/* 
+功能: 重置浏览器默认样式，设置全局基础样式
+说明: 包括盒模型、边距、字体等基础设置
+*/
+
+/* 基础盒模型重置 */
+* {
+  box-sizing: border-box; /* 统一盒模型计算方式 */
+  margin: 0;
+  padding: 0;
+}
+
+/* 根元素样式设置 */
+html {
+  font-size: 17px;                   /* 设置基准字体大小 */
+  -webkit-font-smoothing: antialiased; /* 字体抗锯齿，使文字更清晰 */
+  -moz-osx-font-smoothing: grayscale;  /* Firefox 字体平滑 */
+}
+
+/* 主体内容基础样式 */
+body {
+  background-color: var(--v-white-200);  /* 使用定义的浅灰色背景 */
+  color: var(--v-gray-1000);             /* 使用深灰色文字 */
+  line-height: 1.6;                      /* 设置1.6倍行高，提高可读性 */
+  font-family: "Geist", "LXGWWenKai", sans-serif; /* 设置中英文字体栈，添加通用回退 */
+}
+
+/* 确保媒体元素响应式 */
+img, video, canvas, svg {
+  max-width: 100%; /* 防止媒体元素溢出容器 */
+  height: auto;    /* 保持原始宽高比 */
+}
+
+/* 表单元素基础重置 */
+button, input, select, textarea {
+  font-family: inherit; /* 继承主体字体 */
+  font-size: inherit;   /* 继承主体字号 */
+  line-height: inherit; /* 继承主体行高 */
+}
+
+/* 链接基础样式重置 */
+a {
+  color: inherit;       /* 继承文字颜色 */
+  text-decoration: none; /* 移除默认下划线 */
+}
+
+/* 列表样式重置 */
+ul, ol {
+  list-style: none; /* 移除默认列表标记 */
+}
+
+
+
+
+
+
+/* ==========================================================================
+   标题样式框架
+   ========================================================================== */
+
+/* 
+功能: 定义各级标题(h1-h6)的样式，包含左侧彩色指示条
+说明: 包括字体大小、粗细、颜色、间距和左侧指示条设计
+*/
+
+/* 标题通用基础样式 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  position: relative;                  /* 为伪元素定位做准备 */
+  padding-left: 10px;                  /* 为左侧指示条留出空间 */
+  color: var(--tw-prose-headings);     /* 使用统一的标题颜色 */
+}
+
+/* 标题左侧指示条基础样式 */
+h1::before,
+h2::before,
+h3::before,
+h4::before,
+h5::before,
+h6::before {
+  content: '';                         /* 必须内容 */
+  position: absolute;                  /* 绝对定位 */
+  left: 0;                            /* 紧贴左侧 */
+  width: 3px;                         /* 指示条宽度 */
+  top: 2px;                           /* 上下留出2px边距 */
+  bottom: 2px;
+  height: calc(100% - 4px);           /* 计算高度，减去上下边距 */
+}
+
+/* 为每个标题级别设置不同的指示条颜色 */
+h1::before {
+  background-color: var(--h1-ind-color);  /* 一级标题 - 红色 */
+}
+
+h2::before {
+  background-color: var(--h2-ind-color);  /* 二级标题 - 绿色 */
+}
+
+h3::before {
+  background-color: var(--h3-ind-color);  /* 三级标题 - 蓝色 */
+}
+
+h4::before {
+  background-color: var(--h4-ind-color);  /* 四级标题 - 紫色 */
+}
+
+h5::before {
+  background-color: var(--h5-ind-color);  /* 五级标题 - 金色 */
+}
+
+h6::before {
+  background-color: var(--h6-ind-color);  /* 六级标题 - 浅灰色 */
+}
+
+/* 一级标题详细样式 */
+h1 {
+  font-weight: 800;                   /* 较粗的字重 */
+  font-size: 2em;                     /* 2倍基准字体大小 */
+  margin-top: 0;                      /* 去除默认上边距 */
+  margin-bottom: 0;                   /* 去除默认下边距 */
+  line-height: 1.2;                   /* 较紧凑的行高 */
+}
+
+h1 strong {
+  font-weight: 900;                   /* 加粗时使用最重字重 */
+}
+
+/* 二级标题详细样式 */
+h2 {
+  font-weight: 700;                   /* 稍细于h1的字重 */
+  font-size: 1.7em;                   /* 1.7倍基准字体大小 */
+  line-height: 1.3;                   /* 适中行高 */
+}
+
+h2 strong {
+  font-weight: 800;                   /* 加粗时使用h1的字重 */
+}
+
+/* 三级标题详细样式 */
+h3 {
+  font-weight: 600;                   /* 中等字重 */
+  font-size: 1.5em;                   /* 1.5倍基准字体大小 */
+  line-height: 1.4;                   /* 稍松的行高 */
+}
+
+h3 strong {
+  font-weight: 700;                   /* 加粗时使用h2的字重 */
+}
+
+/* 四级标题详细样式 */
+h4 {
+  font-weight: 600;                   /* 与h3相同的字重 */
+  line-height: 1.7;                   /* 更宽松的行高 */
+}
+
+h4 strong {
+  font-weight: 700;                   /* 加粗字重 */
+}
+
+/* 五级标题详细样式 */
+h5 {
+  font-weight: 500;                   /* 常规字重 */
+  line-height: 1.8;                   /* 宽松行高 */
+  font-size: 0.9em;                   /* 稍小于基准字体 */
+}
+
+h5 strong {
+  font-weight: 500;                   /* 加粗保持相同字重 */
+}
+
+/* 六级标题详细样式 */
+h6 {
+  font-weight: 400;                   /* 较细字重 */
+  line-height: 1.9;                   /* 最宽松的行高 */
+  font-size: 0.9em;                   /* 与h5相同大小 */
+}
+
+/* 标题内代码字体大小调整 */
+h2 code {
+  font-size: 0.8611111em;             /* 二级标题内代码稍小 */
+}
+
+h3 code {
+  font-size: 0.9em;                   /* 三级标题内代码大小 */
+}
+
+/* 添加统一的标题外边距 */
+h1, h2, h3, h4, h5, h6 {
+  margin: 24px 0 16px 0; /* 添加上下外边距 */
+}
+
+/* 但保持您原有的标题后元素间距优化 */
+h1+*, h2+*, h3+*, h4+*, h5+*, h6+* {
+  margin-top: 0;
+}
+
+
+
+
+
+
+/* ==========================================================================
+   引用块样式框架
+   ========================================================================== */
+
+/* 
+功能: 定义引用块(blockquote)的样式
+说明: 包含背景、边框、间距等样式，适配Hexo的Markdown渲染
+*/
+
+/* 引用块基础样式 */
+blockquote {
+  margin-top: 16px !important;        /* 上方间距 */
+  margin-bottom: 0;                   /* 去除底部间距 */
+  margin-left: 0;                     /* 确保左对齐 */
+  margin-right: 0;                    /* 确保右对齐 */
+  padding: 8px;                       /* 内边距 */
+  padding-left: 16px;                 /* 左侧额外内边距，为引用标识留空间 */
+  background: var(--color-1-0-b);     /* 浅蓝色背景 */
+  box-sizing: border-box;             /* 盒模型计算 */
+  border-radius: 8px;                 /* 圆角边框 */
+  border-left: 4px solid var(--v-blue-600);  /* 左侧蓝色边框 */
+  border-right: 0.1px solid transparent;    /* 透明右边框 */
+  border-bottom: 0.1px solid transparent;   /* 透明底边框 */
+  border-top: 0.1px solid transparent;      /* 透明上边框 */
+  font-style: normal;                 /* 重置斜体样式 */
+}
+
+/* 引用块内段落样式 */
+blockquote p {
+  margin: 8px 0;                      /* 段落间距 */
+  color: inherit;                     /* 继承文字颜色 */
+}
+
+/* 引用块内第一个元素去除上边距 */
+blockquote > *:first-child {
+  margin-top: 0 !important;
+}
+
+/* 引用块内最后一个元素去除下边距 */
+blockquote > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* 多层嵌套引用样式 */
+blockquote blockquote {
+  background: var(--color-1-1-b);     /* 嵌套引用使用稍深的背景色 */
+  border-left-color: var(--text-grey); /* 嵌套引用使用更深的左边框，使用已定义的--text-grey */
+}
+
+/* 引用块内的代码样式 */
+blockquote code {
+  background: rgba(255, 255, 255, 0.3); /* 半透明白色背景 */
+  border-radius: 3px;
+}
+
+/* 引用块内的链接样式 */
+blockquote a {
+  color: var(--link-color);
+  text-decoration: underline;
+}
+
+
+
+
+
+/* ==========================================================================
+   链接样式框架
+   ========================================================================== */
+
+/* 
+功能: 定义文章中链接的样式和悬停效果
+说明: 针对Hexo的文章内容区域进行样式定义
+*/
+
+.post-body a,
+.markdown-body a,
+.article-content a {
+  font-weight: 500;                   /* 中等字重 */
+  color: var(--v-blue-700);           /* 蓝色链接 */
+  text-decoration: none;              /* 去除默认下划线 */
+  /*transition: all 0.2s ease-in-out;   /* 添加过渡动画 */
+}
+
+/* 链接悬停效果 - 只针对正文内容区域 */
+.post-body a:hover,
+.markdown-body a:hover,
+.article-content a:hover {
+  background-image: linear-gradient(var(--v-blue-700), var(--v-blue-700));  /* 蓝色渐变 */
+  background-size: 100% 1px;          /* 1像素高的线条 */
+  background-position: 0 100%;        /* 底部对齐 */
+  background-repeat: no-repeat;       /* 不重复 */
+  color: var(--v-blue-800);           /* 悬停时颜色加深 */
+}
+
+
+
+
+
+/* ==========================================================================
+   文本高亮样式框架
+   ========================================================================== */
+
+/* 
+功能: 定义文本高亮标记的样式
+说明: 用于mark标签的视觉突出显示
+*/
+
+.post-body mark,
+.markdown-body mark,
+.article-content mark {
+  background-color: var(--tw-highlight-color);  /* 黄色高亮 */
+  border-radius: 3px;                 /* 小圆角 */
+  padding: 0.1em 0.3em;               /* 内边距增强可读性 */
+  color: inherit;                     /* 继承文字颜色 */
+  box-decoration-break: clone;        /* 确保跨行高亮样式连续 */
+  -webkit-box-decoration-break: clone;
+}
+
+
+
+
+
+/* ==========================================================================
+   水平分割线样式框架
+   ========================================================================== */
+
+/* 
+功能: 美化hr标签的分割线效果
+说明: 替换浏览器默认水平线样式
+*/
+
+hr {
+  margin: 10px 0px;                   /* 上下边距 */
+  border: none;                       /* 去除默认边框 */
+  border-bottom: 1px solid var(--v-gray-500);  /* 底部灰色边框 */
+  height: 1px;                        /* 明确高度 */
+  background: none;                   /* 清除默认背景 */
+}
+
+/* 文章内容区域内的水平线特殊样式 */
+.post-body hr,
+.markdown-body hr,
+.article-content hr {
+  margin: 20px 0;                     /* 文章内分割线间距更大 */
+  border-bottom-width: 2px;           /* 文章内分割线更粗 */
+}
+
+
+
+
+
+/* ==========================================================================
+   行内代码样式框架
+   ========================================================================== */
+
+/* 
+功能: 定义行内代码的样式
+说明: 用于文章内容中的行内代码元素
+*/
+
+.post-body code,
+.markdown-body code,
+.article-content code {
+  padding: 2px 4px;                   /* 小内边距 */
+  font-family: "GeistMono", "LXGWWenKaiMono", monospace;  /* 等宽字体栈 */
+  font-size: 0.9rem;                  /* 稍小字体 */
+  background-color: var(--v-gray-500); /* 灰色背景 */
+  border-radius: 4px;                 /* 小圆角 */
+  color: var(--code-inline-color);    /* 代码文字颜色 */
+}
+
+/* 代码块内的行内代码特殊处理 */
+.post-body pre code,
+.markdown-body pre code,
+.article-content pre code {
+  background: transparent;            /* 代码块内不显示背景 */
+  padding: 0;                         /* 代码块内无内边距 */
+  border-radius: 0;                   /* 代码块内无圆角 */
+  color: inherit;                     /* 继承代码块颜色 */
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   列表样式框架
+   ========================================================================== */
+
+/* 
+功能: 定义无序列表的样式
+说明: 使用自定义标记替代默认列表样式
+*/
+
+.post-body ul,
+.markdown-body ul,
+.article-content ul {
+  list-style: none;                   /* 去除默认列表样式 */
+  padding-left: 16px;                 /* 左侧内边距 */
+  position: relative;                 /* 为子元素定位 */
+}
+
+/* 列表项前的自定义标记 */
+.post-body ul li::before,
+.markdown-body ul li::before,
+.article-content ul li::before {
+  content: "";                        /* 空内容 */
+  position: absolute;                 /* 绝对定位 */
+  left: -16px;                        /* 定位到列表项左侧 */
+  top: 11.5px;                        /* 垂直居中 */
+  width: 9px;                         /* 标记宽度 */
+  height: 2px;                        /* 标记高度 - 短横线 */
+  background-color: #3d3d3d;          /* 深灰色 */
+}
+
+/* 有序列表样式 */
+.post-body ol,
+.markdown-body ol,
+.article-content ol {
+  padding-left: 24px;                 /* 有序列表左侧内边距更大 */
+  list-style: decimal;                /* 显示数字 */
+}
+/* 需要添加这个规则来隐藏有序列表的自定义标记 */
+.post-body ol li::before,
+.markdown-body ol li::before,
+.article-content ol li::before {
+  display: none; /* 有序列表不显示短横线 */
+}
+
+/* 列表项通用样式 */
+.post-body li,
+.markdown-body li,
+.article-content li {
+  margin: 4px 0;                      /* 列表项间距 */
+  position: relative;                 /* 为伪元素定位 */
+}
+
+/* 嵌套列表样式 */
+.post-body ul ul,
+.markdown-body ul ul,
+.article-content ul ul {
+  margin-top: 4px;                    /* 嵌套列表上边距 */
+  margin-bottom: 4px;                 /* 嵌套列表下边距 */
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   图片样式框架
+   ========================================================================== */
+
+/* 
+功能: 定义图片的样式效果
+说明: 包含圆角、阴影等美化效果
+*/
+
+.post-body img,
+.markdown-body img,
+.article-content img {
+  color: transparent;                 /* 去除alt文字颜色 */
+  border: none;                       /* 去除边框 */
+  border-radius: 8px;                 /* 圆角 */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);  /* 阴影效果 */
+  max-width: 100%;                    /* 响应式图片 */
+  height: auto;                       /* 保持比例 */
+  display: block;                     /* 块级显示 */
+  margin: 16px auto;                  /* 居中显示 */
+}
+
+/* 图片标题样式 */
+.post-body figure,
+.markdown-body figure,
+.article-content figure {
+  margin: 16px 0;
+  text-align: center;
+}
+
+.post-body figcaption,
+.markdown-body figcaption,
+.article-content figcaption {
+  font-size: 0.9em;
+  color: var(--text-secondary);
+  margin-top: 8px;
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   表格样式框架
+   ========================================================================== */
+
+/* 
+功能: 定义表格及其元素的样式
+说明: 包含斑马纹、边框、表头等完整表格样式
+*/
+
+.post-body table,
+.markdown-body table,
+.article-content table {
+  width: 100%;                        /* 全宽表格 */
+  margin-bottom: 0;                   /* 去除底部边距 */
+  border-radius: 8px;                 /* 圆角表格 */
+  padding: 0 !important;              /* 去除内边距 */
+  border-collapse: separate;          /* 分离边框模型 */
+  border-spacing: 0;                  /* 单元格间距为0 */
+  margin-top: 0;                      /* 去除顶部边距 */
+  border: 1px solid var(--border-color) !important;  /* 外边框 */
+  overflow: hidden;                   /* 隐藏溢出内容 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 表格阴影 */
+}
+
+/* 表头样式 */
+.post-body table thead tr th,
+.markdown-body table thead tr th,
+.article-content table thead tr th {
+  background: var(--bg-color2);       /* 浅灰色背景 */
+  padding: 12px 8px !important;       /* 表头内边距 */
+  font-weight: 600;                   /* 表头加粗 */
+  text-align: left;                   /* 左对齐 */
+  border-bottom: 1px solid var(--border-color) !important; /* 表头底边框 */
+}
+
+/* 表格隔行变色 - 偶数行 */
+.post-body table tbody tr:nth-child(even) td,
+.markdown-body table tbody tr:nth-child(even) td,
+.article-content table tbody tr:nth-child(even) td {
+  background: var(--bg-color2);       /* 浅灰色背景 */
+}
+
+/* 表格隔行变色 - 奇数行 */
+.post-body table tbody tr:nth-child(odd) td,
+.markdown-body table tbody tr:nth-child(odd) td,
+.article-content table tbody tr:nth-child(odd) td {
+  background: var(--bg-color);        /* 更浅的背景色 */
+}
+
+/* 表格单元格样式 */
+.post-body table tr th,
+.markdown-body table tr th,
+.article-content table tr th,
+.post-body table tr td,
+.markdown-body table tr td,
+.article-content table tr td {
+  padding: 8px !important;            /* 单元格内边距 */
+  white-space: pre-wrap !important;   /* 允许换行 */
+  border-bottom: 1px solid var(--border-color) !important; /* 单元格底边框 */
+}
+
+/* 表格单元格左边框 */
+.post-body table tr td,
+.markdown-body table tr td,
+.article-content table tr td,
+.post-body table thead tr th,
+.markdown-body table thead tr th,
+.article-content table thead tr th {
+  border-left: 1px solid var(--border-color) !important;  /* 垂直分隔线 */
+}
+
+/* 去除第一列的左边框 */
+.post-body table tbody tr td:first-of-type,
+.markdown-body table tbody tr td:first-of-type,
+.article-content table tbody tr td:first-of-type,
+.post-body table thead tr th:first-of-type,
+.markdown-body table thead tr th:first-of-type,
+.article-content table thead tr th:first-of-type {
+  border-left: none !important;       /* 第一列无左边框 */
+}
+
+/* 表格悬停效果 */
+.post-body table tbody tr:hover,
+.markdown-body table tbody tr:hover,
+.article-content table tbody tr:hover {
+  background: var(--hover-color);     /* 悬停背景色 */
+}
+
+
+
+
+
+/* ==========================================================================
+   代码块样式框架 - 适配 highlight.js atom-one-dark
+   ========================================================================== */
+
+/* 
+功能: 定义代码块和语法高亮的样式，适配highlight.js的atom-one-dark主题
+说明: 保留macOS风格窗口控件，与atom-one-dark主题协调
+*/
+
+/* 代码块基础样式 */
+.post-body pre,
+.markdown-body pre,
+.article-content pre,
+.highlight pre {
+  padding-top: 34px;                  /* 顶部留出控件空间 */
+  padding-left: 16px;                 /* 左侧内边距 */
+  padding-right: 16px;                /* 右侧内边距 */
+  padding-bottom: 16px;               /* 底部内边距 */
+  background-color: #282c34;          /* atom-one-dark 背景色 */
+  border-radius: 7px;                 /* 圆角 */
+  position: relative;                 /* 为伪元素定位 */
+  margin: 16px 0;                     /* 上下外边距 */
+  overflow: hidden;                   /* 隐藏溢出 */
+}
+
+/* macOS风格窗口控件 */
+.post-body pre::before,
+.markdown-body pre::before,
+.article-content pre::before,
+.highlight pre::before {
+  position: absolute;                 /* 绝对定位 */
+  left: 12px;                         /* 左侧位置 */
+  top: 12px;                          /* 顶部位置 */
+  content: "";                        /* 必须内容 */
+  width: 13px;                        /* 控件大小 */
+  height: 13px;                       /* 控件大小 */
+  border-radius: 50%;                 /* 圆形 */
+  background: #ff5f56;                /* 红色关闭按钮 */
+  box-shadow: 22px 0px #ffbd2e, 44px 0px #27c93f;  /* 黄色最小化、绿色最大化 */
+  z-index: 1;                         /* 确保在代码内容上方 */
+}
+
+/* 代码高亮容器 - 适配highlight.js */
+.highlight {
+  position: relative;                 /* 为内部元素定位 */
+  border-radius: 7px;                 /* 圆角 */
+  background-color: #282c34;          /* atom-one-dark 背景色 */
+  margin: 16px 0;                     /* 上下外边距 */
+  overflow: hidden;                   /* 隐藏溢出 */
+}
+
+/* 代码块内的代码样式 - 适配highlight.js */
+.post-body pre code,
+.markdown-body pre code,
+.article-content pre code,
+.highlight pre code,
+.hljs {
+  font-family: "GeistMono", "LXGWWenKaiMono", monospace;  /* 等宽字体栈 */
+  font-size: 0.9rem;                  /* 稍小字体 */
+  font-weight: 400;                   /* 正常字重 */
+  line-height: 1.4rem;                /* 紧凑行高 */
+  display: block;                     /* 块级显示 */
+  overflow-x: auto;                   /* 水平滚动 */
+  background: transparent !important; /* 透明背景，覆盖highlight.js默认 */
+  padding: 0;                         /* 无内边距 */
+  border-radius: 0;                   /* 无圆角 */
+  white-space: pre;                   /* 保留空白和换行 */
+  color: #abb2bf;                     /* atom-one-dark 文字颜色 */
+}
+
+/* 代码语言标签样式 */
+.post-body .highlight figcaption,
+.markdown-body .highlight figcaption,
+.article-content .highlight figcaption {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  color: #5c6370;                     /* atom-one-dark 注释颜色 */
+  font-size: 0.8rem;
+  font-family: "Geist", "LXGWWenKai", sans-serif;
+  z-index: 1;
+}
+
+/* 行号样式 - 适配highlight.js行号插件 */
+.post-body .hljs-ln-numbers,
+.markdown-body .hljs-ln-numbers,
+.article-content .hljs-ln-numbers {
+  color: #5c6370;                     /* atom-one-dark 注释颜色 */
+  padding-right: 16px;
+  text-align: right;
+  user-select: none;
+  border-right: 1px solid #3e4451;    /* 行号分隔线 */
+}
+
+/* 代码高亮特定行样式 */
+.post-body .highlight .line,
+.markdown-body .highlight .line,
+.article-content .highlight .line {
+  padding: 0 8px;
+}
+
+/* 代码块滚动条样式 - 适配atom-one-dark主题 */
+.post-body pre::-webkit-scrollbar,
+.markdown-body pre::-webkit-scrollbar,
+.article-content pre::-webkit-scrollbar {
+  height: 8px;
+}
+
+.post-body pre::-webkit-scrollbar-track,
+.markdown-body pre::-webkit-scrollbar-track,
+.article-content pre::-webkit-scrollbar-track {
+  background: #2c323c;                /* 稍亮的背景色 */
+  border-radius: 0 0 7px 7px;
+}
+
+.post-body pre::-webkit-scrollbar-thumb,
+.markdown-body pre::-webkit-scrollbar-thumb,
+.article-content pre::-webkit-scrollbar-thumb {
+  background: #5c6370;                /* atom-one-dark 注释颜色 */
+  border-radius: 4px;
+}
+
+.post-body pre::-webkit-scrollbar-thumb:hover,
+.markdown-body pre::-webkit-scrollbar-thumb:hover,
+.article-content pre::-webkit-scrollbar-thumb:hover {
+  background: #7f848e;                /* 悬停时稍亮 */
+}
+
+/* 覆盖highlight.js的默认背景色 */
+.hljs {
+  background: transparent !important;
+}
+
+/* 确保代码块在highlight.js初始化后保持正确样式 */
+.post-body pre code.hljs,
+.markdown-body pre code.hljs,
+.article-content pre code.hljs {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   文章页面样式
+   ========================================================================== */
+
+/* 文章头部样式 */
+.post-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--v-gray-400);
+}
+
+.post-title {
+    font-size: 2.2em;
+    margin-bottom: 0.5rem;
+    color: var(--theme-900);
+}
+
+.post-meta {
+    font-size: 0.9em;
+    color: var(--v-gray-700);
+    margin-top: 1rem;
+}
+
+.post-meta i {
+    margin-right: 0.3em;
+}
+
+.post-date,
+.post-categories,
+.post-tags {
+    margin-right: 1.5rem;
+    display: inline-block;
+}
+
+.post-categories a,
+.post-tags a {
+    color: var(--v-blue-700);
+    text-decoration: none;
+}
+
+.post-categories a:hover,
+.post-tags a:hover {
+    text-decoration: underline;
+}
+
+/* 文章内容样式 */
+.post-content {
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+/* 文章底部导航 */
+.post-footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--v-gray-400);
+}
+
+.post-nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-nav-prev,
+.post-nav-next {
+    color: var(--v-blue-700);
+    text-decoration: none;
+    max-width: 45%;
+}
+
+.post-nav-prev:hover,
+.post-nav-next:hover {
+    background-image: none !important;
+    text-decoration: underline;
+}
+
+.post-nav-prev i {
+    margin-right: 0.5em;
+}
+
+.post-nav-next i {
+    margin-left: 0.5em;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .post-title {
+        font-size: 1.8em;
+    }
+    
+    .post-meta {
+        font-size: 0.85em;
+    }
+    
+    .post-date,
+    .post-categories,
+    .post-tags {
+        display: block;
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+    
+    .post-nav {
+        flex-direction: column;
+    }
+    
+    .post-nav-prev,
+    .post-nav-next {
+        max-width: 100%;
+        margin-bottom: 1rem;
+    }
+}
+
+
+
+
+
+/* ==========================================================================
+   主布局样式
+   ========================================================================== */
+
+#main {
+    display: flex;
+    min-height: 100vh;
+}
+
+#aside {
+    width: 300px;
+    background-color: var(--v-white-100);
+    border-right: 1px solid var(--v-gray-400);
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+.main-content {
+    flex: 1;
+    max-width: calc(100% - 300px);
+}
+
+#content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* 侧边栏样式 */
+.sidebar {
+    height: 100%;
+}
+
+.sidebar-header {
+    padding: 1.5rem 1.25rem 1rem;
+    border-bottom: 1px solid var(--v-gray-400);
+    background-color: var(--v-white-200);
+
+    /*主页图标*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    font-size: 1.1em;
+    color: var(--theme-900);
+    font-weight: 600;
+}
+
+/*主页图标*/
+.home-link {
+    color: var(--theme-900);  /* 使用与文章目录相同的颜色 */
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 0.3rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    position: relative;
+}
+
+.home-link:hover {
+    color: var(--v-blue-700);  /* 悬停时变为蓝色 */
+    background-color: var(--v-white-200);
+
+}
+
+/* 主页链接的提示文本 */
+.home-link::after {
+    content: "主页";
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--v-gray-800);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75em;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.home-link::before {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent var(--v-gray-800) transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.home-link:hover::after,
+.home-link:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+.sidebar-nav {
+    padding: 1rem 0;
+}
+
+.category-group {
+    margin-bottom: 1rem;
+}
+
+.category-title {
+    padding: 0.5rem 1.25rem;
+    font-weight: 600;
+    color: var(--v-gray-800);
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.category-title:hover {
+    color: var(--v-blue-700);
+}
+
+.category-title i {
+    margin-right: 0.5rem;
+    font-size: 0.8em;
+}
+
+.post-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.post-item {
+    margin: 0;
+}
+
+.post-link {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.5rem 1.25rem 0.5rem 2rem;
+    text-decoration: none;
+    color: var(--v-gray-700);
+    transition: all 0.2s ease;
+    border-left: 2px solid transparent;
+}
+
+.post-link:hover {
+    background-color: var(--v-white-200);
+    color: var(--v-blue-700);
+    border-left-color: var(--v-blue-600);
+}
+
+.post-item.active .post-link {
+    background-color: var(--color-1-0-b);
+    color: var(--v-blue-700);
+    border-left-color: var(--v-blue-700);
+    font-weight: 500;
+}
+
+.post-date {
+    font-size: 0.8em;
+    color: var(--v-gray-600);
+    min-width: 45px;
+    flex-shrink: 0;
+    margin-right: 0.5rem;
+    margin-top: 0.1rem;
+}
+
+.post-title {
+    font-size: 0.9em;
+    line-height: 1.4;
+    flex: 1;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+    #aside {
+        width: 250px;
+    }
+    
+    .main-content {
+        max-width: calc(100% - 250px);
+    }
+}
+
+@media (max-width: 768px) {
+    #main {
+        flex-direction: column;
+    }
+    
+    #aside {
+        width: 100%;
+        height: auto;
+        position: relative;
+        max-height: 40vh;
+        border-right: none;
+        border-bottom: 1px solid var(--v-gray-400);
+    }
+    
+    .main-content {
+        max-width: 100%;
+    }
+    
+    #content {
+        padding: 1.5rem;
+    }
+    
+    .post-link {
+        padding: 0.4rem 1rem 0.4rem 1.5rem;
+    }
+    
+    .category-title {
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* 侧边栏滚动条样式 */
+#aside::-webkit-scrollbar {
+    width: 6px;
+}
+
+#aside::-webkit-scrollbar-track {
+    background: var(--v-white-200);
+}
+
+#aside::-webkit-scrollbar-thumb {
+    background: var(--v-gray-500);
+    border-radius: 3px;
+}
+
+#aside::-webkit-scrollbar-thumb:hover {
+    background: var(--v-gray-600);
+}
+
+
+#aside * {
+    text-decoration: none !important;
+    background-image: none !important;
+}
+
+#aside *:hover {
+    text-decoration: none !important;
+    background-image: none !important;
+}
