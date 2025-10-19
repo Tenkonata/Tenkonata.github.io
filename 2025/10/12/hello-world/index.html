@@ -27,10 +27,9 @@
         <aside id="aside">
             <div class="sidebar">
     <div class="sidebar-header">
-        <h3>文章目录</h3>
 
-        
-        <a href="/" class="home-link" title="主页">
+        <h3>文章目录</h3>
+        <a href="/" class="home-link">
             <i class="fa fa-home"></i>
         </a>
         
@@ -38,39 +37,9 @@
     <nav class="sidebar-nav">
         
         
-        <!-- 遍历所有分类 -->
-        
-            <div class="category-group">
-                <div class="category-title">
-                    <i class="fa fa-folder"></i>
-                    未分类
-                </div>
-                <ul class="post-list">
-                    
-                        <li class="post-item">
-                            <a href="/2025/10/17/%F0%9F%9B%A0%EF%B8%8F%20%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%B8%B8%E7%8E%A9ATM10%E6%95%B4%E5%90%88%E5%8C%85%E6%8C%87%E5%8D%97/" class="post-link">
-                                <span class="post-date">10-17</span>
-                                <span class="post-title"></span>
-                            </a>
-                        </li>
-                    
-                        <li class="post-item">
-                            <a href="/2025/10/14/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="post-link">
-                                <span class="post-date">10-14</span>
-                                <span class="post-title">第一篇博客</span>
-                            </a>
-                        </li>
-                    
-                        <li class="post-item">
-                            <a href="/2025/10/12/hello-world/" class="post-link">
-                                <span class="post-date">10-12</span>
-                                <span class="post-title">Hello World</span>
-                            </a>
-                        </li>
-                    
-                </ul>
-            </div>
-        
+        <ul class="tree-root">
+            <li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>这是一个文件夹</div><ul class="post-list"><li class="post-item file"><a href="/2025/10/14/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">第一篇博客</span></a></li></ul></li><li class="post-item file"><a href="/2025/10/17/%F0%9F%9B%A0%EF%B8%8F%20%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%B8%B8%E7%8E%A9ATM10%E6%95%B4%E5%90%88%E5%8C%85%E6%8C%87%E5%8D%97/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">🛠️ 从零开始游玩ATM10整合包指南</span></a></li><li class="post-item file active"><a href="/2025/10/12/hello-world/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">hello-world</span></a></li>
+        </ul>
     </nav>
 </div>
         </aside>
@@ -138,49 +107,82 @@
     
 <script src="/lib/jquery.pjax.js"></script>
 
-        <script>
-        // 初始化 PJAX
-        $(document).pjax('.sidebar a[href]', '#pjax-container', {
-            timeout: 5000,
-            scrollTo: false
+     <script>
+    // 等待页面完全加载
+    $(document).ready(function() {
+        // 添加加载进度条
+        const progressBar = document.createElement('div');
+        progressBar.className = 'pjax-progress';
+        document.body.appendChild(progressBar);
+        
+        // 初始化 PJAX - 使用更精确的选择器
+        $(document).pjax('#aside .post-list a.post-link', '#pjax-container', {
+            timeout: 8000,
+            scrollTo: false,
+            fragment: '#pjax-container'
+        });
+        
+        // 确保主页链接不使用 PJAX
+        $(document).on('click', '.home-link', function(e) {
+            // 允许主页链接正常跳转，不使用 PJAX
+            return true;
         });
         
         // PJAX 开始事件
         $(document).on('pjax:start', function() {
-            // 显示加载指示器（可选）
+            $('body').addClass('pjax-loading');
+            progressBar.style.display = 'block';
             $('#content').fadeTo(200, 0.7);
+            console.log('PJAX: 开始加载');
         });
         
         // PJAX 完成事件
         $(document).on('pjax:end', function() {
-            // 恢复内容透明度
+            $('body').removeClass('pjax-loading');
+            progressBar.style.display = 'none';
             $('#content').fadeTo(200, 1);
-            
-            // 重新高亮代码块
-            document.querySelectorAll('pre code').forEach((block) => {
-                hljs.highlightElement(block);
-            });
             
             // 更新侧边栏活动状态
             updateSidebarActiveState();
             
+            // 更新页面标题
+            var newTitle = $('#content').find('title').text() || document.title;
+            document.title = newTitle;
+            
             // 滚动到顶部
             window.scrollTo(0, 0);
+            
+            console.log('PJAX: 加载完成');
         });
         
         // PJAX 错误处理
         $(document).on('pjax:error', function(xhr, textStatus, error) {
             console.error('PJAX Error:', error);
-            // 可以在这里添加错误处理逻辑
+            $('body').removeClass('pjax-loading');
+            progressBar.style.display = 'none';
+            $('#content').fadeTo(200, 1);
         });
         
         // 初始化侧边栏活动状态
         function updateSidebarActiveState() {
             $('.post-item').removeClass('active');
             var currentPath = window.location.pathname;
-            $('.sidebar a[href="' + currentPath + '"]').closest('.post-item').addClass('active');
+            var normalizedPath = currentPath.replace(/\/$/, '');
+            
+            $('.post-link').each(function() {
+                var href = $(this).attr('href');
+                var normalizedHref = href ? href.replace(/\/$/, '') : '';
+                
+                if (normalizedHref === normalizedPath) {
+                    $(this).closest('.post-item').addClass('active');
+                    console.log('激活文章:', $(this).find('.post-title').text());
+                }
+            });
         }
-    </script>
+        // 初始侧边栏状态
+        updateSidebarActiveState();
+    });
+</script>
 
     <!-- 引入代码高亮的 js -->
     

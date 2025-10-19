@@ -976,19 +976,32 @@ hr {
 .post-nav {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
 }
 
-.post-nav-prev,
+/* 上一篇文章链接 - 始终居左 */
+.post-nav-prev {
+    color: var(--v-blue-700);
+    text-decoration: none;
+    max-width: 45%;
+    text-align: left;
+    margin-right: auto; /* 确保靠左对齐 */
+}
+
+/* 下一篇文章链接 - 始终居右 */
 .post-nav-next {
     color: var(--v-blue-700);
     text-decoration: none;
     max-width: 45%;
+    text-align: right;
+    margin-left: auto; /* 确保靠右对齐 */
 }
 
 .post-nav-prev:hover,
 .post-nav-next:hover {
     background-image: none !important;
-    text-decoration: underline;
+    text-decoration: none; /* 移除下划线 */
+    opacity: 0.8; /* 添加悬停效果 */
 }
 
 .post-nav-prev i {
@@ -997,35 +1010,6 @@ hr {
 
 .post-nav-next i {
     margin-left: 0.5em;
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-    .post-title {
-        font-size: 1.8em;
-    }
-    
-    .post-meta {
-        font-size: 0.85em;
-    }
-    
-    .post-date,
-    .post-categories,
-    .post-tags {
-        display: block;
-        margin-right: 0;
-        margin-bottom: 0.5rem;
-    }
-    
-    .post-nav {
-        flex-direction: column;
-    }
-    
-    .post-nav-prev,
-    .post-nav-next {
-        max-width: 100%;
-        margin-bottom: 1rem;
-    }
 }
 
 
@@ -1072,13 +1056,10 @@ hr {
     padding: 1.5rem 1.25rem 1rem;
     border-bottom: 1px solid var(--v-gray-400);
     background-color: var(--v-white-200);
-
-    /*主页图标*/
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
-
 }
 
 .sidebar-header h3 {
@@ -1088,9 +1069,9 @@ hr {
     font-weight: 600;
 }
 
-/*主页图标*/
+/* 主页图标 */
 .home-link {
-    color: var(--theme-900);  /* 使用与文章目录相同的颜色 */
+    color: var(--theme-900);
     text-decoration: none;
     font-size: 1.1em;
     padding: 0.3rem;
@@ -1105,9 +1086,8 @@ hr {
 }
 
 .home-link:hover {
-    color: var(--v-blue-700);  /* 悬停时变为蓝色 */
+    color: var(--v-blue-700);
     background-color: var(--v-white-200);
-
 }
 
 /* 主页链接的提示文本 */
@@ -1152,13 +1132,24 @@ hr {
     visibility: visible;
 }
 
-
 .sidebar-nav {
     padding: 1rem 0;
 }
 
+/* ==========================================================================
+   树形目录样式 - 基于现有样式适配
+   ========================================================================== */
+
+.tree-root {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* 文件夹样式 */
 .category-group {
-    margin-bottom: 1rem;
+    margin-bottom: 0;
+    position: relative;
 }
 
 .category-title {
@@ -1169,57 +1160,66 @@ hr {
     display: flex;
     align-items: center;
     cursor: pointer;
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+    user-select: none;
 }
 
 .category-title:hover {
     color: var(--v-blue-700);
+    background-color: var(--v-white-200);
 }
 
 .category-title i {
     margin-right: 0.5rem;
     font-size: 0.8em;
+    transition: transform 0.2s ease;
 }
 
-.post-list {
-    list-style: none;
+/* 文件夹展开/收起状态 */
+.category-group.collapsed .category-title i.fa-folder-open {
+    transform: rotate(0deg);
+}
+
+.category-group:not(.collapsed) .category-title i.fa-folder {
+    transform: rotate(0deg);
+}
+
+/* 文件项样式 */
+.post-item.file {
     margin: 0;
-    padding: 0;
 }
 
-.post-item {
-    margin: 0;
-}
-
-.post-link {
+.post-item.file .post-link {
     display: flex;
     align-items: flex-start;
-    padding: 0.5rem 1.25rem 0.5rem 2rem;
+    padding: 0.4rem 1.25rem 0.4rem 2rem;
     text-decoration: none;
     color: var(--v-gray-700);
     transition: all 0.2s ease;
-    border-left: 2px solid transparent;
+    border-left: 3px solid transparent;
 }
 
-.post-link:hover {
+.post-item.file .post-link:hover {
     background-color: var(--v-white-200);
     color: var(--v-blue-700);
     border-left-color: var(--v-blue-600);
 }
 
-.post-item.active .post-link {
+.post-item.file.active .post-link {
     background-color: var(--color-1-0-b);
     color: var(--v-blue-700);
     border-left-color: var(--v-blue-700);
     font-weight: 500;
 }
 
-.post-date {
-    font-size: 0.8em;
-    color: var(--v-gray-600);
-    min-width: 45px;
-    flex-shrink: 0;
+.post-icon {
     margin-right: 0.5rem;
+    color: var(--v-gray-600);
+    font-size: 0.8em;
+    display: flex;
+    align-items: center;
+    min-width: 16px;
     margin-top: 0.1rem;
 }
 
@@ -1229,47 +1229,37 @@ hr {
     flex: 1;
 }
 
-/* 响应式设计 */
-@media (max-width: 1024px) {
-    #aside {
-        width: 250px;
-    }
-    
-    .main-content {
-        max-width: calc(100% - 250px);
-    }
+/* 嵌套列表样式 */
+.post-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-@media (max-width: 768px) {
-    #main {
-        flex-direction: column;
-    }
-    
-    #aside {
-        width: 100%;
-        height: auto;
-        position: relative;
-        max-height: 40vh;
-        border-right: none;
-        border-bottom: 1px solid var(--v-gray-400);
-    }
-    
-    .main-content {
-        max-width: 100%;
-    }
-    
-    #content {
-        padding: 1.5rem;
-    }
-    
-    .post-link {
-        padding: 0.4rem 1rem 0.4rem 1.5rem;
-    }
-    
-    .category-title {
-        padding: 0.5rem 1rem;
-    }
+/* 文件夹展开/收起动画 */
+.category-group .post-list {
+    max-height: 1000px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
 }
+
+.category-group.collapsed .post-list {
+    max-height: 0;
+}
+
+/* 多级嵌套的缩进 */
+.category-group .category-group {
+    margin-bottom: 0;}
+.category-group .category-group .category-title {
+    padding-left: 2rem;}
+.category-group .category-group .post-item.file .post-link {
+    padding-left: 3rem;}
+.category-group .category-group .category-group .category-title {
+    padding-left: 3rem;}
+.category-group .category-group .category-group .post-item.file .post-link {
+    padding-left: 4rem;}
+
+
 
 /* 侧边栏滚动条样式 */
 #aside::-webkit-scrollbar {
@@ -1289,13 +1279,19 @@ hr {
     background: var(--v-gray-600);
 }
 
-
+/*这里防止下划线*/
 #aside * {
     text-decoration: none !important;
     background-image: none !important;
 }
 
-#aside *:hover {
-    text-decoration: none !important;
-    background-image: none !important;
+/* 确保侧边栏内的列表项没有自定义标记 */
+#aside li::before,
+.sidebar li::before,
+.sidebar-nav li::before,
+.tree-root li::before,
+.post-list li::before,
+.category-group li::before {
+  content: none !important;
+  display: none !important;
 }
