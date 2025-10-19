@@ -1,17 +1,55 @@
-// 侧边栏交互功能
+// 树形目录交互功能
 document.addEventListener('DOMContentLoaded', function() {
-    // 分类目录折叠功能
+    // 文件夹点击展开/收起功能
     const categoryTitles = document.querySelectorAll('.category-title');
     
     categoryTitles.forEach(title => {
-        title.addEventListener('click', function() {
-            const postList = this.nextElementSibling;
-            if (postList && postList.classList.contains('post-list')) {
-                postList.classList.toggle('collapsed');
-                this.classList.toggle('collapsed');
+        title.addEventListener('click', function(e) {
+            e.preventDefault();
+            const categoryGroup = this.closest('.category-group');
+            if (categoryGroup) {
+                categoryGroup.classList.toggle('collapsed');
+                
+                // 切换文件夹图标
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('fa-folder')) {
+                    icon.classList.replace('fa-folder', 'fa-folder-open');
+                } else if (icon.classList.contains('fa-folder-open')) {
+                    icon.classList.replace('fa-folder-open', 'fa-folder');
+                }
             }
         });
     });
+    
+    // 默认展开所有文件夹
+    function expandAllFolders() {
+        document.querySelectorAll('.category-group').forEach(group => {
+            group.classList.remove('collapsed');
+            const icon = group.querySelector('.category-title i');
+            if (icon.classList.contains('fa-folder')) {
+                icon.classList.replace('fa-folder', 'fa-folder-open');
+            }
+        });
+    }
+    
+    // 自动展开当前文章所在的路径
+    function expandActivePath() {
+        const activeItem = document.querySelector('.post-item.file.active');
+        if (activeItem) {
+            let parent = activeItem.closest('.category-group');
+            while (parent) {
+                parent.classList.remove('collapsed');
+                const icon = parent.querySelector('.category-title i');
+                if (icon.classList.contains('fa-folder')) {
+                    icon.classList.replace('fa-folder', 'fa-folder-open');
+                }
+                parent = parent.parentElement.closest('.category-group');
+            }
+        }
+    }
+    
+    // 初始化时展开当前文章路径
+    expandActivePath();
     
     // 移动端菜单切换
     const mobileMenuToggle = document.createElement('button');
@@ -19,7 +57,6 @@ document.addEventListener('DOMContentLoaded', function() {
     mobileMenuToggle.innerHTML = '<i class="fa fa-bars"></i>';
     mobileMenuToggle.style.display = 'none';
     
-    // 确保容器存在再添加按钮
     const mainContainer = document.getElementById('main');
     if (mainContainer) {
         mainContainer.prepend(mobileMenuToggle);
