@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Second theme</title>
+    <title>AIR-v2</title>
     
     <!-- 字体图片库 -->
     
@@ -22,6 +22,45 @@
 <meta name="generator" content="Hexo 8.0.0"></head>
 
 <body class="post-body">
+
+    <!-- 引入导航栏 -->
+    
+
+<nav class="main-nav">
+    <div class="nav-content">
+        <!-- 网站品牌 -->
+        <div class="site-brand">
+            <a href="/" class="site-title">
+                AIR-v2
+            </a>
+            
+        </div>
+
+        <!-- 导航菜单 -->
+        <div class="nav-menu">
+            <!-- 主导航项 -->
+            
+                <a href="/" class="nav-link">
+                    主页
+                </a>
+            
+                <a href="/about" class="nav-link">
+                    关于
+                </a>
+            
+            
+            <!-- 外部链接 -->
+            
+                
+                    <a href="https://github.com" class="nav-link external-nav-link" target="_blank" rel="noopener">
+                        github
+                    </a>
+                
+            
+        </div>
+    </div>
+</nav>
+
     <div id="main">
         <!-- 引入侧边栏 -->
         <aside id="aside">
@@ -74,7 +113,7 @@
 *这是斜体*
 ==这是高亮==
 </code></pre>
-<p><strong>这是粗体</strong><br><del>删除线</del><br><u>下划线</u><br><em>这是斜体</em><br>&#x3D;&#x3D;这是高亮&#x3D;&#x3D;</p>
+<p><strong>这是粗体</strong><br><del>删除线</del><br><u>下划线</u><br><em>这是斜体</em><br>&#x3D;&#x3D;这是高亮&#x3D;&#x3D;（这是扩展语法里的，所以hexo默认用不了）</p>
 <pre><code>快捷键
 加粗：ctrl+B
 删除线：shift+alt+5
@@ -198,16 +237,33 @@ int main()
     
 <script src="/lib/jquery.pjax.js"></script>
 
-     <script>
+    
+    <!-- 引入代码高亮的 js -->
+    
+<script src="/lib/highlight/highlight.min.js"></script>
+
+    
+    <script>
+    // 代码高亮函数
+    function initHighlight() {
+        // 高亮所有代码块
+        document.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightElement(block);
+        });
+    }
+
     // 等待页面完全加载
     $(document).ready(function() {
+        // 初始代码高亮
+        initHighlight();
+        
         // 添加加载进度条
         const progressBar = document.createElement('div');
         progressBar.className = 'pjax-progress';
         document.body.appendChild(progressBar);
         
         // 初始化 PJAX - 使用更精确的选择器
-        $(document).pjax('#aside .post-list a.post-link', '#pjax-container', {
+        $(document).pjax('#aside a.post-link', '#pjax-container', {
             timeout: 8000,
             scrollTo: false,
             fragment: '#pjax-container'
@@ -232,6 +288,9 @@ int main()
             $('body').removeClass('pjax-loading');
             progressBar.style.display = 'none';
             $('#content').fadeTo(200, 1);
+            
+            // 重新初始化代码高亮
+            initHighlight();
             
             // 更新侧边栏活动状态
             updateSidebarActiveState();
@@ -273,19 +332,6 @@ int main()
         // 初始侧边栏状态
         updateSidebarActiveState();
     });
-</script>
-
-    <!-- 引入代码高亮的 js -->
-    
-<script src="/lib/highlight/highlight.min.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            // 高亮所有代码块
-            document.querySelectorAll('pre code').forEach((block) => {
-                hljs.highlightElement(block);
-            });
-        });
     </script>
 
     <!-- 引入主题 js 文件 -->

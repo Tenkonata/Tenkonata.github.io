@@ -421,7 +421,7 @@ blockquote > *:last-child {
 /* 多层嵌套引用样式 */
 blockquote blockquote {
   background: var(--color-1-1-b);     /* 嵌套引用使用稍深的背景色 */
-  border-left-color: var(--text-grey); /* 嵌套引用使用更深的左边框，使用已定义的--text-grey */
+  border-left-color: var(--color-1); /* 嵌套引用使用更深的左边框，使用已定义的--text-grey */
 }
 
 /* 引用块内的代码样式 */
@@ -1294,4 +1294,117 @@ hr {
 .category-group li::before {
   content: none !important;
   display: none !important;
+}
+
+
+
+
+
+
+/* ==========================================================================
+   导航栏样式框架
+   ========================================================================== */
+
+/* 顶部导航栏样式 */
+.main-nav {
+    background: var(--v-white-100);
+    border-bottom: 1px solid var(--v-gray-400);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    background-color: rgba(250, 250, 252, 0.98);
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem; /* 添加内边距，但保持内容居左 */
+    max-width: 100%; /* 移除最大宽度限制 */
+    margin: 0; /* 移除自动居中 */
+}
+
+/* 网站品牌 */
+.site-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: 0; /* 确保没有左边距 */
+}
+
+.site-title {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: var(--theme-900);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    margin-left: 0; /* 确保标题没有左边距 */
+}
+
+.site-title:hover {
+    color: var(--v-blue-700);
+    background-image: none !important;
+}
+
+.site-subtitle {
+    font-size: 0.9em;
+    color: var(--v-gray-700);
+    margin: 0;
+    font-weight: 400;
+}
+
+/* 导航菜单 */
+.nav-menu {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* 导航链接 */
+.nav-link {
+    color: var(--v-gray-800);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95em;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: var(--v-blue-700);
+    background-color: var(--v-white-200);
+    background-image: none !important;
+}
+
+.nav-link.active {
+    color: var(--v-blue-700);
+    background-color: var(--color-1-0-b);
+}
+
+/* 外部链接特殊样式 */
+.external-nav-link {
+    position: relative;
+    padding-right: 1.5rem;
+}
+
+.external-nav-link::after {
+    content: "↗";
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8em;
+    opacity: 0.7;
+}
+
+/* 当前页面高亮 */
+.nav-link[href*="<%= url_for(page.path) %>"] {
+    color: var(--v-blue-700);
+    background-color: var(--color-1-0-b);
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Second theme</title>
+    <title>AIR-v2</title>
     
     <!-- 字体图片库 -->
     
@@ -22,6 +22,45 @@
 <meta name="generator" content="Hexo 8.0.0"></head>
 
 <body class="post-body">
+
+    <!-- 引入导航栏 -->
+    
+
+<nav class="main-nav">
+    <div class="nav-content">
+        <!-- 网站品牌 -->
+        <div class="site-brand">
+            <a href="/" class="site-title">
+                AIR-v2
+            </a>
+            
+        </div>
+
+        <!-- 导航菜单 -->
+        <div class="nav-menu">
+            <!-- 主导航项 -->
+            
+                <a href="/" class="nav-link">
+                    主页
+                </a>
+            
+                <a href="/about" class="nav-link">
+                    关于
+                </a>
+            
+            
+            <!-- 外部链接 -->
+            
+                
+                    <a href="https://github.com" class="nav-link external-nav-link" target="_blank" rel="noopener">
+                        github
+                    </a>
+                
+            
+        </div>
+    </div>
+</nav>
+
     <div id="main">
         <!-- 引入侧边栏 -->
         <aside id="aside">
@@ -48,37 +87,26 @@
         <main class="main-content" id="pjax-container">
             <div id="content">
                 <div id="articleList">
-	<ul>
-		
+    <ul>
+        
 
-			<li class="article-li">
-				<span class="article-date">2025-10-12</span>
-				<a class="article-title" href="/2025/10/12/hello-world/">hello-world</a>
-				<div class="article-digest">
-					Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any pro
-					...
-				</div>
-			</li>
-			
-		
-
-			<li class="article-li">
-				<span class="article-date">2025-10-17</span>
-				<a class="article-title" href="/2025/10/17/🛠️ 从零开始游玩ATM10整合包指南/">🛠️ 从零开始游玩ATM10整合包指南</a>
-				<div class="article-digest">
-					玩ATM10（All The Mods 10）整合包确实能带来不少乐趣。我为你整理了一份从零开始，使用PCL2启动器和柠娜汉化包游玩ATM10整合包的流程图，希望能帮你一目了然地看清整个步骤：
+            <li class="article-li">
+                <span class="article-date">2025-10-17</span>
+                <a class="article-title" href="/2025/10/17/🛠️ 从零开始游玩ATM10整合包指南/">🛠️ 从零开始游玩ATM10整合包指南</a>
+                <div class="article-digest">
+                    玩ATM10（All The Mods 10）整合包确实能带来不少乐趣。我为你整理了一份从零开始，使用PCL2启动器和柠娜汉化包游玩ATM10整合包的流程图，希望能帮你一目了然地看清整个步骤：
 flo
-					...
-				</div>
-			</li>
-			
-		
+                    ...
+                </div>
+            </li>
+            
+        
 
-			<li class="article-li">
-				<span class="article-date">2025-10-14</span>
-				<a class="article-title" href="/2025/10/14/这是一个文件夹/第一篇博客/">第一篇博客</a>
-				<div class="article-digest">
-					一、标题这是二级标题三级标题二、段落小换行小换行
+            <li class="article-li">
+                <span class="article-date">2025-10-14</span>
+                <a class="article-title" href="/2025/10/14/这是一个文件夹/第一篇博客/">第一篇博客</a>
+                <div class="article-digest">
+                    一、标题这是二级标题三级标题二、段落小换行小换行
 分割线使用—或***
 
 三、字体显示**这是粗体**
@@ -88,12 +116,23 @@ flo
 ==这是高亮==
 
 
-					...
-				</div>
-			</li>
-			
-		
-	</ul>
+                    ...
+                </div>
+            </li>
+            
+        
+
+            <li class="article-li">
+                <span class="article-date">2025-10-12</span>
+                <a class="article-title" href="/2025/10/12/hello-world/">hello-world</a>
+                <div class="article-digest">
+                    Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any pro
+                    ...
+                </div>
+            </li>
+            
+        
+    </ul>
 </div>
             </div>
         </main>
@@ -108,16 +147,33 @@ flo
     
 <script src="/lib/jquery.pjax.js"></script>
 
-     <script>
+    
+    <!-- 引入代码高亮的 js -->
+    
+<script src="/lib/highlight/highlight.min.js"></script>
+
+    
+    <script>
+    // 代码高亮函数
+    function initHighlight() {
+        // 高亮所有代码块
+        document.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightElement(block);
+        });
+    }
+
     // 等待页面完全加载
     $(document).ready(function() {
+        // 初始代码高亮
+        initHighlight();
+        
         // 添加加载进度条
         const progressBar = document.createElement('div');
         progressBar.className = 'pjax-progress';
         document.body.appendChild(progressBar);
         
         // 初始化 PJAX - 使用更精确的选择器
-        $(document).pjax('#aside .post-list a.post-link', '#pjax-container', {
+        $(document).pjax('#aside a.post-link', '#pjax-container', {
             timeout: 8000,
             scrollTo: false,
             fragment: '#pjax-container'
@@ -142,6 +198,9 @@ flo
             $('body').removeClass('pjax-loading');
             progressBar.style.display = 'none';
             $('#content').fadeTo(200, 1);
+            
+            // 重新初始化代码高亮
+            initHighlight();
             
             // 更新侧边栏活动状态
             updateSidebarActiveState();
@@ -183,19 +242,6 @@ flo
         // 初始侧边栏状态
         updateSidebarActiveState();
     });
-</script>
-
-    <!-- 引入代码高亮的 js -->
-    
-<script src="/lib/highlight/highlight.min.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            // 高亮所有代码块
-            document.querySelectorAll('pre code').forEach((block) => {
-                hljs.highlightElement(block);
-            });
-        });
     </script>
 
     <!-- 引入主题 js 文件 -->
