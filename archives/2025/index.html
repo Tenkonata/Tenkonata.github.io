@@ -19,11 +19,22 @@
     
 <link rel="stylesheet" href="/css/AIR-v2.css">
 
+    
+    <style>
+    /* 首页特殊布局 */
+    .home-layout #main {
+        display: block !important;
+    }
+    
+    .home-layout .main-content {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    </style>
 <meta name="generator" content="Hexo 8.0.0"></head>
 
-<body class="post-body">
-
-    <!-- 引入导航栏 -->
+<body class="post-body ">
+    <!-- 引入顶部导航 -->
     
 
 <nav class="main-nav">
@@ -64,11 +75,12 @@
         </div>
     </div>
 </nav>
-
+    
     <div id="main">
-        <!-- 引入侧边栏 -->
-        <aside id="aside">
-            <div class="sidebar">
+        
+            <!-- 非首页显示侧边栏 -->
+            <aside id="aside">
+                <div class="sidebar">
     <div class="sidebar-header">
 
         <h3>文章目录</h3>
@@ -85,43 +97,473 @@
         </ul>
     </nav>
 </div>
-        </aside>
+            </aside>
+        
 
         <!-- 主内容区域 -->
-        <main class="main-content" id="pjax-container">
+        <main class="main-content " id="pjax-container">
             <div id="content">
-                <div id="articleList">
-    <ul>
-        
+                
 
-            <li class="article-li">
-                <span class="article-date">2025-10-17</span>
-                <a class="article-title" href="/2025/10/17/🛠️ 从零开始游玩ATM10整合包指南/">🛠️ 从零开始游玩ATM10整合包指南</a>
-                <div class="article-digest">
-                    玩ATM10（All The Mods 10）整合包确实能带来不少乐趣。我为你整理了一份从零开始，使用PCL2启动器和柠娜汉化包游玩ATM10整合包的流程图，希望能帮你一目了然地看清整个步骤：
-flo
-                    ...
-                </div>
-            </li>
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIR-v2</title>
+    
+    <!-- 字体图片库 -->
+    
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+    
+    <style>
+    /* 导航栏 - 完全透明且无边框 */
+    .main-nav {
+    position: fixed !important;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: transparent;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    }
+
+    /* 全屏英雄区域 */
+    .home-hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    }
+
+    /* 背景图片容器 */
+    .hero-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    .hero-background::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            rgba(0, 0, 0, 0.3),
+            rgba(0, 0, 0, 0.2)
+        );
+        z-index: 1;
+    }
+
+    .hero-bg-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://img.paulzzh.com/touhou/random?site=yandere');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    /* 主内容区域 - 优化居中布局 */
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        position: relative;
+        z-index: 2;
+        padding: 0 2rem;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* 打字机效果 - 完美居中 */
+    .typewriter-container {
+        margin-bottom: 2rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .typewriter-text {
+        font-size: 4em;
+        font-weight: 700;
+        overflow: hidden;
+        border-right: 3px solid white;
+        white-space: nowrap;
+        animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        line-height: 1.2;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    @keyframes typing {
+        from { width: 0 }
+        to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+        from, to { border-color: transparent }
+        50% { border-color: white }
+    }
+
+    /* 动态箭头 - 优化位置 */
+    .scroll-indicator {
+        position: absolute;
+        bottom: 60px; /* 调整到更合适的位置 */
+        left: 50%;
+        transform: translateX(-50%);
+        animation: bounce 2s infinite;
+        cursor: pointer;
+        z-index: 3;
+    }
+
+    .v-arrow {
+        width: 40px;
+        height: 40px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+
+    .v-arrow::before,
+    .v-arrow::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 2px;
+        height: 25px;
+        background: white;
+        border-radius: 1px;
+    }
+
+    .v-arrow::before {
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+        transform-origin: top left;
+    }
+
+    .v-arrow::after {
+        right: 50%;
+        transform: translateX(50%) rotate(-45deg);
+        transform-origin: top right;
+    }
+
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateX(-50%) translateY(0);
+        }
+        40% {
+            transform: translateX(-50%) translateY(-10px);
+        }
+        60% {
+            transform: translateX(-50%) translateY(-5px);
+        }
+    }
+
+    /* 文章列表区域 - 优化居中 */
+    .home-posts {
+        position: relative;
+        z-index: 10;
+        min-height: 100vh;
+        padding: 4rem 2rem;
+        display: flex;
+        justify-content: center;
+        background: transparent;
+    }
+
+    .posts-container {
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* 文章卡片 - 毛玻璃效果 */
+    .post-article {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        padding: 2.5rem;
+        margin-bottom: 2.5rem;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        width: 100%;
+        max-width: 900px;
+    }
+
+    .post-article:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        border-color: rgba(82, 174, 255, 0.6);
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .post-article::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: #0072f5;
+        transition: width 0.3s ease;
+    }
+
+    .post-article:hover::before {
+        width: 8px;
+    }
+
+    .article-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .article-title {
+        font-size: 2em;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .article-title a {
+        color: inherit;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .article-title a:hover {
+        color: #a8d1ff;
+    }
+
+    .article-meta {
+        display: flex;
+        gap: 2rem;
+        font-size: 0.95em;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .meta-item i {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .article-excerpt {
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        font-size: 1.1em;
+    }
+
+    .article-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(234, 234, 234, 0.3);
+    }
+
+    .category-tags {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+    }
+
+    .category-tag {
+        background: rgba(62, 105, 215, 0.3);
+        color: rgba(255, 255, 255, 0.9);
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9em;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border: 1px solid rgba(62, 105, 215, 0.5);
+    }
+
+    .category-tag:hover {
+        background: rgba(62, 105, 215, 0.6);
+        color: white;
+    }
+
+    .read-more-btn {
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.2s ease;
+        font-size: 1.05em;
+    }
+
+    .read-more-btn:hover {
+        color: white;
+        gap: 0.8rem;
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+        .typewriter-text {
+            font-size: 2.5em;
+            white-space: normal;
+            border-right: none;
+            animation: none;
+        }
+        
+        .article-footer {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .article-meta {
+            gap: 1rem;
+        }
+        
+        .home-posts {
+            padding: 2rem 1rem;
+        }
+        
+        .post-article {
+            padding: 1.5rem;
+        }
+        
+        .scroll-indicator {
+            bottom: 40px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .typewriter-text {
+            font-size: 2em;
+        }
+        
+        .article-title {
+            font-size: 1.5em;
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- 全屏背景 -->
+    <div class="hero-background">
+        <div class="hero-bg-image"></div>
+    </div>
+
+    <!-- 主页内容 -->
+    <div class="home-hero">
+        <!-- 导航栏已经在layout.ejs中包含 -->
+        
+        <!-- 主要内容 -->
+        <div class="hero-content">
+            <div class="typewriter-container">
+                <h1 class="typewriter-text">欢迎来到我的博客</h1>
+            </div>
             
-        
+            <!-- 动态V型箭头 -->
+            <div class="scroll-indicator" onclick="scrollToPosts()">
+                <div class="v-arrow"></div>
+            </div>
+        </div>
+    </div>
 
-            <li class="article-li">
-                <span class="article-date">2025-10-12</span>
-                <a class="article-title" href="/2025/10/12/hello-world/">hello-world</a>
-                <div class="article-digest">
-                    Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any pro
-                    ...
-                </div>
-            </li>
+    <!-- 文章列表 -->
+    <section class="home-posts">
+        <div class="posts-container">
             
-        
-
-            <li class="article-li">
-                <span class="article-date">2025-10-14</span>
-                <a class="article-title" href="/2025/10/14/这是一个文件夹/第一篇博客/">第一篇博客</a>
-                <div class="article-digest">
-                    一、标题这是二级标题三级标题二、段落小换行小换行
+                
+                    <article class="post-article">
+                        <div class="article-header">
+                            <h2 class="article-title">
+                                <a href="/2025/10/17/%F0%9F%9B%A0%EF%B8%8F%20%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%B8%B8%E7%8E%A9ATM10%E6%95%B4%E5%90%88%E5%8C%85%E6%8C%87%E5%8D%97/">无题</a>
+                            </h2>
+                            
+                            <div class="article-meta">
+                                <div class="meta-item">
+                                    <i class="fa fa-calendar"></i>
+                                    <time datetime="2025-10-17T04:47:59.250Z">
+                                        2025-10-17
+                                    </time>
+                                </div>
+                                
+                                
+                                
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="article-excerpt">
+                            
+                            玩ATM10（All The Mods 10）整合包确实能带来不少乐趣。我为你整理了一份从零开始，使用PCL2启动器和柠娜汉化包游玩ATM10整合包的流程图，希望能帮你一目了然地看清整个步骤：
+flowchart TD
+    A[从零开始游玩ATM10整合包] --&gt; B[准备阶段: 下载必要软件]
+    A --&gt; C[安装阶段: 配置环境与整合包]
+    A --&gt; D[汉化阶段: 应用柠娜汉化包]
+    A --&gt; E[游玩阶段: 启动与优化游戏]...
+                        </div>
+                        
+                        <div class="article-footer">
+                            
+                            
+                            <a href="/2025/10/17/%F0%9F%9B%A0%EF%B8%8F%20%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%B8%B8%E7%8E%A9ATM10%E6%95%B4%E5%90%88%E5%8C%85%E6%8C%87%E5%8D%97/" class="read-more-btn">
+                                阅读全文 <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="post-article">
+                        <div class="article-header">
+                            <h2 class="article-title">
+                                <a href="/2025/10/14/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">第一篇博客</a>
+                            </h2>
+                            
+                            <div class="article-meta">
+                                <div class="meta-item">
+                                    <i class="fa fa-calendar"></i>
+                                    <time datetime="2025-10-14T15:47:53.846Z">
+                                        2025-10-14
+                                    </time>
+                                </div>
+                                
+                                
+                                
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="article-excerpt">
+                            
+                            一、标题这是二级标题三级标题二、段落小换行小换行
 分割线使用—或***
 
 三、字体显示**这是粗体**
@@ -130,14 +572,74 @@ flo
 *这是斜体*
 ==这是高亮==
 
+这是粗体删除线下划线这是斜体&#x3D;&#x3D;这是高亮&#x3D;&#x3D;（这是扩展语法里的，所以hexo默认用不了）
+快捷键
+加粗：ctrl+B
+删除线：shift+alt+5
+下划线：ctrl+U
+斜体：ctrl+I
 
-                    ...
-                </div>
-            </li>
+1*2*3	\*
+上下标x^2^	x^2^H2O	H~2~OX1^...
+                        </div>
+                        
+                        <div class="article-footer">
+                            
+                            
+                            <a href="/2025/10/14/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="read-more-btn">
+                                阅读全文 <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="post-article">
+                        <div class="article-header">
+                            <h2 class="article-title">
+                                <a href="/2025/10/12/hello-world/">Hello World</a>
+                            </h2>
+                            
+                            <div class="article-meta">
+                                <div class="meta-item">
+                                    <i class="fa fa-calendar"></i>
+                                    <time datetime="2025-10-12T14:20:53.696Z">
+                                        2025-10-12
+                                    </time>
+                                </div>
+                                
+                                
+                                
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="article-excerpt">
+                            
+                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick StartCreate a new post$ hexo new &quot;My New Pos...
+                        </div>
+                        
+                        <div class="article-footer">
+                            
+                            
+                            <a href="/2025/10/12/hello-world/" class="read-more-btn">
+                                阅读全文 <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
             
-        
-    </ul>
-</div>
+        </div>
+    </section>
+
+    <script>
+    function scrollToPosts() {
+        document.querySelector('.home-posts').scrollIntoView({ 
+            behavior: 'smooth'
+        });
+    }
+    </script>
+</body>
+</html>
             </div>
         </main>
     </div>
@@ -177,22 +679,22 @@ flo
         document.body.appendChild(progressBar);
         
         // 初始化 PJAX - 使用更精确的选择器
-        $(document).pjax('#aside a.post-link', '#pjax-container', {
+        $(document).pjax('#aside .post-list a.post-link', '#pjax-container', {
             timeout: 8000,
             scrollTo: false,
             fragment: '#pjax-container'
         });
         
-        // 确保主页链接不使用 PJAX
-        $(document).on('click', '.home-link', function(e) {
-            // 允许主页链接正常跳转，不使用 PJAX
+        // 确保主页链接和导航链接不使用 PJAX
+        $(document).on('click', '.home-link, .nav-link', function(e) {
+            // 允许这些链接正常跳转，不使用 PJAX
             return true;
         });
         
         // PJAX 开始事件
         $(document).on('pjax:start', function() {
             $('body').addClass('pjax-loading');
-            progressBar.style.display = 'block';
+            progressBar.classList.add('loading');
             $('#content').fadeTo(200, 0.7);
             console.log('PJAX: 开始加载');
         });
@@ -200,7 +702,8 @@ flo
         // PJAX 完成事件
         $(document).on('pjax:end', function() {
             $('body').removeClass('pjax-loading');
-            progressBar.style.display = 'none';
+            progressBar.classList.remove('loading');
+            progressBar.classList.add('finish');
             $('#content').fadeTo(200, 1);
             
             // 重新初始化代码高亮
@@ -215,6 +718,12 @@ flo
             
             // 滚动到顶部
             window.scrollTo(0, 0);
+            
+            // 重置进度条
+            setTimeout(() => {
+                progressBar.classList.remove('finish');
+                progressBar.style.display = 'none';
+            }, 500);
             
             console.log('PJAX: 加载完成');
         });

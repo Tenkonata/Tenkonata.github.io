@@ -1302,28 +1302,27 @@ hr {
 
 
 /* ==========================================================================
-   导航栏样式框架
+   导航栏样式框架 - 静态定位（随页面滚动）
    ========================================================================== */
 
-/* 顶部导航栏样式 */
+/* 静态导航栏样式 */
 .main-nav {
     background: var(--v-white-100);
     border-bottom: 1px solid var(--v-gray-400);
     padding: 1rem 0;
-    position: sticky;
-    top: 0;
+    width: 100%;
+    position: relative; /* 静态定位，随页面滚动 */
     z-index: 100;
-    backdrop-filter: blur(10px);
-    background-color: rgba(250, 250, 252, 0.98);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .nav-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 2rem; /* 添加内边距，但保持内容居左 */
-    max-width: 100%; /* 移除最大宽度限制 */
-    margin: 0; /* 移除自动居中 */
+    padding: 0 2rem;
+    max-width: 100%;
+    margin: 0;
 }
 
 /* 网站品牌 */
@@ -1331,7 +1330,6 @@ hr {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-left: 0; /* 确保没有左边距 */
 }
 
 .site-title {
@@ -1340,7 +1338,6 @@ hr {
     color: var(--theme-900);
     text-decoration: none;
     transition: color 0.2s ease;
-    margin-left: 0; /* 确保标题没有左边距 */
 }
 
 .site-title:hover {
