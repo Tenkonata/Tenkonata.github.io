@@ -3,38 +3,40 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIR-v2</title>
+    <title>
+        
+            Hello World | AIR-v2
+        
+    </title>
     
-    <!-- 字体图片库 -->
     
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
-
-    <!-- 代码高亮库 -->
     
 <link rel="stylesheet" href="/lib/highlight/styles/atom-one-dark.css">
 
-
-    <!-- 引入主题样式 -->
     
 <link rel="stylesheet" href="/css/AIR-v2.css">
 
     
     <style>
-    /* 首页特殊布局 */
     .home-layout #main {
         display: block !important;
     }
-    
     .home-layout .main-content {
         max-width: 100% !important;
         width: 100% !important;
+    }
+    /* Pjax 加载动画 */
+    #pjax-container.pjax-loading {
+        opacity: 0.5;
+        transition: opacity 0.3s;
     }
     </style>
 <meta name="generator" content="Hexo 8.0.0"></head>
 
 <body class="post-body ">
-    <!-- 引入顶部导航 -->
+    
     
 
 <nav class="main-nav">
@@ -76,11 +78,12 @@
     </div>
 </nav>
     
-    <div id="main">
+    <div id="pjax-container">
         
-            <!-- 非首页显示侧边栏 -->
-            <aside id="aside">
-                <div class="sidebar">
+        <div id="main">
+            
+                <aside id="aside">
+                    <div class="sidebar">
     <div class="sidebar-header">
 
         <h3>文章目录</h3>
@@ -97,13 +100,12 @@
         </ul>
     </nav>
 </div>
-            </aside>
-        
+                </aside>
+            
 
-        <!-- 主内容区域 -->
-        <main class="main-content " id="pjax-container">
-            <div id="content">
-                <article class="post-body markdown-body">
+            <main class="main-content ">
+                <div id="content">
+                    <article class="post-body markdown-body">
     <header class="post-header">
         <h1 class="post-title">Hello World</h1>
         
@@ -150,21 +152,16 @@
         </div>
     </footer>
 </article>
-            </div>
-        </main>
-    </div>
+                </div>
+            </main>
+        </div>
 
-    <!-- 引入jQuery -->
-    
+    </div> 
 <script src="/lib/jquery-3.7.1.min.js"></script>
 
-
-    <!-- 引入pjax -->
     
 <script src="/lib/jquery.pjax.js"></script>
 
-    
-    <!-- 引入代码高亮的 js -->
     
 <script src="/lib/highlight/highlight.min.js"></script>
 
@@ -172,102 +169,87 @@
     <script>
     // 代码高亮函数
     function initHighlight() {
-        // 高亮所有代码块
         document.querySelectorAll('pre code').forEach((block) => {
             hljs.highlightElement(block);
         });
+        console.log("Pjax: 代码高亮已重新执行");
+    }
+
+    // 统一的初始化函数，用于页面首次加载和 Pjax 加载后调用
+    function onPageReady() {
+        // 1. 重新执行代码高亮
+        initHighlight();
+        
+        console.log("Pjax: 页面初始化脚本 (onPageReady) 已执行");
     }
 
     // 等待页面完全加载
     $(document).ready(function() {
-        // 初始代码高亮
-        initHighlight();
+        console.log("文档首次加载 (document.ready)");
         
-        // 添加加载进度条
-        const progressBar = document.createElement('div');
-        progressBar.className = 'pjax-progress';
-        document.body.appendChild(progressBar);
+        // 1. 首次加载时运行初始化
+        onPageReady();
+
+        // 2. Pjax 初始化
+        var pjaxSelector = 'a[href^="/"]:not([target="_blank"]):not([href$=".xml"]):not([href$=".json"])';
         
-        // 初始化 PJAX - 使用更精确的选择器
-        $(document).pjax('#aside .post-list a.post-link', '#pjax-container', {
-            timeout: 8000,
-            scrollTo: false,
-            fragment: '#pjax-container'
+        // 【重要】容器 ID 保持不变，但它现在指向的是 <div id="pjax-container">
+        var pjaxContainer = '#pjax-container';
+
+        console.log("Pjax: 初始化，监听 " + pjaxSelector + "，容器: " + pjaxContainer);
+
+        // 启动 Pjax
+        $(document).pjax(pjaxSelector, pjaxContainer, {
+            fragment: pjaxContainer, // 抓取新页面的 #pjax-container
+            timeout: 8000
         });
+
         
-        // 确保主页链接和导航链接不使用 PJAX
-        $(document).on('click', '.home-link, .nav-link', function(e) {
-            // 允许这些链接正常跳转，不使用 PJAX
-            return true;
+        // 3. Pjax 事件监听器
+        
+        $(document).on('pjax:send', function() {
+            console.log("Pjax: send (开始加载)");
+            $(pjaxContainer).addClass('pjax-loading');
         });
-        
-        // PJAX 开始事件
-        $(document).on('pjax:start', function() {
-            $('body').addClass('pjax-loading');
-            progressBar.classList.add('loading');
-            $('#content').fadeTo(200, 0.7);
-            console.log('PJAX: 开始加载');
+
+        // 【新增】pjax:success 事件 (在内容替换后, complete 之前)
+        // 我们用它来同步 <body> 标签的 class
+        $(document).on('pjax:success', function(event, data, status, xhr, options) {
+            console.log("Pjax: success (内容已拉取)");
+            
+            // xhr.responseText 是 Pjax 拉取到的 *完整* HTML 页面字符串
+            var fullHtml = xhr.responseText;
+            
+            // 我们用正则表达式从完整 HTML 中提取出 <body> 的 class
+            var newBodyClass = /<body class="([^"]+)">/.exec(fullHtml);
+            
+            if (newBodyClass && newBodyClass[1]) {
+                // 找到了，就更新当前页面的 <body> class
+                $('body').attr('class', newBodyClass[1]);
+                console.log("Pjax: Body class 已同步为: " + newBodyClass[1]);
+            } 
         });
-        
-        // PJAX 完成事件
-        $(document).on('pjax:end', function() {
-            $('body').removeClass('pjax-loading');
-            progressBar.classList.remove('loading');
-            progressBar.classList.add('finish');
-            $('#content').fadeTo(200, 1);
+
+        // Pjax 加载完成后 (新内容已替换旧内容)
+        $(document).on('pjax:complete', function() {
+            console.log("Pjax: complete (加载完成, 准备执行脚本)");
             
-            // 重新初始化代码高亮
-            initHighlight();
-            
-            // 更新侧边栏活动状态
-            updateSidebarActiveState();
-            
-            // 更新页面标题
-            var newTitle = $('#content').find('title').text() || document.title;
-            document.title = newTitle;
-            
-            // 滚动到顶部
-            window.scrollTo(0, 0);
-            
-            // 重置进度条
-            setTimeout(() => {
-                progressBar.classList.remove('finish');
-                progressBar.style.display = 'none';
-            }, 500);
-            
-            console.log('PJAX: 加载完成');
+            $(pjaxContainer).removeClass('pjax-loading');
+
+            // 重新运行页面初始化脚本 (包括代码高亮 和 动画)
+            onPageReady();
         });
-        
-        // PJAX 错误处理
-        $(document).on('pjax:error', function(xhr, textStatus, error) {
-            console.error('PJAX Error:', error);
-            $('body').removeClass('pjax-loading');
-            progressBar.style.display = 'none';
-            $('#content').fadeTo(200, 1);
+
+        $(document).on('pjax:error', function(event, xhr, textStatus, errorThrown) {
+            console.error("Pjax 错误: ", textStatus, errorThrown);
+            if (xhr.status_code != 404) {
+                // 加载失败时，强制浏览器跳转
+                window.location.href = event.currentTarget.href;
+            }
         });
-        
-        // 初始化侧边栏活动状态
-        function updateSidebarActiveState() {
-            $('.post-item').removeClass('active');
-            var currentPath = window.location.pathname;
-            var normalizedPath = currentPath.replace(/\/$/, '');
-            
-            $('.post-link').each(function() {
-                var href = $(this).attr('href');
-                var normalizedHref = href ? href.replace(/\/$/, '') : '';
-                
-                if (normalizedHref === normalizedPath) {
-                    $(this).closest('.post-item').addClass('active');
-                    console.log('激活文章:', $(this).find('.post-title').text());
-                }
-            });
-        }
-        // 初始侧边栏状态
-        updateSidebarActiveState();
     });
     </script>
 
-    <!-- 引入主题 js 文件 -->
     
 <script src="/js/AIR-v2.js"></script>
 

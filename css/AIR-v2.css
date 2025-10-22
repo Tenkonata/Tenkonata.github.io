@@ -458,15 +458,15 @@ blockquote a {
   /*transition: all 0.2s ease-in-out;   /* 添加过渡动画 */
 }
 
-/* 链接悬停效果 - 只针对正文内容区域 */
+/* 链接悬停效果(发生在全体)  */
 .post-body a:hover,
 .markdown-body a:hover,
 .article-content a:hover {
-  background-image: linear-gradient(var(--v-blue-700), var(--v-blue-700));  /* 蓝色渐变 */
+  background-image: linear-gradient(var(--v-blue-700));  /* 蓝色渐变 */
   background-size: 100% 1px;          /* 1像素高的线条 */
   background-position: 0 100%;        /* 底部对齐 */
   background-repeat: no-repeat;       /* 不重复 */
-  color: var(--v-blue-800);           /* 悬停时颜色加深 */
+  color: var(--v-amber-700);           /* 悬停时颜色加深 */
 }
 
 
@@ -756,13 +756,6 @@ hr {
   border-left: none !important;       /* 第一列无左边框 */
 }
 
-/* 表格悬停效果 */
-.post-body table tbody tr:hover,
-.markdown-body table tbody tr:hover,
-.article-content table tbody tr:hover {
-  background: var(--hover-color);     /* 悬停背景色 */
-}
-
 
 
 
@@ -889,12 +882,6 @@ hr {
   border-radius: 4px;
 }
 
-.post-body pre::-webkit-scrollbar-thumb:hover,
-.markdown-body pre::-webkit-scrollbar-thumb:hover,
-.article-content pre::-webkit-scrollbar-thumb:hover {
-  background: #7f848e;                /* 悬停时稍亮 */
-}
-
 /* 覆盖highlight.js的默认背景色 */
 .hljs {
   background: transparent !important;
@@ -953,11 +940,6 @@ hr {
 .post-tags a {
     color: var(--v-blue-700);
     text-decoration: none;
-}
-
-.post-categories a:hover,
-.post-tags a:hover {
-    text-decoration: underline;
 }
 
 /* 文章内容样式 */
@@ -1083,11 +1065,6 @@ hr {
     width: 28px;
     height: 28px;
     position: relative;
-}
-
-.home-link:hover {
-    color: var(--v-blue-700);
-    background-color: var(--v-white-200);
 }
 
 /* 主页链接的提示文本 */
@@ -1341,7 +1318,6 @@ hr {
 }
 
 .site-title:hover {
-    color: var(--v-blue-700);
     background-image: none !important;
 }
 
@@ -1361,7 +1337,7 @@ hr {
     padding: 0;
 }
 
-/* 导航链接 */
+/* 导航链接样式 */
 .nav-link {
     color: var(--v-gray-800);
     text-decoration: none;
@@ -1374,8 +1350,7 @@ hr {
 }
 
 .nav-link:hover {
-    color: var(--v-blue-700);
-    background-color: var(--v-white-200);
+    background-color: rgba(255, 255, 255, 0.15);/* 毛玻璃效果 */
     background-image: none !important;
 }
 
