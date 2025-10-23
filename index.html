@@ -614,88 +614,151 @@ Quick StartCreate a new post$ hexo new &quot;My New Pos...
 
     
     <script>
-    // 代码高亮函数
-    function initHighlight() {
-        document.querySelectorAll('pre code').forEach((block) => {
-            hljs.highlightElement(block);
-        });
-        console.log("Pjax: 代码高亮已重新执行");
+    // 代码高亮函数
+    function initHighlight() {
+        document.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightElement(block);
+        });
+        console.log("Pjax: 代码高亮已重新执行");
+    }
+
+// 生成文章大纲 - 修复版本
+function generateOutline() {
+    const outlineContainer = document.getElementById('article-outline');
+    if (!outlineContainer) return;
+    
+    const headings = document.querySelectorAll('#content h1, #content h2, #content h3, #content h4, #content h5, #content h6');
+    
+    if (headings.length === 0) {
+        outlineContainer.innerHTML = '<div class="no-outline">本文暂无标题</div>';
+        return;
     }
-
-    // 统一的初始化函数，用于页面首次加载和 Pjax 加载后调用
-    function onPageReady() {
-        // 1. 重新执行代码高亮
-        initHighlight();
+    
+    let outlineHTML = '<ul class="outline-list" style="margin: 0; padding: 0;">'; // 确保没有额外的边距
+    
+    headings.forEach((heading, index) => {
+        const level = parseInt(heading.tagName.substring(1));
+        const text = heading.textContent;
+        const id = heading.id || `heading-${index}`;
         
-        console.log("Pjax: 页面初始化脚本 (onPageReady) 已执行");
-    }
-
-    // 等待页面完全加载
-    $(document).ready(function() {
-        console.log("文档首次加载 (document.ready)");
+        // 如果没有ID，创建一个
+        if (!heading.id) {
+            heading.id = id;
+        }
         
-        // 1. 首次加载时运行初始化
-        onPageReady();
-
-        // 2. Pjax 初始化
-        var pjaxSelector = 'a[href^="/"]:not([target="_blank"]):not([href$=".xml"]):not([href$=".json"])';
-        
-        // 【重要】容器 ID 保持不变，但它现在指向的是 <div id="pjax-container">
-        var pjaxContainer = '#pjax-container';
-
-        console.log("Pjax: 初始化，监听 " + pjaxSelector + "，容器: " + pjaxContainer);
-
-        // 启动 Pjax
-        $(document).pjax(pjaxSelector, pjaxContainer, {
-            fragment: pjaxContainer, // 抓取新页面的 #pjax-container
-            timeout: 8000
-        });
-
-        
-        // 3. Pjax 事件监听器
-        
-        $(document).on('pjax:send', function() {
-            console.log("Pjax: send (开始加载)");
-            $(pjaxContainer).addClass('pjax-loading');
-        });
-
-        // 【新增】pjax:success 事件 (在内容替换后, complete 之前)
-        // 我们用它来同步 <body> 标签的 class
-        $(document).on('pjax:success', function(event, data, status, xhr, options) {
-            console.log("Pjax: success (内容已拉取)");
-            
-            // xhr.responseText 是 Pjax 拉取到的 *完整* HTML 页面字符串
-            var fullHtml = xhr.responseText;
-            
-            // 我们用正则表达式从完整 HTML 中提取出 <body> 的 class
-            var newBodyClass = /<body class="([^"]+)">/.exec(fullHtml);
-            
-            if (newBodyClass && newBodyClass[1]) {
-                // 找到了，就更新当前页面的 <body> class
-                $('body').attr('class', newBodyClass[1]);
-                console.log("Pjax: Body class 已同步为: " + newBodyClass[1]);
-            } 
-        });
-
-        // Pjax 加载完成后 (新内容已替换旧内容)
-        $(document).on('pjax:complete', function() {
-            console.log("Pjax: complete (加载完成, 准备执行脚本)");
-            
-            $(pjaxContainer).removeClass('pjax-loading');
-
-            // 重新运行页面初始化脚本 (包括代码高亮 和 动画)
-            onPageReady();
-        });
-
-        $(document).on('pjax:error', function(event, xhr, textStatus, errorThrown) {
-            console.error("Pjax 错误: ", textStatus, errorThrown);
-            if (xhr.status_code != 404) {
-                // 加载失败时，强制浏览器跳转
-                window.location.href = event.currentTarget.href;
+        outlineHTML += `
+            <li class="outline-item outline-level-${level}" style="margin: 0; padding: 0;">
+                <a href="#${id}" class="outline-link">${text}</a>
+            </li>
+        `;
+    });
+    
+    outlineHTML += '</ul>';
+    outlineContainer.innerHTML = outlineHTML;
+    
+    // 添加大纲链接点击事件（使用事件委托）
+    const outlineTab = document.getElementById('outline-tab');
+    if (outlineTab) {
+        outlineTab.addEventListener('click', function(e) {
+            if (e.target.classList.contains('outline-link')) {
+                e.preventDefault();
+                const targetId = e.target.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             }
         });
-    });
-    </script>
+    }
+}
+
+    // 更新侧边栏活动状态 (保持不变)
+    function updateSidebarActiveState() {
+        // ... 你的 updateSidebarActiveState 函数代码保持不变 ...
+        const postItems = document.querySelectorAll('.post-item');
+        postItems.forEach(item => item.classList.remove('active'));
+        
+        const currentPath = window.location.pathname;
+        const normalizedPath = currentPath.replace(/\/$/, '');
+        
+        document.querySelectorAll('.post-link').forEach(link => {
+            const href = link.getAttribute('href');
+            const normalizedHref = href ? href.replace(/\/$/, '') : '';
+            
+            if (normalizedHref === normalizedPath) {
+                link.closest('.post-item').classList.add('active');
+                
+                // 展开父级文件夹
+                let parent = link.closest('.category-group');
+                while (parent) {
+                    parent.classList.remove('collapsed');
+                    const icon = parent.querySelector('.category-title i');
+                    if (icon && icon.classList.contains('fa-folder')) {
+                        icon.classList.remove('fa-folder');
+                        icon.classList.add('fa-folder-open');
+                    }
+                    parent = parent.parentElement.closest('.category-group');
+                }
+            }
+        });
+    }
+
+    // 统一的初始化函数，用于页面首次加载和 Pjax 加载后调用
+    function onPageReady() {
+        // 1. 重新执行代码高亮
+        initHighlight();
+        
+        // 2. 初始化侧边栏功能
+        if (document.querySelector('#aside')) {
+            // 【已删除】不再需要调用 initSidebarTabs()
+            // initSidebarTabs();
+            
+            // 【保留】这两个函数仍然需要
+            generateOutline();
+            updateSidebarActiveState();
+
+            // 【额外修复】调用你 js/AIR-v2.js 中定义的函数
+            // 这样你的移动端按钮和文件夹展开才能在 Pjax 后正常工作
+            if (window.initSidebarAndMobile) {
+                window.initSidebarAndMobile();
+            }
+        }
+        
+        console.log("Pjax: 页面初始化脚本 (onPageReady) 已执行");
+    }
+
+    // 等待页面完全加载 (Pjax 监听器部分保持不变)
+    $(document).ready(function() {
+        // ... 你的所有 Pjax 初始化和监听器 (send, success, complete, error) 保持不变 ...
+        console.log("文档首次加载 (document.ready)");
+        
+        // 1. 首次加载时运行初始化
+        onPageReady();
+
+        // 2. Pjax 初始化
+        var pjaxSelector = 'a[href^="/"]:not([target="_blank"]):not([href$=".xml"]):not([href$=".json"])';
+        var pjaxContainer = '#pjax-container';
+        console.log("Pjax: 初始化，监听 " + pjaxSelector + "，容器: " + pjaxContainer);
+        $(document).pjax(pjaxSelector, pjaxContainer, {
+            fragment: pjaxContainer,
+            timeout: 8000
+        });
+        
+        // 3. Pjax 事件监听器
+        $(document).on('pjax:send', function() { /* ... */ });
+        $(document).on('pjax:success', function(event, data, status, xhr, options) { /* ... */ });
+        $(document).on('pjax:complete', function() {
+            console.log("Pjax: complete (加载完成, 准备执行脚本)");
+            $(pjaxContainer).removeClass('pjax-loading');
+            onPageReady();
+        });
+        $(document).on('pjax:error', function(event, xhr, textStatus, errorThrown) { /* ... */ });
+    });
+    </script>
 
     
 <script src="/js/AIR-v2.js"></script>

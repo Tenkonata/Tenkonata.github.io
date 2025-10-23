@@ -1051,67 +1051,71 @@ hr {
     font-weight: 600;
 }
 
+  .sidebar-nav {
+      padding: 1rem 0;
+  }
+
 /* 主页图标 */
-.home-link {
-    color: var(--theme-900);
-    text-decoration: none;
-    font-size: 1.1em;
-    padding: 0.3rem;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    position: relative;
-}
+/*
+  .home-link {
+      color: var(--theme-900);
+      text-decoration: none;
+      font-size: 1.1em;
+      padding: 0.3rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      position: relative;
+  }
 
-/* 主页链接的提示文本 */
-.home-link::after {
-    content: "主页";
-    position: absolute;
-    bottom: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--v-gray-800);
-    color: white;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 0.75em;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.2s ease;
-    z-index: 10;
-    pointer-events: none;
-}
+  /* 主页链接的提示文本 */
+  /*
+  .home-link::after {
+      content: "主页";
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--v-gray-800);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.75em;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+      z-index: 10;
+      pointer-events: none;
+  }
 
-.home-link::before {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent var(--v-gray-800) transparent;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.2s ease;
-    z-index: 10;
-    pointer-events: none;
-}
+  .home-link::before {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent transparent var(--v-gray-800) transparent;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+      z-index: 10;
+      pointer-events: none;
+  }
 
-.home-link:hover::after,
-.home-link:hover::before {
-    opacity: 1;
-    visibility: visible;
-}
+  .home-link:hover::after,
+  .home-link:hover::before {
+      opacity: 1;
+      visibility: visible;
+  }
+  */
 
-.sidebar-nav {
-    padding: 1rem 0;
-}
 
 /* ==========================================================================
    树形目录样式 - 基于现有样式适配
@@ -1273,9 +1277,158 @@ hr {
   display: none !important;
 }
 
+/* ==========================================================================
+   侧边栏选项卡样式 - 重写版
+   ========================================================================== */
 
+/* 选项卡容器 */
+.sidebar-tabs {
+    display: flex;
+    height: 50px; /* 固定高度 */
+    border-bottom: 1px solid var(--v-gray-400);
+    background: var(--v-white-100);
+}
 
+/* 选项卡按钮 - 各占一半 */
+.tab-btn {
+    flex: 1; /* 各占50% */
+    display: flex;
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+    border: none;
+    background: transparent;
+    color: var(--v-gray-700);
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
 
+/* 文件按钮 - 添加右侧竖线 */
+.tab-btn[data-tab="files"] {
+    border-right: 1px solid var(--v-gray-400);
+}
+
+.tab-btn:hover {
+    background: var(--v-white-200);
+    color: var(--v-blue-700);
+}
+
+.tab-btn.active {
+    color: var(--v-blue-700);
+    background: var(--v-white-200);
+    border-bottom: 2px solid var(--v-blue-700);
+}
+
+/* 调整侧边栏头部样式 */
+.sidebar-header {
+    padding: 0;
+    border-bottom: none;
+    background-color: var(--v-white-100);
+    display: block; /* 改为块级显示 */
+}
+
+/* 内容区域保持不变 */
+.tab-content {
+    display: none;
+    height: calc(100vh - 140px);
+    overflow-y: auto;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ==========================================================================
+   大纲样式 - 优化间距和字体大小
+   ========================================================================== */
+
+/* 大纲容器 */
+.outline-container {
+    padding: 0.5rem 0; /* 增加容器内边距 */
+}
+
+/* 大纲列表 */
+.outline-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* 大纲项 */
+.outline-item {
+    margin: 0;
+    padding: 0;
+    line-height: 1.4; /* 恢复舒适的行高 */
+}
+
+/* 大纲链接 - 主要调整位置 */
+.outline-link {
+    display: block;
+    padding: 0.3rem 1.25rem 0.3rem 0; /* 增加上下内边距 */
+    color: var(--v-gray-700);
+    text-decoration: none;
+    font-size: 1.1em; /* 恢复合适的字体大小 */
+    line-height: 1.4; /* 恢复舒适的行高 */
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+    margin: 0;
+}
+
+.outline-link:hover {
+    background: var(--v-white-200);
+    color: var(--v-blue-700);
+    border-left-color: var(--v-blue-600);
+}
+
+/* 大纲层级缩进 */
+.outline-level-1 .outline-link { 
+    padding-left: 1.25rem;
+    color: var(--h1-ind-color);
+    font-weight: 600;
+}
+
+.outline-level-2 .outline-link { 
+    padding-left: 2.0rem;
+    color: var(--h2-ind-color);
+    font-weight: 500;
+}
+
+.outline-level-3 .outline-link { 
+    padding-left: 2.75rem;
+    color: var(--h3-ind-color);
+}
+
+.outline-level-4 .outline-link { 
+    padding-left: 3.5rem;
+    color: var(--h4-ind-color);
+}
+
+.outline-level-5 .outline-link { 
+    padding-left: 4.25rem;
+    color: var(--h5-ind-color);
+}
+
+.outline-level-6 .outline-link { 
+    padding-left: 5.0rem;
+    color: var(--h6-ind-color);
+}
+
+.no-outline {
+    padding: 1rem 1.25rem; /* 增加无大纲时的内边距 */
+    text-align: center;
+    color: var(--v-gray-600);
+    font-size: 0.9em;
+}
+
+/* 调整侧边栏导航样式 */
+.sidebar-nav {
+    padding: 0;
+    height: calc(100% - 65px);
+}
 
 
 /* ==========================================================================
