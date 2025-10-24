@@ -1533,3 +1533,402 @@ hr {
     color: var(--v-blue-700);
     background-color: var(--color-1-0-b);
 }
+
+@media screen and (max-width: 768px) {
+  /* 主布局调整 */
+  #main {
+    display: block !important;
+    min-height: auto;
+  }
+
+  #aside {
+    display: none; /* 移动端隐藏侧边栏 */
+  }
+
+  .main-content {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  #content {
+    padding: 1rem;
+    max-width: 100%;
+  }
+
+  /* 导航栏优化 */
+  .main-nav {
+    position: relative !important;
+    padding: 0.8rem 1rem;
+  }
+
+  .nav-content {
+    padding: 0 1rem;
+    flex-wrap: wrap;
+  }
+
+  .site-title {
+    font-size: 1.2em;
+  }
+
+  .nav-menu {
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+
+  .nav-link {
+    font-size: 0.85em;
+    padding: 0.4rem 0.6rem;
+  }
+
+  /* 主页英雄区域优化 */
+  .home-hero {
+    height: 60vh;
+    padding: 0 1rem;
+  }
+
+  .typewriter-text {
+    font-size: 2em !important;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.3;
+    padding: 0 10px;
+    word-wrap: break-word;
+  }
+
+  /* 文章卡片优化 */
+  .home-posts {
+    padding: 2rem 1rem;
+  }
+
+  .posts-container {
+    max-width: 100%;
+  }
+
+  .post-article {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .article-title {
+    font-size: 1.5em;
+    line-height: 1.3;
+    word-wrap: break-word;
+  }
+
+  .article-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.85em;
+  }
+
+  .article-excerpt {
+    font-size: 1em;
+    line-height: 1.6;
+    word-wrap: break-word;
+  }
+
+  .article-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .category-tags {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .category-tag {
+    font-size: 0.8em;
+    padding: 0.3rem 0.8rem;
+  }
+
+  .read-more-btn {
+    align-self: stretch;
+    text-align: center;
+    padding: 0.5rem;
+  }
+
+  /* 箭头指示器优化 */
+  .scroll-indicator {
+    bottom: 40px;
+  }
+
+  .v-arrow {
+    width: 30px;
+    height: 30px;
+  }
+
+  .v-arrow::before,
+  .v-arrow::after {
+    height: 18px;
+  }
+
+  /* 文章内容优化 */
+  .post-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+  }
+
+  .post-title {
+    font-size: 1.8em;
+    line-height: 1.3;
+  }
+
+  .post-meta {
+    font-size: 0.8em;
+  }
+
+  .post-date,
+  .post-categories,
+  .post-tags {
+    margin-right: 1rem;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  /* 代码块优化 */
+  .post-body pre,
+  .markdown-body pre,
+  .article-content pre,
+  .highlight pre {
+    padding-top: 28px;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin: 12px 0;
+    border-radius: 6px;
+  }
+
+  .post-body pre code,
+  .markdown-body pre code,
+  .article-content pre code,
+  .highlight pre code,
+  .hljs {
+    font-size: 0.8rem;
+    line-height: 1.3rem;
+  }
+
+  /* 表格优化 */
+  .post-body table,
+  .markdown-body table,
+  .article-content table {
+    font-size: 0.9em;
+    display: block;
+    overflow-x: auto;
+  }
+
+  /* 图片优化 */
+  .post-body img,
+  .markdown-body img,
+  .article-content img {
+    border-radius: 6px;
+    margin: 12px auto;
+  }
+
+  /* 引用块优化 */
+  blockquote {
+    margin-top: 12px !important;
+    padding: 6px 12px;
+    border-radius: 6px;
+  }
+
+  /* 列表优化 */
+  .post-body ul,
+  .markdown-body ul,
+  .article-content ul {
+    padding-left: 12px;
+  }
+
+  .post-body ol,
+  .markdown-body ol,
+  .article-content ol {
+    padding-left: 20px;
+  }
+
+  /* 标题优化 */
+  h1 {
+    font-size: 1.8em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  h3 {
+    font-size: 1.3em;
+  }
+
+  h4 {
+    font-size: 1.1em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 20px 0 14px 0;
+    padding-left: 8px;
+  }
+
+  h1::before,
+  h2::before,
+  h3::before,
+  h4::before,
+  h5::before,
+  h6::before {
+    width: 2px;
+    top: 1px;
+    bottom: 1px;
+    height: calc(100% - 2px);
+  }
+}
+
+/* 手机设备 (480px 及以下) */
+@media screen and (max-width: 480px) {
+  .home-hero {
+    height: 50vh;
+  }
+
+  .typewriter-text {
+    font-size: 1.6em !important;
+  }
+
+  .nav-content {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .site-brand {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .nav-menu {
+    gap: 0.5rem;
+  }
+
+  .nav-link {
+    font-size: 0.8em;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .post-article {
+    padding: 1rem;
+  }
+
+  .article-title {
+    font-size: 1.3em;
+  }
+
+  .post-title {
+    font-size: 1.5em;
+  }
+
+  #content {
+    padding: 0.8rem;
+  }
+
+  .home-posts {
+    padding: 1.5rem 0.8rem;
+  }
+
+  /* 进一步缩小代码字体 */
+  .post-body pre code,
+  .markdown-body pre code,
+  .article-content pre code,
+  .highlight pre code,
+  .hljs {
+    font-size: 0.75rem;
+  }
+
+  /* 文章底部导航优化 */
+  .post-nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .post-nav-prev,
+  .post-nav-next {
+    max-width: 100%;
+    text-align: center;
+  }
+}
+
+/* 超小屏幕设备 (360px 及以下) */
+@media screen and (max-width: 360px) {
+  .typewriter-text {
+    font-size: 1.4em !important;
+  }
+
+  .nav-link {
+    font-size: 0.75em;
+    padding: 0.25rem 0.4rem;
+  }
+
+  .post-article {
+    padding: 0.8rem;
+  }
+
+  .article-title {
+    font-size: 1.2em;
+  }
+
+  #content {
+    padding: 0.5rem;
+  }
+}
+
+/* 通用移动端优化 */
+@media screen and (max-width: 768px) {
+  /* 防止背景固定导致性能问题 */
+  .hero-bg-image {
+    background-attachment: scroll;
+  }
+
+  /* 改善触摸体验 */
+  .nav-link,
+  .read-more-btn,
+  .category-tag,
+  .scroll-indicator,
+  .post-link {
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+
+  /* 确保文本不会溢出 */
+  .article-title,
+  .article-excerpt,
+  .typewriter-text,
+  .post-title {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  /* 改善滚动性能 */
+  .home-hero,
+  .home-posts,
+  #content {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 统一盒模型 */
+  * {
+    max-width: 100%; /* 防止元素溢出视口 */
+  }
+}
+
+/* 横屏模式优化 */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .home-hero {
+    height: 80vh;
+  }
+  
+  .typewriter-text {
+    font-size: 1.8em !important;
+  }
+}
