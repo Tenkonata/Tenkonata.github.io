@@ -51,19 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- (保持不变) 修复2: 移动端按钮点击 (事件委托) ---
-    pjaxContainer.addEventListener('click', function(e) {
-        // 检查被点击的是否是 .mobile-menu-toggle 按钮
-        const toggleButton = e.target.closest('.mobile-menu-toggle');
-        
-        if (toggleButton) {
-            // ... 你的移动端按钮点击处理逻辑保持不变 ...
-            const aside = document.getElementById('aside');
-            if (aside) {
-                aside.classList.toggle('mobile-open');
-            }
-        }
-    });
 
     // ----------------------------------------------------------------
     // 【【【新增】】】 修复3: 侧边栏选项卡 (文件/大纲) 点击 (事件委托)

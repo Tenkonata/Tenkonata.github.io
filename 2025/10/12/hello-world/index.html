@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         
-            Hello World | AIR-v2
+            Hello World |
+AIR-v2
         
     </title>
     
@@ -18,24 +19,30 @@
     
 <link rel="stylesheet" href="/css/AIR-v2.css">
 
+
+    
+<link rel="stylesheet" href="/css/mobile.css">
+
     
     <style>
     .home-layout #main {
         display: block !important;
-    }
+}
     .home-layout .main-content {
         max-width: 100% !important;
         width: 100% !important;
-    }
-    /* Pjax 加载动画 */
+}
+    /* Pjax 加載動畫 */
     #pjax-container.pjax-loading {
         opacity: 0.5;
-        transition: opacity 0.3s;
+transition: opacity 0.3s;
     }
     </style>
 <meta name="generator" content="Hexo 8.0.0"></head>
 
 <body class="post-body ">
+
+    <div id="mobile-overlay"></div>
     
     
 
@@ -83,7 +90,9 @@
         <div id="main">
             
                 <aside id="aside">
-                    <div class="sidebar">
+           
+     
+    <div class="sidebar">
     <div class="sidebar-header">
         <div class="sidebar-tabs">
             <button class="tab-btn active" data-tab="files">文件</button>
@@ -163,7 +172,8 @@
         </div>
     </footer>
 </article>
-                </div>
+     
+           </div>
             </main>
         </div>
 
@@ -183,22 +193,21 @@
         document.querySelectorAll('pre code').forEach((block) => {
             hljs.highlightElement(block);
         });
-        console.log("Pjax: 代码高亮已重新执行");
+console.log("Pjax: 代码高亮已重新执行");
     }
 
 // 生成文章大纲 - 修复版本
 function generateOutline() {
     const outlineContainer = document.getElementById('article-outline');
     if (!outlineContainer) return;
-    
-    const headings = document.querySelectorAll('#content h1, #content h2, #content h3, #content h4, #content h5, #content h6');
-    
-    if (headings.length === 0) {
+const headings = document.querySelectorAll('#content h1, #content h2, #content h3, #content h4, #content h5, #content h6');
+if (headings.length === 0) {
         outlineContainer.innerHTML = '<div class="no-outline">本文暂无标题</div>';
         return;
-    }
+}
     
-    let outlineHTML = '<ul class="outline-list" style="margin: 0; padding: 0;">'; // 确保没有额外的边距
+    let outlineHTML = '<ul class="outline-list" style="margin: 0; padding: 0;">';
+// 确保没有额外的边距
     
     headings.forEach((heading, index) => {
         const level = parseInt(heading.tagName.substring(1));
@@ -209,47 +218,49 @@ function generateOutline() {
         if (!heading.id) {
             heading.id = id;
         }
-        
+    
+
+    
         outlineHTML += `
             <li class="outline-item outline-level-${level}" style="margin: 0; padding: 0;">
                 <a href="#${id}" class="outline-link">${text}</a>
             </li>
         `;
     });
-    
-    outlineHTML += '</ul>';
+outlineHTML += '</ul>';
     outlineContainer.innerHTML = outlineHTML;
     
     // 添加大纲链接点击事件（使用事件委托）
     const outlineTab = document.getElementById('outline-tab');
-    if (outlineTab) {
+if (outlineTab) {
         outlineTab.addEventListener('click', function(e) {
             if (e.target.classList.contains('outline-link')) {
                 e.preventDefault();
                 const targetId = e.target.getAttribute('href').substring(1);
                 const targetElement = document.getElementById(targetId);
                 
-                if (targetElement) {
+    
+
+            if (targetElement) {
                     targetElement.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
-                    });
+                
+
+    });
                 }
             }
         });
-    }
+}
 }
 
     // 更新侧边栏活动状态 (保持不变)
     function updateSidebarActiveState() {
-        // ... 你的 updateSidebarActiveState 函数代码保持不变 ...
         const postItems = document.querySelectorAll('.post-item');
-        postItems.forEach(item => item.classList.remove('active'));
-        
-        const currentPath = window.location.pathname;
+postItems.forEach(item => item.classList.remove('active'));
+const currentPath = window.location.pathname;
         const normalizedPath = currentPath.replace(/\/$/, '');
-        
-        document.querySelectorAll('.post-link').forEach(link => {
+document.querySelectorAll('.post-link').forEach(link => {
             const href = link.getAttribute('href');
             const normalizedHref = href ? href.replace(/\/$/, '') : '';
             
@@ -259,8 +270,10 @@ function generateOutline() {
                 // 展开父级文件夹
                 let parent = link.closest('.category-group');
                 while (parent) {
-                    parent.classList.remove('collapsed');
-                    const icon = parent.querySelector('.category-title i');
+        
+            parent.classList.remove('collapsed');
+      
+              const icon = parent.querySelector('.category-title i');
                     if (icon && icon.classList.contains('fa-folder')) {
                         icon.classList.remove('fa-folder');
                         icon.classList.add('fa-folder-open');
@@ -269,35 +282,33 @@ function generateOutline() {
                 }
             }
         });
-    }
+}
 
     // 统一的初始化函数，用于页面首次加载和 Pjax 加载后调用
     function onPageReady() {
         // 1. 重新执行代码高亮
         initHighlight();
-        
-        // 2. 初始化侧边栏功能
+// 2. 初始化侧边栏功能
         if (document.querySelector('#aside')) {
-            // 【已删除】不再需要调用 initSidebarTabs()
-            // initSidebarTabs();
-            
-            // 【保留】这两个函数仍然需要
             generateOutline();
             updateSidebarActiveState();
-
-            // 【额外修复】调用你 js/AIR-v2.js 中定义的函数
-            // 这样你的移动端按钮和文件夹展开才能在 Pjax 后正常工作
+// (【注意】: 這一行依賴 AIR-v2.js，如果您刪除了那裡的代碼，它將不工作)
             if (window.initSidebarAndMobile) {
                 window.initSidebarAndMobile();
-            }
+}
         }
+
+        // 3. 調用 mobile.js 中暴露的函數
+        // 作用：檢查是否為主頁，以決定是否顯示漢堡按鈕
+        if (window.initMobileLayout) {
+            window.initMobileLayout();
+}
         
         console.log("Pjax: 页面初始化脚本 (onPageReady) 已执行");
-    }
+}
 
     // 等待页面完全加载 (Pjax 监听器部分保持不变)
     $(document).ready(function() {
-        // ... 你的所有 Pjax 初始化和监听器 (send, success, complete, error) 保持不变 ...
         console.log("文档首次加载 (document.ready)");
         
         // 1. 首次加载时运行初始化
@@ -309,23 +320,49 @@ function generateOutline() {
         console.log("Pjax: 初始化，监听 " + pjaxSelector + "，容器: " + pjaxContainer);
         $(document).pjax(pjaxSelector, pjaxContainer, {
             fragment: pjaxContainer,
-            timeout: 8000
+            
+timeout: 8000
         });
         
         // 3. Pjax 事件监听器
-        $(document).on('pjax:send', function() { /* ... */ });
+    $(document).on('pjax:send', function() { /* ... */ });
         $(document).on('pjax:success', function(event, data, status, xhr, options) { /* ... */ });
         $(document).on('pjax:complete', function() {
             console.log("Pjax: complete (加载完成, 准备执行脚本)");
             $(pjaxContainer).removeClass('pjax-loading');
-            onPageReady();
+
+            // --- (PJAX 佈局 BUG 修復 - 保持不變) ---
+          // 1. 获取并规范化你网站的根目录 (来自 Hexo 配置)
+            var rootPath = ('/' ||
+'/').replace(/\/$/, ''); 
+            
+            // 2. 获取当前页面路径
+            var currentPath = window.location.pathname.replace(/\/$/, '');
+// 3. 检查当前路径是否等于根目录
+            // 注意: 'index.html' 也应视为主页
+            var isHomePage = (currentPath === rootPath || currentPath === rootPath + '/index.html');
+if (isHomePage) {
+                // 导航到主页: 确保 'home-layout' class 存在
+                $('body').addClass('home-layout');
+} else {
+                // 导航到其他页: 移除 'home-layout' class，恢复文章页布局
+                $('body').removeClass('home-layout');
+}
+            // --- (BUG 修復結束) ---
+
+onPageReady();
         });
-        $(document).on('pjax:error', function(event, xhr, textStatus, errorThrown) { /* ... */ });
+$(document).on('pjax:error', function(event, xhr, textStatus, errorThrown) { /* ... */ });
     });
-    </script>
+</script>
 
     
 <script src="/js/AIR-v2.js"></script>
+
+    
+    
+<script src="/js/mobile.js"></script>
+
 
 </body>
 </html>
