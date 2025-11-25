@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        
+            AIR-v2 
+        
+    </title>
+    
+    
+        <link rel="icon" href="/images/favicon.png">
+    
+    
+    
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/lib/highlight/styles/atom-one-dark.css">
+
+    
+<link rel="stylesheet" href="/css/AIR-v2.css">
+
+    
+<link rel="stylesheet" href="/css/mobile.css">
+
+    
+    <style>
+    .home-layout #main { display: block !important; }
+    .home-layout .main-content { max-width: 100% !important; width: 100% !important; }
+    #pjax-container.pjax-loading { opacity: 0.5; transition: opacity 0.3s; }
+    </style>
+<meta name="generator" content="Hexo 8.0.0"></head>
+
+<body class="post-body home-layout">
+
+    <div id="mobile-overlay"></div>
+    
+    
+
+<nav class="main-nav">
+    <div class="nav-content">
+        <!-- 网站品牌 -->
+        <div class="site-brand">
+            <a href="/" class="site-title">
+                AIR-v2
+            </a>
+            
+        </div>
+
+        <!-- 导航菜单 -->
+        <div class="nav-menu">
+            <!-- 主导航项 -->
+            
+                <a href="/" class="nav-link">
+                    主页
+                </a>
+            
+                <a href="/about" class="nav-link">
+                    关于
+                </a>
+            
+                <a href="/updatelog" class="nav-link">
+                    更新日志
+                </a>
+            
+            
+            <!-- 外部链接 -->
+            
+        </div>
+    </div>
+</nav>
+    
+    <div id="pjax-container">
+        
+        <div id="main">
+            <!-- 左侧边栏 (非首页显示) -->
+            
+
+            <!-- 主内容区 -->
+            <main class="main-content home-main">
+                <div id="content">
+                    
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 字体图片库 -->
+    
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+    
+    <style>
+    /* 确保首页布局不受其他页面影响 */
+    #main {
+    display: block !important;
+    }
+    .main-content {
+    max-width: 100% !important;
+    width: 100% !important;
+    }
+
+    /* 导航栏 - 完全透明且无边框 */
+    .main-nav {
+    position: fixed !important;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: transparent;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    }
+
+    /* 全屏英雄区域 */
+    .home-hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    }
+
+    /* 背景图片容器 */
+    .hero-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    .hero-background::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            rgba(0, 0, 0, 0.3),
+            rgba(0, 0, 0, 0.2)
+        );
+        z-index: 1;
+    }
+
+    .hero-bg-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://img.paulzzh.com/touhou/random?site=yandere');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    /* 主内容区域 - 优化居中布局 */
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        position: relative;
+        z-index: 2;
+        padding: 0 2rem;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* 打字机效果 - 完美居中 */
+    .typewriter-container {
+        margin-bottom: 2rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .typewriter-text {
+        font-size: 4em;
+        font-weight: 700;
+        overflow: hidden;
+        padding-right: 10px;
+        white-space: nowrap;
+        animation: typing 3.5s steps(40, end); /* 移除闪烁动画 */
+        /* 白色描边效果 */
+        text-shadow: 
+            -1px -1px 0 #fafafa,
+            1px -1px 0 #fafafa,
+            -1px 1px 0 #fafafa,
+            1px 1px 0 #fafafa,
+            2px 2px 8px rgba(0, 0, 0, 0.7); /* 保留原有阴影 */
+        line-height: 1.2;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .typewriter-text::after {
+    content: '';
+    position: absolute;
+    top: 2px; /* 光标顶部距离文字2px */
+    bottom: 2px; /* 光标底部距离文字2px */
+    right: 0;
+    width: 3px;
+    background-color: #E4374B; /* 红色光标 */
+    }
+
+    @keyframes typing {
+        from { width: 0 }
+        to { width: 100% }
+    }
+
+    /* 动态箭头 - 优化位置 */
+    .scroll-indicator {
+        position: absolute;
+        bottom: 60px; /* 调整到更合适的位置 */
+        left: 50%;
+        transform: translateX(-50%);
+        animation: bounce 2s infinite;
+        cursor: pointer;
+        z-index: 3;
+    }
+
+    .v-arrow {
+        width: 40px;
+        height: 40px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+
+    .v-arrow::before,
+    .v-arrow::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 2px;
+        height: 25px;
+        background: white;
+        border-radius: 1px;
+    }
+
+    .v-arrow::before {
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+        transform-origin: top left;
+    }
+
+    .v-arrow::after {
+        right: 50%;
+        transform: translateX(50%) rotate(-45deg);
+        transform-origin: top right;
+    }
+
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateX(-50%) translateY(0);
+        }
+        40% {
+            transform: translateX(-50%) translateY(-10px);
+        }
+        60% {
+            transform: translateX(-50%) translateY(-5px);
+        }
+    }
+
+    /* 文章列表区域 - 优化居中 */
+    .home-posts {
+        position: relative;
+        z-index: 10;
+        min-height: 100vh;
+        padding: 4rem 2rem;
+        display: flex;
+        justify-content: center;
+        background: transparent;
+    }
+
+    .posts-container {
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* 文章卡片 - 毛玻璃效果 */
+    .post-article {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        padding: 2.5rem;
+        margin-bottom: 2.5rem;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        width: 100%;
+        max-width: 900px;
+    }
+
+    .post-article:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        border-color: rgba(82, 174, 255, 0.6);
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .post-article::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: #0072f5;
+        transition: width 0.3s ease;
+    }
+
+    .post-article:hover::before {
+        width: 8px;
+    }
+
+    .article-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .article-title {
+        font-size: 2em;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .article-title a {
+        color: inherit;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .article-title a:hover {
+        color: #a8d1ff;
+    }
+
+    .article-meta {
+        display: flex;
+        gap: 2rem;
+        font-size: 0.95em;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .meta-item i {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .article-excerpt {
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        font-size: 1.1em;
+    }
+
+    .article-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(234, 234, 234, 0.3);
+    }
+
+    .category-tags {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+    }
+
+    .category-tag {
+        background: rgba(62, 105, 215, 0.3);
+        color: rgba(255, 255, 255, 0.9);
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9em;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border: 1px solid rgba(62, 105, 215, 0.5);
+    }
+
+    .category-tag:hover {
+        background: rgba(62, 105, 215, 0.6);
+        color: white;
+    }
+
+    .read-more-btn {
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.2s ease;
+        font-size: 1.05em;
+    }
+
+    .read-more-btn:hover {
+        color: white;
+        gap: 0.8rem;
+    }
+    </style>
+</head>
+<body>
+    <!-- 全屏背景 -->
+    <div class="hero-background">
+        <div class="hero-bg-image"></div>
+    </div>
+
+    <!-- 主页内容 -->
+    <div class="home-hero">
+        <!-- 导航栏已经在layout.ejs中包含 -->
+        
+        <!-- 主要内容 -->
+        <div class="hero-content">
+            <div class="typewriter-container">
+                <h1 class="typewriter-text">欢迎来到我的博客</h1>
+            </div>
+            
+            <!-- 动态V型箭头 -->
+            <div class="scroll-indicator" onclick="scrollToPosts()">
+                <div class="v-arrow"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 文章列表 -->
+    <section class="home-posts">
+        <div class="posts-container">
+            
+                
+                    <article class="post-article">
+                        <div class="article-header">
+                            <h2 class="article-title">
+                                <a href="/2025/11/23/%E6%98%9F%E9%9C%B2%E8%B0%B7sve%E7%BB%93%E8%AF%AD/">星露谷sve结语</a>
+                            </h2>
+                            
+                            <div class="article-meta">
+                                <div class="meta-item">
+                                    <i class="fa fa-calendar"></i>
+                                    <time datetime="2025-11-23T15:26:04.000Z">
+                                        2025-11-23
+                                    </time>
+                                </div>
+                                
+                                
+                                
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="article-excerpt">
+                            
+                            星露谷sve百小时完美存档巨献
+结语自第1年春季1日启，至第3年春季1日结，历时224个早6晚2。达成了100%完美。
+总收入8000余万金，花费4000余万金，如果倾家荡产，大抵是还能凑出1000万金。
+
+sve第三年还有新人物，所以会卡住人物好感和配方，但就这样吧，50万金买一个豁免书，99%完美+1%豁免。
+
+势利眼之病究竟从何时起，我患上了势利眼呢？从一开始，我就没在这个休闲游戏享受过田园风光过。
+初识星露谷在亲手游玩前，我早已闻得实况中
+
+春季钓鱼种甘蓝速出耕作6级做优质洒水器转草莓...
+                        </div>
+                        
+                        <div class="article-footer">
+                            
+                            
+                            <a href="/2025/11/23/%E6%98%9F%E9%9C%B2%E8%B0%B7sve%E7%BB%93%E8%AF%AD/" class="read-more-btn">
+                                阅读全文 <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="post-article">
+                        <div class="article-header">
+                            <h2 class="article-title">
+                                <a href="/2025/11/13/sql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BC%96%E7%A8%8B/">SQL Server 数据库编程</a>
+                            </h2>
+                            
+                            <div class="article-meta">
+                                <div class="meta-item">
+                                    <i class="fa fa-calendar"></i>
+                                    <time datetime="2025-11-13T03:41:35.123Z">
+                                        2025-11-13
+                                    </time>
+                                </div>
+                                
+                                
+                                
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="article-excerpt">
+                            
+                            三、建立数据表1.创建博客系统数据表语法use filename
+GO
+
+create table list_name
+(
+    column_name datatype null/not null
+	userID char(6) NOT NULL
+)
+GO
+
+数据类型varchar可变长度字符串numeric精确数字数据类型nvarchar类varchar，存储非Unicode字符nchar固定长度Unicode字符串
+2.设置主键语法：alter table list_name
+add /...
+                        </div>
+                        
+                        <div class="article-footer">
+                            
+                            
+                            <a href="/2025/11/13/sql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BC%96%E7%A8%8B/" class="read-more-btn">
+                                阅读全文 <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="post-article">
+                        <div class="article-header">
+                            <h2 class="article-title">
+                                <a href="/2025/11/02/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%93%E4%B8%80%E4%B8%AAhexo%E4%B8%BB%E9%A2%98/">hexo主题开发及部署教程</a>
+                            </h2>
+                            
+                            <div class="article-meta">
+                                <div class="meta-item">
+                                    <i class="fa fa-calendar"></i>
+                                    <time datetime="2025-11-02T15:10:00.562Z">
+                                        2025-11-02
+                                    </time>
+                                </div>
+                                
+                                
+                                
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="article-excerpt">
+                            
+                            本文仅作为个人开发时的碰见的各类情况而总结出来的建议，逻辑混乱敬请见谅，建议根据标题寻找对应情况
+
+推荐：一步一步地撰写开发：Hexo主题开发 - ﹏猴子请来的救兵 这是个非常好的教程！
+文件树
+在你的theme文件夹下右键打开cmd，输入tree /f
+
+你的tree大致应该长这样，但实际可以随意
+theme
+│_config.yml	#配置
+│
+├─layout	#布局
+│      aside.ejs	#侧边栏
+│      index.ejs	#首页
+│      layout.ejs...
+                        </div>
+                        
+                        <div class="article-footer">
+                            
+                            
+                            <a href="/2025/11/02/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%93%E4%B8%80%E4%B8%AAhexo%E4%B8%BB%E9%A2%98/" class="read-more-btn">
+                                阅读全文 <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="post-article">
+                        <div class="article-header">
+                            <h2 class="article-title">
+                                <a href="/2025/10/28/%F0%9F%91%81%EF%B8%8F/">👁️</a>
+                            </h2>
+                            
+                            <div class="article-meta">
+                                <div class="meta-item">
+                                    <i class="fa fa-calendar"></i>
+                                    <time datetime="2025-10-28T14:21:08.091Z">
+                                        2025-10-28
+                                    </time>
+                                </div>
+                                
+                                
+                                
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="article-excerpt">
+                            
+                            你好加入星际餐厅东方project同好会没了
+                        </div>
+                        
+                        <div class="article-footer">
+                            
+                            
+                            <a href="/2025/10/28/%F0%9F%91%81%EF%B8%8F/" class="read-more-btn">
+                                阅读全文 <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="post-article">
+                        <div class="article-header">
+                            <h2 class="article-title">
+                                <a href="/2025/10/14/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">第一篇博客</a>
+                            </h2>
+                            
+                            <div class="article-meta">
+                                <div class="meta-item">
+                                    <i class="fa fa-calendar"></i>
+                                    <time datetime="2025-10-14T15:47:53.846Z">
+                                        2025-10-14
+                                    </time>
+                                </div>
+                                
+                                
+                                
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="article-excerpt">
+                            
+                            一、标题这是二级标题三级标题二、段落小换行小换行
+分割线使用—或***
+
+三、字体显示**这是粗体**
+~~删除线~~
+&lt;u&gt;下划线&lt;/u&gt;
+*这是斜体*
+==这是高亮==
+
+这是粗体删除线下划线这是斜体&#x3D;&#x3D;这是高亮&#x3D;&#x3D;（这是扩展语法里的，所以hexo默认用不了）
+快捷键
+加粗：ctrl+B
+删除线：shift+alt+5
+下划线：ctrl+U
+斜体：ctrl+I
+
+1*2*3	\*
+上下标x^2^	x^2^H2O	H~2~OX1^...
+                        </div>
+                        
+                        <div class="article-footer">
+                            
+                            
+                            <a href="/2025/10/14/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="read-more-btn">
+                                阅读全文 <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="post-article">
+                        <div class="article-header">
+                            <h2 class="article-title">
+                                <a href="/2025/10/12/hello-world/">Hello World</a>
+                            </h2>
+                            
+                            <div class="article-meta">
+                                <div class="meta-item">
+                                    <i class="fa fa-calendar"></i>
+                                    <time datetime="2025-10-12T14:20:53.696Z">
+                                        2025-10-12
+                                    </time>
+                                </div>
+                                
+                                
+                                
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="article-excerpt">
+                            
+                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick StartCreate a new post$ hexo new &quot;My New Pos...
+                        </div>
+                        
+                        <div class="article-footer">
+                            
+                            
+                            <a href="/2025/10/12/hello-world/" class="read-more-btn">
+                                阅读全文 <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+            
+        </div>
+    </section>
+
+    <script>
+    function scrollToPosts() {
+        document.querySelector('.home-posts').scrollIntoView({ 
+            behavior: 'smooth'
+        });
+    }
+    </script>
+</body>
+</html>
+                </div>
+            </main>
+            
+            <!-- 【新增】右侧边栏 (非首页显示) -->
+            
+        </div>
+
+    </div> 
+    
+    
+<script src="/lib/jquery-3.7.1.min.js"></script>
+
+    
+<script src="/lib/jquery.pjax.js"></script>
+
+    
+<script src="/lib/highlight/highlight.min.js"></script>
+
+    
+    <script>
+    // 代码高亮函数
+    function initHighlight() {
+        document.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightElement(block);
+        });
+        console.log("Pjax: 代码高亮已重新执行");
+    }
+
+    // 生成文章大纲 - 修复版本
+    function generateOutline() {
+        const outlineContainer = document.getElementById('article-outline');
+        if (!outlineContainer) return;
+        const headings = document.querySelectorAll('#content h1, #content h2, #content h3, #content h4, #content h5, #content h6');
+        if (headings.length === 0) {
+            outlineContainer.innerHTML = '<div class="no-outline">本文暂无标题</div>';
+            return;
+        }
+        
+        let outlineHTML = '<ul class="outline-list" style="margin: 0; padding: 0;">';
+        
+        headings.forEach((heading, index) => {
+            const level = parseInt(heading.tagName.substring(1));
+            const text = heading.textContent;
+            const id = heading.id || `heading-${index}`;
+            
+            if (!heading.id) { heading.id = id; }
+        
+            outlineHTML += `
+                <li class="outline-item outline-level-${level}" style="margin: 0; padding: 0;">
+                    <a href="#${id}" class="outline-link">${text}</a>
+                </li>
+            `;
+        });
+        outlineHTML += '</ul>';
+        outlineContainer.innerHTML = outlineHTML;
+        
+        const outlineTab = document.getElementById('outline-tab');
+        if (outlineTab) {
+            outlineTab.addEventListener('click', function(e) {
+                if (e.target.classList.contains('outline-link')) {
+                    e.preventDefault();
+                    const targetId = e.target.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+    // 更新侧边栏活动状态
+    function updateSidebarActiveState() {
+        const postItems = document.querySelectorAll('.post-item');
+        postItems.forEach(item => item.classList.remove('active'));
+        const currentPath = window.location.pathname;
+        const normalizedPath = currentPath.replace(/\/$/, '');
+        document.querySelectorAll('.post-link').forEach(link => {
+            const href = link.getAttribute('href');
+            const normalizedHref = href ? href.replace(/\/$/, '') : '';
+            
+            if (normalizedHref === normalizedPath) {
+                link.closest('.post-item').classList.add('active');
+                
+                let parent = link.closest('.category-group');
+                while (parent) {
+                    parent.classList.remove('collapsed');
+                    const icon = parent.querySelector('.category-title i');
+                    if (icon && icon.classList.contains('fa-folder')) {
+                        icon.classList.remove('fa-folder');
+                        icon.classList.add('fa-folder-open');
+                    }
+                    parent = parent.parentElement.closest('.category-group');
+                }
+            }
+        });
+    }
+
+    // 统一的初始化函数
+    function onPageReady() {
+        initHighlight();
+        if (document.querySelector('#aside')) {
+            generateOutline();
+            updateSidebarActiveState();
+        }
+
+        if (window.initMobileLayout) {
+            window.initMobileLayout();
+        }
+        
+        console.log("Pjax: 页面初始化脚本 (onPageReady) 已执行");
+    }
+
+    // 等待页面完全加载
+    $(document).ready(function() {
+        console.log("文档首次加载 (document.ready)");
+        
+        onPageReady();
+
+        var pjaxSelector = 'a[href^="/"]:not([target="_blank"]):not([href$=".xml"]):not([href$=".json"])';
+        var pjaxContainer = '#pjax-container';
+        console.log("Pjax: 初始化，监听 " + pjaxSelector + "，容器: " + pjaxContainer);
+        $(document).pjax(pjaxSelector, pjaxContainer, {
+            fragment: pjaxContainer,
+            timeout: 8000
+        });
+        
+        $(document).on('pjax:send', function() { /* ... */ });
+        $(document).on('pjax:success', function(event, data, status, xhr, options) { /* ... */ });
+        $(document).on('pjax:complete', function() {
+            console.log("Pjax: complete (加载完成, 准备执行脚本)");
+            $(pjaxContainer).removeClass('pjax-loading');
+
+            var rootPath = ('/' || '/').replace(/\/$/, ''); 
+            var currentPath = window.location.pathname.replace(/\/$/, '');
+            var isHomePage = (currentPath === rootPath || currentPath === rootPath + '/index.html');
+            if (isHomePage) {
+                $('body').addClass('home-layout');
+            } else {
+                $('body').removeClass('home-layout');
+            }
+
+            onPageReady();
+        });
+        $(document).on('pjax:error', function(event, xhr, textStatus, errorThrown) { /* ... */ });
+    });
+    </script>
+
+    
+<script src="/js/AIR-v2.js"></script>
+
+    
+<script src="/js/mobile.js"></script>
+
+
+</body>
+</html>

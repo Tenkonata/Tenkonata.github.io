@@ -1,0 +1,231 @@
+/*
+ * ----------------------------------------------------------------
+ * 響應式佈局 (Mobile) - 智能切換 v4 (修復歡迎文字)
+ * ----------------------------------------------------------------
+ */
+
+/* 1. 移動端菜單切換按鈕 (漢堡按鈕) (保持不變) */
+.mobile-menu-toggle {
+    display: none; 
+    width: 22px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+    z-index: 1001; 
+    background: transparent;
+    border: none;
+    padding: 0;
+    order: 3; 
+    margin-left: 1rem;
+}
+.mobile-menu-toggle span {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: var(--theme-900); 
+    border-radius: 3px;
+    opacity: 1;
+    left: 0;
+    transition: .25s ease-in-out;
+}
+.mobile-menu-toggle span:nth-child(1) { top: 0px; }
+.mobile-menu-toggle span:nth-child(2) { top: 8px; }
+.mobile-menu-toggle span:nth-child(3) { top: 16px; }
+
+/* 2. 遮罩層 (保持不變) */
+#mobile-overlay {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999; 
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+#mobile-overlay.mobile-overlay-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* * ----------------------------------------------------------------
+ * 3. 媒體查詢 (900px 以下) - 手机端通用样式
+ * ----------------------------------------------------------------
+ */
+@media (max-width: 900px) {
+
+    /* ======================================================= */
+    /* 3.1 非主頁 (文章頁、關於頁等) 的導航欄 (保持不變) */
+    /* ======================================================= */
+
+    body:not(.home-layout) .mobile-menu-toggle {
+        display: block;
+    }
+    body:not(.home-layout) .nav-menu {
+        display: none;
+    }
+    body:not(.home-layout) .nav-content {
+        justify-content: space-between;
+    }
+    
+    /* ======================================================= */
+    /* 3.2 主頁 (home-layout) 的導航欄 (保持不變) */
+    /* ======================================================= */
+
+    .home-layout .mobile-menu-toggle {
+        display: none !important;
+    }
+    .home-layout .site-title {
+        font-size: 1.1em; 
+        color: #0072f5; 
+        text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
+    .home-layout .site-subtitle {
+        display: none;
+    }
+    .home-layout .nav-menu {
+        display: flex;
+        flex-wrap: nowrap; 
+        gap: 0.4rem; 
+        align-items: center;
+        flex-shrink: 1; 
+        overflow: hidden; 
+    }
+    .home-layout .nav-link {
+        font-size: 0.85em; 
+        padding: 0.2rem 0.3rem; 
+        color: #0072f5; 
+        text-shadow: 0 0 5px rgba(0,0,0,0.5);
+        white-space: nowrap; 
+    }
+    .home-layout .external-nav-link::after {
+        display: none;
+    }
+
+    /* ======================================================= */
+    /* 3.3 通用佈局調整 (側邊欄、主內容) (保持不變) */
+    /* ======================================================= */
+    
+    #aside {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 300px; 
+        z-index: 1000;
+        transform: translateX(-100%); 
+        transition: transform 0.3s ease-in-out;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        display: block !important;
+    }
+    #aside.mobile-open {
+        transform: translateX(0); 
+    }
+    .main-content {
+        max-width: 100% !important; 
+        width: 100% !important;
+    }
+    #mobile-overlay {
+        display: block; 
+    }
+
+    /* ======================================================= */
+    /* 3.4 主頁內容的移動端響應式 (來自 index.ejs) */
+    /* ======================================================= */
+
+    .home-layout .typewriter-text {
+        font-size: 2.2em;   /* 保持您上次的字體大小 */
+        line-height: 1.3;   /* 設置行高 */
+        text-align: center; /* 確保換行後居中 */
+        white-space: normal;
+        animation: none;
+        width: auto;
+        overflow: visible;
+        padding-right: 0;
+    }
+
+    .home-layout .typewriter-text::after {
+        display: none;
+    }
+    
+    .home-layout .scroll-indicator {
+        bottom: 30px; 
+    }
+    .home-layout .home-posts {
+        padding: 2rem 1rem; 
+    }
+    .home-layout .post-article {
+        padding: 1.5rem; 
+        margin-bottom: 1.5rem;
+    }
+    .home-layout .article-title {
+        font-size: 1.5em; 
+    }
+    .home-layout .article-meta {
+        gap: 0.5rem; 
+        font-size: 0.85em;
+        flex-direction: column; 
+        align-items: flex-start;
+    }
+    .home-layout .article-excerpt {
+        font-size: 1em; 
+    }
+}
+
+/* * ----------------------------------------------------------------
+ * 4. 【新增】平板与小屏桌面适配 (1001px - 1280px)
+ * 说明：在此区间内保持三栏布局，但缩小两侧边栏宽度，防止中间过窄。
+ * ----------------------------------------------------------------
+ */
+@media (min-width: 1001px) and (max-width: 1280px) {
+    /* 左侧文件树：280px -> 220px */
+    #aside {
+        width: 220px !important;
+    }
+
+    /* 右侧作者栏：280px -> 220px */
+    #right-sidebar {
+        width: 220px !important;
+        padding: 2rem 1rem !important; /* 稍微减小内边距防止溢出 */
+    }
+
+    /* 主内容区计算：100% - 220px(左) - 220px(右) = 440px */
+    .main-content {
+        max-width: calc(100% - 440px) !important;
+    }
+    
+    /* 稍微减小文章内容的内边距 */
+    #content {
+        padding: 2rem 1.5rem !important;
+    }
+}
+
+/* * ----------------------------------------------------------------
+ * 5. 竖屏平板与手机 (1000px 以下) - 隐藏右侧栏
+ * ----------------------------------------------------------------
+ */
+@media (max-width: 1000px) {
+    #right-sidebar {
+        display: none !important;
+    }
+    
+    /* 隐藏右边栏后，主内容区域自动撑满剩余空间 */
+    .main-content {
+        max-width: calc(100% - 280px) !important; 
+    }
+}
+
+/* * ----------------------------------------------------------------
+ * 6. 移动端极窄屏幕适配 (900px 以下) - 覆盖层级
+ * ----------------------------------------------------------------
+ */
+@media (max-width: 900px) {
+    .main-content {
+        max-width: 100% !important;
+    }
+}
