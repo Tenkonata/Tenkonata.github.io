@@ -701,18 +701,31 @@ exec proc_clickNum
             timeout: 8000
         });
         
-        // 【关键逻辑】请求开始：给容器添加 loading 类
-        $(document).on('pjax:send', function() {
+        // 【关键逻辑修复】精准控制动画触发时机
+        $(document).on('pjax:send', function(event, xhr, options) {
+            
+            // 始终添加 loading 类（用于防止点击等逻辑控制）
             $(pjaxContainer).addClass('pjax-loading');
+            
+            // 判断当前状态：
+            // 1. 如果 body 有 home-layout 类，说明当前是在首页。
+            //    首页切出时不应该有呼吸动画（避免背景消失），所以不添加 pjax-animate。
+            // 2. 如果 body 没有 home-layout 类，说明在文章页。
+            //    文章页切换需要呼吸动画，所以添加 pjax-animate。
+            
+            if (!$('body').hasClass('home-layout')) {
+                $(pjaxContainer).addClass('pjax-animate');
+            }
         });
 
-        // 请求成功（暂不做处理）
         $(document).on('pjax:success', function(event, data, status, xhr, options) { /* ... */ });
         
-        // 【关键逻辑】请求结束：移除 loading 类，触发内容淡入动画
+        // 【关键逻辑】请求结束：移除所有相关类
         $(document).on('pjax:complete', function() {
             console.log("Pjax: complete (加载完成)");
-            $(pjaxContainer).removeClass('pjax-loading');
+            
+            // 移除 loading 和 animate 类，确保状态复原
+            $(pjaxContainer).removeClass('pjax-loading pjax-animate');
 
             var rootPath = ('/' || '/').replace(/\/$/, ''); 
             var currentPath = window.location.pathname.replace(/\/$/, '');

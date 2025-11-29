@@ -1605,31 +1605,31 @@ hr {
    功能：实现正文内容的“呼吸”切换，侧边栏不受影响。
    ========================================================================== */
 
+
 /* 1. 给内容区域 (#content) 设置基础过渡属性 */
 #content {
-    /* 默认状态：完全显示 */
     opacity: 1;
     transform: scale(1);
     filter: blur(0px);
     
-    /* 确保过渡动画平滑，只针对这三个属性 */
     transition: 
         opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
         transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
         filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    /* 设定变换原点，让缩放更自然 */
+        
     transform-origin: center 5vh; 
-    /* 性能优化 */
     will-change: opacity, transform, filter;
 }
 
-/* 2. 加载中状态：当父容器有 .pjax-loading 类时，让 #content 产生呼吸效果 */
-#pjax-container.pjax-loading #content {
-    opacity: 0.01 !important; /* 隐藏旧内容 */
-    filter: blur(5px);        /* 正文模糊 */
+/* 2. 加载中状态 */
+/* 关键修改：只有当 #pjax-container 同时拥有 .pjax-loading 和 .pjax-animate 时才触发 */
+/* 这样我们在 JS 里如果不加 .pjax-animate，就不会有动画 */
+#pjax-container.pjax-loading.pjax-animate #content {
+    opacity: 0.01 !important;  
+    filter: blur(5px);        
 }
 
-/* 防止加载过程中正文被误点击 */
+/* 防止加载过程中误触 */
 #pjax-container.pjax-loading {
     pointer-events: none;
 }
