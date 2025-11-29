@@ -126,34 +126,43 @@
 
     
     <style>
-    /* 确保首页布局不受其他页面影响 */
+    /* ============================================ */
+    /* 核心布局修复：强制覆盖全局 CSS 限制 */
+    /* ============================================ */
     #main {
-    display: block !important;
+        display: block !important;
     }
     .main-content {
-    max-width: 100% !important;
-    width: 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        flex: none !important;
+    }
+    #content {
+        max-width: 100% !important; 
+        width: 100% !important;
+        padding: 0 !important; /* 移除内边距，让 Hero 区域能贴边 */
+        margin: 0 !important;
     }
 
     /* 导航栏 - 完全透明且无边框 */
     .main-nav {
-    position: fixed !important;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    background: transparent;
-    border-bottom: none !important;
-    box-shadow: none !important;
+        position: fixed !important;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        background: transparent;
+        border-bottom: none !important;
+        box-shadow: none !important;
     }
 
     /* 全屏英雄区域 */
     .home-hero {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
     }
 
     /* 背景图片容器 */
@@ -208,52 +217,69 @@
         height: 100%;
     }
 
-    /* 打字机效果 - 完美居中 */
-    .typewriter-container {
-        margin-bottom: 2rem;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-
+        /* 【修复】打字机文字样式 */
     .typewriter-text {
-        font-size: 4em;
+        /* 1. 关键修复：宽度适应内容，不再占满全屏 */
+        display: inline-block; 
+        width: fit-content; 
+        
+        position: relative; /* 为光标提供定位基准 */
+        
+        font-size: clamp(2rem, 5vw, 4.5em); 
         font-weight: 700;
-        overflow: hidden;
-        padding-right: 10px;
-        white-space: nowrap;
-        animation: typing 3.5s steps(40, end); /* 移除闪烁动画 */
-        /* 白色描边效果 */
+        white-space: pre-wrap; 
+        word-wrap: break-word;
+        overflow: visible; 
+        
+        /* 进场动画：简单的淡入上浮 */
+        animation: fadeIn 1.5s ease-out;
+        
         text-shadow: 
             -1px -1px 0 #fafafa,
             1px -1px 0 #fafafa,
             -1px 1px 0 #fafafa,
             1px 1px 0 #fafafa,
-            2px 2px 8px rgba(0, 0, 0, 0.7); /* 保留原有阴影 */
-        line-height: 1.2;
+            2px 2px 8px rgba(0, 0, 0, 0.7);
+        line-height: 1.3;
         text-align: center;
         margin: 0 auto;
+        
+        /* 右侧留一点空隙给光标 */
+        padding-right: 5px; 
     }
 
+    /* 光标样式 */
     .typewriter-text::after {
-    content: '';
-    position: absolute;
-    top: 2px; /* 光标顶部距离文字2px */
-    bottom: 2px; /* 光标底部距离文字2px */
-    right: 0;
-    width: 3px;
-    background-color: #E4374B; /* 红色光标 */
+        content: '';
+        position: absolute;
+        
+        /* 2. 定位调整：始终在文字块的右侧 */
+        top: 4px;
+        bottom: 4px;
+        right: -10px; /* 负值确保光标在文字外侧 */
+        width: 3px; /* 光标稍粗一点 */
+        background-color: #E4374B;
+        border-radius: 2px;
+        
+        /* 3. 动画：改为标准闪烁，不再位移 */
+        /*animation: cursor-blink 1.2s step-end infinite;*/
     }
 
-    @keyframes typing {
-        from { width: 0 }
-        to { width: 100% }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
-    /* 动态箭头 - 优化位置 */
+    @keyframes cursor-blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+
+
+    /* 动态箭头 */
     .scroll-indicator {
         position: absolute;
-        bottom: 60px; /* 调整到更合适的位置 */
+        bottom: 60px;
         left: 50%;
         transform: translateX(-50%);
         animation: bounce 2s infinite;
@@ -304,7 +330,7 @@
         }
     }
 
-    /* 文章列表区域 - 优化居中 */
+    /* 文章列表区域 */
     .home-posts {
         position: relative;
         z-index: 10;
@@ -316,7 +342,7 @@
     }
 
     .posts-container {
-        max-width: 1200px;
+        max-width: 100%; 
         width: 100%;
         margin: 0 auto;
         display: flex;
@@ -324,8 +350,16 @@
         align-items: center;
     }
 
-    /* 文章卡片 - 毛玻璃效果 */
+    /* 文章卡片样式 */
     .post-article {
+        display: block; 
+        
+        /* 1. 【核心修复】强制移除所有下划线和链接相关样式 */
+        text-decoration: none !important; 
+        border-bottom: none !important;   
+        background-image: none !important; /* 关键：移除 CSS 中的背景图下划线 */
+        
+        color: inherit; 
         background: rgba(255, 255, 255, 0.15);
         border-radius: 12px;
         padding: 2.5rem;
@@ -337,14 +371,28 @@
         overflow: hidden;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        width: 100%;
-        max-width: 900px;
+        cursor: pointer;
+
+        /* 【配置】卡片宽度设置 */
+        /* 设置为 100% 保持响应式 */
+        width: 100%;          
+        /* [修改这里] 控制最大宽度。可以改成 1200px, 800px 或 100%(全宽) */
+        max-width: 800px;     
+        /* 高度由内容自动撑开，通过上方的 excerptLength 变量控制字数 */
+        height: auto;         
     }
 
+    /* 悬停效果 */
     .post-article:hover {
         transform: translateY(-8px);
-        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
-        border-color: rgba(82, 174, 255, 0.6);
+        
+        /* 【配置】悬停发光效果 - 蓝色光晕 */
+        box-shadow: 
+            0 12px 35px rgba(0, 0, 0, 0.15),      /* 基础阴影 */
+            0 0 20px rgba(82, 174, 255, 0.5),     /* 中层发光 */
+            0 0 40px rgba(82, 174, 255, 0.3);     /* 外层扩散 */
+            
+        border-color: rgba(82, 174, 255, 0.8);    
         background: rgba(255, 255, 255, 0.2);
     }
 
@@ -374,16 +422,6 @@
         margin-bottom: 1rem;
         line-height: 1.3;
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    }
-
-    .article-title a {
-        color: inherit;
-        text-decoration: none;
-        transition: color 0.2s ease;
-    }
-
-    .article-title a:hover {
-        color: #a8d1ff;
     }
 
     .article-meta {
@@ -436,28 +474,14 @@
         text-decoration: none;
         transition: all 0.2s ease;
         border: 1px solid rgba(62, 105, 215, 0.5);
+        cursor: pointer; 
     }
 
-    .category-tag:hover {
-        background: rgba(62, 105, 215, 0.6);
+    .post-article:hover .category-tag {
+        background: rgba(62, 105, 215, 0.5);
         color: white;
     }
 
-    .read-more-btn {
-        color: rgba(255, 255, 255, 0.9);
-        text-decoration: none;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        transition: all 0.2s ease;
-        font-size: 1.05em;
-    }
-
-    .read-more-btn:hover {
-        color: white;
-        gap: 0.8rem;
-    }
     </style>
 </head>
 <body>
@@ -488,10 +512,10 @@
         <div class="posts-container">
             
                 
-                    <article class="post-article">
+                    <a href="/2025/10/28/%F0%9F%91%81%EF%B8%8F/" class="post-article">
                         <div class="article-header">
                             <h2 class="article-title">
-                                <a href="/2025/10/28/%F0%9F%91%81%EF%B8%8F/">👁️</a>
+                                👁️
                             </h2>
                             
                             <div class="article-meta">
@@ -515,17 +539,13 @@
                         
                         <div class="article-footer">
                             
-                            
-                            <a href="/2025/10/28/%F0%9F%91%81%EF%B8%8F/" class="read-more-btn">
-                                阅读全文 <i class="fa fa-arrow-right"></i>
-                            </a>
                         </div>
-                    </article>
+                    </a>
                 
-                    <article class="post-article">
+                    <a href="/2025/10/14/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="post-article">
                         <div class="article-header">
                             <h2 class="article-title">
-                                <a href="/2025/10/14/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">第一篇博客</a>
+                                第一篇博客
                             </h2>
                             
                             <div class="article-meta">
@@ -553,30 +573,18 @@
 *这是斜体*
 ==这是高亮==
 
-这是粗体删除线下划线这是斜体&#x3D;&#x3D;这是高亮&#x3D;&#x3D;（这是扩展语法里的，所以hexo默认用不了）
-快捷键
-加粗：ctrl+B
-删除线：shift+alt+5
-下划线：ctrl+U
-斜体：ctrl+I
-
-1*2*3	\*
-上下标x^2^	x^2^H2O	H~2~OX1^...
+这是粗体删除线下划线这是斜体&#x3D;...
                         </div>
                         
                         <div class="article-footer">
                             
-                            
-                            <a href="/2025/10/14/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="read-more-btn">
-                                阅读全文 <i class="fa fa-arrow-right"></i>
-                            </a>
                         </div>
-                    </article>
+                    </a>
                 
-                    <article class="post-article">
+                    <a href="/2025/10/12/hello-world/" class="post-article">
                         <div class="article-header">
                             <h2 class="article-title">
-                                <a href="/2025/10/12/hello-world/">Hello World</a>
+                                Hello World
                             </h2>
                             
                             <div class="article-meta">
@@ -595,18 +603,13 @@
                         
                         <div class="article-excerpt">
                             
-                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post$ hexo new &quot;My New Pos...
+                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex...
                         </div>
                         
                         <div class="article-footer">
                             
-                            
-                            <a href="/2025/10/12/hello-world/" class="read-more-btn">
-                                阅读全文 <i class="fa fa-arrow-right"></i>
-                            </a>
                         </div>
-                    </article>
+                    </a>
                 
             
         </div>

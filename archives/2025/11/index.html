@@ -126,34 +126,43 @@
 
     
     <style>
-    /* 确保首页布局不受其他页面影响 */
+    /* ============================================ */
+    /* 核心布局修复：强制覆盖全局 CSS 限制 */
+    /* ============================================ */
     #main {
-    display: block !important;
+        display: block !important;
     }
     .main-content {
-    max-width: 100% !important;
-    width: 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        flex: none !important;
+    }
+    #content {
+        max-width: 100% !important; 
+        width: 100% !important;
+        padding: 0 !important; /* 移除内边距，让 Hero 区域能贴边 */
+        margin: 0 !important;
     }
 
     /* 导航栏 - 完全透明且无边框 */
     .main-nav {
-    position: fixed !important;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    background: transparent;
-    border-bottom: none !important;
-    box-shadow: none !important;
+        position: fixed !important;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        background: transparent;
+        border-bottom: none !important;
+        box-shadow: none !important;
     }
 
     /* 全屏英雄区域 */
     .home-hero {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
     }
 
     /* 背景图片容器 */
@@ -208,52 +217,69 @@
         height: 100%;
     }
 
-    /* 打字机效果 - 完美居中 */
-    .typewriter-container {
-        margin-bottom: 2rem;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-
+        /* 【修复】打字机文字样式 */
     .typewriter-text {
-        font-size: 4em;
+        /* 1. 关键修复：宽度适应内容，不再占满全屏 */
+        display: inline-block; 
+        width: fit-content; 
+        
+        position: relative; /* 为光标提供定位基准 */
+        
+        font-size: clamp(2rem, 5vw, 4.5em); 
         font-weight: 700;
-        overflow: hidden;
-        padding-right: 10px;
-        white-space: nowrap;
-        animation: typing 3.5s steps(40, end); /* 移除闪烁动画 */
-        /* 白色描边效果 */
+        white-space: pre-wrap; 
+        word-wrap: break-word;
+        overflow: visible; 
+        
+        /* 进场动画：简单的淡入上浮 */
+        animation: fadeIn 1.5s ease-out;
+        
         text-shadow: 
             -1px -1px 0 #fafafa,
             1px -1px 0 #fafafa,
             -1px 1px 0 #fafafa,
             1px 1px 0 #fafafa,
-            2px 2px 8px rgba(0, 0, 0, 0.7); /* 保留原有阴影 */
-        line-height: 1.2;
+            2px 2px 8px rgba(0, 0, 0, 0.7);
+        line-height: 1.3;
         text-align: center;
         margin: 0 auto;
+        
+        /* 右侧留一点空隙给光标 */
+        padding-right: 5px; 
     }
 
+    /* 光标样式 */
     .typewriter-text::after {
-    content: '';
-    position: absolute;
-    top: 2px; /* 光标顶部距离文字2px */
-    bottom: 2px; /* 光标底部距离文字2px */
-    right: 0;
-    width: 3px;
-    background-color: #E4374B; /* 红色光标 */
+        content: '';
+        position: absolute;
+        
+        /* 2. 定位调整：始终在文字块的右侧 */
+        top: 4px;
+        bottom: 4px;
+        right: -10px; /* 负值确保光标在文字外侧 */
+        width: 3px; /* 光标稍粗一点 */
+        background-color: #E4374B;
+        border-radius: 2px;
+        
+        /* 3. 动画：改为标准闪烁，不再位移 */
+        /*animation: cursor-blink 1.2s step-end infinite;*/
     }
 
-    @keyframes typing {
-        from { width: 0 }
-        to { width: 100% }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
-    /* 动态箭头 - 优化位置 */
+    @keyframes cursor-blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+
+
+    /* 动态箭头 */
     .scroll-indicator {
         position: absolute;
-        bottom: 60px; /* 调整到更合适的位置 */
+        bottom: 60px;
         left: 50%;
         transform: translateX(-50%);
         animation: bounce 2s infinite;
@@ -304,7 +330,7 @@
         }
     }
 
-    /* 文章列表区域 - 优化居中 */
+    /* 文章列表区域 */
     .home-posts {
         position: relative;
         z-index: 10;
@@ -316,7 +342,7 @@
     }
 
     .posts-container {
-        max-width: 1200px;
+        max-width: 100%; 
         width: 100%;
         margin: 0 auto;
         display: flex;
@@ -324,8 +350,16 @@
         align-items: center;
     }
 
-    /* 文章卡片 - 毛玻璃效果 */
+    /* 文章卡片样式 */
     .post-article {
+        display: block; 
+        
+        /* 1. 【核心修复】强制移除所有下划线和链接相关样式 */
+        text-decoration: none !important; 
+        border-bottom: none !important;   
+        background-image: none !important; /* 关键：移除 CSS 中的背景图下划线 */
+        
+        color: inherit; 
         background: rgba(255, 255, 255, 0.15);
         border-radius: 12px;
         padding: 2.5rem;
@@ -337,14 +371,28 @@
         overflow: hidden;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        width: 100%;
-        max-width: 900px;
+        cursor: pointer;
+
+        /* 【配置】卡片宽度设置 */
+        /* 设置为 100% 保持响应式 */
+        width: 100%;          
+        /* [修改这里] 控制最大宽度。可以改成 1200px, 800px 或 100%(全宽) */
+        max-width: 800px;     
+        /* 高度由内容自动撑开，通过上方的 excerptLength 变量控制字数 */
+        height: auto;         
     }
 
+    /* 悬停效果 */
     .post-article:hover {
         transform: translateY(-8px);
-        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
-        border-color: rgba(82, 174, 255, 0.6);
+        
+        /* 【配置】悬停发光效果 - 蓝色光晕 */
+        box-shadow: 
+            0 12px 35px rgba(0, 0, 0, 0.15),      /* 基础阴影 */
+            0 0 20px rgba(82, 174, 255, 0.5),     /* 中层发光 */
+            0 0 40px rgba(82, 174, 255, 0.3);     /* 外层扩散 */
+            
+        border-color: rgba(82, 174, 255, 0.8);    
         background: rgba(255, 255, 255, 0.2);
     }
 
@@ -374,16 +422,6 @@
         margin-bottom: 1rem;
         line-height: 1.3;
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    }
-
-    .article-title a {
-        color: inherit;
-        text-decoration: none;
-        transition: color 0.2s ease;
-    }
-
-    .article-title a:hover {
-        color: #a8d1ff;
     }
 
     .article-meta {
@@ -436,28 +474,14 @@
         text-decoration: none;
         transition: all 0.2s ease;
         border: 1px solid rgba(62, 105, 215, 0.5);
+        cursor: pointer; 
     }
 
-    .category-tag:hover {
-        background: rgba(62, 105, 215, 0.6);
+    .post-article:hover .category-tag {
+        background: rgba(62, 105, 215, 0.5);
         color: white;
     }
 
-    .read-more-btn {
-        color: rgba(255, 255, 255, 0.9);
-        text-decoration: none;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        transition: all 0.2s ease;
-        font-size: 1.05em;
-    }
-
-    .read-more-btn:hover {
-        color: white;
-        gap: 0.8rem;
-    }
     </style>
 </head>
 <body>
@@ -488,10 +512,10 @@
         <div class="posts-container">
             
                 
-                    <article class="post-article">
+                    <a href="/2025/11/23/%E6%98%9F%E9%9C%B2%E8%B0%B7sve%E7%BB%93%E8%AF%AD/" class="post-article">
                         <div class="article-header">
                             <h2 class="article-title">
-                                <a href="/2025/11/23/%E6%98%9F%E9%9C%B2%E8%B0%B7sve%E7%BB%93%E8%AF%AD/">星露谷sve结语</a>
+                                星露谷sve结语
                             </h2>
                             
                             <div class="article-meta">
@@ -514,27 +538,18 @@
 结语自第1年春季1日启，至第3年春季1日结，历时224个早6晚2。达成了100%完美。
 总收入8000余万金，花费4000余万金，如果倾家荡产，大抵是还能凑出1000万金。
 
-sve第三年还有新人物，所以会卡住人物好感和配方，但就这样吧，50万金买一个豁免书，99%完美+1%豁免。
-
-势利眼之病究竟从何时起，我患上了势利眼呢？从一开始，我就没在这个休闲游戏享受过田园风光过。
-初识星露谷在亲手游玩前，我早已闻得实况中
-
-春季钓鱼种甘蓝速出耕作6级做优质洒水器转草莓...
+sve第三年还有新人物，所以会卡...
                         </div>
                         
                         <div class="article-footer">
                             
-                            
-                            <a href="/2025/11/23/%E6%98%9F%E9%9C%B2%E8%B0%B7sve%E7%BB%93%E8%AF%AD/" class="read-more-btn">
-                                阅读全文 <i class="fa fa-arrow-right"></i>
-                            </a>
                         </div>
-                    </article>
+                    </a>
                 
-                    <article class="post-article">
+                    <a href="/2025/11/13/sql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BC%96%E7%A8%8B/" class="post-article">
                         <div class="article-header">
                             <h2 class="article-title">
-                                <a href="/2025/11/13/sql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BC%96%E7%A8%8B/">SQL Server 数据库编程</a>
+                                SQL Server 数据库编程
                             </h2>
                             
                             <div class="article-meta">
@@ -559,28 +574,18 @@ GO
 create table list_name
 (
     column_name datatype null/not null
-	userID char(6) NOT NULL
-)
-GO
-
-数据类型varchar可变长度字符串numeric精确数字数据类型nvarchar类varchar，存储非Unicode字符nchar固定长度Unicode字符串
-2.设置主键语法：alter table list_name
-add /...
+	userID char(6) NOT...
                         </div>
                         
                         <div class="article-footer">
                             
-                            
-                            <a href="/2025/11/13/sql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BC%96%E7%A8%8B/" class="read-more-btn">
-                                阅读全文 <i class="fa fa-arrow-right"></i>
-                            </a>
                         </div>
-                    </article>
+                    </a>
                 
-                    <article class="post-article">
+                    <a href="/2025/11/02/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%93%E4%B8%80%E4%B8%AAhexo%E4%B8%BB%E9%A2%98/" class="post-article">
                         <div class="article-header">
                             <h2 class="article-title">
-                                <a href="/2025/11/02/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%93%E4%B8%80%E4%B8%AAhexo%E4%B8%BB%E9%A2%98/">hexo主题开发及部署教程</a>
+                                hexo主题开发及部署教程
                             </h2>
                             
                             <div class="article-meta">
@@ -603,26 +608,13 @@ add /...
 
 推荐：一步一步地撰写开发：Hexo主题开发 - ﹏猴子请来的救兵 这是个非常好的教程！
 文件树
-在你的theme文件夹下右键打开cmd，输入tree /f
-
-你的tree大致应该长这样，但实际可以随意
-theme
-│_config.yml	#配置
-│
-├─layout	#布局
-│      aside.ejs	#侧边栏
-│      index.ejs	#首页
-│      layout.ejs...
+在你的theme文件夹下右键打开cmd，输...
                         </div>
                         
                         <div class="article-footer">
                             
-                            
-                            <a href="/2025/11/02/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%93%E4%B8%80%E4%B8%AAhexo%E4%B8%BB%E9%A2%98/" class="read-more-btn">
-                                阅读全文 <i class="fa fa-arrow-right"></i>
-                            </a>
                         </div>
-                    </article>
+                    </a>
                 
             
         </div>
