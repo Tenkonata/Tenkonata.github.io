@@ -95,7 +95,7 @@
     
     <style>
     /* ============================================ */
-    /* 核心布局修复：强制覆盖全局 CSS 限制 */
+    /* 核心布局修复 */
     /* ============================================ */
     #main {
         display: block !important;
@@ -108,13 +108,11 @@
     #content {
         max-width: 100% !important; 
         width: 100% !important;
-        padding: 0 !important; /* 移除内边距，让 Hero 区域能贴边 */
+        padding: 0 !important;
         margin: 0 !important;
     }
 
-    
-
-    /* 导航栏 - 完全透明且无边框 */
+    /* 导航栏 */
     .main-nav {
         position: fixed !important;
         top: 0;
@@ -135,14 +133,16 @@
         position: relative;
     }
 
-    /* 背景图片容器 */
+    /* 背景图片容器 - 修复版 */
     .hero-background {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: 100vh; /* 强制视口高度 */
         z-index: -1;
+        /* 确保不会溢出导致滚动条 */
+        overflow: hidden; 
     }
 
     .hero-background::before {
@@ -166,13 +166,21 @@
         width: 100%;
         height: 100%;
         background-image: url('https://img.paulzzh.com/touhou/random?site=yandere');
+        
+        /* 核心修复：确保背景图覆盖且居中 */
         background-size: cover;
-        background-position: center;
+        background-position: center center;
         background-repeat: no-repeat;
-        background-attachment: fixed;
+        
+        /* 移除 fixed attachment，因为它在某些移动浏览器上会导致背景被错误缩放 */
+        /* background-attachment: fixed; */
+        
+        /* 添加变换以防止某些浏览器上的微小抖动 */
+        transform: translateZ(0);
+        backface-visibility: hidden;
     }
 
-    /* 主内容区域 - 优化居中布局 */
+    /* 主内容区域 */
     .hero-content {
         display: flex;
         flex-direction: column;
@@ -187,23 +195,17 @@
         height: 100%;
     }
 
-        /* 【修复】打字机文字样式 */
+    /* 打字机文字样式 */
     .typewriter-text {
-        /* 1. 关键修复：宽度适应内容，不再占满全屏 */
         display: inline-block; 
         width: fit-content; 
-        
-        position: relative; /* 为光标提供定位基准 */
-        
+        position: relative; 
         font-size: clamp(2rem, 5vw, 4.5em); 
         font-weight: 700;
         white-space: pre-wrap; 
         word-wrap: break-word;
         overflow: visible; 
-        
-        /* 进场动画：简单的淡入上浮 */
         animation: fadeIn 1.5s ease-out;
-        
         text-shadow: 
             -1px -1px 0 #fafafa,
             1px -1px 0 #fafafa,
@@ -213,38 +215,24 @@
         line-height: 1.3;
         text-align: center;
         margin: 0 auto;
-        
-        /* 右侧留一点空隙给光标 */
         padding-right: 5px; 
     }
 
-    /* 光标样式 */
     .typewriter-text::after {
         content: '';
         position: absolute;
-        
-        /* 2. 定位调整：始终在文字块的右侧 */
         top: 4px;
         bottom: 4px;
-        right: -10px; /* 负值确保光标在文字外侧 */
-        width: 3px; /* 光标稍粗一点 */
+        right: -10px; 
+        width: 3px; 
         background-color: #E4374B;
         border-radius: 2px;
-        
-        /* 3. 动画：改为标准闪烁，不再位移 */
-        /*animation: cursor-blink 1.2s step-end infinite;*/
     }
 
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
     }
-
-    @keyframes cursor-blink {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0; }
-    }
-
 
     /* 动态箭头 */
     .scroll-indicator {
@@ -323,12 +311,9 @@
     /* 文章卡片样式 */
     .post-article {
         display: block; 
-        
-        /* 1. 【核心修复】强制移除所有下划线和链接相关样式 */
         text-decoration: none !important; 
         border-bottom: none !important;   
-        background-image: none !important; /* 关键：移除 CSS 中的背景图下划线 */
-        
+        background-image: none !important; 
         color: inherit; 
         background: rgba(255, 255, 255, 0.15);
         border-radius: 12px;
@@ -342,26 +327,18 @@
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         cursor: pointer;
-
-        /* 【配置】卡片宽度设置 */
-        /* 设置为 100% 保持响应式 */
         width: 100%;          
-        /* [修改这里] 控制最大宽度。可以改成 1200px, 800px 或 100%(全宽) */
         max-width: 800px;     
-        /* 高度由内容自动撑开，通过上方的 excerptLength 变量控制字数 */
         height: auto;         
     }
 
     /* 悬停效果 */
     .post-article:hover {
         transform: translateY(-8px);
-        
-        /* 【配置】悬停发光效果 - 蓝色光晕 */
         box-shadow: 
-            0 12px 35px rgba(0, 0, 0, 0.15),      /* 基础阴影 */
-            0 0 20px rgba(82, 174, 255, 0.5),     /* 中层发光 */
-            0 0 40px rgba(82, 174, 255, 0.3);     /* 外层扩散 */
-            
+            0 12px 35px rgba(0, 0, 0, 0.15),
+            0 0 20px rgba(82, 174, 255, 0.5), 
+            0 0 40px rgba(82, 174, 255, 0.3);
         border-color: rgba(82, 174, 255, 0.8);    
         background: rgba(255, 255, 255, 0.2);
     }
