@@ -126,8 +126,26 @@
     
     <style>
     /* ============================================ */
-    /* 核心布局修复 */
+    /* 核心修复：解决背景不固定问题 */
     /* ============================================ */
+    
+    /* 【关键修复】
+       强制清除父级元素的动画和变换属性。
+       这会消除“层叠上下文”，使内部的 position: fixed 真正相对于浏览器窗口定位，
+       而不是相对于 #content 内容区域定位。
+    */
+    #pjax-container,
+    #main,
+    .main-content,
+    #content {
+        transform: none !important;
+        will-change: auto !important;
+        filter: none !important;
+        perspective: none !important;
+        -webkit-transform: none !important;
+    }
+
+    /* 核心布局调整 */
     #main {
         display: block !important;
     }
@@ -164,16 +182,17 @@
         position: relative;
     }
 
-    /* 背景图片容器 - 修复版 */
+    /* 背景图片容器 - 修复版 
+       使用 fixed 定位，并强制 height: 100vh 
+    */
     .hero-background {
         position: fixed;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100vh; /* 强制视口高度 */
+        width: 100%;  /* 使用 100% 避免 100vw 导致的滚动条 */
+        height: 100vh; /* 强制高度为视口高度 */
         z-index: -1;
-        /* 确保不会溢出导致滚动条 */
-        overflow: hidden; 
+        pointer-events: none; /* 确保不阻挡点击 */
     }
 
     .hero-background::before {
@@ -190,6 +209,9 @@
         z-index: 1;
     }
 
+    /* 背景图 - 修复版
+       移除了 background-attachment: fixed 
+    */
     .hero-bg-image {
         position: absolute;
         top: 0;
@@ -197,18 +219,9 @@
         width: 100%;
         height: 100%;
         background-image: url('https://img.paulzzh.com/touhou/random?site=yandere');
-        
-        /* 核心修复：确保背景图覆盖且居中 */
         background-size: cover;
-        background-position: center center;
+        background-position: center;
         background-repeat: no-repeat;
-        
-        /* 移除 fixed attachment，因为它在某些移动浏览器上会导致背景被错误缩放 */
-        /* background-attachment: fixed; */
-        
-        /* 添加变换以防止某些浏览器上的微小抖动 */
-        transform: translateZ(0);
-        backface-visibility: hidden;
     }
 
     /* 主内容区域 */
@@ -470,7 +483,6 @@
 
     <!-- 主页内容 -->
     <div class="home-hero">
-        <!-- 导航栏已经在layout.ejs中包含 -->
         
         <!-- 主要内容 -->
         <div class="hero-content">

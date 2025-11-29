@@ -1609,9 +1609,8 @@ hr {
 /* 1. 给内容区域 (#content) 设置基础过渡属性 */
 #content {
     opacity: 1;
-    transform: scale(1);
+    transform: none;
     filter: blur(0px);
-    
     transition: 
         opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
         transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
