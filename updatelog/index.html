@@ -29,7 +29,6 @@
     <style>
     .home-layout #main { display: block !important; }
     .home-layout .main-content { max-width: 100% !important; width: 100% !important; }
-    #pjax-container.pjax-loading { opacity: 0.5; transition: opacity 0.3s; }
     </style>
 <meta name="generator" content="Hexo 8.0.0"></head>
 
@@ -170,11 +169,14 @@
 </li>
 </ul>
 <h2 id="2025-11-29"><a href="#2025-11-29" class="headerlink" title="2025&#x2F;11&#x2F;29"></a>2025&#x2F;11&#x2F;29</h2><ul>
-<li>细化了首页</li>
+<li>细化了首页<ul>
 <li>修复了被控制的#content宽度</li>
 <li>卡片宽度高度调整</li>
 <li>打字机动画改为浮出动画</li>
 <li>卡片的元素调整，现在点击卡片就能跳转</li>
+</ul>
+</li>
+<li>为正文内容切换添加了呼吸动画</li>
 </ul>
 
     </div>
@@ -191,7 +193,7 @@
                 </div>
             </main>
             
-            <!-- 【新增】右侧边栏 (非首页显示) -->
+            <!-- 右侧边栏 (非首页显示) -->
             
                 <aside id="right-sidebar">
     <div class="sidebar-author">
@@ -289,7 +291,7 @@
         console.log("Pjax: 代码高亮已重新执行");
     }
 
-    // 生成文章大纲 - 修复版本
+    // 生成文章大纲
     function generateOutline() {
         const outlineContainer = document.getElementById('article-outline');
         if (!outlineContainer) return;
@@ -392,10 +394,17 @@
             timeout: 8000
         });
         
-        $(document).on('pjax:send', function() { /* ... */ });
+        // 【关键逻辑】请求开始：给容器添加 loading 类
+        $(document).on('pjax:send', function() {
+            $(pjaxContainer).addClass('pjax-loading');
+        });
+
+        // 请求成功（暂不做处理）
         $(document).on('pjax:success', function(event, data, status, xhr, options) { /* ... */ });
+        
+        // 【关键逻辑】请求结束：移除 loading 类，触发内容淡入动画
         $(document).on('pjax:complete', function() {
-            console.log("Pjax: complete (加载完成, 准备执行脚本)");
+            console.log("Pjax: complete (加载完成)");
             $(pjaxContainer).removeClass('pjax-loading');
 
             var rootPath = ('/' || '/').replace(/\/$/, ''); 
