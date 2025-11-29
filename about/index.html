@@ -27,6 +27,20 @@
 
     
     <style>
+    /* ============================================ */
+    /* 核心修复：解决背景不固定问题 */
+    /* ============================================ */
+    #pjax-container,
+    #main,
+    .main-content,
+    #content {
+        transform: none !important;
+        will-change: auto !important;
+        filter: none !important;
+        perspective: none !important;
+        -webkit-transform: none !important;
+    }
+
     .home-layout #main { display: block !important; }
     .home-layout .main-content { max-width: 100% !important; width: 100% !important; }
     </style>
@@ -135,6 +149,7 @@
 <p>主题为AIR-v2，仍在更新中</p>
 <p>你问AIR-v1？那个是根据超级教程<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yyhh/p/11058985.html">hexo主题开发</a>过着走了一遍，感谢<code>@ ﹏猴子请来的救兵</code></p>
 <p>没有可以写的了</p>
+<p><mark>这是高亮的文本</mark></p>
 </blockquote>
 <p><img src="https://github.com/Tenkonata/picx-images-hosting/raw/master/%E8%A3%85%E9%A5%B0/Kosuzu.4g4xpgxs4w.webp" alt="Kosuzu"></p>
 <p>👁️👁️👁️</p>
@@ -228,6 +243,12 @@
     </div>
 </aside>
             
+        </div>
+
+        <!-- 【新增】回到顶部按钮 -->
+        <!-- 仅在非首页显示，通过 CSS 类控制显示状态 -->
+        <div id="back-to-top" class="">
+            <i class="fa fa-arrow-up"></i>
         </div>
 
     </div> 
@@ -354,18 +375,9 @@
             timeout: 8000
         });
         
-        // 【关键逻辑修复】精准控制动画触发时机
+        // Pjax 动画控制
         $(document).on('pjax:send', function(event, xhr, options) {
-            
-            // 始终添加 loading 类（用于防止点击等逻辑控制）
             $(pjaxContainer).addClass('pjax-loading');
-            
-            // 判断当前状态：
-            // 1. 如果 body 有 home-layout 类，说明当前是在首页。
-            //    首页切出时不应该有呼吸动画（避免背景消失），所以不添加 pjax-animate。
-            // 2. 如果 body 没有 home-layout 类，说明在文章页。
-            //    文章页切换需要呼吸动画，所以添加 pjax-animate。
-            
             if (!$('body').hasClass('home-layout')) {
                 $(pjaxContainer).addClass('pjax-animate');
             }
@@ -373,11 +385,9 @@
 
         $(document).on('pjax:success', function(event, data, status, xhr, options) { /* ... */ });
         
-        // 【关键逻辑】请求结束：移除所有相关类
         $(document).on('pjax:complete', function() {
             console.log("Pjax: complete (加载完成)");
             
-            // 移除 loading 和 animate 类，确保状态复原
             $(pjaxContainer).removeClass('pjax-loading pjax-animate');
 
             var rootPath = ('/' || '/').replace(/\/$/, ''); 

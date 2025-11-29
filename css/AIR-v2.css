@@ -1,9 +1,41 @@
 @charset "UTF-8";
+/*==========================================================================
+  注释标准-此为标题
+  每个板块空四行
+  每个功能指{}前需要单行注释，空一行
+  内函数tab统一位置（模块内） 单行注释
+
+  功能检索
+  一、字体库引入
+  二、CSS变量定义模块
+  三、全局重置与基础样式
+  四、标题样式框架
+  五、引用块样式框架
+  六、链接样式框架
+  七、文本高亮样式框架
+  八、水平分割线样式框架
+  九、行内代码样式框架
+  十、列表样式框架
+  十一、图片样式框架
+  十二、表格样式框架
+  十三、代码块样式框架
+  十四、文章页面样式
+  十五、主布局样式
+  十六、树形目录样式
+  十七、侧边栏选项卡样式
+  十八、大纲样式
+  十九、导航栏样式框架
+  二十、右侧边栏
+  二十一、回到顶部按钮样式
+  ==========================================================================*/
+
+
 
 
 /*==========================================================================
-   字体
- ==========================================================================*/
+  一、字体库引入
+  占了三十多兆，纯毒瘤
+  ==========================================================================*/
 
 /* Geist 可变字体 - 正常样式 */
 @font-face {
@@ -58,10 +90,10 @@
 
 
 
-/* ==========================================================================
-  CSS变量定义模块
+/*==========================================================================
+  二、CSS变量定义模块
   功能：定义整个主题使用的颜色、字体等CSS自定义属性
- ==========================================================================*/
+  ==========================================================================*/
 :root {
   /* 颜色系统 */
   --v-white-100: #ffffff;
@@ -104,7 +136,7 @@
   --h5-ind-color: #D2A852;
   --h6-ind-color: #E0E5D5;
 
-
+  /* 其他候补元素 */
   --link-color: var(--v-blue-700);
   --code-inline-color: var(--text-code);
   --text-secondary: var(--v-gray-700);
@@ -117,87 +149,76 @@
 
 
 
-/* ==========================================================================
-   全局重置与基础样式
-   ========================================================================== */
 
-/* 功能: 重置浏览器默认样式，设置全局基础样式
-说明: 包括盒模型、边距、字体等基础设置
-*/
+/*==========================================================================
+  三、全局重置与基础样式
+  功能: 重置浏览器默认样式，设置全局基础样式
+  说明: 包括盒模型、边距、字体等基础设置
+  ========================================================================== */
 
 /* 基础盒模型重置 */
-* {
-  box-sizing: border-box; /* 统一盒模型计算方式 */
+*{
+  box-sizing: border-box;                 /* 统一盒模型计算方式 */
   margin: 0;
   padding: 0;
 }
 
 /* 根元素样式设置 */
 html {
-  font-size: 17px;                   /* 设置基准字体大小 */
-  -webkit-font-smoothing: antialiased; /* 字体抗锯齿，使文字更清晰 */
-  -moz-osx-font-smoothing: grayscale;  /* Firefox 字体平滑 */
+  font-size: 17px;                        /* 设置基准字体大小 */
+  -webkit-font-smoothing: antialiased;    /* 字体抗锯齿，使文字更清晰 */
+  -moz-osx-font-smoothing: grayscale;     /* Firefox 字体平滑 */
 }
 
 /* 主体内容基础样式 */
 body {
-  background-color: var(--v-white-200);  /* 使用定义的浅灰色背景 */
-  color: var(--v-gray-1000);             /* 使用深灰色文字 */
-  line-height: 1.6;                      /* 设置1.6倍行高，提高可读性 */
-  font-family: "Geist", "LXGWWenKai"; /* 设置中英文字体栈 */
+  background-color: var(--v-white-200);   /* 使用定义的浅灰色背景 */
+  color: var(--v-gray-1000);              /* 使用深灰色文字 */
+  line-height: 1.6;                       /* 设置1.6倍行高，提高可读性 */
+  font-family: "Geist", "LXGWWenKai";     /* 设置中英文字体栈 */
 }
 
 /* 确保媒体元素响应式 */
 img, video, canvas, svg {
-  max-width: 100%; /* 防止媒体元素溢出容器 */
-  height: auto;    /* 保持原始宽高比 */
+  max-width: 100%;                        /* 防止媒体元素溢出容器 */
+  height: auto;                           /* 保持原始宽高比 */
 }
 
 /* 表单元素基础重置 */
 button, input, select, textarea {
-  font-family: inherit; /* 继承主体字体 */
-  font-size: inherit;   /* 继承主体字号 */
-  line-height: inherit; /* 继承主体行高 */
+  font-family: inherit;                   /* 继承主体字体 */
+  font-size: inherit;                     /* 继承主体字号 */
+  line-height: inherit;                   /* 继承主体行高 */
 }
 
 /* 链接基础样式重置 */
 a {
-  color: inherit;       /* 继承文字颜色 */
-  text-decoration: none; /* 移除默认下划线 */
+  color: inherit;                         /* 继承文字颜色 */
+  text-decoration: none;                  /* 移除默认下划线 */
 }
 
 /* 列表样式重置 */
 ul, ol {
-  list-style: none; /* 移除默认列表标记 */
+  list-style: none;                       /* 移除默认列表标记 */
 }
 
 
 
-/* ==========================================================================
-   标题样式框架
-   ========================================================================== */
+/*==========================================================================
+  四、标题样式框架
+  ========================================================================== */
 
 /* 标题通用基础样式 */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  position: relative;                  /* 为伪元素定位做准备 */
-  padding-left: 10px;                  /* 为左侧指示条留出空间 */
-  color: var(--tw-prose-headings);     /* 使用统一的标题颜色 */
+h1,h2,h3,h4,h5,h6 {
+  position: relative;                 /* 为伪元素定位做准备 */
+  padding-left: 10px;                 /* 为左侧指示条留出空间 */
+  color: var(--tw-prose-headings);    /* 使用统一的标题颜色 */
 }
 
 /* 标题左侧指示条基础样式 */
-h1::before,
-h2::before,
-h3::before,
-h4::before,
-h5::before,
-h6::before {
-  content: '';                         /* 必须内容 */
-  position: absolute;                  /* 绝对定位 */
+h1::before,h2::before,h3::before,h4::before,h5::before,h6::before {
+  content: '';                        /* 必须内容 */
+  position: absolute;                 /* 绝对定位 */
   left: 0;                            /* 紧贴左侧 */
   width: 3px;                         /* 指示条宽度 */
   top: 2px;                           /* 上下留出2px边距 */
@@ -221,7 +242,6 @@ h1 {
   margin-bottom: 0;                   /* 去除默认下边距 */
   line-height: 1.2;                   /* 较紧凑的行高 */
 }
-
 h1 strong {
   font-weight: 900;                   /* 加粗时使用最重字重 */
 }
@@ -232,7 +252,6 @@ h2 {
   font-size: 1.7em;                   /* 1.7倍基准字体大小 */
   line-height: 1.3;                   /* 适中行高 */
 }
-
 h2 strong {
   font-weight: 800;                   /* 加粗时使用h1的字重 */
 }
@@ -243,7 +262,6 @@ h3 {
   font-size: 1.5em;                   /* 1.5倍基准字体大小 */
   line-height: 1.4;                   /* 稍松的行高 */
 }
-
 h3 strong {
   font-weight: 700;                   /* 加粗时使用h2的字重 */
 }
@@ -253,7 +271,6 @@ h4 {
   font-weight: 600;                   /* 与h3相同的字重 */
   line-height: 1.7;                   /* 更宽松的行高 */
 }
-
 h4 strong {
   font-weight: 700;                   /* 加粗字重 */
 }
@@ -264,7 +281,6 @@ h5 {
   line-height: 1.8;                   /* 宽松行高 */
   font-size: 0.9em;                   /* 稍小于基准字体 */
 }
-
 h5 strong {
   font-weight: 500;                   /* 加粗保持相同字重 */
 }
@@ -287,10 +303,10 @@ h3 code {
 
 /* 添加统一的标题外边距 */
 h1, h2, h3, h4, h5, h6 {
-  margin: 24px 0 16px 0; /* 添加上下外边距 */
+  margin: 24px 0 16px 0;              /* 添加上下外边距 */
 }
 
-/* 但保持您原有的标题后元素间距优化 */
+/* 但保持原有的标题后元素间距优化 */
 h1+*, h2+*, h3+*, h4+*, h5+*, h6+* {
   margin-top: 0;
 }
@@ -298,38 +314,34 @@ h1+*, h2+*, h3+*, h4+*, h5+*, h6+* {
 
 
 
-
-
-/* ==========================================================================
-   引用块样式框架
-   ========================================================================== */
-
-/* 功能: 定义引用块(blockquote)的样式
-说明: 包含背景、边框、间距等样式，适配Hexo的Markdown渲染
-*/
+/*==========================================================================
+  五、引用块样式框架
+  功能: 定义引用块(blockquote)的样式
+  说明: 包含背景、边框、间距等样式，适配Hexo的Markdown渲染
+  ========================================================================== */
 
 /* 引用块基础样式 */
 blockquote {
-  margin-top: 16px !important;        /* 上方间距 */
-  margin-bottom: 0;                   /* 去除底部间距 */
-  margin-left: 0;                     /* 确保左对齐 */
-  margin-right: 0;                    /* 确保右对齐 */
-  padding: 8px;                       /* 内边距 */
-  padding-left: 16px;                 /* 左侧额外内边距，为引用标识留空间 */
-  background: var(--color-1-0-b);     /* 浅蓝色背景 */
-  box-sizing: border-box;             /* 盒模型计算 */
-  border-radius: 8px;                 /* 圆角边框 */
-  border-left: 4px solid var(--v-blue-600);  /* 左侧蓝色边框 */
-  border-right: 0.1px solid transparent;    /* 透明右边框 */
-  border-bottom: 0.1px solid transparent;   /* 透明底边框 */
-  border-top: 0.1px solid transparent;      /* 透明上边框 */
-  font-style: normal;                 /* 重置斜体样式 */
+  margin-top: 16px !important;                /* 上方间距 */
+  margin-bottom: 0;                           /* 去除底部间距 */
+  margin-left: 0;                             /* 确保左对齐 */
+  margin-right: 0;                            /* 确保右对齐 */
+  padding: 8px;                               /* 内边距 */
+  padding-left: 16px;                         /* 左侧额外内边距，为引用标识留空间 */
+  background: var(--color-1-0-b);             /* 浅蓝色背景 */
+  box-sizing: border-box;                     /* 盒模型计算 */
+  border-radius: 8px;                         /* 圆角边框 */
+  border-left: 4px solid var(--v-blue-600);   /* 左侧蓝色边框 */
+  border-right: 0.1px solid transparent;      /* 透明右边框 */
+  border-bottom: 0.1px solid transparent;     /* 透明底边框 */
+  border-top: 0.1px solid transparent;        /* 透明上边框 */
+  font-style: normal;                         /* 重置斜体样式 */
 }
 
 /* 引用块内段落样式 */
 blockquote p {
-  margin: 8px 0;                      /* 段落间距 */
-  color: inherit;                     /* 继承文字颜色 */
+  margin: 8px 0;                              /* 段落间距 */
+  color: inherit;                             /* 继承文字颜色 */
 }
 
 /* 引用块内第一个元素去除上边距 */
@@ -344,13 +356,13 @@ blockquote > *:last-child {
 
 /* 多层嵌套引用样式 */
 blockquote blockquote {
-  background: var(--color-1-1-b);     /* 嵌套引用使用稍深的背景色 */
-  border-left-color: var(--color-1); /* 嵌套引用使用更深的左边框*/
+  background: var(--color-1-1-b);             /* 嵌套引用使用稍深的背景色 */
+  border-left-color: var(--color-1);          /* 嵌套引用使用更深的左边框*/
 }
 
 /* 引用块内的代码样式 */
 blockquote code {
-  background: rgba(255, 255, 255, 0.3); /* 半透明白色背景 */
+  background: rgba(255, 255, 255, 0.3);     /* 半透明白色背景 */
   border-radius: 3px;
 }
 
@@ -363,133 +375,119 @@ blockquote a {
 
 
 
+/*==========================================================================
+  六、链接样式框架
+  功能: 定义文章中链接的样式和悬停效果
+  说明: 针对Hexo的文章内容区域进行样式定义
+  ========================================================================== */
 
-/* ==========================================================================
-   链接样式框架
-   ========================================================================== */
-
-/* 功能: 定义文章中链接的样式和悬停效果
-说明: 针对Hexo的文章内容区域进行样式定义
-*/
-
+/* 链接基本样式 */
 .post-body a,
 .markdown-body a,
 .article-content a {
-  font-weight: 500;                   /* 中等字重 */
-  color: var(--v-blue-700);           /* 蓝色链接 */
-  text-decoration: none;              /* 去除默认下划线 */
-  /*transition: all 0.2s ease-in-out;   /* 添加过渡动画 */
+  font-weight: 500;                                         /* 中等字重 */
+  color: var(--v-blue-700);                                 /* 蓝色链接 */
+  text-decoration: none;                                    /* 去除默认下划线 */
+  /*transition: all 0.2s ease-in-out;                       /* 添加过渡动画 */
 }
 
 /* 链接悬停效果(发生在全体)  */
 .post-body a:hover,
 .markdown-body a:hover,
 .article-content a:hover {
-  background-image: linear-gradient(var(--v-blue-700));  /* 蓝色渐变 */
-  background-size: 100% 1px;          /* 1像素高的线条 */
-  background-position: 0 100%;        /* 底部对齐 */
-  background-repeat: no-repeat;       /* 不重复 */
-  color: var(--v-amber-700);           /* 悬停时颜色加深 */
+  background-image: linear-gradient(var(--v-blue-700));     /* 蓝色渐变 */
+  background-size: 100% 1px;                                /* 1像素高的线条 */
+  background-position: 0 100%;                              /* 底部对齐 */
+  background-repeat: no-repeat;                             /* 不重复 */
 }
 
 
 
 
-
-/* ==========================================================================
-   文本高亮样式框架
-   ========================================================================== */
-
-/* 功能: 定义文本高亮标记的样式
-说明: 用于mark标签的视觉突出显示
-*/
+/*==========================================================================
+  七、文本高亮样式框架
+  功能: 定义文本高亮标记的样式
+  说明: 用于mark标签的视觉突出显示
+  ========================================================================== */
 
 .post-body mark,
 .markdown-body mark,
 .article-content mark {
-  background-color: var(--tw-highlight-color);  /* 黄色高亮 */
-  border-radius: 3px;                 /* 小圆角 */
-  padding: 0.1em 0.3em;               /* 内边距增强可读性 */
-  color: inherit;                     /* 继承文字颜色 */
-  box-decoration-break: clone;        /* 确保跨行高亮样式连续 */
+  background-color: var(--tw-highlight-color);    /* 黄色高亮 */
+  border-radius: 6px;                             /* 小圆角 */
+  padding: 0.1em 0.3em;                           /* 内边距增强可读性 */
+  color: inherit;                                 /* 继承文字颜色 */
+  box-decoration-break: clone;                    /* 确保跨行高亮样式连续 */
   -webkit-box-decoration-break: clone;
 }
 
 
 
 
+/*==========================================================================
+  八、水平分割线样式框架
+  功能: 美化hr标签的分割线效果
+  说明: 替换浏览器默认水平线样式
+  ========================================================================== */
 
-/* ==========================================================================
-   水平分割线样式框架
-   ========================================================================== */
-
-/* 功能: 美化hr标签的分割线效果
-说明: 替换浏览器默认水平线样式
-*/
 
 hr {
-  margin: 10px 0px;                   /* 上下边距 */
-  border: none;                       /* 去除默认边框 */
-  border-bottom: 1px solid var(--v-gray-500);  /* 底部灰色边框 */
-  height: 1px;                        /* 明确高度 */
-  background: none;                   /* 清除默认背景 */
+  margin: 10px 0px;                                 /* 上下边距 */
+  border: none;                                     /* 去除默认边框 */
+  border-bottom: 1px solid var(--v-gray-500);       /* 底部灰色边框 */
+  height: 1px;                                      /* 明确高度 */
+  background: none;                                 /* 清除默认背景 */
 }
 
 /* 文章内容区域内的水平线特殊样式 */
 .post-body hr,
 .markdown-body hr,
 .article-content hr {
-  margin: 20px 0;                     /* 文章内分割线间距更大 */
-  border-bottom-width: 2px;           /* 文章内分割线更粗 */
+  margin: 20px 0;                                   /* 文章内分割线间距更大 */
+  border-bottom-width: 2px;                         /* 文章内分割线更粗 */
 }
 
 
 
 
+/*==========================================================================
+  九、行内代码样式框架
+  功能: 定义行内代码的样式
+  说明: 用于文章内容中的行内代码元素
+  ========================================================================== */
 
-/* ==========================================================================
-   行内代码样式框架
-   ========================================================================== */
-
-/* 功能: 定义行内代码的样式
-说明: 用于文章内容中的行内代码元素
-*/
-
+/* 行内代码基础样式 */
 .post-body code,
 .markdown-body code,
 .article-content code {
-  padding: 2px 4px;                   /* 小内边距 */
-  font-family: "GeistMono", "LXGWWenKaiMono", monospace;  /* 等宽字体栈 */
-  font-size: 0.9rem;                  /* 稍小字体 */
-  background-color: var(--v-gray-500); /* 灰色背景 */
-  border-radius: 4px;                 /* 小圆角 */
-  color: var(--code-inline-color);    /* 代码文字颜色 */
+  padding: 2px 4px;                                         /* 小内边距 */
+  font-family: "GeistMono", "LXGWWenKaiMono", monospace;    /* 等宽字体栈 */
+  font-size: 0.9rem;                                        /* 稍小字体 */
+  background-color: var(--v-gray-500);                      /* 灰色背景 */
+  border-radius: 4px;                                       /* 小圆角 */
+  color: var(--code-inline-color);                          /* 代码文字颜色 */
 }
 
 /* 代码块内的行内代码特殊处理 */
 .post-body pre code,
 .markdown-body pre code,
 .article-content pre code {
-  background: transparent;            /* 代码块内不显示背景 */
-  padding: 0;                         /* 代码块内无内边距 */
-  border-radius: 0;                   /* 代码块内无圆角 */
-  color: inherit;                     /* 继承代码块颜色 */
+  background: transparent;                                  /* 代码块内不显示背景 */
+  padding: 0;                                               /* 代码块内无内边距 */
+  border-radius: 0;                                         /* 代码块内无圆角 */
+  color: inherit;                                           /* 继承代码块颜色 */
 }
 
 
 
 
+/*==========================================================================
+  十、列表样式框架
+  功能: 定义无序列表的样式
+  说明: 使用自定义标记替代默认列表样式
+  ========================================================================== */
 
-
-
-/* ==========================================================================
-   列表样式框架
-   ========================================================================== */
-
-/* 功能: 定义无序列表的样式
-说明: 使用自定义标记替代默认列表样式
-*/
-
+/* 列表基础样式 */
 .post-body ul,
 .markdown-body ul,
 .article-content ul {
@@ -508,7 +506,7 @@ hr {
   top: 11.5px;                        /* 垂直居中 */
   width: 9px;                         /* 标记宽度 */
   height: 2px;                        /* 标记高度 - 短横线 */
-  background-color: #3d3d3d;          /* 深灰色 */
+  background-color: #3d3d3d;        /* 深灰色 */
 }
 
 /* 有序列表样式 */
@@ -522,7 +520,7 @@ hr {
 .post-body ol li::before,
 .markdown-body ol li::before,
 .article-content ol li::before {
-  display: none; /* 有序列表不显示短横线 */
+  display: none;                      /* 有序列表不显示短横线 */
 }
 
 /* 列表项通用样式 */
@@ -544,29 +542,24 @@ hr {
 
 
 
+/*==========================================================================
+  十一、图片样式框架
+  功能: 定义图片的样式效果
+  说明: 包含圆角、阴影等美化效果
+  ========================================================================== */
 
-
-
-
-/* ==========================================================================
-   图片样式框架
-   ========================================================================== */
-
-/* 功能: 定义图片的样式效果
-说明: 包含圆角、阴影等美化效果
-*/
-
+/* 图片基础样式 */
 .post-body img,
 .markdown-body img,
 .article-content img {
-  color: transparent;                 /* 去除alt文字颜色 */
-  border: none;                       /* 去除边框 */
-  border-radius: 8px;                 /* 圆角 */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);  /* 阴影效果 */
-  max-width: 100%;                    /* 响应式图片 */
-  height: auto;                       /* 保持比例 */
-  display: block;                     /* 块级显示 */
-  margin: 16px auto;                  /* 居中显示 */
+  color: transparent;                                   /* 去除alt文字颜色 */
+  border: none;                                         /* 去除边框 */
+  border-radius: 8px;                                   /* 圆角 */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);         /* 阴影效果 */
+  max-width: 100%;                                      /* 响应式图片 */
+  height: auto;                                         /* 保持比例 */
+  display: block;                                       /* 块级显示 */
+  margin: 16px auto;                                    /* 居中显示 */
 }
 
 /* 图片标题样式 */
@@ -576,7 +569,6 @@ hr {
   margin: 16px 0;
   text-align: center;
 }
-
 .post-body figcaption,
 .markdown-body figcaption,
 .article-content figcaption {
@@ -588,57 +580,51 @@ hr {
 
 
 
+/*==========================================================================
+  十二、表格样式框架
+  功能: 定义表格及其元素的样式
+  说明: 包含斑马纹、边框、表头等完整表格样式
+  ========================================================================== */
 
-
-
-
-
-/* ==========================================================================
-   表格样式框架
-   ========================================================================== */
-
-/* 功能: 定义表格及其元素的样式
-说明: 包含斑马纹、边框、表头等完整表格样式
-*/
-
+/* 表格基础样式 */
 .post-body table,
 .markdown-body table,
 .article-content table {
-  width: 100%;                        /* 全宽表格 */
-  margin-bottom: 0;                   /* 去除底部边距 */
-  border-radius: 8px;                 /* 圆角表格 */
-  padding: 0 !important;              /* 去除内边距 */
-  border-collapse: separate;          /* 分离边框模型 */
-  border-spacing: 0;                  /* 单元格间距为0 */
-  margin-top: 0;                      /* 去除顶部边距 */
-  border: 1px solid var(--v-gray-400) !important;  /* [修改] 使用统一变量 */
-  overflow: hidden;                   /* 隐藏溢出内容 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 表格阴影 */
+  width: 100%;                                            /* 全宽表格 */
+  margin-bottom: 0;                                       /* 去除底部边距 */
+  border-radius: 8px;                                     /* 圆角表格 */
+  padding: 0 !important;                                  /* 去除内边距 */
+  border-collapse: separate;                              /* 分离边框模型 */
+  border-spacing: 0;                                      /* 单元格间距为0 */
+  margin-top: 0;                                          /* 去除顶部边距 */
+  border: 1px solid var(--v-gray-400) !important;         /*使用统一变量 */
+  overflow: hidden;                                       /* 隐藏溢出内容 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);             /* 表格阴影 */
 }
 
 /* 表头样式 */
 .post-body table thead tr th,
 .markdown-body table thead tr th,
 .article-content table thead tr th {
-  background: var(--bg-color2);       /* 浅灰色背景 */
-  padding: 12px 8px !important;       /* 表头内边距 */
-  font-weight: 600;                   /* 表头加粗 */
-  text-align: left;                   /* 左对齐 */
-  border-bottom: 1px solid var(--v-gray-400) !important; /* 表头底边框 */
+  background: var(--bg-color2);                           /* 浅灰色背景 */
+  padding: 12px 8px !important;                           /* 表头内边距 */
+  font-weight: 600;                                       /* 表头加粗 */
+  text-align: left;                                       /* 左对齐 */
+  border-bottom: 1px solid var(--v-gray-400) !important;  /* 表头底边框 */
 }
 
 /* 表格隔行变色 - 偶数行 */
 .post-body table tbody tr:nth-child(even) td,
 .markdown-body table tbody tr:nth-child(even) td,
 .article-content table tbody tr:nth-child(even) td {
-  background: var(--bg-color2);       /* 浅灰色背景 */
+  background: var(--bg-color2);                           /* 浅灰色背景 */
 }
 
 /* 表格隔行变色 - 奇数行 */
 .post-body table tbody tr:nth-child(odd) td,
 .markdown-body table tbody tr:nth-child(odd) td,
 .article-content table tbody tr:nth-child(odd) td {
-  background: var(--bg-color);        /* 更浅的背景色 */
+  background: var(--bg-color);                            /* 更浅的背景色 */
 }
 
 /* 表格单元格样式 */
@@ -648,57 +634,36 @@ hr {
 .post-body table tr td,
 .markdown-body table tr td,
 .article-content table tr td {
-  padding: 8px !important;            /* 单元格内边距 */
-  white-space: pre-wrap !important;   /* 允许换行 */
-  border-bottom: 1px solid var(--v-gray-400) !important; /* 单元格底边框 */
+  padding: 8px !important;                                /* 单元格内边距 */
+  white-space: pre-wrap !important;                       /* 允许换行 */
+  border-bottom: 1px solid var(--v-gray-400) !important;  /* 单元格底边框 */
 }
 
-/* 表格单元格左边框 */
-.post-body table tr td,
-.markdown-body table tr td,
-.article-content table tr td,
-.post-body table thead tr th,
-.markdown-body table thead tr th,
-.article-content table thead tr th {
-  border-left: 1px solid var(--v-gray-400) !important;  /* 垂直分隔线 */
-}
-
-/* 去除第一列的左边框 */
-.post-body table tbody tr td:first-of-type,
-.markdown-body table tbody tr td:first-of-type,
-.article-content table tbody tr td:first-of-type,
-.post-body table thead tr th:first-of-type,
-.markdown-body table thead tr th:first-of-type,
-.article-content table thead tr th:first-of-type {
-  border-left: none !important;       /* 第一列无左边框 */
-}
+/* 注意！请添加表格风格竖向边框 */
 
 
 
 
-
-/* ==========================================================================
-   代码块样式框架 - 适配 highlight.js atom-one-dark
-   ========================================================================== */
-
-/* 功能: 定义代码块和语法高亮的样式，适配highlight.js的atom-one-dark主题
-说明: 保留macOS风格窗口控件，与atom-one-dark主题协调
-*/
+/*==========================================================================
+  十三、代码块样式框架
+  功能: 定义代码块和语法高亮的样式，适配highlight.js的atom-one-dark主题
+  说明: 保留macOS风格窗口控件，与atom-one-dark主题协调
+  ========================================================================== */
 
 /* 代码块基础样式 */
 .post-body pre,
 .markdown-body pre,
 .article-content pre,
 .highlight pre {
-  padding-top: 34px;                  /* 顶部留出控件空间 */
-  padding-left: 16px;                 /* 左侧内边距 */
-  padding-right: 16px;                /* 右侧内边距 */
-  padding-bottom: 16px;               /* 底部内边距 */
-  background-color: #282c34;          /* atom-one-dark 背景色 */
-  border-radius: 7px;                 /* 圆角 */
-  position: relative;                 /* 为伪元素定位 */
-  margin: 16px 0;                     /* 上下外边距 */
-  overflow: hidden;                   /* 隐藏溢出 */
+  padding-top: 34px;                                      /* 顶部留出控件空间 */
+  padding-left: 16px;                                     /* 左侧内边距 */
+  padding-right: 16px;                                    /* 右侧内边距 */
+  padding-bottom: 16px;                                   /* 底部内边距 */
+  background-color: #282c34;                            /* atom-one-dark 背景色 */
+  border-radius: 7px;                                     /* 圆角 */
+  position: relative;                                     /* 为伪元素定位 */
+  margin: 16px 0;                                         /* 上下外边距 */
+  overflow: hidden;                                       /* 隐藏溢出 */
 }
 
 /* macOS风格窗口控件 */
@@ -706,25 +671,25 @@ hr {
 .markdown-body pre::before,
 .article-content pre::before,
 .highlight pre::before {
-  position: absolute;                 /* 绝对定位 */
-  left: 12px;                         /* 左侧位置 */
-  top: 12px;                          /* 顶部位置 */
-  content: "";                        /* 必须内容 */
-  width: 13px;                        /* 控件大小 */
-  height: 13px;                       /* 控件大小 */
-  border-radius: 50%;                 /* 圆形 */
-  background: #ff5f56;                /* 红色关闭按钮 */
-  box-shadow: 22px 0px #ffbd2e, 44px 0px #27c93f;  /* 黄色最小化、绿色最大化 */
-  z-index: 1;                         /* 确保在代码内容上方 */
+  position: absolute;                                     /* 绝对定位 */
+  left: 12px;                                             /* 左侧位置 */
+  top: 12px;                                              /* 顶部位置 */
+  content: "";                                            /* 必须内容 */
+  width: 13px;                                            /* 控件大小 */
+  height: 13px;                                           /* 控件大小 */
+  border-radius: 50%;                                     /* 圆形 */
+  background: #ff5f56;                                  /* 红色关闭按钮 */
+  box-shadow: 22px 0px #ffbd2e, 44px 0px #27c93f;     /* 黄色最小化、绿色最大化 */
+  z-index: 1;                                             /* 确保在代码内容上方 */
 }
 
 /* 代码高亮容器 - 适配highlight.js */
 .highlight {
-  position: relative;                 /* 为内部元素定位 */
-  border-radius: 7px;                 /* 圆角 */
-  background-color: #282c34;          /* atom-one-dark 背景色 */
-  margin: 16px 0;                     /* 上下外边距 */
-  overflow: hidden;                   /* 隐藏溢出 */
+  position: relative;                                     /* 为内部元素定位 */
+  border-radius: 7px;                                     /* 圆角 */
+  background-color: #282c34;                            /* atom-one-dark 背景色 */
+  margin: 16px 0;                                         /* 上下外边距 */
+  overflow: hidden;                                       /* 隐藏溢出 */
 }
 
 /* 代码块内的代码样式 - 适配highlight.js */
@@ -734,16 +699,16 @@ hr {
 .highlight pre code,
 .hljs {
   font-family: "GeistMono", "LXGWWenKaiMono", monospace;  /* 等宽字体栈 */
-  font-size: 0.9rem;                  /* 稍小字体 */
-  font-weight: 400;                   /* 正常字重 */
-  line-height: 1.4rem;                /* 紧凑行高 */
-  display: block;                     /* 块级显示 */
-  overflow-x: auto;                   /* 水平滚动 */
-  background: transparent !important; /* 透明背景，覆盖highlight.js默认 */
-  padding: 0;                         /* 无内边距 */
-  border-radius: 0;                   /* 无圆角 */
-  white-space: pre;                   /* 保留空白和换行 */
-  color: #abb2bf;                     /* atom-one-dark 文字颜色 */
+  font-size: 0.9rem;                                      /* 稍小字体 */
+  font-weight: 400;                                       /* 正常字重 */
+  line-height: 1.4rem;                                    /* 紧凑行高 */
+  display: block;                                         /* 块级显示 */
+  overflow-x: auto;                                       /* 水平滚动 */
+  background: transparent !important;                     /* 透明背景，覆盖highlight.js默认 */
+  padding: 0;                                             /* 无内边距 */
+  border-radius: 0;                                       /* 无圆角 */
+  white-space: pre;                                       /* 保留空白和换行 */
+  color: #abb2bf;                                       /* atom-one-dark 文字颜色 */
 }
 
 /* 代码语言标签样式 */
@@ -753,7 +718,7 @@ hr {
   position: absolute;
   top: 12px;
   right: 16px;
-  color: #5c6370;                     /* atom-one-dark 注释颜色 */
+  color: #5c6370;                                       /* atom-one-dark 注释颜色 */
   font-size: 0.8rem;
   font-family: "Geist", "LXGWWenKai";
   z-index: 1;
@@ -763,11 +728,11 @@ hr {
 .post-body .hljs-ln-numbers,
 .markdown-body .hljs-ln-numbers,
 .article-content .hljs-ln-numbers {
-  color: #5c6370;                     /* atom-one-dark 注释颜色 */
+  color: #5c6370;                                       /* atom-one-dark 注释颜色 */
   padding-right: 16px;
   text-align: right;
   user-select: none;
-  border-right: 1px solid #3e4451;    /* 行号分隔线 */
+  border-right: 1px solid #3e4451;                      /* 行号分隔线 */
 }
 
 /* 代码高亮特定行样式 */
@@ -777,20 +742,20 @@ hr {
   padding: 0 8px;
 }
 
-/* 代码块滚动条样式 - 修复版 (您之前满意的版本) */
+/* 代码块滚动条样式 */
 /* 1. 设置滚动条整体大小 */
 .post-body pre code::-webkit-scrollbar,
 .markdown-body pre code::-webkit-scrollbar,
 .article-content pre code::-webkit-scrollbar {
-  height: 6px;                        /* 稍微调细一点，更精致 */
-  background-color: transparent;      /* 背景透明 */
+  height: 6px;                                            /* 稍微调细一点，更精致 */
+  background-color: transparent;                          /* 背景透明 */
 }
 
 /* 2. 滚动条轨道 (Track) */
 .post-body pre code::-webkit-scrollbar-track,
 .markdown-body pre code::-webkit-scrollbar-track,
 .article-content pre code::-webkit-scrollbar-track {
-  background-color: transparent;      /* 轨道透明，透出代码块背景色 */
+  background-color: transparent;                          /* 轨道透明，透出代码块背景色 */
   border-radius: 4px;
 }
 
@@ -798,16 +763,16 @@ hr {
 .post-body pre code::-webkit-scrollbar-thumb,
 .markdown-body pre code::-webkit-scrollbar-thumb,
 .article-content pre code::-webkit-scrollbar-thumb {
-  background-color: #4b5263;          /* 使用深灰色，比背景稍亮，契合 Atom One Dark */
-  border-radius: 4px;                 /* 圆角滑块 */
-  transition: background-color 0.2s;  /* 增加过渡效果 */
+  background-color: #4b5263;                            /* 使用深灰色，比背景稍亮*/
+  border-radius: 4px;                                     /* 圆角滑块 */
+  transition: background-color 0.2s;                      /* 增加过渡效果 */
 }
 
 /* 4. 鼠标悬停在滑块上时的颜色 */
 .post-body pre code::-webkit-scrollbar-thumb:hover,
 .markdown-body pre code::-webkit-scrollbar-thumb:hover,
 .article-content pre code::-webkit-scrollbar-thumb:hover {
-  background-color: #5c6370;          /* 悬停时变亮，提高交互感 */
+  background-color: #5c6370;                            /* 悬停时变亮，提高交互感 */
 }
 
 /* 覆盖highlight.js的默认背景色 */
@@ -826,13 +791,9 @@ hr {
 
 
 
-
-
-
-
-/* ==========================================================================
-   文章页面样式
-   ========================================================================== */
+/*==========================================================================
+  十四、文章页面样式
+  ========================================================================== */
 
 /* 文章头部样式 */
 .post-header {
@@ -925,22 +886,22 @@ hr {
 
 
 
+/*==========================================================================
+  十五、主布局样式 
+  (已适配三栏布局)
+  ========================================================================== */
 
-/* ==========================================================================
-   主布局样式 (已适配三栏布局)
-   ========================================================================== */
-
+/* 基本框架 */
 #main {
     display: flex;
     min-height: 100vh;
-    /* [新增] 整体居中，为三栏布局做准备 */
     justify-content: center;
     width: 100%;
 }
 
+/* 左侧导航栏 */
 #aside {
-    /* [修改] 将原先的 300px 微调为 280px，保持左右平衡 */
-    width: 280px;
+    width: 280px;     /* 左侧边栏宽度 */
     background-color: var(--v-white-100);
     border-right: 1px solid var(--v-gray-400);
     height: 100vh;
@@ -950,7 +911,7 @@ hr {
     flex-shrink: 0;
 }
 
-/* [新增] 右侧边栏基础样式 */
+/* 右侧边栏基础样式 */
 #right-sidebar {
     width: 280px;
     height: 100vh;
@@ -966,7 +927,7 @@ hr {
     flex: 1;
     /* [修改] 重新计算最大宽度: 100% - 左边栏(280) - 右边栏(280) = 560px */
     max-width: calc(100% - 560px);
-    /* [新增] 防止 flex 子元素内容溢出撑破布局 */
+    /* 防止 flex 子元素内容溢出撑破布局 */
     min-width: 0; 
 }
 
@@ -1002,10 +963,47 @@ hr {
       padding: 1rem 0;
   }
 
-/* ==========================================================================
-   树形目录样式 - 基于现有样式适配
-   ========================================================================== */
+/* 
+  【新增】Pjax 呼吸切换动画 (修复版)
+  功能：实现正文内容的“呼吸”切换，侧边栏不受影响。
+*/
 
+/* 1. 给内容区域 (#content) 设置基础过渡属性 */
+#content {
+    opacity: 1;
+    transform: none;
+    filter: blur(0px);
+    transition: 
+        opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+        filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        
+    transform-origin: center 5vh; 
+    will-change: opacity, transform, filter;
+}
+
+/* 2. 加载中状态 */
+/* 关键修改：只有当 #pjax-container 同时拥有 .pjax-loading 和 .pjax-animate 时才触发 */
+/* 这样我们在 JS 里如果不加 .pjax-animate，就不会有动画 */
+#pjax-container.pjax-loading.pjax-animate #content {
+    opacity: 0.01 !important;  
+    filter: blur(5px);        
+}
+
+/* 防止加载过程中误触 */
+#pjax-container.pjax-loading {
+    pointer-events: none;
+}
+
+
+
+
+/* ==========================================================================
+  十六、树形目录样式
+  (基于现有样式适配)
+  ========================================================================== */
+
+/* 初始化 */
 .tree-root {
     list-style: none;
     margin: 0;
@@ -1125,8 +1123,6 @@ hr {
 .category-group .category-group .category-group .post-item.file .post-link {
     padding-left: 4rem;}
 
-
-
 /* 侧边栏滚动条样式 */
 #aside::-webkit-scrollbar {
     width: 6px;
@@ -1162,9 +1158,12 @@ hr {
   display: none !important;
 }
 
-/* ==========================================================================
-   侧边栏选项卡样式 - 重写版
-   ========================================================================== */
+
+
+
+/*==========================================================================
+  十七、侧边栏选项卡样式
+  ========================================================================== */
 
 /* 选项卡容器 */
 .sidebar-tabs {
@@ -1227,9 +1226,13 @@ hr {
     display: block;
 }
 
-/* ==========================================================================
-   大纲样式 - 优化间距和字体大小
-   ========================================================================== */
+
+
+
+/*==========================================================================
+  十八、大纲样式
+  (优化间距和字体大小)
+  ========================================================================== */
 
 /* 大纲容器 */
 .outline-container {
@@ -1316,9 +1319,12 @@ hr {
 }
 
 
-/* ==========================================================================
-   导航栏样式框架 - 静态定位（随页面滚动）
-   ========================================================================== */
+
+
+/*==========================================================================
+  十九、导航栏样式框架
+  说明：静态定位（随页面滚动）
+  ========================================================================== */
 
 /* 静态导航栏样式 */
 .main-nav {
@@ -1423,7 +1429,7 @@ hr {
 
 
 /* ==========================================================================
-   【新增】右侧边栏与小部件样式 (Widget Author)
+   二十、右侧边栏与小部件样式 (Widget Author)
    --------------------------------------------------------------------------
    说明：为了不破坏原有结构，所有新增加的样式都放在文件末尾。
    这部分样式主要用于右侧的用户信息卡片展示。
@@ -1583,7 +1589,7 @@ hr {
 }
 
 /*
-   用于适配非 FontAwesome 的 SVG 图标
+  用于适配非 FontAwesome 的 SVG 图标
  */
 .sidebar-social .custom-icon {
     width: 1.15em;          /* 宽度与当前字体大小一致 */
@@ -1599,36 +1605,67 @@ hr {
 }
 
 
-/* ==========================================================================
-   【新增】Pjax 呼吸切换动画 (修复版)
-   --------------------------------------------------------------------------
-   功能：实现正文内容的“呼吸”切换，侧边栏不受影响。
-   ========================================================================== */
 
 
-/* 1. 给内容区域 (#content) 设置基础过渡属性 */
-#content {
+ /*==========================================================================
+  二十一、回到顶部按钮样式
+  ==========================================================================*/
+
+/* 基础样式 */
+#back-to-top {
+    position: fixed;
+    bottom: 20px; /* 距离底部 */
+    left: 200px; /* 距离左侧 */
+    width: 48px;
+    height: 48px;
+    background-color: var(--v-white-100);
+    border: 1px solid var(--v-gray-400);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    
+    /* 动画过渡 */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* 默认隐藏，只有滚动 JS 触发 show 类时才显示 */
     opacity: 1;
-    transform: none;
-    filter: blur(0px);
-    transition: 
-        opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-        filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        
-    transform-origin: center 5vh; 
-    will-change: opacity, transform, filter;
+    visibility: hidden;
+    transform: translateY(0) scale(1);
 }
 
-/* 2. 加载中状态 */
-/* 关键修改：只有当 #pjax-container 同时拥有 .pjax-loading 和 .pjax-animate 时才触发 */
-/* 这样我们在 JS 里如果不加 .pjax-animate，就不会有动画 */
-#pjax-container.pjax-loading.pjax-animate #content {
-    opacity: 0.01 !important;  
-    filter: blur(5px);        
+/* 显示状态 (JS 会添加这个类) */
+#back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
 }
 
-/* 防止加载过程中误触 */
-#pjax-container.pjax-loading {
-    pointer-events: none;
+/* 首页隐藏状态 (由 layout.ejs 控制) */
+/* 如果希望在首页也显示按钮，可以暂时注释掉下面这三行 */
+/* 可以直接点击标题和主页回到顶部 */
+#back-to-top.btt-hidden {
+    display: none !important;
+}
+
+/* 悬停效果 */
+#back-to-top:hover {
+    background-color: var(--v-blue-600);
+    border-color: var(--v-blue-600);
+    color: white;
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 114, 245, 0.3);
+}
+
+/* 图标样式 */
+#back-to-top i {
+    font-size: 1.2em;
+    color: var(--v-gray-700);
+    transition: color 0.3s ease;
+}
+#back-to-top:hover i {
+    color: white;
 }
