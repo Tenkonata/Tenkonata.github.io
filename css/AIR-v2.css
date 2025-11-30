@@ -481,62 +481,54 @@ hr {
 
 
 
-/*==========================================================================
-  十、列表样式框架
-  功能: 定义无序列表的样式
-  说明: 使用自定义标记替代默认列表样式
-  ========================================================================== */
+/* ==========================================================================
+   十、列表样式框架 
+   功能: 定义列表样式
+   ========================================================================== */
 
-/* 列表基础样式 */
-.post-body ul,
-.markdown-body ul,
-.article-content ul {
-  list-style: none;                   /* 去除默认列表样式 */
-  padding-left: 16px;                 /* 左侧内边距 */
-  position: relative;                 /* 为子元素定位 */
+/* 列表容器基础重置 */
+.post-body ul, .post-body ol,
+.markdown-body ul, .markdown-body ol,
+.article-content ul, .article-content ol {
+  margin: 0 0 16px 0;           /* 列表块级间距 */
+  padding-left: 16px;           /* 统一左侧缩进 */
 }
 
-/* 列表项前的自定义标记 */
-.post-body ul li::before,
-.markdown-body ul li::before,
-.article-content ul li::before {
-  content: "";                        /* 空内容 */
-  position: absolute;                 /* 绝对定位 */
-  left: -16px;                        /* 定位到列表项左侧 */
-  top: 11.5px;                        /* 垂直居中 */
-  width: 9px;                         /* 标记宽度 */
-  height: 2px;                        /* 标记高度 - 短横线 */
-  background-color: #3d3d3d;        /* 深灰色 */
-}
-
-/* 有序列表样式 */
-.post-body ol,
-.markdown-body ol,
-.article-content ol {
-  padding-left: 24px;                 /* 有序列表左侧内边距更大 */
-  list-style: decimal;                /* 显示数字 */
-}
-/* 需要添加这个规则来隐藏有序列表的自定义标记 */
-.post-body ol li::before,
-.markdown-body ol li::before,
-.article-content ol li::before {
-  display: none;                      /* 有序列表不显示短横线 */
-}
-
-/* 列表项通用样式 */
 .post-body li,
 .markdown-body li,
 .article-content li {
-  margin: 4px 0;                      /* 列表项间距 */
-  position: relative;                 /* 为伪元素定位 */
+  position: relative;           /* 为伪元素定位做准备 */
+  margin: 4px 0;                /* 列表项行间距 */
+  line-height: 1.6;             /* 确保行高一致 */
 }
 
-/* 嵌套列表样式 */
-.post-body ul ul,
-.markdown-body ul ul,
-.article-content ul ul {
-  margin-top: 4px;                    /* 嵌套列表上边距 */
-  margin-bottom: 4px;                 /* 嵌套列表下边距 */
+/* 仅当 li 内部【不包含】复选框时，才显示短横线 */
+.post-body ul li:not(:has(input[type="checkbox"]))::before,
+.markdown-body ul li:not(:has(input[type="checkbox"]))::before,
+.article-content ul li:not(:has(input[type="checkbox"]))::before {
+  content: "";
+  position: absolute;
+  left: -16px;                  /* 定位到内边距区域 */
+  top: 11.5px;                  /* 垂直居中 (基于当前行高) */
+  width: 9px;
+  height: 2px;
+  background-color: #3d3d3d;    /* 深灰色短横线 */
+}
+
+/* 有序列表 (OL) - 默认数字 */
+.post-body ol,
+.markdown-body ol,
+.article-content ol {
+  list-style: decimal;          /* 恢复默认数字样式 */
+  padding-left: 24px;           /* 数字比短横线宽，增加缩进 */
+}
+
+/* 嵌套列表间距优化 */
+.post-body ul ul, .post-body ul ol, .post-body ol ul, .post-body ol ol,
+.markdown-body ul ul, .markdown-body ul ol, .markdown-body ol ul, .markdown-body ol ol,
+.article-content ul ul, .article-content ul ol, .article-content ol ul, .article-content ol ol {
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 
