@@ -388,17 +388,38 @@ blockquote a {
   font-weight: 500;                                         /* 中等字重 */
   color: var(--v-blue-700);                                 /* 蓝色链接 */
   text-decoration: none;                                    /* 去除默认下划线 */
-  /*transition: all 0.2s ease-in-out;                       /* 添加过渡动画 */
+  position: relative;                                       /* 为伪元素定位 */
 }
 
-/* 链接悬停效果(发生在全体)  */
+/* 链接悬停颜色 */
 .post-body a:hover,
 .markdown-body a:hover,
 .article-content a:hover {
-  background-image: linear-gradient(var(--v-blue-700));     /* 蓝色渐变 */
-  background-size: 100% 1px;                                /* 1像素高的线条 */
-  background-position: 0 100%;                              /* 底部对齐 */
-  background-repeat: no-repeat;                             /* 不重复 */
+  color: var(--v-amber-700);                                /* 悬停时颜色加深 */
+  background-image: none;                                   /* [删除] 移除旧版背景图模拟 */
+}
+
+/* 底部横线动画 - 伪元素实现 */
+.post-content a::after,
+.markdown-content a::after,
+.article-content a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;                                                /* 位于底部 */
+  width: 100%;                                              /* 宽度占满 */
+  height: 1px;                                              /* 线条细度 */
+  background-color: var(--v-blue-700);                      /* 线条颜色 */
+  transform: scaleX(0);                                     /* 初始状态：收缩到0 */
+  transform-origin: center;                                 /* 关键：从中心开始 */
+  transition: transform 0.3s ease-out;                      /* 动画时间与缓动 */
+}
+
+/* 悬停触发横线伸展 */
+.post-content a:hover::after,
+.markdown-content a:hover::after,
+.article-content a:hover::after {
+  transform: scaleX(1);                                     /* 伸展到100% */
 }
 
 
