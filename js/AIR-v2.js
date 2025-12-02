@@ -1,7 +1,14 @@
+// 1. 初始化夜间模式状态 (尽早执行避免闪烁)
+(function() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+    }
+})();
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log("Pjax: Attaching one-time delegated listeners.");
 
-    // (保持不变) 找到静态父元素
     const pjaxContainer = document.getElementById('pjax-container');
     
     if (!pjaxContainer) {
@@ -9,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    // --- (保持不变) 修复1: 侧边栏文件夹点击 (事件委托) ---
+    // --- 修复1: 侧边栏文件夹点击 (事件委托) ---
     pjaxContainer.addEventListener('click', function(e) {
         const title = e.target.closest('.category-title');
         if (title) {
@@ -29,8 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-
-    // --- (保持不变) 修复3: 侧边栏选项卡 (文件/大纲) 点击 (事件委托)
+    // --- 修复3: 侧边栏选项卡 (文件/大纲) 点击 (事件委托) ---
     pjaxContainer.addEventListener('click', function(e) {
         const tabButton = e.target.closest('.tab-btn');
         if (!tabButton) return;
@@ -49,22 +55,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- (保持不变) 修复4: 窗口大小调整 (一次性) ---
-    if (window.initMobileLayout) { // 安全检查
+    // --- 修复4: 窗口大小调整 ---
+    if (window.initMobileLayout) {
        window.addEventListener('resize', window.initMobileLayout);
     }
 
-
     // ==========================================================
-    // 回到顶部按钮逻辑
+    // 回到顶部按钮逻辑 (Pjax 适配增强版)
     // ==========================================================
-    // 1. 全局点击监听 (不依赖 jQuery，也不依赖 Pjax 刷新)
+    
+    // 1. 全局点击监听 (使用委托，无需在 Pjax 后重新绑定)
     document.body.addEventListener('click', function(e) {
-        // 检查点击的目标是否是 #back-to-top 或者其内部元素
-        const btn = e.target.closest('#back-to-top');
-        if (btn) {
-            e.preventDefault(); // 防止可能的默认行为
-            // 原生平滑滚动
+        if (e.target.closest('#back-to-top')) {
+            e.preventDefault();
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
@@ -72,53 +75,59 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // 2. 滚动监听
-    let currentScrollHandler = null;
-
-    function initBackToTop() {
+    // 2. 滚动处理函数 (动态查找元素)
+    // 关键点：每次滚动时重新获取 DOM 元素，而不是依赖闭包中的旧引用
+    function handleScroll() {
         const backToTopBtn = document.getElementById('back-to-top');
-        
-        // 如果页面上找不到按钮，清除旧监听器并退出
-        if (!backToTopBtn) {
-            if (currentScrollHandler) {
-                window.removeEventListener('scroll', currentScrollHandler);
-                currentScrollHandler = null;
-            }
-            return;
+        // 如果当前页面没有这个按钮（比如被 Pjax 移除了，或者还未加载），直接退出
+        if (!backToTopBtn) return;
+
+        const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+        if (scrollTop > 300) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
         }
-
-        // 定义处理函数
-        const handleScroll = function() {
-            // 兼容性写法获取滚动高度
-            const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
-
-            if (scrollTop > 300) {
-                backToTopBtn.classList.add('show');
-            } else {
-                backToTopBtn.classList.remove('show');
-            }
-        };
-
-        // 移除旧监听器，防止重复绑定
-        if (currentScrollHandler) {
-            window.removeEventListener('scroll', currentScrollHandler);
-        }
-
-        // 绑定新监听器
-        currentScrollHandler = handleScroll;
-        window.addEventListener('scroll', currentScrollHandler);
-        
-        // 立即检查一次状态
-        handleScroll();
     }
 
-    // 初始化
-    initBackToTop();
+    // 3. 绑定滚动事件 (只需绑定一次，永久生效)
+    window.addEventListener('scroll', handleScroll);
+    
+    // 4. 立即检查一次状态
+    handleScroll();
 
-    // 【关键修改】使用 jQuery 监听 Pjax 完成事件
-    // 因为 Pjax 插件触发的是 jQuery 事件，原生 document.addEventListener 无法捕获
-    $(document).on('pjax:complete', function() {
-        initBackToTop();
+    // ==========================================================
+    // 夜间模式逻辑 (Dark Mode)
+    // ==========================================================
+    
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+
+    // 绑定点击事件 (事件委托，确保 Pjax 后依然有效)
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.author-avatar')) {
+            toggleDarkMode();
+        }
     });
 
-}); // 结束 DOMContentLoaded
+    // ==========================================================
+    // Pjax 完成后的回调
+    // ==========================================================
+    $(document).on('pjax:complete', function() {
+        // 1. Pjax 完成后 DOM 已更新，立即调用一次 handleScroll 
+        // 确保如果用户是在页面中间刷新的，按钮能正确显示
+        handleScroll();
+        
+        // 2. 再次确认夜间模式状态 (防止 body class 丢失)
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+    });
+
+});

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         
-            关于 - 代办 | AIR-v2
+            歸檔 | AIR-v2
         
     </title>
     
@@ -114,7 +114,7 @@
         <div class="tab-content" id="outline-tab">
             <div class="outline-container">
                 
-                    <div id="article-outline"></div>
+                    <div class="no-outline">请打开一篇文章查看大纲</div>
                 
             </div>
         </div>
@@ -126,80 +126,435 @@
             <!-- 主内容区 -->
             <main class="main-content ">
                 <div id="content">
-                    <article class="post-body markdown-body">
-    <header class="post-header">
-        <h1 class="post-title">关于 - 代办</h1>
-        
-        
-        <div class="post-meta">
-            <time class="post-date" datetime="2025-11-29T16:00:00.000Z">
-                <i class="fa fa-calendar"></i> 2025-11-30
-            </time>
-            
-            
-            
-            
-        </div>
-        
-    </header>
-    
-    <div class="post-content">
-        <blockquote>
-<p>事实上没有什么能关于的，想不到要写什么，但是又要有这个页面，又不能空着，索性写待办事项吧，我又不想在导航栏又添一个</p>
-</blockquote>
-<h2 id="代办清单"><a href="#代办清单" class="headerlink" title="代办清单"></a>代办清单</h2><ul>
-<li><input checked="" disabled="" type="checkbox"> search栏功能实现</li>
-<li><input disabled="" type="checkbox"> 阿b的svg图标大小位置修复<del>（你怎么知道没对准）</del></li>
-<li><input checked="" disabled="" type="checkbox"> 夜间模式</li>
-<li><input disabled="" type="checkbox"> 引入LaTeX插件</li>
-<li><input disabled="" type="checkbox"> <del>攥写一篇合理的About</del></li>
-<li><input disabled="" type="checkbox"> 主页到文章加载动画调整</li>
-<li><input disabled="" type="checkbox"> 事实上主页的welcome_text和文章的title莫名构成了一篇文章体系，可能会修复</li>
-<li><input checked="" disabled="" type="checkbox"> 字体文件占了33.9MB，在考虑是否删除</li>
-<li><input checked="" disabled="" type="checkbox"> 修复任务列表前有个无序列表的标识</li>
-<li><input disabled="" type="checkbox"> emoji插件引入 <code>:unhappy</code></li>
-<li><input disabled="" type="checkbox"> 给博客添加创建日期和更新日期区分 <mark>!important</mark></li>
-<li><input disabled="" type="checkbox"> 追视动画(何意为)</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://Tenkonata.github.io/picx-images-hosting/装饰/Kosuzu.4g4xpgxs4w.webp"><img src="https://Tenkonata.github.io/picx-images-hosting/装饰/Kosuzu.4g4xpgxs4w.webp" title="kosuzu" style="zoom: 67%"/></a></p>
-<h2 id="功能检索-AIR-v2-css"><a href="#功能检索-AIR-v2-css" class="headerlink" title="功能检索 - AIR-v2.css"></a>功能检索 - AIR-v2.css</h2><blockquote>
-<ol>
-<li>字体库引入</li>
-<li>CSS变量定义模块</li>
-<li>全局重置与基础样式</li>
-<li>标题样式框架</li>
-<li>引用块样式框架</li>
-<li>链接样式框架</li>
-<li>文本高亮样式框架</li>
-<li>水平分割线样式框架</li>
-<li>行内代码样式框架</li>
-<li>列表样式框架</li>
-<li>图片样式框架</li>
-<li>表格样式框架</li>
-<li>代码块样式框架</li>
-<li>文章页面样式</li>
-<li>主布局样式</li>
-<li>树形目录样式</li>
-<li>侧边栏选项卡样式</li>
-<li>大纲样式</li>
-<li>导航栏样式框架</li>
-<li>右侧边栏</li>
-<li>回到顶部按钮样式</li>
-</ol>
-</blockquote>
-<p>👁️👁️👁️</p>
+                    
 
-    </div>
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <footer class="post-footer">
-        <!-- 可以添加上一篇下一篇导航 -->
-        <div class="post-nav">
+    <style>
+    /* ============================================ */
+    /* 核心修复：解决背景不固定问题 */
+    /* ============================================ */
+    
+    /* 【关键修复】
+       强制清除父级元素的动画和变换属性。
+       这会消除“层叠上下文”，使内部的 position: fixed 真正相对于浏览器窗口定位，
+       而不是相对于 #content 内容区域定位。
+    */
+    #pjax-container,
+    #main,
+    .main-content,
+    #content {
+        transform: none !important;
+        will-change: auto !important;
+        filter: none !important;
+        perspective: none !important;
+        -webkit-transform: none !important;
+    }
+
+    /* 核心布局调整 */
+    #main {
+        display: block !important;
+    }
+    .main-content {
+        max-width: 100% !important;
+        width: 100% !important;
+        flex: none !important;
+    }
+    #content {
+        max-width: 100% !important; 
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* 导航栏 */
+    .main-nav {
+        position: fixed !important;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        background: transparent;
+        border-bottom: none !important;
+        box-shadow: none !important;
+    }
+
+    /* 全屏英雄区域 */
+    .home-hero {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    /* 背景图片容器 - 修复版 
+       使用 fixed 定位，并强制 height: 100vh 
+    */
+    .hero-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;  /* 使用 100% 避免 100vw 导致的滚动条 */
+        height: 100vh; /* 强制高度为视口高度 */
+        z-index: -1;
+        pointer-events: none; /* 确保不阻挡点击 */
+    }
+
+    .hero-background::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            rgba(0, 0, 0, 0.3),
+            rgba(0, 0, 0, 0.2)
+        );
+        z-index: 1;
+    }
+
+    /* 背景图 - 修复版
+       移除了 background-attachment: fixed 
+    */
+    .hero-bg-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://img.paulzzh.com/touhou/random?size=pc&amp;site=all');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    /* 主内容区域 */
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        position: relative;
+        z-index: 2;
+        padding: 0 2rem;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* 打字机文字样式 */
+    .typewriter-text {
+        display: inline-block; 
+        width: fit-content; 
+        position: relative; 
+        font-size: clamp(2rem, 5vw, 4.5em); 
+        font-weight: 700;
+        white-space: pre-wrap; 
+        word-wrap: break-word;
+        overflow: visible; 
+        animation: fadeIn 1.5s ease-out;
+        text-shadow: 
+            -1px -1px 0 #fafafa,
+            1px -1px 0 #fafafa,
+            -1px 1px 0 #fafafa,
+            1px 1px 0 #fafafa,
+            2px 2px 8px rgba(0, 0, 0, 0.7);
+        line-height: 1.3;
+        text-align: center;
+        margin: 0 auto;
+        padding-right: 5px; 
+    }
+
+    .typewriter-text::after {
+        content: '';
+        position: absolute;
+        top: 4px;
+        bottom: 4px;
+        right: -10px; 
+        width: 3px; 
+        background-color: #E4374B;
+        border-radius: 2px;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 动态箭头 */
+    .scroll-indicator {
+        position: absolute;
+        bottom: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: bounce 2s infinite;
+        cursor: pointer;
+        z-index: 3;
+    }
+
+    .v-arrow {
+        width: 40px;
+        height: 40px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+
+    .v-arrow::before,
+    .v-arrow::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 2px;
+        height: 25px;
+        background: white;
+        border-radius: 1px;
+    }
+
+    .v-arrow::before {
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+        transform-origin: top left;
+    }
+
+    .v-arrow::after {
+        right: 50%;
+        transform: translateX(50%) rotate(-45deg);
+        transform-origin: top right;
+    }
+
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateX(-50%) translateY(0);
+        }
+        40% {
+            transform: translateX(-50%) translateY(-10px);
+        }
+        60% {
+            transform: translateX(-50%) translateY(-5px);
+        }
+    }
+
+    /* 文章列表区域 */
+    .home-posts {
+        position: relative;
+        z-index: 10;
+        min-height: 100vh;
+        padding: 4rem 2rem;
+        display: flex;
+        justify-content: center;
+        background: transparent;
+    }
+
+    .posts-container {
+        max-width: 100%; 
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* 文章卡片样式 */
+    .post-article {
+        display: block; 
+        text-decoration: none !important; 
+        border-bottom: none !important;   
+        background-image: none !important; 
+        color: inherit; 
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        padding: 2.5rem;
+        margin-bottom: 2.5rem;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        cursor: pointer;
+        width: 100%;          
+        max-width: 800px;     
+        height: auto;         
+    }
+
+    /* 悬停效果 */
+    .post-article:hover {
+        transform: translateY(-8px);
+        box-shadow: 
+            0 12px 35px rgba(0, 0, 0, 0.15),
+            0 0 20px rgba(82, 174, 255, 0.5), 
+            0 0 40px rgba(82, 174, 255, 0.3);
+        border-color: rgba(82, 174, 255, 0.8);    
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .post-article::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: #0072f5;
+        transition: width 0.3s ease;
+    }
+
+    .post-article:hover::before {
+        width: 8px;
+    }
+
+    .article-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .article-title {
+        font-size: 2em;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .article-meta {
+        display: flex;
+        gap: 2rem;
+        font-size: 0.95em;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .meta-item i {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .article-excerpt {
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        font-size: 1.1em;
+    }
+
+    .article-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(234, 234, 234, 0.3);
+    }
+
+    .category-tags {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+    }
+
+    .category-tag {
+        background: rgba(62, 105, 215, 0.3);
+        color: rgba(255, 255, 255, 0.9);
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9em;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border: 1px solid rgba(62, 105, 215, 0.5);
+        cursor: pointer; 
+    }
+
+    .post-article:hover .category-tag {
+        background: rgba(62, 105, 215, 0.5);
+        color: white;
+    }
+
+    </style>
+</head>
+<body>
+    <!-- 全屏背景 -->
+    <div class="hero-background">
+        <div class="hero-bg-image"></div>
+    </div>
+
+    <!-- 主页内容 -->
+    <div class="home-hero">
+        
+        <!-- 主要内容 -->
+        <div class="hero-content">
+            <div class="typewriter-container">
+                <h1 class="typewriter-text">欢迎来到我的博客</h1>
+            </div>
             
+            <!-- 动态V型箭头 -->
+            <div class="scroll-indicator" onclick="scrollToPosts()">
+                <div class="v-arrow"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 文章列表 -->
+    <section class="home-posts">
+        <div class="posts-container">
             
+                
+                    <a href="/2025/12/01/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9/%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E/" class="post-article">
+                        <div class="article-header">
+                            <h2 class="article-title">
+                                免责声明
+                            </h2>
+                            
+                            <div class="article-meta">
+                                <div class="meta-item">
+                                    <i class="fa fa-calendar"></i>
+                                    <time datetime="2025-11-30T16:00:00.000Z">
+                                        2025-12-01
+                                    </time>
+                                </div>
+                                
+                                
+                                
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="article-excerpt">
+                            
+                            免责声明本免责声明特此简要声明：本人并未以任何方式要求或暗示任何个人、实体、系统或概念必须同意、接受、承认或甚至知晓本免责声明的存在；对于本免责声明中所包含、未包含、暗示或可能推断出的任何内容、表述、格式、逻辑矛盾、语义模糊或潜在解释，本人...
+                        </div>
+                        
+                        <div class="article-footer">
+                            
+                        </div>
+                    </a>
+                
             
         </div>
-    </footer>
-</article>
+    </section>
+
+    <script>
+    function scrollToPosts() {
+        document.querySelector('.home-posts').scrollIntoView({ 
+            behavior: 'smooth'
+        });
+    }
+    </script>
+</body>
+</html>
                 </div>
             </main>
             

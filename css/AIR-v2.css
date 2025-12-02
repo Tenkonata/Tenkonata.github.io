@@ -27,6 +27,7 @@
   十九、导航栏样式框架
   二十、右侧边栏
   二十一、回到顶部按钮样式
+  二十二、夜间模式
   ==========================================================================*/
 
 
@@ -110,7 +111,7 @@
   --v-background: #282c34;
 
   /* 字体设置 */
-  --monospace: "GeistMono", "LXGWWenKaiMono";
+  --monospace: "GeistMono", "LXGWWenKaiMono",Consolas;
 
   /* 背景颜色 */
   --bg-color: rgb(250, 250, 252);
@@ -145,6 +146,7 @@
   --text-grey-dark: #555;
   --color-1-0-b: rgba(62, 105, 215, 0.06);
   --color-1: #3e69d7;
+  --aside-color: #ffffff;
 }
 
 
@@ -400,7 +402,7 @@ blockquote a {
 }
 
 /* 底部横线动画 - 伪元素实现 */
-.post-content a::after,
+.post-content a:not(:has(img)):after,
 .markdown-content a::after,
 .article-content a::after {
   content: "";
@@ -915,7 +917,7 @@ hr {
 /* 左侧导航栏 */
 #aside {
     width: 280px;     /* 左侧边栏宽度 */
-    background-color: var(--v-white-100);
+    background-color: var(--aside-color);
     border-right: 1px solid var(--v-gray-400);
     height: 100vh;
     position: sticky;
@@ -1136,21 +1138,27 @@ hr {
 .category-group .category-group .category-group .post-item.file .post-link {
     padding-left: 4rem;}
 
-/* 侧边栏滚动条样式 */
-#aside::-webkit-scrollbar {
+/* 侧边栏滚动条样式 - 修正版
+   说明：同时应用于 #aside 容器和内部的 .tab-content 列表区域
+*/
+#aside::-webkit-scrollbar,
+.tab-content::-webkit-scrollbar {
     width: 6px;
 }
 
-#aside::-webkit-scrollbar-track {
+#aside::-webkit-scrollbar-track,
+.tab-content::-webkit-scrollbar-track {
     background: var(--v-white-200);
 }
 
-#aside::-webkit-scrollbar-thumb {
+#aside::-webkit-scrollbar-thumb,
+.tab-content::-webkit-scrollbar-thumb {
     background: var(--v-gray-500);
     border-radius: 3px;
 }
 
-#aside::-webkit-scrollbar-thumb:hover {
+#aside::-webkit-scrollbar-thumb:hover,
+.tab-content::-webkit-scrollbar-thumb:hover {
     background: var(--v-gray-600);
 }
 
@@ -1183,7 +1191,7 @@ hr {
     display: flex;
     height: 50px; /* 固定高度 */
     border-bottom: 1px solid var(--v-gray-400);
-    background: var(--v-white-100);
+    background: var(--aside-color);
 }
 
 /* 选项卡按钮 - 各占一半 */
@@ -1198,7 +1206,6 @@ hr {
     font-size: 0.9em;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s ease;
     position: relative;
     padding: 0;
     margin: 0;
@@ -1224,7 +1231,6 @@ hr {
 .sidebar-header {
     padding: 0;
     border-bottom: none;
-    background-color: var(--v-white-100);
     display: block; /* 改为块级显示 */
 }
 
@@ -1641,9 +1647,6 @@ hr {
     z-index: 999;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     
-    /* 动画过渡 */
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    
     /* 默认隐藏，只有滚动 JS 触发 show 类时才显示 */
     opacity: 1;
     visibility: hidden;
@@ -1681,4 +1684,61 @@ hr {
 }
 #back-to-top:hover i {
     color: white;
+}
+
+
+
+
+/*==========================================================================
+  二十二、夜间模式
+  ========================================================================== */
+
+/* 1. 触发器样式：让头像变成手型指针，提示可点击 */
+.author-avatar {
+    cursor: pointer;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.author-avatar:active {
+    transform: scale(0.85);   /* 点击时的微缩反馈 */
+}
+
+/* 2. 夜间模式变量覆盖 */
+body.dark-mode:not(.home-layout) {
+    /* --- 基础背景与文字 --- */
+    --v-white-100: #1c1917;   /* 卡片/侧边栏背景：深灰 */
+    --aside-color: #202020;
+    --v-white-200: #202020;   /* 网页底色：全黑 */
+    --v-gray-1000: #e5e5e5;   /* 正文主色：白灰 */
+    --v-gray-800: #a3a3a3;    /* 次级文字：浅灰 */
+    --v-gray-700: #8a8a8a;    /* 描述文字 */
+    --v-gray-600: #666666;
+    --v-gray-400: #2c2c2e;    /* 边框/分割线：深色 */
+    --v-gray-500: #2c2c2e;    /* 行内代码背景：变深灰 */
+
+    /* --- 标题颜色强制变白 --- */
+    --theme-900: #fafafa;
+    --tw-prose-headings: #fafafa; 
+
+    /* ---行内代码文字变亮 --- */
+    --code-inline-color: #89ddff; /* VSCode 风格的浅蓝色，黑底清晰可见 */
+    --text-code: #89ddff;
+
+    /* --- 链接与高亮 --- */
+    --v-blue-700: #4aa3ff;    /* 链接蓝色提亮，防止太暗 */
+    --link-color: #4aa3ff;
+    --color-1-0-b: rgba(62, 105, 215, 0.25); /* 引用块/选中态背景加深 */
+    --tw-highlight-color: rgba(0, 72, 255, 0.55);
+    
+    /* --- 表格 --- */
+    --bg-color: #121212;      /* 表格奇数行 */
+    --bg-color2: #1c1c1e;     /* 表格偶数行/表头 */
+}
+
+/* 3. 组件特定修正 */
+
+/* 激活状态的选项卡文字 */
+body.dark-mode .tab-btn.active {
+    background-color: var(--v-white-100);
+    color: var(--v-blue-700);
+    border-bottom-color: var(--v-blue-700);
 }
