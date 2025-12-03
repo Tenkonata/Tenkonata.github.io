@@ -108,11 +108,6 @@
     /* 核心修复：解决背景不固定问题 */
     /* ============================================ */
     
-    /* 【关键修复】
-       强制清除父级元素的动画和变换属性。
-       这会消除“层叠上下文”，使内部的 position: fixed 真正相对于浏览器窗口定位，
-       而不是相对于 #content 内容区域定位。
-    */
     #pjax-container,
     #main,
     .main-content,
@@ -125,20 +120,9 @@
     }
 
     /* 核心布局调整 */
-    #main {
-        display: block !important;
-    }
-    .main-content {
-        max-width: 100% !important;
-        width: 100% !important;
-        flex: none !important;
-    }
-    #content {
-        max-width: 100% !important; 
-        width: 100% !important;
-        padding: 0 !important;
-        margin: 0 !important;
-    }
+    #main { display: block !important; }
+    .main-content { max-width: 100% !important; width: 100% !important; flex: none !important; }
+    #content { max-width: 100% !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
 
     /* 导航栏 */
     .main-nav {
@@ -161,17 +145,16 @@
         position: relative;
     }
 
-    /* 背景图片容器 - 修复版 
-       使用 fixed 定位，并强制 height: 100vh 
-    */
+    /* 背景图片容器 */
     .hero-background {
         position: fixed;
         top: 0;
         left: 0;
-        width: 100%;  /* 使用 100% 避免 100vw 导致的滚动条 */
-        height: 100vh; /* 强制高度为视口高度 */
+        width: 100%;
+        height: 100vh;
         z-index: -1;
-        pointer-events: none; /* 确保不阻挡点击 */
+        pointer-events: none;
+        will-change: transform; 
     }
 
     .hero-background::before {
@@ -188,9 +171,7 @@
         z-index: 1;
     }
 
-    /* 背景图 - 修复版
-       移除了 background-attachment: fixed 
-    */
+    /* 背景图 */
     .hero-bg-image {
         position: absolute;
         top: 0;
@@ -257,7 +238,9 @@
         to { opacity: 1; transform: translateY(0); }
     }
 
-    /* 动态箭头 */
+    /* [修改] 动态箭头优化
+       使用 FontAwesome 图标，移除复杂的 CSS 绘制代码
+    */
     .scroll-indicator {
         position: absolute;
         bottom: 60px;
@@ -266,38 +249,17 @@
         animation: bounce 2s infinite;
         cursor: pointer;
         z-index: 3;
+        /* 新增字体样式 */
+        font-size: 3rem;
+        color: rgba(255, 255, 255, 0.8);
+        transition: color 0.3s ease;
     }
 
-    .v-arrow {
-        width: 40px;
-        height: 40px;
-        position: relative;
-        display: flex;
-        justify-content: center;
+    .scroll-indicator:hover {
+        color: #ffffff;
     }
 
-    .v-arrow::before,
-    .v-arrow::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        width: 2px;
-        height: 25px;
-        background: white;
-        border-radius: 1px;
-    }
-
-    .v-arrow::before {
-        left: 50%;
-        transform: translateX(-50%) rotate(45deg);
-        transform-origin: top left;
-    }
-
-    .v-arrow::after {
-        right: 50%;
-        transform: translateX(50%) rotate(-45deg);
-        transform-origin: top right;
-    }
+    /* 删除了原有的 .v-arrow 相关 CSS */
 
     @keyframes bounce {
         0%, 20%, 50%, 80%, 100% {
@@ -331,24 +293,31 @@
         align-items: center;
     }
 
-    /* 文章卡片样式 */
+    /* 文章卡片样式 - 高斯模糊版 */
     .post-article {
         display: block; 
         text-decoration: none !important; 
         border-bottom: none !important;   
         background-image: none !important; 
         color: inherit; 
+        
         background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        
+        transform: translate3d(0, 0, 0); 
+        will-change: transform; 
+        
         border-radius: 12px;
-        padding: 2.5rem;
+        padding: 1.5rem 2.5rem; /* 已调整的内边距 */
         margin-bottom: 2.5rem;
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         border: 1px solid rgba(255, 255, 255, 0.2);
-        transition: all 0.3s ease;
+        
+        transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+        
         position: relative;
         overflow: hidden;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
         cursor: pointer;
         width: 100%;          
         max-width: 800px;     
@@ -357,13 +326,13 @@
 
     /* 悬停效果 */
     .post-article:hover {
-        transform: translateY(-8px);
+        transform: translate3d(0, -8px, 0); 
         box-shadow: 
             0 12px 35px rgba(0, 0, 0, 0.15),
             0 0 20px rgba(82, 174, 255, 0.5), 
             0 0 40px rgba(82, 174, 255, 0.3);
         border-color: rgba(82, 174, 255, 0.8);    
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.25); 
     }
 
     .post-article::before {
@@ -389,7 +358,7 @@
         font-size: 2em;
         font-weight: 700;
         color: white;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem; /* 已调整 */
         line-height: 1.3;
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     }
@@ -469,9 +438,9 @@
                 <h1 class="typewriter-text">欢迎来到我的博客</h1>
             </div>
             
-            <!-- 动态V型箭头 -->
+            <!-- [修改] 动态箭头：使用 fa-angle-down -->
             <div class="scroll-indicator" onclick="scrollToPosts()">
-                <div class="v-arrow"></div>
+                <i class="fa fa-angle-down"></i>
             </div>
         </div>
     </div>
@@ -487,6 +456,7 @@
                                 免责声明
                             </h2>
                             
+                            <!-- 创建日期 -->
                             <div class="article-meta">
                                 <div class="meta-item">
                                     <i class="fa fa-calendar"></i>
@@ -494,6 +464,16 @@
                                         2025-12-01
                                     </time>
                                 </div>
+
+                                <!-- 修改日期 -->
+                                
+                                    <div class="meta-item">
+                                        <i class="fa fa-edit"></i>
+                                        <time datetime="2025-12-02T14:04:44.121Z">
+                                            2025-12-02
+                                        </time>
+                                    </div>
+                                
                                 
                                 
                                 
@@ -517,6 +497,7 @@
                                 星露谷sve结语
                             </h2>
                             
+                            <!-- 创建日期 -->
                             <div class="article-meta">
                                 <div class="meta-item">
                                     <i class="fa fa-calendar"></i>
@@ -524,6 +505,16 @@
                                         2025-11-23
                                     </time>
                                 </div>
+
+                                <!-- 修改日期 -->
+                                
+                                    <div class="meta-item">
+                                        <i class="fa fa-edit"></i>
+                                        <time datetime="2025-12-02T13:57:39.431Z">
+                                            2025-12-02
+                                        </time>
+                                    </div>
+                                
                                 
                                 
                                 
@@ -551,6 +542,7 @@ sve第三年还有新人物，所以会卡...
                                 SQL Server 数据库编程
                             </h2>
                             
+                            <!-- 创建日期 -->
                             <div class="article-meta">
                                 <div class="meta-item">
                                     <i class="fa fa-calendar"></i>
@@ -558,6 +550,16 @@ sve第三年还有新人物，所以会卡...
                                         2025-11-13
                                     </time>
                                 </div>
+
+                                <!-- 修改日期 -->
+                                
+                                    <div class="meta-item">
+                                        <i class="fa fa-edit"></i>
+                                        <time datetime="2025-12-02T14:00:48.534Z">
+                                            2025-12-02
+                                        </time>
+                                    </div>
+                                
                                 
                                 
                                 
@@ -587,6 +589,7 @@ create table list_name
                                 hexo主题开发及部署教程
                             </h2>
                             
+                            <!-- 创建日期 -->
                             <div class="article-meta">
                                 <div class="meta-item">
                                     <i class="fa fa-calendar"></i>
@@ -594,6 +597,16 @@ create table list_name
                                         2025-11-02
                                     </time>
                                 </div>
+
+                                <!-- 修改日期 -->
+                                
+                                    <div class="meta-item">
+                                        <i class="fa fa-edit"></i>
+                                        <time datetime="2025-12-02T14:02:07.989Z">
+                                            2025-12-02
+                                        </time>
+                                    </div>
+                                
                                 
                                 
                                 
@@ -621,6 +634,7 @@ create table list_name
                                 👁️
                             </h2>
                             
+                            <!-- 创建日期 -->
                             <div class="article-meta">
                                 <div class="meta-item">
                                     <i class="fa fa-calendar"></i>
@@ -628,6 +642,16 @@ create table list_name
                                         2025-10-28
                                     </time>
                                 </div>
+
+                                <!-- 修改日期 -->
+                                
+                                    <div class="meta-item">
+                                        <i class="fa fa-edit"></i>
+                                        <time datetime="2025-11-28T16:00:00.000Z">
+                                            2025-11-29
+                                        </time>
+                                    </div>
+                                
                                 
                                 
                                 
@@ -651,6 +675,7 @@ create table list_name
                                 第一篇博客
                             </h2>
                             
+                            <!-- 创建日期 -->
                             <div class="article-meta">
                                 <div class="meta-item">
                                     <i class="fa fa-calendar"></i>
@@ -658,6 +683,16 @@ create table list_name
                                         2025-10-20
                                     </time>
                                 </div>
+
+                                <!-- 修改日期 -->
+                                
+                                    <div class="meta-item">
+                                        <i class="fa fa-edit"></i>
+                                        <time datetime="2025-12-02T14:05:52.181Z">
+                                            2025-12-02
+                                        </time>
+                                    </div>
+                                
                                 
                                 
                                 
@@ -690,6 +725,7 @@ create table list_name
                                 Hello World
                             </h2>
                             
+                            <!-- 创建日期 -->
                             <div class="article-meta">
                                 <div class="meta-item">
                                     <i class="fa fa-calendar"></i>
@@ -697,6 +733,16 @@ create table list_name
                                         2025-10-12
                                     </time>
                                 </div>
+
+                                <!-- 修改日期 -->
+                                
+                                    <div class="meta-item">
+                                        <i class="fa fa-edit"></i>
+                                        <time datetime="2025-12-02T14:05:31.118Z">
+                                            2025-12-02
+                                        </time>
+                                    </div>
+                                
                                 
                                 
                                 
@@ -719,11 +765,70 @@ create table list_name
     </section>
 
     <script>
-    function scrollToPosts() {
-        document.querySelector('.home-posts').scrollIntoView({ 
-            behavior: 'smooth'
+    // [新增] 滚轮监听逻辑 - 仅在首页生效
+    (function() {
+        // [修复] 检查当前是否在首页 (通过 .home-hero 元素判断)
+        const heroSection = document.querySelector('.home-hero');
+        const homePosts = document.querySelector('.home-posts');
+        
+        // 如果没有 Hero 区域，说明不是首页，直接退出
+        if (!heroSection || !homePosts) return;
+
+        let isScrolling = false;
+
+        // 点击箭头跳转
+        window.scrollToPosts = function() {
+            if (isScrolling) return;
+            isScrolling = true;
+            homePosts.scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => isScrolling = false, 800);
+        }
+
+        // 滚轮监听
+        const wheelHandler = function(e) {
+            // [修复] 再次检查 DOM 是否依然存在 (防止 Pjax 切换后残留)
+            if (!document.querySelector('.home-hero')) {
+                window.removeEventListener('wheel', wheelHandler);
+                return;
+            }
+
+            // 如果正在自动滚动中，忽略操作，防止冲突
+            //if (isScrolling) return;
+
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const heroHeight = window.innerHeight;
+            
+            // 灵敏度阈值 (px)，防止过于敏感
+            const sensitivity = 120; 
+
+            // 场景1：在顶部 (Hero区) 向下滚动 -> 自动滑到文章区
+            if (scrollTop < sensitivity && e.deltaY > 0) {
+                e.preventDefault(); // 阻止默认微小滚动
+                scrollToPosts();
+            }
+
+            // 场景2：在文章区顶部 向上滚动 -> 自动滑回到顶部
+            // 判断条件：滚动位置大概在 Hero 和 Posts 的交界处
+            if (scrollTop >= heroHeight - sensitivity && scrollTop <= heroHeight + sensitivity && e.deltaY < 0) {
+                e.preventDefault();
+                isScrolling = true;
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                setTimeout(() => isScrolling = false, 800);
+            }
+        };
+
+        // 绑定监听器
+        window.addEventListener('wheel', wheelHandler, { passive: false });
+        
+        // [修复] 监听 Pjax 发送事件，在页面切换前移除监听器，防止影响其他页面
+        $(document).on('pjax:send', function() {
+            window.removeEventListener('wheel', wheelHandler);
         });
-    }
+
+    })();
     </script>
 </body>
 </html>

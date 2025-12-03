@@ -4,34 +4,33 @@
  * ----------------------------------------------------------------
  */
 
-/* 1. 移動端菜單切換按鈕 (漢堡按鈕) (保持不變) */
-.mobile-menu-toggle {
-    display: none; 
-    width: 22px;
-    height: 20px;
-    position: relative;
-    cursor: pointer;
-    z-index: 1001; 
+/* 1. 移動端按鈕通用樣式 (漢堡 & 主題) */
+.mobile-menu-toggle,
+.mobile-theme-toggle {
+    display: none; /* 默認隱藏，由媒體查詢控制顯示 */
     background: transparent;
     border: none;
-    padding: 0;
-    order: 3; 
-    margin-left: 1rem;
+    padding: 0.5rem; /* 增加觸摸區域 */
+    cursor: pointer;
+    z-index: 1001;
+    color: var(--v-gray-800);
+    font-size: 1.2rem; /*圖標大小*/
+    line-height: 1;
+    transition: color 0.3s ease, transform 0.2s ease;
+    margin-left: 0.5rem;
 }
-.mobile-menu-toggle span {
-    display: block;
-    position: absolute;
-    height: 3px;
-    width: 100%;
-    background: var(--theme-900); 
-    border-radius: 3px;
-    opacity: 1;
-    left: 0;
-    transition: .25s ease-in-out;
+
+.mobile-menu-toggle:hover,
+.mobile-theme-toggle:hover {
+    color: var(--v-blue-700);
+    transform: scale(1.1);
 }
-.mobile-menu-toggle span:nth-child(1) { top: 0px; }
-.mobile-menu-toggle span:nth-child(2) { top: 8px; }
-.mobile-menu-toggle span:nth-child(3) { top: 16px; }
+
+/* 夜間模式下按鈕變亮 */
+body.dark-mode .mobile-menu-toggle,
+body.dark-mode .mobile-theme-toggle {
+    color: var(--v-gray-1000); /* 淺色 */
+}
 
 /* 2. 遮罩層 (保持不變) */
 #mobile-overlay {
@@ -60,24 +59,35 @@
 @media (max-width: 900px) {
 
     /* ======================================================= */
-    /* 3.1 非主頁 (文章頁、關於頁等) 的導航欄 (保持不變) */
+    /* 3.1 非主頁 (文章頁、關於頁等) 的導航欄 */
     /* ======================================================= */
 
-    body:not(.home-layout) .mobile-menu-toggle {
+    /* 顯示移動端按鈕 */
+    body:not(.home-layout) .mobile-menu-toggle,
+    body:not(.home-layout) .mobile-theme-toggle {
         display: block;
     }
+
+    /* 隱藏桌面端導航菜單 */
     body:not(.home-layout) .nav-menu {
         display: none;
     }
+    
+    /* 導航欄內容佈局調整 */
     body:not(.home-layout) .nav-content {
         justify-content: space-between;
+        align-items: center;
     }
+    
+    /* 確保按鈕組靠右排列 */
+    /* 這裡利用 flex-grow 或者 margin-left: auto 將按鈕推到右邊 */
     
     /* ======================================================= */
     /* 3.2 主頁 (home-layout) 的導航欄 (保持不變) */
     /* ======================================================= */
 
-    .home-layout .mobile-menu-toggle {
+    .home-layout .mobile-menu-toggle,
+    .home-layout .mobile-theme-toggle {
         display: none !important;
     }
     .home-layout .site-title {
@@ -236,12 +246,16 @@
  * ----------------------------------------------------------------
  */
 
-/* 回到顶部按钮适配 - 稍微调小一点，防止遮挡内容 */
+/* 回到顶部按钮适配 - 优化移动端体验 */
 @media (max-width: 768px) {
     #back-to-top {
-        bottom: 20px;
-        right: 20px;
-        width: 40px;
-        height: 40px;
+        bottom: 25px;       /* 稍微提高，避免贴底 */
+        left: 50%;
+        margin-left: -22px; /* 宽度(44px)的一半，使其水平居中 */
+        right: auto;        /* 清除桌面端的 right 定位 */
+        width: 44px;        /* 增大触控区域 */
+        height: 44px;
+        font-size: 1.1em;   /* 图标稍微放大 */
+        opacity: 0.9;       /* 移动端常显时略微透明，避免太抢眼 */
     }
 }

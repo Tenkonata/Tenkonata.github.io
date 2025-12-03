@@ -1703,11 +1703,14 @@ hr {
 }
 
 /* 2. 夜间模式变量覆盖 */
+body.dark-mode{
+      --v-white-200: #202020;   /* 网页底色：全黑 */
+}
+
 body.dark-mode:not(.home-layout) {
     /* --- 基础背景与文字 --- */
     --v-white-100: #1c1917;   /* 卡片/侧边栏背景：深灰 */
     --aside-color: #202020;
-    --v-white-200: #202020;   /* 网页底色：全黑 */
     --v-gray-1000: #e5e5e5;   /* 正文主色：白灰 */
     --v-gray-800: #a3a3a3;    /* 次级文字：浅灰 */
     --v-gray-700: #8a8a8a;    /* 描述文字 */
@@ -1734,11 +1737,4 @@ body.dark-mode:not(.home-layout) {
     --bg-color2: #1c1c1e;     /* 表格偶数行/表头 */
 }
 
-/* 3. 组件特定修正 */
-
-/* 激活状态的选项卡文字 */
-body.dark-mode .tab-btn.active {
-    background-color: var(--v-white-100);
-    color: var(--v-blue-700);
-    border-bottom-color: var(--v-blue-700);
-}
+/* 3. 组件特定修正（暂无） */

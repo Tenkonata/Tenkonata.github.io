@@ -132,9 +132,18 @@
         
         
         <div class="post-meta">
-            <time class="post-date" datetime="2025-12-01T16:00:00.000Z">
+            <!-- 创建日期 -->
+            <time class="post-date" datetime="2025-12-01T16:00:00.000Z" title="创建日期">
                 <i class="fa fa-calendar"></i> 2025-12-02
             </time>
+
+            <!-- [新增] 修改日期 -->
+            <!-- 只有当 updated 存在且晚于 date 时才显示，避免重复 -->
+            
+            <time class="post-date" datetime="2025-12-03T14:50:38.187Z" title="修改日期">
+                <i class="fa fa-edit"></i> 2025-12-03
+            </time>
+            
             
             
             
@@ -216,12 +225,23 @@
 <li>不，我还是给404做了一个跟随系统设置深色模式XD</li>
 </ul>
 </li>
+<li>使用 <code>hexo-abbrlink</code> 插件，现在每篇文章有自己的ID！</li>
+</ul>
+<h2 id="2025-12-03"><a href="#2025-12-03" class="headerlink" title="2025&#x2F;12&#x2F;03"></a>2025&#x2F;12&#x2F;03</h2><ul>
+<li>微调了首页<ul>
+<li>毛玻璃占性能，但我不删，微调了大小</li>
+<li>动态箭头优化</li>
+<li>滚动界面优化（现在在交界处可以一键上滑）</li>
+</ul>
+</li>
+<li>给博客添加创建日期和更新日期区分！</li>
+<li>随便敷衍了下移动端的界面优化</li>
 </ul>
 
     </div>
     
     <footer class="post-footer">
-        <!-- 可以添加上一篇下一篇导航 -->
+        <!-- 上一篇下一篇导航 -->
         <div class="post-nav">
             
             
@@ -250,9 +270,7 @@
             
                 <p>坐和放宽</p>
             
-                <p>字体库占了34MB</p>
-            
-                <p>我把字体库删了</p>
+                <p>字体库占了34MB把字体库删了</p>
             
                 <p>现在没有字体加载是正常的</p>
             
@@ -261,6 +279,8 @@
                 <p>图标库使用CDN</p>
             
                 <p>正在企图把代码高亮库删掉</p>
+            
+                <p>好想把字体加回来TT</p>
             
         </div>
         
