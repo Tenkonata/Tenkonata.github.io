@@ -68,25 +68,9 @@
     url("/fonts/Geist-Italic[wght].woff2") format("woff2");
 }
 
-/* 霞鹜文楷字体 - 常规样式 
-@font-face {
-  font-family: "LXGWWenKai";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: 
-    url("/fonts/LXGWWenKai-Regular.ttf") format("truetype");
-}
+/* 霞鹜文楷字体 - 常规样式  已引入cdn
 
-/* 霞鹜文楷等宽字体 
-@font-face {
-  font-family: "LXGWWenKaiMono";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: 
-    url("/fonts/LXGWWenKaiMono-Regular.ttf") format("truetype");
-}
+/* 霞鹜文楷等宽字体 已引入cdn
 
 
 
@@ -110,7 +94,7 @@
   --v-background: #282c34;
 
   /* 字体设置 */
-  --monospace: "GeistMono", "LXGWWenKaiMono",Consolas;
+  --monospace: Consolas,"GeistMono", "LXGW WenKai Mono";
 
   /* 背景颜色 */
   --bg-color: rgb(250, 250, 252);
@@ -176,7 +160,7 @@ body {
   background-color: var(--v-white-200);   /* 使用定义的浅灰色背景 */
   color: var(--v-gray-1000);              /* 使用深灰色文字 */
   line-height: 1.6;                       /* 设置1.6倍行高，提高可读性 */
-  font-family: "Geist", "LXGWWenKai";     /* 设置中英文字体栈 */
+  font-family: "Geist", "LXGW WenKai";     /* 设置中英文字体栈 */
 }
 
 /* 确保媒体元素响应式 */
@@ -483,7 +467,7 @@ hr {
 .markdown-body code,
 .article-content code {
   padding: 2px 4px;                                         /* 小内边距 */
-  font-family: "GeistMono", "LXGWWenKaiMono", monospace;    /* 等宽字体栈 */
+  font-family: var(--monospace);    /* 等宽字体栈 */
   font-size: 0.9rem;                                        /* 稍小字体 */
   background-color: var(--v-gray-500);                      /* 灰色背景 */
   border-radius: 4px;                                       /* 小圆角 */
@@ -712,7 +696,7 @@ hr {
 .article-content pre code,
 .highlight pre code,
 .hljs {
-  font-family: "GeistMono", "LXGWWenKaiMono", monospace;  /* 等宽字体栈 */
+  font-family: var(--monospace);  /* 等宽字体栈 */
   font-size: 0.9rem;                                      /* 稍小字体 */
   font-weight: 400;                                       /* 正常字重 */
   line-height: 1.4rem;                                    /* 紧凑行高 */
@@ -734,7 +718,7 @@ hr {
   right: 16px;
   color: #5c6370;                                       /* atom-one-dark 注释颜色 */
   font-size: 0.8rem;
-  font-family: "Geist", "LXGWWenKai";
+  font-family: "Geist", "LXGW WenKai";
   z-index: 1;
 }
 
@@ -915,7 +899,7 @@ hr {
 
 /* 左侧导航栏 */
 #aside {
-    width: 280px;     /* 左侧边栏宽度 */
+    width: 260px;     /* 左侧边栏宽度 */
     background-color: var(--aside-color);
     border-right: 1px solid var(--v-gray-400);
     height: 100vh;
@@ -927,7 +911,7 @@ hr {
 
 /* 右侧边栏基础样式 */
 #right-sidebar {
-    width: 280px;
+    width: 260px;
     height: 100vh;
     position: sticky;
     top: 0;
@@ -939,8 +923,8 @@ hr {
 
 .main-content {
     flex: 1;
-    /* [修改] 重新计算最大宽度: 100% - 左边栏(280) - 右边栏(280) = 560px */
-    max-width: calc(100% - 560px);
+    /* [修改] 重新计算最大宽度: 100% - 左边栏(260) - 右边栏(260) = 560px */
+    max-width: calc(100% - 520px);
     /* 防止 flex 子元素内容溢出撑破布局 */
     min-width: 0; 
 }
@@ -1372,20 +1356,14 @@ hr {
 }
 
 .site-title {
-    font-size: 1.4em;
+    font-size: 1.4em;     /* 这里修改大小 */
     font-weight: 700;
-    color: var(--theme-900);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
-.site-title:hover {
-    background-image: none !important;
-}
-
 .site-subtitle {
     font-size: 0.9em;
-    color: var(--v-gray-700);
     margin: 0;
     font-weight: 400;
 }
@@ -1401,19 +1379,12 @@ hr {
 
 /* 导航链接样式 */
 .nav-link {
-    color: var(--v-gray-800);
     text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95em;
-    padding: 0.5rem 0.75rem;
+    font-size: 1.1em;       /* 这里修改大小 */
+    padding: 0.3rem 0.75rem;
     border-radius: 6px;
     transition: all 0.2s ease;
     position: relative;
-}
-
-.nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.15);/* 毛玻璃效果 */
-    background-image: none !important;
 }
 
 .nav-link.active {
@@ -1487,11 +1458,12 @@ hr {
 
 /* 3. 作者名样式 */
 .author-name {
-    font-size: 1.4em;
+    font-size: clamp(1rem, 11cqi, 1.4em);
     font-weight: 600;
     color: var(--theme-900);
     margin: 0.5rem 0;
     padding: 0;
+    white-space: nowrap;
 }
 /* 覆盖原有的标题伪元素，避免出现左侧的彩色竖条 */
 .author-name::before { display: none; } 
