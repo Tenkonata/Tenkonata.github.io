@@ -135,24 +135,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <style>
-    /* ============================================ */
-    /* 核心修复：解决背景不固定问题 */
-    /* ============================================ */
-    
-    #pjax-container,
-    #main,
-    .main-content,
-    #content {
-        transform: none !important;
-        will-change: auto !important;
-        filter: none !important;
-        perspective: none !important;
-        -webkit-transform: none !important;
-    }
-
     /* 核心布局调整 */
-    #main { display: block !important; }
-    .main-content { max-width: 100% !important; width: 100% !important; flex: none !important; }
     #content { max-width: 100% !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
 
     /* 导航栏 */
@@ -185,7 +168,6 @@
         height: 100vh;
         z-index: -1;
         pointer-events: none;
-        will-change: transform; 
     }
 
     .hero-background::before {
@@ -241,12 +223,14 @@
         word-wrap: break-word;
         overflow: visible; 
         animation: fadeIn 1.5s ease-out;
-        text-shadow: 
-            -1px -1px 0 #fafafa,
-            1px -1px 0 #fafafa,
-            -1px 1px 0 #fafafa,
-            1px 1px 0 #fafafa,
-            2px 2px 8px rgba(0, 0, 0, 0.7);
+        
+        /* 使用 stroke 实现纯净白边 */
+        /* 1. 设置描边宽度和颜色 */
+        -webkit-text-stroke: 2.0px #ffffff;
+        /* 2. 关键属性：让描边先绘制（在底部），填充后绘制（在顶部）
+           这样描边就是“外描边”，不会把文字变细 */
+        paint-order: stroke fill;
+
         line-height: 1.3;
         text-align: center;
         margin: 0 auto;
@@ -269,7 +253,7 @@
         to { opacity: 1; transform: translateY(0); }
     }
 
-    /* [修改] 动态箭头优化
+    /* 动态箭头优化
        使用 FontAwesome 图标，移除复杂的 CSS 绘制代码
     */
     .scroll-indicator {
@@ -289,8 +273,6 @@
     .scroll-indicator:hover {
         color: #ffffff;
     }
-
-    /* 删除了原有的 .v-arrow 相关 CSS */
 
     @keyframes bounce {
         0%, 20%, 50%, 80%, 100% {
@@ -333,12 +315,10 @@
         color: inherit; 
         
         background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px);
+
+        backdrop-filter: blur(10px);            /* 性能杀手blur */
         -webkit-backdrop-filter: blur(10px);
-        
-        transform: translate3d(0, 0, 0); 
-        will-change: transform; 
-        
+
         border-radius: 12px;
         padding: 1.5rem 2.5rem; /* 已调整的内边距 */
         margin-bottom: 2.5rem;
@@ -506,9 +486,6 @@
                                     </div>
                                 
                                 
-                                
-                                
-                                
                             </div>
                         </div>
                         
@@ -545,9 +522,6 @@
                                             2025-12-02
                                         </time>
                                     </div>
-                                
-                                
-                                
                                 
                                 
                             </div>
@@ -597,9 +571,6 @@
                                     </div>
                                 
                                 
-                                
-                                
-                                
                             </div>
                         </div>
                         
@@ -619,6 +590,7 @@
 
     <script>
     // [新增] 滚轮监听逻辑 - 仅在首页生效
+            document.body.classList.add('home-layout');
     (function() {
         // [修复] 检查当前是否在首页 (通过 .home-hero 元素判断)
         const heroSection = document.querySelector('.home-hero');

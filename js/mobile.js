@@ -114,17 +114,32 @@
         const isDark = document.body.classList.contains('dark-mode');
         themeButton.innerHTML = isDark ? '<i class="fa fa-sun-o"></i>' : '<i class="fa fa-moon-o"></i>';
 
-        // 检查是否为主页
-        const isHomePage = document.body.classList.contains('home-layout');
+        // [修改] 增强的主页判断逻辑 (JS 独立判断)
+        // 优先检查 body 类名，其次检查 URL 路径，确保在 Pjax/Back 操作中万无一失
+        const path = window.location.pathname.replace(/\/$/, '');
+        const isHomePage = document.body.classList.contains('home-layout') || 
+                          path === '' || 
+                          path === '/index.html';
 
         if (isHomePage) {
-            // 主页隐藏汉堡菜单，但保留主题切换按钮（或者也隐藏，视设计而定）
-            // 这里为了简洁，主页通常不显示复杂导航，建议两者都隐藏，或只显示主题
-            toggleButton.style.display = 'none'; 
-            themeButton.style.display = 'none'; // 主页全屏背景通常不需要这个
+            // 主页：通过 JS 强制隐藏移动端组件
+            // 使用 setProperty('display', 'none', 'important') 确保覆盖 CSS
+            toggleButton.style.setProperty('display', 'none', 'important');
+            themeButton.style.setProperty('display', 'none', 'important');
+            
+            // 额外保险：如果检测到主页，强制清理所有移动端打开状态 (防止遮罩层残留)
+            const aside = document.getElementById('aside');
+            const overlay = document.getElementById('mobile-overlay');
+            if (aside && aside.classList.contains('mobile-open')) {
+                aside.classList.remove('mobile-open');
+            }
+            if (overlay && overlay.classList.contains('mobile-overlay-open')) {
+                overlay.classList.remove('mobile-overlay-open');
+            }
         } else {
-            toggleButton.style.display = ''; 
-            themeButton.style.display = '';
+            // 非主页：移除内联样式，交还给 CSS 控制
+            toggleButton.style.removeProperty('display');
+            themeButton.style.removeProperty('display');
         }
     }
 
@@ -132,6 +147,13 @@
     window.initMobileLayout = checkMobileButtonVisibility;
 
     // --- 4. 启动 ---
+    
+    // [新增] 监听 popstate 事件 (浏览器后退/前进)
+    // 即使 Pjax 有时处理不及时，原生事件也能触发状态检查
+    window.addEventListener('popstate', function() {
+        // 稍微延迟一下，等待 DOM 可能的变化
+        setTimeout(checkMobileButtonVisibility, 50);
+    });
     
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() {

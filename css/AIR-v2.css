@@ -38,7 +38,7 @@
   占了三十多兆，纯毒瘤
   ==========================================================================*/
 
-/* Geist 可变字体 - 正常样式 */
+/* Geist 可变字体 - 正常样式 
 @font-face {
   font-family: "Geist";
   font-style: normal;
@@ -48,7 +48,7 @@
     url("/fonts/Geist[wght].woff2") format("woff2");
 }
 
-/* Geist Mono 可变等宽字体 */
+/* Geist Mono 可变等宽字体 
 @font-face {
   font-family: "GeistMono";
   font-style: normal;
@@ -58,7 +58,7 @@
     url("/fonts/GeistMono[wght].woff2") format("woff2");
 }
 
-/* Geist 可变字体 - 斜体样式 */
+/* Geist 可变字体 - 斜体样式 
 @font-face {
   font-family: "Geist";
   font-style: italic;
@@ -68,7 +68,7 @@
     url("/fonts/Geist-Italic[wght].woff2") format("woff2");
 }
 
-/* 霞鹜文楷字体 - 常规样式 */
+/* 霞鹜文楷字体 - 常规样式 
 @font-face {
   font-family: "LXGWWenKai";
   font-style: normal;
@@ -78,7 +78,7 @@
     url("/fonts/LXGWWenKai-Regular.ttf") format("truetype");
 }
 
-/* 霞鹜文楷等宽字体 */
+/* 霞鹜文楷等宽字体 
 @font-face {
   font-family: "LXGWWenKaiMono";
   font-style: normal;
@@ -87,7 +87,6 @@
   src: 
     url("/fonts/LXGWWenKaiMono-Regular.ttf") format("truetype");
 }
-
 
 
 
