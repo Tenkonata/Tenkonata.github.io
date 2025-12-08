@@ -790,7 +790,7 @@ hr {
 
 /* 左侧导航栏 */
 #aside {
-    width: 260px;     /* 左侧边栏宽度 */
+    width: 220px;     /* 左侧边栏宽度 */
     background-color: var(--aside-color);
     border-right: 1px solid var(--v-gray-400);
     height: 100vh;
@@ -815,7 +815,7 @@ hr {
 .main-content {
     flex: 1;
     /* 重新计算最大宽度: 100% - 左边栏(260) - 右边栏(260) = 560px */
-    max-width: calc(100% - 520px);
+    max-width: calc(100% - 480px);
     /* 防止 flex 子元素内容溢出撑破布局 */
     min-width: 0; 
 }
@@ -919,7 +919,7 @@ hr {
 }
 
 .category-title i {
-    margin-right: 0.5rem;
+    margin-right: 0.3rem; /* 文件夹图标间距 */
     font-size: 0.8em;
     transition: transform 0.2s ease;
 }
@@ -962,7 +962,7 @@ hr {
 }
 
 .post-icon {
-    margin-right: 0.5rem;
+    margin-right: 0.2rem;   /* 文件图标间距 */
     color: var(--v-gray-600);
     font-size: 0.8em;
     display: flex;
@@ -1067,7 +1067,6 @@ hr {
     background: transparent;
     color: var(--v-gray-700);
     font-size: 0.9em;
-    font-weight: 500;
     cursor: pointer;
     position: relative;
     padding: 0;
@@ -1075,7 +1074,7 @@ hr {
 }
 
 /* 文件按钮 - 添加右侧竖线 */
-.tab-btn[data-tab="files"] {
+.tab-btn[data-tab="outline"] {
     border-right: 1px solid var(--v-gray-400);
 }
 
@@ -1288,12 +1287,6 @@ hr {
     opacity: 0.7;
 }
 
-/* 当前页面高亮 */
-.nav-link[href*="<%= url_for(page.path) %>"] {
-    color: var(--v-blue-700);
-    background-color: var(--color-1-0-b);
-}
-
 
 
 
@@ -1377,10 +1370,6 @@ hr {
     transition: transform 0.2s;
 }
 
-.site-state-item:hover {
-    transform: translateY(-3px); /* 悬停微微上浮 */
-}
-
 .site-state-item-name {
     font-size: 0.75em;
     color: var(--v-gray-700);
@@ -1396,44 +1385,15 @@ hr {
     line-height: 1;
 }
 
-/* 6. 搜索框样式 */
-.sidebar-search {
-    width: 100%;
-    margin-bottom: 1.5rem;
+.site-state-item:hover .site-state-item-name,
+.site-state-item:hover .site-state-item-count {
+    color: var(--v-blue-700);
+    transition: color 0.3s ease;
 }
 
-.search-input-wrap {
-    position: relative;
-    width: 100%;
+.site-state-item:hover {
+    transform: translateY(-3px); /* 悬停微微上浮 */
 }
-
-.search-input-wrap i {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--v-gray-700);
-    font-size: 0.9em;
-}
-
-.search-input-wrap input {
-    width: 100%;
-    padding: 8px 12px 8px 36px; /* 左侧留出图标空间 */
-    border: 1px solid var(--v-blue-600); 
-    border-radius: 20px; /* 圆角 */
-    outline: none;
-    font-size: 0.9em;
-    background: transparent;
-    transition: all 0.3s ease;
-    border-style: solid; /* 实线风格 */
-}
-
-.search-input-wrap input:focus {
-    border: 1px solid var(--v-blue-700); 
-    box-shadow: 0 0 0 3px rgba(0, 114, 245, 0.1);
-    background: var(--v-white-100);
-}
-
 
 /* 7. RSS 按钮样式 */
 

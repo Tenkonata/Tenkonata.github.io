@@ -71,7 +71,7 @@
         font-size: 1.4em; }
     .home-layout .nav-link {
         font-size:  clamp(0.75em, 3.5vw, 1.5rem);        
-        padding: 0.2rem 0.2rem;} 
+        padding: 0.1rem 0.1rem;} 
     .home-layout .typewriter-text {
         font-size: clamp(1.8rem, 7vw, 4rem)}  
 

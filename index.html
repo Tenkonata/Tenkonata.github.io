@@ -29,26 +29,16 @@
 
     
     <style>
-    /* ============================================ */
-    /* 核心修复：解决背景不固定问题 */
-    /* ============================================ */
-    #pjax-container,
-    #main,
-    .main-content,
-    #content {
-        transform: none !important;
-        will-change: auto !important;
-        filter: none !important;
-        perspective: none !important;
-        -webkit-transform: none !important;
-    }
-
     .home-layout #main { display: block !important; }
     .home-layout .main-content { max-width: 100% !important; width: 100% !important; }
+
+    .archive-layout #main {display: block !important;}
+    .archive-layout .main-content {max-width: 100% !important;width: 100% !important;padding: 0 !important;}
+
     </style>
 <meta name="generator" content="Hexo 8.0.0"></head>
 
-<body class="post-body home-layout">
+<body class="post-body home-layout ">
 
     <div id="mobile-overlay"></div>
     
@@ -76,6 +66,10 @@
                     关于
                 </a>
             
+                <a href="/archives" class="nav-link">
+                    归档
+                </a>
+            
                 <a href="/updatelog" class="nav-link">
                     更新日志
                 </a>
@@ -98,6 +92,18 @@
                 <div id="content">
                     
     <style>
+    /* 背景固定 */
+    #pjax-container,
+    #main,
+    .main-content,
+    #content {
+        transform: none !important;
+        will-change: auto !important;
+        filter: none !important;
+        perspective: none !important;
+        -webkit-transform: none !important;
+    }   
+
     /* 导航栏样式保持 */
     .main-nav {
         position: fixed !important;
@@ -468,7 +474,7 @@
                         </div>
                         
                         <div class="article-footer">
-                            
+                        <!-- 尚无内容 -->
                         </div>
                     </a>
                 
@@ -503,7 +509,7 @@
                         </div>
                         
                         <div class="article-footer">
-                            
+                        <!-- 尚无内容 -->
                         </div>
                     </a>
                 
@@ -542,7 +548,7 @@ sve第三年还有新人物，所以会卡...
                         </div>
                         
                         <div class="article-footer">
-                            
+                        <!-- 尚无内容 -->
                         </div>
                     </a>
                 
@@ -583,7 +589,7 @@ create table list_name
                         </div>
                         
                         <div class="article-footer">
-                            
+                        <!-- 尚无内容 -->
                         </div>
                     </a>
                 
@@ -622,7 +628,7 @@ create table list_name
                         </div>
                         
                         <div class="article-footer">
-                            
+                        <!-- 尚无内容 -->
                         </div>
                     </a>
                 
@@ -657,7 +663,7 @@ create table list_name
                         </div>
                         
                         <div class="article-footer">
-                            
+                        <!-- 尚无内容 -->
                         </div>
                     </a>
                 
@@ -701,7 +707,7 @@ create table list_name
                         </div>
                         
                         <div class="article-footer">
-                            
+                        <!-- 尚无内容 -->
                         </div>
                     </a>
                 
@@ -736,7 +742,7 @@ create table list_name
                         </div>
                         
                         <div class="article-footer">
-                            
+                        <!-- 尚无内容 -->
                         </div>
                     </a>
                 
@@ -919,10 +925,6 @@ create table list_name
             updateSidebarActiveState();
         }
 
-        if (window.initMobileLayout) {
-            window.initMobileLayout();
-        }
-        
         console.log("Pjax: 页面初始化脚本 (onPageReady) 已执行");
     }
 
@@ -958,12 +960,15 @@ create table list_name
             var rootPath = ('/' || '/').replace(/\/$/, ''); 
             var currentPath = window.location.pathname.replace(/\/$/, '');
             var isHomePage = (currentPath === rootPath || currentPath === rootPath + '/index.html');
+            var isArchivePage = (currentPath.includes('/archives') || window.location.href.includes('/archives'));
+
+            $('body').removeClass('home-layout archive-layout');
+            
             if (isHomePage) {
                 $('body').addClass('home-layout');
-            } else {
-                $('body').removeClass('home-layout');
+            } else if (isArchivePage) {
+                $('body').addClass('archive-layout');
             }
-
             onPageReady();
         });
         $(document).on('pjax:error', function(event, xhr, textStatus, errorThrown) { /* ... */ });

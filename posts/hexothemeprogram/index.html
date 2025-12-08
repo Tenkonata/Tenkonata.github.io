@@ -29,26 +29,16 @@
 
     
     <style>
-    /* ============================================ */
-    /* 核心修复：解决背景不固定问题 */
-    /* ============================================ */
-    #pjax-container,
-    #main,
-    .main-content,
-    #content {
-        transform: none !important;
-        will-change: auto !important;
-        filter: none !important;
-        perspective: none !important;
-        -webkit-transform: none !important;
-    }
-
     .home-layout #main { display: block !important; }
     .home-layout .main-content { max-width: 100% !important; width: 100% !important; }
+
+    .archive-layout #main {display: block !important;}
+    .archive-layout .main-content {max-width: 100% !important;width: 100% !important;padding: 0 !important;}
+
     </style>
 <meta name="generator" content="Hexo 8.0.0"></head>
 
-<body class="post-body ">
+<body class="post-body  ">
 
     <div id="mobile-overlay"></div>
     
@@ -76,6 +66,10 @@
                     关于
                 </a>
             
+                <a href="/archives" class="nav-link">
+                    归档
+                </a>
+            
                 <a href="/updatelog" class="nav-link">
                     更新日志
                 </a>
@@ -96,28 +90,28 @@
                     <div class="sidebar">
     <div class="sidebar-header">
         <div class="sidebar-tabs">
-            <button class="tab-btn active" data-tab="files">文件</button>
-            <button class="tab-btn" data-tab="outline">大纲</button>
+            <button class="tab-btn active" data-tab="outline">大纲</button>
+            <button class="tab-btn" data-tab="files">文件</button>
         </div>
     </div>
     
     <nav class="sidebar-nav">
-        <!-- 文件列表 -->
-        <div class="tab-content active" id="files-tab">
-            
-            
-            <ul class="tree-root">
-                <li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>测试性质文件</div><ul class="post-list"><li class="post-item file"><a href="/posts/804a7bbf/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">必要测试中</span></a></li><li class="post-item file"><a href="/posts/thefirst/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">第一篇博客</span></a></li><li class="post-item file"><a href="/posts/liability/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">免责声明</span></a></li></ul></li><li class="post-item file"><a href="/posts/projectjoin/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">👁️</span></a></li><li class="post-item file active"><a href="/posts/hexothemeprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">从零开始搓一个hexo主题</span></a></li><li class="post-item file"><a href="/posts/cf87542b/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">星露谷sve结语</span></a></li><li class="post-item file"><a href="/posts/helloworld/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">hello-world</span></a></li><li class="post-item file"><a href="/posts/sqlprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">sql数据库编程</span></a></li>
-            </ul>
-        </div>
-        
-        <!-- 大纲 -->
-        <div class="tab-content" id="outline-tab">
+        <!-- 大纲的内容 -->
+        <div class="tab-content active" id="outline-tab">
             <div class="outline-container">
                 
                     <div id="article-outline"></div>
                 
             </div>
+        </div>
+
+        <!-- 文件的内容 -->
+        <div class="tab-content" id="files-tab">
+            
+            
+            <ul class="tree-root">
+                <li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>测试性质文件</div><ul class="post-list"><li class="post-item file"><a href="/posts/804a7bbf/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">必要测试中</span></a></li><li class="post-item file"><a href="/posts/thefirst/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">第一篇博客</span></a></li><li class="post-item file"><a href="/posts/liability/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">免责声明</span></a></li></ul></li><li class="post-item file"><a href="/posts/projectjoin/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">👁️</span></a></li><li class="post-item file active"><a href="/posts/hexothemeprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">从零开始搓一个hexo主题</span></a></li><li class="post-item file"><a href="/posts/cf87542b/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">星露谷sve结语</span></a></li><li class="post-item file"><a href="/posts/helloworld/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">hello-world</span></a></li><li class="post-item file"><a href="/posts/sqlprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">sql数据库编程</span></a></li>
+            </ul>
         </div>
     </nav>
 </div>
@@ -143,8 +137,6 @@
             <time class="post-date" datetime="2025-12-02T14:02:07.989Z" title="修改日期">
                 <i class="fa fa-edit"></i> 2025-12-02
             </time>
-            
-            
             
             
             
@@ -280,21 +272,13 @@
         
         <!-- 数据统计 (文章数 / 标签数) -->
         <div class="site-state-wrap">
-            <div class="site-state-item">
+            <a href="/archives/" class="site-state-item">
                 <span class="site-state-item-name">POSTS</span>
                 <span class="site-state-item-count">8</span>
-            </div>
+            </a>
             <div class="site-state-item">
                 <span class="site-state-item-name">LIKES</span>
                 <span class="site-state-item-count">⑨⑨⑨</span>
-            </div>
-        </div>
-        
-        <!-- 搜索框 -->
-        <div class="sidebar-search">
-            <div class="search-input-wrap">
-                <i class="fa fa-search"></i>
-                <input type="text" id="local-search-input" placeholder="Search...(NO Function)" title="这只是个装饰">
             </div>
         </div>
 
@@ -441,10 +425,6 @@
             updateSidebarActiveState();
         }
 
-        if (window.initMobileLayout) {
-            window.initMobileLayout();
-        }
-        
         console.log("Pjax: 页面初始化脚本 (onPageReady) 已执行");
     }
 
@@ -480,12 +460,15 @@
             var rootPath = ('/' || '/').replace(/\/$/, ''); 
             var currentPath = window.location.pathname.replace(/\/$/, '');
             var isHomePage = (currentPath === rootPath || currentPath === rootPath + '/index.html');
+            var isArchivePage = (currentPath.includes('/archives') || window.location.href.includes('/archives'));
+
+            $('body').removeClass('home-layout archive-layout');
+            
             if (isHomePage) {
                 $('body').addClass('home-layout');
-            } else {
-                $('body').removeClass('home-layout');
+            } else if (isArchivePage) {
+                $('body').addClass('archive-layout');
             }
-
             onPageReady();
         });
         $(document).on('pjax:error', function(event, xhr, textStatus, errorThrown) { /* ... */ });
