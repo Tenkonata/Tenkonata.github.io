@@ -16,20 +16,7 @@
     color: var(--v-blue-700);
     font-size: 1.2rem; /*圖標大小*/
     line-height: 1;
-    transition: color 0.3s ease, transform 0.2s ease;
     margin-left: 0.5rem;
-}
-
-.mobile-menu-toggle:hover,
-.mobile-theme-toggle:hover {
-    color: var(--v-blue-700);
-    transform: scale(1.1);
-}
-
-/* 夜間模式下按鈕變亮 */
-body.dark-mode .mobile-menu-toggle,
-body.dark-mode .mobile-theme-toggle {
-    color: var(--v-blue-700); /* 淺色 */
 }
 
 /* 2. 遮罩層 (保持不變) */
@@ -79,9 +66,16 @@ body.dark-mode .mobile-theme-toggle {
         align-items: center;
     }
     
-    /* 確保按鈕組靠右排列 */
-    /* 這裡利用 flex-grow 或者 margin-left: auto 將按鈕推到右邊 */
+    /* 主页调整 */
+    .home-layout .site-title {
+        font-size: 1.4em; }
+    .home-layout .nav-link {
+        font-size:  clamp(0.75em, 3.5vw, 1.5rem);        
+        padding: 0.2rem 0.2rem;} 
+    .home-layout .typewriter-text {
+        font-size: clamp(1.8rem, 7vw, 4rem)}  
 
+    
     /* ======================================================= */
     /* 3.3 通用佈局調整 (側邊欄、主內容) (保持不變) */
     /* ======================================================= */
@@ -96,14 +90,14 @@ body.dark-mode .mobile-theme-toggle {
         transform: translateX(-100%); 
         transition: transform 0.3s ease-in-out;
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-        display: block !important;
+        display: block;
     }
     #aside.mobile-open {
         transform: translateX(0); 
     }
     .main-content {
-        max-width: 100% !important; 
-        width: 100% !important;
+        max-width: 100%; 
+        width: 100%;
     }
     #mobile-overlay {
         display: block; 
@@ -112,31 +106,27 @@ body.dark-mode .mobile-theme-toggle {
 }
 
 /* * ----------------------------------------------------------------
- * 4. 【新增】平板与小屏桌面适配 (1001px - 1280px)
+ * 4.平板与小屏桌面适配 (1001px - 1280px)
  * 说明：在此区间内保持三栏布局，但缩小两侧边栏宽度，防止中间过窄。
  * ----------------------------------------------------------------
  */
 @media (min-width: 1001px) and (max-width: 1280px) {
     /* 左侧文件树：280px -> 220px */
     #aside {
-        width: 220px !important;
+        width: 220px;
     }
 
     /* 右侧作者栏：280px -> 220px */
     #right-sidebar {
-        width: 220px !important;
-        padding: 2rem 1rem !important; /* 稍微减小内边距防止溢出 */
+        width: 220px;
+        padding: 2rem 1rem; /* 稍微减小内边距防止溢出 */
     }
 
     /* 主内容区计算：100% - 220px(左) - 220px(右) = 440px */
-    .main-content {
-        max-width: calc(100% - 440px) !important;
-    }
+    .main-content {max-width: calc(100% - 440px);}
     
     /* 稍微减小文章内容的内边距 */
-    #content {
-        padding: 2rem 1.5rem !important;
-    }
+    #content {padding: 2rem 1.5rem;}
 }
 
 /* * ----------------------------------------------------------------
@@ -145,33 +135,21 @@ body.dark-mode .mobile-theme-toggle {
  */
 @media (max-width: 1000px) {
     #right-sidebar {
-        display: none !important;
+        display: none;
     }
     
     /* 隐藏右边栏后，主内容区域自动撑满剩余空间 */
     .main-content {
-        max-width: calc(100% - 280px) !important; 
+        max-width: 100%; 
     }
 }
-
-/* * ----------------------------------------------------------------
- * 6. 移动端极窄屏幕适配 (900px 以下) - 覆盖层级
- * ----------------------------------------------------------------
- */
-@media (max-width: 900px) {
-    .main-content {
-        max-width: 100% !important;
-    }
-}
-
-
 /* * ----------------------------------------------------------------
  * 7. 其他组件适配
  * ----------------------------------------------------------------
  */
 
 /* 回到顶部按钮适配 - 优化移动端体验 */
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
     #back-to-top {
         bottom: 25px;       /* 稍微提高，避免贴底 */
         left: 50%;

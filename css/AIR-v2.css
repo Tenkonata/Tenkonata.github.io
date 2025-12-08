@@ -200,7 +200,7 @@ h1,h2,h3,h4,h5,h6 {
   color: var(--tw-prose-headings);    /* 使用统一的标题颜色 */
 }
 
-/* 标题左侧指示条基础样式 */
+/* 标题左侧指示条基础样式 伪元素 */
 h1::before,h2::before,h3::before,h4::before,h5::before,h6::before {
   content: '';                        /* 必须内容 */
   position: absolute;                 /* 绝对定位 */
@@ -221,69 +221,38 @@ h6::before {background-color: var(--h6-ind-color);}
 
 /* 一级标题详细样式 */
 h1 {
-  font-weight: 800;                   /* 较粗的字重 */
   font-size: 2em;                     /* 2倍基准字体大小 */
-  margin-top: 0;                      /* 去除默认上边距 */
-  margin-bottom: 0;                   /* 去除默认下边距 */
   line-height: 1.2;                   /* 较紧凑的行高 */
-}
-h1 strong {
-  font-weight: 900;                   /* 加粗时使用最重字重 */
 }
 
 /* 二级标题详细样式 */
 h2 {
-  font-weight: 700;                   /* 稍细于h1的字重 */
   font-size: 1.7em;                   /* 1.7倍基准字体大小 */
   line-height: 1.3;                   /* 适中行高 */
-}
-h2 strong {
-  font-weight: 800;                   /* 加粗时使用h1的字重 */
 }
 
 /* 三级标题详细样式 */
 h3 {
-  font-weight: 600;                   /* 中等字重 */
   font-size: 1.5em;                   /* 1.5倍基准字体大小 */
   line-height: 1.4;                   /* 稍松的行高 */
-}
-h3 strong {
-  font-weight: 700;                   /* 加粗时使用h2的字重 */
 }
 
 /* 四级标题详细样式 */
 h4 {
-  font-weight: 600;                   /* 与h3相同的字重 */
   line-height: 1.7;                   /* 更宽松的行高 */
-}
-h4 strong {
-  font-weight: 700;                   /* 加粗字重 */
 }
 
 /* 五级标题详细样式 */
 h5 {
-  font-weight: 500;                   /* 常规字重 */
   line-height: 1.8;                   /* 宽松行高 */
   font-size: 0.9em;                   /* 稍小于基准字体 */
 }
-h5 strong {
-  font-weight: 500;                   /* 加粗保持相同字重 */
-}
+
 
 /* 六级标题详细样式 */
 h6 {
-  font-weight: 400;                   /* 较细字重 */
   line-height: 1.9;                   /* 最宽松的行高 */
   font-size: 0.9em;                   /* 与h5相同大小 */
-}
-
-/* 标题内代码字体大小调整 */
-h2 code {
-  font-size: 0.8611111em;             /* 二级标题内代码稍小 */
-}
-
-h3 code {
-  font-size: 0.9em;                   /* 三级标题内代码大小 */
 }
 
 /* 添加统一的标题外边距 */
@@ -307,10 +276,8 @@ h1+*, h2+*, h3+*, h4+*, h5+*, h6+* {
 
 /* 引用块基础样式 */
 blockquote {
-  margin-top: 16px !important;                /* 上方间距 */
+  margin-top: 16px;                           /* 上方间距 */
   margin-bottom: 0;                           /* 去除底部间距 */
-  margin-left: 0;                             /* 确保左对齐 */
-  margin-right: 0;                            /* 确保右对齐 */
   padding: 8px;                               /* 内边距 */
   padding-left: 16px;                         /* 左侧额外内边距，为引用标识留空间 */
   background: var(--color-1-0-b);             /* 浅蓝色背景 */
@@ -330,31 +297,15 @@ blockquote p {
 }
 
 /* 引用块内第一个元素去除上边距 */
-blockquote > *:first-child {
-  margin-top: 0 !important;
-}
+blockquote > *:first-child {margin-top: 0;}
 
 /* 引用块内最后一个元素去除下边距 */
-blockquote > *:last-child {
-  margin-bottom: 0 !important;
-}
+blockquote > *:last-child {margin-bottom: 0;}
 
 /* 多层嵌套引用样式 */
 blockquote blockquote {
   background: var(--color-1-1-b);             /* 嵌套引用使用稍深的背景色 */
   border-left-color: var(--color-1);          /* 嵌套引用使用更深的左边框*/
-}
-
-/* 引用块内的代码样式 */
-blockquote code {
-  background: rgba(255, 255, 255, 0.3);     /* 半透明白色背景 */
-  border-radius: 3px;
-}
-
-/* 引用块内的链接样式 */
-blockquote a {
-  color: var(--link-color);
-  text-decoration: underline;
 }
 
 
@@ -381,7 +332,6 @@ blockquote a {
 .markdown-body a:hover,
 .article-content a:hover {
   color: var(--v-amber-700);                                /* 悬停时颜色加深 */
-  background-image: none;                                   /* [删除] 移除旧版背景图模拟 */
 }
 
 /* 底部横线动画 - 伪元素实现 */
@@ -433,7 +383,7 @@ blockquote a {
 /*==========================================================================
   八、水平分割线样式框架
   功能: 美化hr标签的分割线效果
-  说明: 替换浏览器默认水平线样式
+  说明: 替换浏览器默认水平线样式(默认真的很丑)
   ========================================================================== */
 
 
@@ -467,21 +417,11 @@ hr {
 .markdown-body code,
 .article-content code {
   padding: 2px 4px;                                         /* 小内边距 */
-  font-family: var(--monospace);    /* 等宽字体栈 */
-  font-size: 0.9rem;                                        /* 稍小字体 */
+  font-family: var(--monospace);                            /* 等宽字体栈 */
+  font-size: 0.9em;                                         /* 稍小字体 */
   background-color: var(--v-gray-500);                      /* 灰色背景 */
   border-radius: 4px;                                       /* 小圆角 */
   color: var(--code-inline-color);                          /* 代码文字颜色 */
-}
-
-/* 代码块内的行内代码特殊处理 */
-.post-body pre code,
-.markdown-body pre code,
-.article-content pre code {
-  background: transparent;                                  /* 代码块内不显示背景 */
-  padding: 0;                                               /* 代码块内无内边距 */
-  border-radius: 0;                                         /* 代码块内无圆角 */
-  color: inherit;                                           /* 继承代码块颜色 */
 }
 
 
@@ -498,6 +438,8 @@ hr {
 .article-content ul, .article-content ol {
   margin: 0 0 16px 0;           /* 列表块级间距 */
   padding-left: 16px;           /* 统一左侧缩进 */
+  margin-top: 4px;              /* 列表间距优化 */
+  margin-bottom: 4px;
 }
 
 .post-body li,
@@ -529,14 +471,6 @@ hr {
   padding-left: 24px;           /* 数字比短横线宽，增加缩进 */
 }
 
-/* 嵌套列表间距优化 */
-.post-body ul ul, .post-body ul ol, .post-body ol ul, .post-body ol ol,
-.markdown-body ul ul, .markdown-body ul ol, .markdown-body ol ul, .markdown-body ol ol,
-.article-content ul ul, .article-content ul ol, .article-content ol ul, .article-content ol ol {
-  margin-top: 4px;
-  margin-bottom: 4px;
-}
-
 
 
 
@@ -554,25 +488,10 @@ hr {
   border: none;                                         /* 去除边框 */
   border-radius: 8px;                                   /* 圆角 */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);         /* 阴影效果 */
-  max-width: 100%;                                      /* 响应式图片 */
+  max-width: 90%;                                               /* 调整图片比例大小 */
   height: auto;                                         /* 保持比例 */
   display: block;                                       /* 块级显示 */
   margin: 16px auto;                                    /* 居中显示 */
-}
-
-/* 图片标题样式 */
-.post-body figure,
-.markdown-body figure,
-.article-content figure {
-  margin: 16px 0;
-  text-align: center;
-}
-.post-body figcaption,
-.markdown-body figcaption,
-.article-content figcaption {
-  font-size: 0.9em;
-  color: var(--text-secondary);
-  margin-top: 8px;
 }
 
 
@@ -588,16 +507,13 @@ hr {
 .post-body table,
 .markdown-body table,
 .article-content table {
-  width: 100%;                                            /* 全宽表格 */
-  margin-bottom: 0;                                       /* 去除底部边距 */
+  width: 90%;                                            /* 全宽表格 */
   border-radius: 8px;                                     /* 圆角表格 */
-  padding: 0 !important;                                  /* 去除内边距 */
-  border-collapse: separate;                              /* 分离边框模型 */
   border-spacing: 0;                                      /* 单元格间距为0 */
-  margin-top: 0;                                          /* 去除顶部边距 */
-  border: 1px solid var(--v-gray-400) !important;         /*使用统一变量 */
   overflow: hidden;                                       /* 隐藏溢出内容 */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);             /* 表格阴影 */
+  margin: auto;                                            /* 表头居中 */
+  margin-top: 16px                                        /* 顶部页边距 */
 }
 
 /* 表头样式 */
@@ -605,10 +521,7 @@ hr {
 .markdown-body table thead tr th,
 .article-content table thead tr th {
   background: var(--bg-color2);                           /* 浅灰色背景 */
-  padding: 12px 8px !important;                           /* 表头内边距 */
-  font-weight: 600;                                       /* 表头加粗 */
-  text-align: left;                                       /* 左对齐 */
-  border-bottom: 1px solid var(--v-gray-400) !important;  /* 表头底边框 */
+  padding: 15px 8px !important;                           /* 表头内边距 */
 }
 
 /* 表格隔行变色 - 偶数行 */
@@ -632,9 +545,8 @@ hr {
 .post-body table tr td,
 .markdown-body table tr td,
 .article-content table tr td {
-  padding: 8px !important;                                /* 单元格内边距 */
+  padding: 12px;                                          /* 单元格内边距 */
   white-space: pre-wrap !important;                       /* 允许换行 */
-  border-bottom: 1px solid var(--v-gray-400) !important;  /* 单元格底边框 */
 }
 
 /* 注意！请添加表格风格竖向边框 */
@@ -816,23 +728,15 @@ hr {
     margin-right: 0.3em;
 }
 
-.post-date,
-.post-categories,
-.post-tags {
+.post-date {
     margin-right: 1.5rem;
     display: inline-block;
 }
 
-.post-categories a,
-.post-tags a {
-    color: var(--v-blue-700);
-    text-decoration: none;
-}
-
 /* 文章内容样式 */
 .post-content {
-    line-height: 1.7;
-    font-size: 1rem;
+    line-height: 1.7;     /* 行高 */
+    font-size: 1rem;      /* 字体大小 */
 }
 
 /* 文章底部导航 */
@@ -851,7 +755,6 @@ hr {
 /* 上一篇文章链接 - 始终居左 */
 .post-nav-prev {
     color: var(--v-blue-700);
-    text-decoration: none;
     max-width: 45%;
     text-align: left;
     margin-right: auto; /* 确保靠左对齐 */
@@ -860,26 +763,14 @@ hr {
 /* 下一篇文章链接 - 始终居右 */
 .post-nav-next {
     color: var(--v-blue-700);
-    text-decoration: none;
     max-width: 45%;
     text-align: right;
     margin-left: auto; /* 确保靠右对齐 */
 }
 
-.post-nav-prev:hover,
-.post-nav-next:hover {
-    background-image: none !important;
-    text-decoration: none; /* 移除下划线 */
-    opacity: 0.8; /* 添加悬停效果 */
-}
-
-.post-nav-prev i {
-    margin-right: 0.5em;
-}
-
-.post-nav-next i {
-    margin-left: 0.5em;
-}
+/* 图标与文字距离 */
+.post-nav-prev i {margin-right: 0.5em;}
+.post-nav-next i {margin-left: 0.5em;}
 
 
 
@@ -923,16 +814,16 @@ hr {
 
 .main-content {
     flex: 1;
-    /* [修改] 重新计算最大宽度: 100% - 左边栏(260) - 右边栏(260) = 560px */
+    /* 重新计算最大宽度: 100% - 左边栏(260) - 右边栏(260) = 560px */
     max-width: calc(100% - 520px);
     /* 防止 flex 子元素内容溢出撑破布局 */
     min-width: 0; 
 }
 
 #content {
-    max-width: 800px;
+    max-width: 960px;       /* 修改正文宽度 */
     margin: 0 auto;
-    padding: 2rem 3rem; /* [修改] 增加一些内边距让阅读更舒适 */
+    padding: 2rem 3rem; /* 增加一些内边距让阅读更舒适 */
 }
 
 /* 侧边栏样式 */
@@ -962,7 +853,7 @@ hr {
   }
 
 /* 
-  【新增】Pjax 呼吸切换动画 (修复版)
+  Pjax 呼吸切换动画 (修复版)
   功能：实现正文内容的“呼吸”切换，侧边栏不受影响。
 */
 
@@ -986,11 +877,6 @@ hr {
 #pjax-container.pjax-loading.pjax-animate #content {
     opacity: 0.01 !important;  
     filter: blur(5px);        
-}
-
-/* 防止加载过程中误触 */
-#pjax-container.pjax-loading {
-    pointer-events: none;
 }
 
 
@@ -1143,12 +1029,6 @@ hr {
 #aside::-webkit-scrollbar-thumb:hover,
 .tab-content::-webkit-scrollbar-thumb:hover {
     background: var(--v-gray-600);
-}
-
-/*这里防止下划线*/
-#aside * {
-    text-decoration: none !important;
-    background-image: none !important;
 }
 
 /* 确保侧边栏内的列表项没有自定义标记 */
@@ -1446,6 +1326,7 @@ hr {
 }
 
 .author-avatar img {
+    max-width: 100%;
     width: 100%;
     height: 100%;
     border-radius: 50%; /* 圆形 */
