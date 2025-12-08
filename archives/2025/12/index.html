@@ -128,26 +128,17 @@
             <main class="main-content ">
                 <div id="content">
                     
-
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <style>
-    /* 核心布局调整 */
-    #content { max-width: 100% !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
-
-    /* 导航栏 */
+    /* 导航栏样式保持 */
     .main-nav {
         position: fixed !important;
         top: 0;
         width: 100%;
         z-index: 1000;
         background: transparent;
-        border-bottom: none !important;
-        box-shadow: none !important;
+        border-bottom: none;
+        box-shadow: none;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
     }
 
     /* 全屏英雄区域 */
@@ -158,6 +149,9 @@
         justify-content: center;
         align-items: center;
         position: relative;
+        /* 添加过渡属性，为了离场动画 */
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease, filter 0.6s ease;
+        will-change: transform, opacity, filter;
     }
 
     /* 背景图片容器 */
@@ -169,6 +163,9 @@
         height: 100vh;
         z-index: -1;
         pointer-events: none;
+        /* 添加过渡属性 */
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+        will-change: transform, opacity;
     }
 
     .hero-background::before {
@@ -213,50 +210,63 @@
         height: 100%;
     }
 
-    /* 打字机文字样式 */
+    /* =================================================================
+     * 【重写】打字机字符跳动动画 (Typewriter Jump Effect)
+     * =================================================================
+     */
+    .typewriter-container {
+        /* 确保文字容器居中且不换行错乱 */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+
     .typewriter-text {
-        display: inline-block; 
-        width: fit-content; 
-        position: relative; 
         font-size: clamp(2rem, 5vw, 4.5em); 
         font-weight: 700;
-        white-space: pre-wrap; 
-        word-wrap: break-word;
-        overflow: visible; 
-        animation: fadeIn 1.5s ease-out;
-        
-        /* 使用 stroke 实现纯净白边 */
-        /* 1. 设置描边宽度和颜色 */
-        -webkit-text-stroke: 2.0px #ffffff;
-        /* 2. 关键属性：让描边先绘制（在底部），填充后绘制（在顶部）
-           这样描边就是“外描边”，不会把文字变细 */
-        paint-order: stroke fill;
-
         line-height: 1.3;
-        text-align: center;
-        margin: 0 auto;
-        padding-right: 5px; 
+        color: #0f172a;
+        -webkit-text-stroke: 2px #ffffff; /* 稍微减细一点描边，让文字更精致 */
+        paint-order: stroke fill;
+        display: flex;
+
+        animation-delay: 
+        calc(var(--char-index) * 0.05s), 
+        calc(var(--char-index) * 0.05s + 1s);
     }
 
-    .typewriter-text::after {
-        content: '';
-        position: absolute;
-        top: 4px;
-        bottom: 4px;
-        right: -10px; 
-        width: 3px; 
-        background-color: #E4374B;
-        border-radius: 2px;
+    /* 单个字符样式 */
+    .type-char {
+        display: inline-block; /* 必须是 block 或 inline-block 才能应用 transform */
+        white-space: pre;      /* 保留空格宽度 */
+        opacity: 0;            /* 初始不可见 */
+        transform: translateY(20px) scale(0.8); /* 初始位置：靠下且稍小 */
+
+        animation: 
+            charEnter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,  /* 0.8s 执行一次 */
+            charBounce 4s ease-in-out infinite; /* 花费 4s 循环播放 */
+        
+        animation-delay: 
+            calc(var(--char-index) * 0.15s), /* 进场延迟 */
+            calc(var(--char-index) * 0.05s + 3s);   /* 跳动延迟 */
     }
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+    /* 阶段一：进场 (从下方浮出) */
+    @keyframes charEnter {
+        0% {opacity: 0;transform: translateY(30px) scale(0.8);}
+        100% {opacity: 1;transform: translateY(0) scale(1);}
     }
 
-    /* 动态箭头优化
-       使用 FontAwesome 图标，移除复杂的 CSS 绘制代码
-    */
+    /* 阶段二：持续跳动 (波浪效果) */
+    @keyframes charBounce {
+        0%, 100% {transform: translateY(0);}
+        5% {transform: translateY(-10px);}     /* 跳动高度 */
+        10% {transform: translateY(0);}
+        /* 10% -> 100%: 静止等待下一轮 */       /* 调整方式:charBounce时间减小，5%和10%比例增大 */
+    }
+
+    /* 动态箭头优化 */
     .scroll-indicator {
         position: absolute;
         bottom: 60px;
@@ -265,26 +275,15 @@
         animation: bounce 2s infinite;
         cursor: pointer;
         z-index: 3;
-        /* 新增字体样式 */
-        font-size: 3rem;
+        font-size: 2.5rem;
         color: rgba(255, 255, 255, 0.8);
         transition: color 0.3s ease;
     }
 
-    .scroll-indicator:hover {
-        color: #ffffff;
-    }
-
     @keyframes bounce {
-        0%, 20%, 50%, 80%, 100% {
-            transform: translateX(-50%) translateY(0);
-        }
-        40% {
-            transform: translateX(-50%) translateY(-10px);
-        }
-        60% {
-            transform: translateX(-50%) translateY(-5px);
-        }
+        0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
+        40% {transform: translateX(-50%) translateY(-10px);}
+        60% {transform: translateX(-50%) translateY(-5px);}
     }
 
     /* 文章列表区域 */
@@ -296,6 +295,9 @@
         display: flex;
         justify-content: center;
         background: transparent;
+        /* 添加过渡属性 */
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+        will-change: transform, opacity;
     }
 
     .posts-container {
@@ -307,135 +309,95 @@
         align-items: center;
     }
 
-    /* 文章卡片样式 - 高斯模糊版 */
+    /* 深空流体卡片样式 */
     .post-article {
-        display: block; 
-        text-decoration: none !important; 
-        border-bottom: none !important;   
-        background-image: none !important; 
         color: inherit; 
-        
-        background: rgba(255, 255, 255, 0.15);
-
-        backdrop-filter: blur(10px);            /* 性能杀手blur */
-        -webkit-backdrop-filter: blur(10px);
-
-        border-radius: 12px;
-        padding: 1.5rem 2.5rem; /* 已调整的内边距 */
+        background: linear-gradient(
+            135deg, 
+            rgba(20, 24, 36, 0.8) 0%, 
+            rgba(20, 24, 36, 0.5) 100%
+        );
+        border-radius: 16px; 
+        padding: 1.5rem 2.5rem; 
         margin-bottom: 2.5rem;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        
-        transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-        
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
         position: relative;
         overflow: hidden;
         cursor: pointer;
         width: 100%;          
         max-width: 800px;     
-        height: auto;         
+        height: auto;
+        
+        /* 硬件加速与防抖动 */
+        transform: translateZ(0);
+        will-change: transform, box-shadow;
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                    background 0.4s ease, 
+                    box-shadow 0.4s ease, 
+                    border-color 0.4s ease;
     }
 
     /* 悬停效果 */
     .post-article:hover {
-        transform: translate3d(0, -8px, 0); 
+        transform: translateY(-8px) scale(1.01) translateZ(0);
+        background: linear-gradient(
+            135deg, 
+            rgba(20, 24, 36, 0.9) 0%, 
+            rgba(20, 24, 36, 0.75) 100%
+        );
         box-shadow: 
-            0 12px 35px rgba(0, 0, 0, 0.15),
-            0 0 20px rgba(82, 174, 255, 0.5), 
-            0 0 40px rgba(82, 174, 255, 0.3);
-        border-color: rgba(82, 174, 255, 0.8);    
-        background: rgba(255, 255, 255, 0.25); 
+            0 20px 40px rgba(0, 0, 0, 0.35),
+            0 0 0 1px rgba(82, 174, 255, 0.4); 
+        border-color: rgba(82, 174, 255, 0.5); 
     }
 
-    .post-article::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 5px;
-        height: 100%;
-        background: #0072f5;
-        transition: width 0.3s ease;
-    }
-
-    .post-article:hover::before {
-        width: 8px;
-    }
-
-    .article-header {
-        margin-bottom: 1.5rem;
-    }
+    .post-article:hover .article-title {color: var(--v-blue-600);}  /* 悬停标题颜色 */
 
     .article-title {
-        font-size: 2em;
-        font-weight: 700;
-        color: white;
-        margin-bottom: 0.5rem; /* 已调整 */
+        font-size: 2.0em;
+        color: #ffffff;
+        margin: 0 0 0.8rem 0;
         line-height: 1.3;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        transition: color 0.3s ease;
     }
 
     .article-meta {
         display: flex;
         gap: 2rem;
         font-size: 0.95em;
-        color: rgba(255, 255, 255, 0.9);
+        color: rgba(255, 255, 255, 0.8);
         margin-bottom: 1rem;
         flex-wrap: wrap;
     }
 
-    .meta-item {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .meta-item i {
-        color: rgba(255, 255, 255, 0.7);
-    }
-
     .article-excerpt {
-        color: rgba(255, 255, 255, 0.9);
-        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.85);
+        line-height: 1.6;
         margin-bottom: 2rem;
         font-size: 1.1em;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     }
 
     .article-footer {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding-top: 1.5rem;
-        border-top: 1px solid rgba(234, 234, 234, 0.3);
+        padding-top: 1.2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1); 
     }
 
-    .category-tags {
-        display: flex;
-        gap: 0.8rem;
-        flex-wrap: wrap;
-    }
-
-    .category-tag {
-        background: rgba(62, 105, 215, 0.3);
-        color: rgba(255, 255, 255, 0.9);
-        padding: 0.4rem 1rem;
-        border-radius: 20px;
-        font-size: 0.9em;
-        font-weight: 500;
-        text-decoration: none;
-        transition: all 0.2s ease;
-        border: 1px solid rgba(62, 105, 215, 0.5);
-        cursor: pointer; 
-    }
-
-    .post-article:hover .category-tag {
-        background: rgba(62, 105, 215, 0.5);
-        color: white;
-    }
-
+    /* 主页离场动画 */
+    /* 1. Hero 区域：向上浮动 + 模糊 + 淡出 */
+    body.home-exiting .home-hero {transform: translateY(-80px); opacity: 0; filter: blur(10px); }
+    /* 2. 文章列表：向下沉降 + 淡出 */
+    body.home-exiting .home-posts {transform: translateY(80px);opacity: 0;}
+    /* 3. 背景图：逐渐透明 */
+    body.home-exiting .hero-background {opacity: 0;}
     </style>
-</head>
-<body>
+
     <!-- 全屏背景 -->
     <div class="hero-background">
         <div class="hero-bg-image"></div>
@@ -443,32 +405,61 @@
 
     <!-- 主页内容 -->
     <div class="home-hero">
-        
-        <!-- 主要内容 -->
         <div class="hero-content">
             <div class="typewriter-container">
-                <h1 class="typewriter-text">欢迎来到我的博客</h1>
+                <div class="typewriter-text">
+                    
+                        <span class="type-char" style="--char-index: 0;">T</span>
+                    
+                        <span class="type-char" style="--char-index: 1;">e</span>
+                    
+                        <span class="type-char" style="--char-index: 2;">n</span>
+                    
+                        <span class="type-char" style="--char-index: 3;">k</span>
+                    
+                        <span class="type-char" style="--char-index: 4;">o</span>
+                    
+                        <span class="type-char" style="--char-index: 5;">n</span>
+                    
+                        <span class="type-char" style="--char-index: 6;">a</span>
+                    
+                        <span class="type-char" style="--char-index: 7;">t</span>
+                    
+                        <span class="type-char" style="--char-index: 8;">a</span>
+                    
+                        <span class="type-char" style="--char-index: 9;">&#39;</span>
+                    
+                        <span class="type-char" style="--char-index: 10;">s</span>
+                    
+                        <span class="type-char" style="--char-index: 11;"> </span>
+                    
+                        <span class="type-char" style="--char-index: 12;">B</span>
+                    
+                        <span class="type-char" style="--char-index: 13;">l</span>
+                    
+                        <span class="type-char" style="--char-index: 14;">o</span>
+                    
+                        <span class="type-char" style="--char-index: 15;">g</span>
+                    
+                </div>
             </div>
             
-            <!-- [修改] 动态箭头：使用 fa-angle-down -->
             <div class="scroll-indicator" onclick="scrollToPosts()">
                 <i class="fa fa-angle-down"></i>
             </div>
         </div>
     </div>
 
-    <!-- 文章列表 -->
     <section class="home-posts">
         <div class="posts-container">
             
                 
                     <a href="/posts/804a7bbf/" class="post-article">
                         <div class="article-header">
-                            <h2 class="article-title">
+                            <h3 class="article-title">
                                 必要测试中
-                            </h2>
+                            </h3>
                             
-                            <!-- 创建日期 -->
                             <div class="article-meta">
                                 <div class="meta-item">
                                     <i class="fa fa-calendar"></i>
@@ -477,7 +468,6 @@
                                     </time>
                                 </div>
 
-                                <!-- 修改日期 -->
                                 
                                     <div class="meta-item">
                                         <i class="fa fa-edit"></i>
@@ -485,7 +475,6 @@
                                             2025-12-08
                                         </time>
                                     </div>
-                                
                                 
                             </div>
                         </div>
@@ -516,11 +505,10 @@
                 
                     <a href="/posts/liability/" class="post-article">
                         <div class="article-header">
-                            <h2 class="article-title">
+                            <h3 class="article-title">
                                 免责声明
-                            </h2>
+                            </h3>
                             
-                            <!-- 创建日期 -->
                             <div class="article-meta">
                                 <div class="meta-item">
                                     <i class="fa fa-calendar"></i>
@@ -529,7 +517,6 @@
                                     </time>
                                 </div>
 
-                                <!-- 修改日期 -->
                                 
                                     <div class="meta-item">
                                         <i class="fa fa-edit"></i>
@@ -537,7 +524,6 @@
                                             2025-12-02
                                         </time>
                                     </div>
-                                
                                 
                             </div>
                         </div>
@@ -557,74 +543,64 @@
     </section>
 
     <script>
-    // [新增] 滚轮监听逻辑 - 仅在首页生效
-            document.body.classList.add('home-layout');
-    (function() {
-        // [修复] 检查当前是否在首页 (通过 .home-hero 元素判断)
-        const heroSection = document.querySelector('.home-hero');
-        const homePosts = document.querySelector('.home-posts');
-        
-        // 如果没有 Hero 区域，说明不是首页，直接退出
-        if (!heroSection || !homePosts) return;
-
-        let isScrolling = false;
-
-        // 点击箭头跳转
-        window.scrollToPosts = function() {
-            if (isScrolling) return;
-            isScrolling = true;
-            homePosts.scrollIntoView({ behavior: 'smooth' });
-            setTimeout(() => isScrolling = false, 800);
+    function scrollToPosts() {
+        //箭头滚动
+        const postsSection = document.querySelector('.home-posts');
+        if (postsSection) {
+            postsSection.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
         }
-
-        // 滚轮监听
-        const wheelHandler = function(e) {
-            // [修复] 再次检查 DOM 是否依然存在 (防止 Pjax 切换后残留)
-            if (!document.querySelector('.home-hero')) {
-                window.removeEventListener('wheel', wheelHandler);
-                return;
-            }
-
-            // 如果正在自动滚动中，忽略操作，防止冲突
-            //if (isScrolling) return;
-
-            const scrollTop = window.scrollY || document.documentElement.scrollTop;
-            const heroHeight = window.innerHeight;
+    }
+    
+    (function() {
+        //主页切换动画
+        // 1. 强制清理状态 (防止返回时白屏)
+        document.body.classList.remove('home-exiting');
+        // 2. 通用点击处理函数
+        function handleExit(e) {
+            // 【安全检查】确保只在主页触发
+            // 因为导航栏是全局存在的，不加检查会导致在文章页点击导航也触发主页动画
+            if (!document.body.classList.contains('home-layout')) return;
+            // 排除特殊操作 (Ctrl/Cmd点击、新窗口打开)
+            if (e.ctrlKey || e.metaKey || e.shiftKey || this.target === '_blank') return;
+            // 阻止默认跳转
+            e.preventDefault();
+            var targetUrl = this.getAttribute('href');
+            // 触发 CSS 动画
+            document.body.classList.add('home-exiting');
+            // 延迟 500ms 后手动触发 Pjax
+            setTimeout(function() {
+                if (window.jQuery && jQuery.pjax) {
+                    jQuery.pjax({
+                        url: targetUrl,
+                        container: '#pjax-container',
+                        fragment: '#pjax-container',
+                        timeout: 8000
+                    });
+                } else {
+                    window.location.href = targetUrl;
+                }
+            }, 500);
+        }
+        function bindEvents() {
+            if (typeof jQuery === 'undefined') return;
+            //绑定文章卡片
+            $('.home-posts').off('click.homeAnim', '.post-article')
+                            .on('click.homeAnim', '.post-article', handleExit);
             
-            // 灵敏度阈值 (px)，防止过于敏感
-            const sensitivity = 120; 
-
-            // 场景1：在顶部 (Hero区) 向下滚动 -> 自动滑到文章区
-            if (scrollTop < sensitivity && e.deltaY > 0) {
-                e.preventDefault(); // 阻止默认微小滚动
-                scrollToPosts();
-            }
-
-            // 场景2：在文章区顶部 向上滚动 -> 自动滑回到顶部
-            // 判断条件：滚动位置大概在 Hero 和 Posts 的交界处
-            if (scrollTop >= heroHeight - sensitivity && scrollTop <= heroHeight + sensitivity && e.deltaY < 0) {
-                e.preventDefault();
-                isScrolling = true;
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-                setTimeout(() => isScrolling = false, 800);
-            }
-        };
-
-        // 绑定监听器
-        window.addEventListener('wheel', wheelHandler, { passive: false });
-        
-        // [修复] 监听 Pjax 发送事件，在页面切换前移除监听器，防止影响其他页面
-        $(document).on('pjax:send', function() {
-            window.removeEventListener('wheel', wheelHandler);
-        });
-
+            // 绑定导航栏链接
+            $('.main-nav').off('click.homeAnim', '.nav-link')
+                          .on('click.homeAnim', '.nav-link', handleExit);
+        }
+        if (typeof jQuery === 'undefined') {
+            document.addEventListener('DOMContentLoaded', bindEvents);
+        } else {
+            bindEvents();
+        }
     })();
     </script>
-</body>
-</html>
                 </div>
             </main>
             
