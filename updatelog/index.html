@@ -13,14 +13,7 @@
         <link rel="icon" href="https://Tenkonata.github.io/picx-images-hosting/装饰/favicon.86u3byc1l2.webp">
     
     
-    
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-webfont/1.7.0/lxgwwenkaimono-regular.css" />
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-webfont/1.7.0/lxgwwenkai-regular.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    
-<link rel="stylesheet" href="/lib/highlight/styles/atom-one-dark.css">
-
+    <!-- 本地库引入 -->
     
 <link rel="stylesheet" href="/css/AIR-v2.css">
 
@@ -134,7 +127,7 @@
             <!-- 修改日期 -->
             <!-- 只有当 updated 存在且晚于 date 时才显示，避免重复 -->
             
-            <time class="post-date" datetime="2025-12-08T16:28:24.933Z" title="修改日期">
+            <time class="post-date" datetime="2025-12-09T11:58:38.699Z" title="修改日期">
                 <i class="fa fa-edit"></i> 2025-12-09
             </time>
             
@@ -246,6 +239,8 @@
 <li><strong>归档页面创建</strong></li>
 <li><strong>更新文章页面逻辑</strong></li>
 <li>动画调整</li>
+<li>一切上云</li>
+<li>修复mobile逻辑与样式问题</li>
 </ul>
 
     </div>
@@ -280,15 +275,9 @@
             
                 <p>坐和放宽</p>
             
-                <p></p>
+                <p>一切上云！</p>
             
-                <p>我把所有图片上云了</p>
-            
-                <p>图标库使用CDN</p>
-            
-                <p>正在企图把代码高亮库删掉</p>
-            
-                <p>字体使用CDN！(Geist没有国内CDN所以没加)</p>
+                <p>正在改写所有使用逻辑！</p>
             
         </div>
         
@@ -339,7 +328,7 @@
             
         </div>
 
-        <!-- 【新增】回到顶部按钮 -->
+        <!-- 回到顶部按钮 -->
         <!-- 仅在非首页显示，通过 CSS 类控制显示状态 -->
         <div id="back-to-top" class="">
             <i class="fa fa-arrow-up"></i>
@@ -353,9 +342,8 @@
     
 <script src="/lib/jquery.pjax.js"></script>
 
-    
-<script src="/lib/highlight/highlight.min.js"></script>
-
+    <!-- 代码块高亮js引入 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
     
     <script>
     // 代码高亮函数
@@ -446,6 +434,14 @@
         if (document.querySelector('#aside')) {
             generateOutline();
             updateSidebarActiveState();
+        }
+
+        if (window.initArchivePage) {
+            window.initArchivePage();
+        }
+
+        if (window.initMobileLayout) {
+            window.initMobileLayout();
         }
 
         console.log("Pjax: 页面初始化脚本 (onPageReady) 已执行");

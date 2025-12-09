@@ -35,42 +35,16 @@
 
 /*==========================================================================
   一、字体库引入
-  占了三十多兆，纯毒瘤
   ==========================================================================*/
 
-/* Geist 可变字体 - 正常样式 
-@font-face {
-  font-family: "Geist";
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: 
-    url("/fonts/Geist[wght].woff2") format("woff2");
-}
-
-/* Geist Mono 可变等宽字体 
-@font-face {
-  font-family: "GeistMono";
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: 
-    url("/fonts/GeistMono[wght].woff2") format("woff2");
-}
-
-/* Geist 可变字体 - 斜体样式 
-@font-face {
-  font-family: "Geist";
-  font-style: italic;
-  font-weight: 100 900;
-  font-display: swap;
-  src: 
-    url("/fonts/Geist-Italic[wght].woff2") format("woff2");
-}
-
-/* 霞鹜文楷字体 - 常规样式  已引入cdn
-
-/* 霞鹜文楷等宽字体 已引入cdn
+/* 霞鹜文楷字体 - 常规样式  已引入cdn */
+@import url('https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-webfont/1.7.0/lxgwwenkai-regular.css');
+/* 霞鹜文楷等宽字体 已引入cdn */
+@import url('https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-webfont/1.7.0/lxgwwenkaimono-regular.css');
+/* font-awesome图标引入 */
+@import url('https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+/* 代码块高亮引入 */
+@import url('https://cdn.bootcdn.net/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css');
 
 
 
@@ -593,15 +567,6 @@ hr {
   z-index: 1;                                             /* 确保在代码内容上方 */
 }
 
-/* 代码高亮容器 - 适配highlight.js */
-.highlight {
-  position: relative;                                     /* 为内部元素定位 */
-  border-radius: 7px;                                     /* 圆角 */
-  background-color: #282c34;                            /* atom-one-dark 背景色 */
-  margin: 16px 0;                                         /* 上下外边距 */
-  overflow: hidden;                                       /* 隐藏溢出 */
-}
-
 /* 代码块内的代码样式 - 适配highlight.js */
 .post-body pre code,
 .markdown-body pre code,
@@ -619,37 +584,6 @@ hr {
   border-radius: 0;                                       /* 无圆角 */
   white-space: pre;                                       /* 保留空白和换行 */
   color: #abb2bf;                                       /* atom-one-dark 文字颜色 */
-}
-
-/* 代码语言标签样式 */
-.post-body .highlight figcaption,
-.markdown-body .highlight figcaption,
-.article-content .highlight figcaption {
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  color: #5c6370;                                       /* atom-one-dark 注释颜色 */
-  font-size: 0.8rem;
-  font-family: "Geist", "LXGW WenKai";
-  z-index: 1;
-}
-
-/* 行号样式 - 适配highlight.js行号插件 */
-.post-body .hljs-ln-numbers,
-.markdown-body .hljs-ln-numbers,
-.article-content .hljs-ln-numbers {
-  color: #5c6370;                                       /* atom-one-dark 注释颜色 */
-  padding-right: 16px;
-  text-align: right;
-  user-select: none;
-  border-right: 1px solid #3e4451;                      /* 行号分隔线 */
-}
-
-/* 代码高亮特定行样式 */
-.post-body .highlight .line,
-.markdown-body .highlight .line,
-.article-content .highlight .line {
-  padding: 0 8px;
 }
 
 /* 代码块滚动条样式 */
@@ -685,19 +619,6 @@ hr {
   background-color: #5c6370;                            /* 悬停时变亮，提高交互感 */
 }
 
-/* 覆盖highlight.js的默认背景色 */
-.hljs {
-  background: transparent !important;
-}
-
-/* 确保代码块在highlight.js初始化后保持正确样式 */
-.post-body pre code.hljs,
-.markdown-body pre code.hljs,
-.article-content pre code.hljs {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-}
-
 
 
 
@@ -712,6 +633,7 @@ hr {
     border-bottom: 1px solid var(--v-gray-400);
 }
 
+/* 我把title删了，这个暂时没用 */
 .post-title {
     font-size: 2.2em;
     margin-bottom: 0.5rem;
@@ -721,7 +643,6 @@ hr {
 .post-meta {
     font-size: 0.9em;
     color: var(--v-gray-700);
-    margin-top: 1rem;
 }
 
 .post-meta i {

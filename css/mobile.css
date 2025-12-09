@@ -65,15 +65,62 @@
         justify-content: space-between;
         align-items: center;
     }
+
+    body:not(.home-layout) .post-meta {
+        display: flex;
+        flex-wrap: wrap;       /* 允许标签组整体换行 */
+        gap: 0.5rem;           /* 标签之间的间距 */
+        justify-content: flex-start;
+    }
     
-    /* 主页调整 */
+    /* ======================================================= */
+    /* 3.2 主页调整 (Home Layout) */
+    /* ======================================================= */
+    
     .home-layout .site-title {
-        font-size: 1.4em; }
+        font-size: 1.4em; 
+    }
+    
     .home-layout .nav-link {
-        font-size:  clamp(0.75em, 3.5vw, 1.5rem);        
-        padding: 0.1rem 0.1rem;} 
+        font-size: clamp(0.75em, 3.5vw, 1.5rem);        
+        padding: 0.1rem 0.1rem;
+    } 
+    
     .home-layout .typewriter-text {
-        font-size: clamp(1.8rem, 7vw, 4rem)}  
+        font-size: clamp(1.8rem, 7vw, 4rem);
+    }  
+
+    /* [新增] 移动端隐藏主页文章摘要，使卡片更紧凑 */
+    .home-layout .article-excerpt {
+        display: none !important;
+    }
+
+    /* [修改] 优化元数据布局，解决跨行间距过大问题 */
+    .home-layout .article-meta {
+        margin-bottom: 0.5rem !important; 
+        
+        /* 关键修改：减小项目间距 */
+        gap: 0.8rem !important;      /* 水平间距 */
+        row-gap: 0.2rem !important;  /* 垂直间距 (控制跨行后的行高) */
+        
+        flex-wrap: wrap !important;  /* 允许换行 */
+        justify-content: flex-start !important;
+        align-items: center;
+        line-height: 1.4;            /* 收紧行高 */
+    }
+    
+    /* 针对里面的每个小项目 */
+    .home-layout .meta-item {
+        font-size: 0.85em;           /* 稍微缩小字体 */
+        margin: 0 !important;        /* 清除可能存在的旧边距 */
+        display: inline-flex;
+        align-items: center;
+    }
+
+    /* [优化] 调整卡片内边距，减少留白 */
+    .home-layout .post-article {
+        padding: 1.2rem 1.5rem !important;
+    }
 
     
     /* ======================================================= */
