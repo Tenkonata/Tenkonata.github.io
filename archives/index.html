@@ -12,8 +12,9 @@
     
         <link rel="icon" href="https://Tenkonata.github.io/picx-images-hosting/装饰/favicon.86u3byc1l2.webp">
     
+
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     
-    <!-- 本地库引入 -->
     
 <link rel="stylesheet" href="/css/AIR-v2.css">
 
@@ -21,17 +22,15 @@
 <link rel="stylesheet" href="/css/mobile.css">
 
     
-    <style>
-    .home-layout #main { display: block !important; }
-    .home-layout .main-content { max-width: 100% !important; width: 100% !important; }
-
-    .archive-layout #main {display: block !important;}
-    .archive-layout .main-content {max-width: 100% !important;width: 100% !important;padding: 0 !important;}
-
-    </style>
 <meta name="generator" content="Hexo 8.0.0"></head>
 
 <body class="post-body  archive-layout">
+    <script>
+        (function() {
+            var savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') document.body.classList.add('dark-mode');
+        })();
+    </script>
 
     <div id="mobile-overlay"></div>
     
@@ -74,14 +73,39 @@
     </div>
 </nav>
     
-    <div id="pjax-container">
-        
-        <div id="main">
-            <!-- 左侧边栏 (非首页显示) -->
-            
+    <div id="main">
+        <aside id="aside">
+            <div class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-tabs">
+            <button class="tab-btn active" data-tab="outline">大纲</button>
+            <button class="tab-btn" data-tab="files">文件</button>
+        </div>
+    </div>
+    
+    <nav class="sidebar-nav">
+        <!-- 大纲的内容 (服务端渲染版 SSR) -->
+        <div class="tab-content active" id="outline-tab">
+            <div class="outline-container">
+                
+                    <div class="no-outline">请打开一篇文章查看大纲</div>
+                
+            </div>
+        </div>
 
-            <!-- 主内容区 -->
-            <main class="main-content ">
+        <!-- 文件的内容 (保持原有的 SSR 逻辑) -->
+        <div class="tab-content" id="files-tab">
+            
+            <ul class="tree-root">
+                <li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>测试性质文件</div><ul class="post-list"><li class="post-item file"><a href="/posts/804a7bbf/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">必要测试中</span></a></li><li class="post-item file"><a href="/posts/thefirst/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">第一篇博客</span></a></li><li class="post-item file"><a href="/posts/liability/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">免责声明</span></a></li></ul></li><li class="post-item file"><a href="/posts/projectjoin/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">👁️</span></a></li><li class="post-item file"><a href="/posts/hexothemeprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">从零开始搓一个hexo主题</span></a></li><li class="post-item file"><a href="/posts/cf87542b/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">星露谷sve结语</span></a></li><li class="post-item file"><a href="/posts/helloworld/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">hello-world</span></a></li><li class="post-item file"><a href="/posts/sqlprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">sql数据库编程</span></a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+        </aside>
+
+        <main class="main-content ">
+            <div id="pjax-container">
                 <div id="content">
                     <style>
 /* =========================================
@@ -566,19 +590,80 @@ window.initArchivePage = function() {
 };
 </script>
                 </div>
-            </main>
+            </div>
+        </main>
+        
+    <aside id="right-sidebar">
+    <div class="sidebar-author">
+        <!-- 头像 -->
+        <div class="author-avatar">
+            <img src="https://Tenkonata.github.io/picx-images-hosting/装饰/avatar.96a6p4esqw.webp" alt="Tenkonata的博客" title="点我切换深/浅色">
+        </div>
+        
+        <!-- 作者名称 -->
+        <h3 class="author-name">Tenkonata的博客</h3>
+        
+        <!-- 签名 -->
+        
+        <div class="author-description">
             
-            <!-- 右侧边栏 (非首页显示) -->
+                <p>坐和放宽</p>
+            
+                <p>一切上云！</p>
+            
+                <p>正在改写所有使用逻辑！</p>
             
         </div>
-
-        <!-- 回到顶部按钮 -->
-        <!-- 仅在非首页显示，通过 CSS 类控制显示状态 -->
-        <div id="back-to-top" class="">
-            <i class="fa fa-arrow-up"></i>
+        
+        
+        <!-- 数据统计 (文章数 / 标签数) -->
+        <div class="site-state-wrap">
+            <a href="/archives/" class="site-state-item">
+                <span class="site-state-item-name">POSTS</span>
+                <span class="site-state-item-count">8</span>
+            </a>
+            <div class="site-state-item">
+                <span class="site-state-item-name">LIKES</span>
+                <span class="site-state-item-count">⑨⑨⑨</span>
+            </div>
         </div>
 
-    </div> 
+        <!-- RSS 按钮 -->
+
+       <!-- 社交图标 -->
+        
+        <div class="sidebar-social">
+            
+                <a href="https://github.com/Tenkonata" target="_blank" rel="noopener" title="GitHub">
+                    
+                        <!-- 否则显示 FontAwesome 图标 -->
+                        <i class="fa fa-github"></i>
+                    
+                </a>
+            
+                <a href="mailto:xi-justice@outlook.com" target="_blank" rel="noopener" title="Email">
+                    
+                        <!-- 否则显示 FontAwesome 图标 -->
+                        <i class="fa fa-envelope"></i>
+                    
+                </a>
+            
+                <a href="https://space.bilibili.com/179767580" target="_blank" rel="noopener" title="Bilibili">
+                    
+                        <!-- 如果配置了 image-svg -->
+                        <span class="custom-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" ><path d="M18.223 3.08584C18.7112 3.574 18.7112 4.36545 18.223 4.85361L17.08 5.99598L18.25 5.99638C20.3211 5.99638 22 7.67531 22 9.74638V17.2464C22 19.3174 20.3211 20.9964 18.25 20.9964H5.75C3.67893 20.9964 2 19.3174 2 17.2464V9.74638C2 7.67531 3.67893 5.99638 5.75 5.99638L6.91625 5.99598L5.77466 4.85456C5.28651 4.36641 5.28651 3.57495 5.77466 3.0868C6.26282 2.59864 7.05427 2.59864 7.54243 3.0868L10.1941 5.73845C10.2729 5.81729 10.339 5.90403 10.3924 5.99614L13.6046 5.99636C13.6581 5.90382 13.7244 5.81667 13.8036 5.73749L16.4553 3.08584C16.9434 2.59769 17.7349 2.59769 18.223 3.08584ZM18.25 8.50638H5.75C5.09102 8.50638 4.55115 9.0163 4.50343 9.66309L4.5 9.75638V17.2564C4.5 17.9154 5.00992 18.4552 5.65671 18.5029L5.75 18.5064H18.25C18.909 18.5064 19.4489 17.9965 19.4966 17.3497L19.5 17.2564V9.75638C19.5 9.06602 18.9404 8.50638 18.25 8.50638ZM8.25 11.0064C8.94036 11.0064 9.5 11.566 9.5 12.2564V13.5064C9.5 14.1967 8.94036 14.7564 8.25 14.7564C7.55964 14.7564 7 14.1967 7 13.5064V12.2564C7 11.566 7.55964 11.0064 8.25 11.0064ZM15.75 11.0064C16.4404 11.0064 17 11.566 17 12.2564V13.5064C17 14.1967 16.4404 14.7564 15.75 14.7564C15.0596 14.7564 14.5 14.1967 14.5 13.5064V12.2564C14.5 11.566 15.0596 11.0064 15.75 11.0064Z" /></svg></span>
+                    
+                </a>
+            
+        </div>
+        
+    </div>
+</aside>
+    </div>
+
+    <div id="back-to-top" class="">
+        <i class="fa fa-arrow-up"></i>
+    </div>
     
     
 <script src="/lib/jquery-3.7.1.min.js"></script>
@@ -586,155 +671,76 @@ window.initArchivePage = function() {
     
 <script src="/lib/jquery.pjax.js"></script>
 
-    <!-- 代码块高亮js引入 -->
     <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
     
+    <!-- Pjax 核心配置 -->
     <script>
-    // 代码高亮函数
-    function initHighlight() {
-        document.querySelectorAll('pre code').forEach((block) => {
-            hljs.highlightElement(block);
-        });
-        console.log("Pjax: 代码高亮已重新执行");
-    }
-
-    // 生成文章大纲
-    function generateOutline() {
-        const outlineContainer = document.getElementById('article-outline');
-        if (!outlineContainer) return;
-        const headings = document.querySelectorAll('#content h1, #content h2, #content h3, #content h4, #content h5, #content h6');
-        if (headings.length === 0) {
-            outlineContainer.innerHTML = '<div class="no-outline">本文暂无标题</div>';
-            return;
-        }
-        
-        let outlineHTML = '<ul class="outline-list" style="margin: 0; padding: 0;">';
-        
-        headings.forEach((heading, index) => {
-            const level = parseInt(heading.tagName.substring(1));
-            const text = heading.textContent;
-            const id = heading.id || `heading-${index}`;
-            
-            if (!heading.id) { heading.id = id; }
-        
-            outlineHTML += `
-                <li class="outline-item outline-level-${level}" style="margin: 0; padding: 0;">
-                    <a href="#${id}" class="outline-link">${text}</a>
-                </li>
-            `;
-        });
-        outlineHTML += '</ul>';
-        outlineContainer.innerHTML = outlineHTML;
-        
-        const outlineTab = document.getElementById('outline-tab');
-        if (outlineTab) {
-            outlineTab.addEventListener('click', function(e) {
-                if (e.target.classList.contains('outline-link')) {
-                    e.preventDefault();
-                    const targetId = e.target.getAttribute('href').substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                }
-            });
-        }
-    }
-
-    // 更新侧边栏活动状态
-    function updateSidebarActiveState() {
-        const postItems = document.querySelectorAll('.post-item');
-        postItems.forEach(item => item.classList.remove('active'));
-        const currentPath = window.location.pathname;
-        const normalizedPath = currentPath.replace(/\/$/, '');
-        document.querySelectorAll('.post-link').forEach(link => {
-            const href = link.getAttribute('href');
-            const normalizedHref = href ? href.replace(/\/$/, '') : '';
-            
-            if (normalizedHref === normalizedPath) {
-                link.closest('.post-item').classList.add('active');
-                
-                let parent = link.closest('.category-group');
-                while (parent) {
-                    parent.classList.remove('collapsed');
-                    const icon = parent.querySelector('.category-title i');
-                    if (icon && icon.classList.contains('fa-folder')) {
-                        icon.classList.remove('fa-folder');
-                        icon.classList.add('fa-folder-open');
-                    }
-                    parent = parent.parentElement.closest('.category-group');
-                }
-            }
-        });
-    }
-
-    // 统一的初始化函数
-    function onPageReady() {
-        initHighlight();
-        if (document.querySelector('#aside')) {
-            generateOutline();
-            updateSidebarActiveState();
-        }
-
-        if (window.initArchivePage) {
-            window.initArchivePage();
-        }
-
-        if (window.initMobileLayout) {
-            window.initMobileLayout();
-        }
-
-        console.log("Pjax: 页面初始化脚本 (onPageReady) 已执行");
-    }
-
-    // 等待页面完全加载
     $(document).ready(function() {
-        console.log("文档首次加载 (document.ready)");
-        
-        onPageReady();
-
         var pjaxSelector = 'a[href^="/"]:not([target="_blank"]):not([href$=".xml"]):not([href$=".json"])';
         var pjaxContainer = '#pjax-container';
-        console.log("Pjax: 初始化，监听 " + pjaxSelector + "，容器: " + pjaxContainer);
+        
         $(document).pjax(pjaxSelector, pjaxContainer, {
-            fragment: pjaxContainer,
+            fragment: pjaxContainer, 
             timeout: 8000
         });
         
-        // Pjax 动画控制
-        $(document).on('pjax:send', function(event, xhr, options) {
+        // Pjax 加载动画
+        $(document).on('pjax:send', function() {
             $(pjaxContainer).addClass('pjax-loading');
             if (!$('body').hasClass('home-layout')) {
                 $(pjaxContainer).addClass('pjax-animate');
             }
         });
-
-        $(document).on('pjax:success', function(event, data, status, xhr, options) { /* ... */ });
         
-        $(document).on('pjax:complete', function() {
-            console.log("Pjax: complete (加载完成)");
-            
+        // 【关键修复】封装页面状态刷新逻辑
+        // 无论通过点击还是后退，都需要调用此函数来同步 Body 类名和按钮状态
+        function refreshLayout() {
+            // 1. 清除加载动画
             $(pjaxContainer).removeClass('pjax-loading pjax-animate');
 
+            // 2. 根据当前 URL重新判断页面类型
             var rootPath = ('/' || '/').replace(/\/$/, ''); 
             var currentPath = window.location.pathname.replace(/\/$/, '');
             var isHomePage = (currentPath === rootPath || currentPath === rootPath + '/index.html');
             var isArchivePage = (currentPath.includes('/archives') || window.location.href.includes('/archives'));
 
+            // 3. 强制更新 Body 类名
             $('body').removeClass('home-layout archive-layout');
+            if (isHomePage) $('body').addClass('home-layout');
+            else if (isArchivePage) $('body').addClass('archive-layout');
             
-            if (isHomePage) {
-                $('body').addClass('home-layout');
-            } else if (isArchivePage) {
-                $('body').addClass('archive-layout');
+            // 4. 强制更新回到顶部按钮可见性
+            var btt = document.getElementById('back-to-top');
+            if (btt) {
+                if (isHomePage) {
+                    btt.classList.add('btt-hidden');
+                    btt.classList.remove('show'); // 确保隐藏
+                } else {
+                    btt.classList.remove('btt-hidden');
+                }
             }
-            onPageReady();
+
+            // 5. 调用其他组件的更新逻辑 (Mobile & AIR-v2)
+            if (window.initMobileLayout) window.initMobileLayout();
+            
+            // 确保 AIR-v2.js 里的逻辑也能覆盖到
+            // 注意：AIR-v2.js 自己也监听了 pjax:complete，但为了 popstate 我们手动触发一次
+            if (window.initHighlight) window.initHighlight();
+            if (window.generateOutline) window.generateOutline(); 
+            if (window.updateSidebarActiveState) window.updateSidebarActiveState();
+            
+            console.log("Layout refreshed: " + currentPath);
+        }
+
+        // 场景 A: 正常的 Pjax 跳转完成
+        $(document).on('pjax:complete', function() {
+            refreshLayout();
         });
-        $(document).on('pjax:error', function(event, xhr, textStatus, errorThrown) { /* ... */ });
+        // 场景 B: 【核心修复】浏览器后退/前进 (Popstate)
+        // 使用 popstate 监听器作为兜底，确保 URL 变了就一定更新布局
+        window.addEventListener('popstate', function() {
+            refreshLayout();
+        });
     });
     </script>
 

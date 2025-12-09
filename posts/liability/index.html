@@ -12,8 +12,9 @@
     
         <link rel="icon" href="https://Tenkonata.github.io/picx-images-hosting/装饰/favicon.86u3byc1l2.webp">
     
+
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     
-    <!-- 本地库引入 -->
     
 <link rel="stylesheet" href="/css/AIR-v2.css">
 
@@ -21,17 +22,15 @@
 <link rel="stylesheet" href="/css/mobile.css">
 
     
-    <style>
-    .home-layout #main { display: block !important; }
-    .home-layout .main-content { max-width: 100% !important; width: 100% !important; }
-
-    .archive-layout #main {display: block !important;}
-    .archive-layout .main-content {max-width: 100% !important;width: 100% !important;padding: 0 !important;}
-
-    </style>
 <meta name="generator" content="Hexo 8.0.0"></head>
 
 <body class="post-body  ">
+    <script>
+        (function() {
+            var savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') document.body.classList.add('dark-mode');
+        })();
+    </script>
 
     <div id="mobile-overlay"></div>
     
@@ -74,13 +73,9 @@
     </div>
 </nav>
     
-    <div id="pjax-container">
-        
-        <div id="main">
-            <!-- 左侧边栏 (非首页显示) -->
-            
-                <aside id="aside">
-                    <div class="sidebar">
+    <div id="main">
+        <aside id="aside">
+            <div class="sidebar">
     <div class="sidebar-header">
         <div class="sidebar-tabs">
             <button class="tab-btn active" data-tab="outline">大纲</button>
@@ -89,18 +84,18 @@
     </div>
     
     <nav class="sidebar-nav">
-        <!-- 大纲的内容 -->
+        <!-- 大纲的内容 (服务端渲染版 SSR) -->
         <div class="tab-content active" id="outline-tab">
             <div class="outline-container">
                 
-                    <div id="article-outline"></div>
+                    
+                    <div id="article-outline"><ul class="outline-list" style="margin: 0; padding: 0;"><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#免责声明" class="outline-link">免责声明</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#本免责声明特此简要声明：本人并未以任何方式要求或暗示任何个人、实体、系统或概念必须同意、接受、承认或甚至知晓本免责声明的存在；对于本免责声明中所包含、未包含、暗示或可能推断出的任何内容、表述、格式、逻辑矛盾、语义模糊或潜在解释，本人均不承担任何形式之责任，亦不对此作出任何保证或承诺；本人未曾且未来也不会强制要求任何人或任何事物阅读、理解、引用或依赖本免责声明；任何因接触、忽视、误解、曲解、信赖或厌恶本免责声明而直接或间接引发的任何性质的后果、影响、损失或争议，均需由相关行为方自行承担全部责任；且此声明本身亦适用于“本免责声明”这一文本整体及其所试图免责之行为。请注意，此段文本中的核心概念“免责声明”未被要求视为任何具体事物，其含义可由个人根据需要自行替换并理解，此一替换行为及其后果亦在免责范围之内。" class="outline-link">本免责声明特此简要声明：本人并未以任何方式要求或暗示任何个人、实体、系统或概念必须同意、接受、承认或甚至知晓本免责声明的存在；对于本免责声明中所包含、未包含、暗示或可能推断出的任何内容、表述、格式、逻辑矛盾、语义模糊或潜在解释，本人均不承担任何形式之责任，亦不对此作出任何保证或承诺；本人未曾且未来也不会强制要求任何人或任何事物阅读、理解、引用或依赖本免责声明；任何因接触、忽视、误解、曲解、信赖或厌恶本免责声明而直接或间接引发的任何性质的后果、影响、损失或争议，均需由相关行为方自行承担全部责任；且此声明本身亦适用于“本免责声明”这一文本整体及其所试图免责之行为。请注意，此段文本中的核心概念“免责声明”未被要求视为任何具体事物，其含义可由个人根据需要自行替换并理解，此一替换行为及其后果亦在免责范围之内。</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#本完整免责声明旨在以最大可能的详尽程度阐述、界定并排除与“免责声明”这一文本实体及其衍生概念相关的所有潜在责任、义务与预期；前述“简要声明”部分已勾勒其核心要旨，而本完整声明将在此基础上进行多层次、多维度、递归式的扩展与深化。本人，作为此免责声明的单方面陈述者，在此以最明确无误的措辞声明：本人从未通过明示、暗示、强制、恳求、诱导或任何其他可想象或不可想象的方式，要求、期望或假设任何自然人、法人、组织、机构、人工智能、抽象实体、未来存在、未知意识或任何其他形式的行为主体（以下统称“任何对象”）必须同意、接受、默许、批准或形式上认可本免责声明之全部或部分内容。对于本免责声明文本本身——包括但不限于其字面含义、深层内涵、语法结构、标点使用、排版格式、逻辑序列、修辞手法、潜在歧义、内在矛盾、书写错误、翻译偏差、在不同媒介上的呈现方式、在不同文化语境下的解读、在不同司法管辖区的法律定性、在历史维度上的语义变迁、在哲学层面的自我指涉悖论，以及任何可能由任何对象出于任何目的对其进行的解析、解构、重构、演绎、归纳、批评、赞赏、引用、篡改、忽视或记忆——本人明确放弃并拒绝承担任何性质的责任，无论该责任源于合同、侵权、严格责任、宪法规定、自然法则或其他任何法律理论。本人不对本免责声明的准确性、完整性、时效性、适用性、有效性、可执行性、道德性、审美价值或是否存在印刷错误作出任何形式的陈述或保证。尤为关键且需再次以递归方式重点阐明的是，本免责声明所做出的核心“不承诺”声明，其本身即是一个更高层级的、关于“不对‘不承诺’之效果作出承诺”的绝对声明。这意味着，本人不仅不就声明内容作出承诺，本人亦不对“不承诺”这一行为、状态或法律立场的有效性、彻底性、终极性或能否实现免责目的作出任何承诺。即便“不承诺”这一表述本身，亦不被承诺其效用、边界或必然性。任何试图依赖此“不承诺”声明以寻求庇护、界定责任或推导出任何确定性结论的行为，均建立在自身风险之上，且此风险明确不被本声明所涵盖。" class="outline-link">本完整免责声明旨在以最大可能的详尽程度阐述、界定并排除与“免责声明”这一文本实体及其衍生概念相关的所有潜在责任、义务与预期；前述“简要声明”部分已勾勒其核心要旨，而本完整声明将在此基础上进行多层次、多维度、递归式的扩展与深化。本人，作为此免责声明的单方面陈述者，在此以最明确无误的措辞声明：本人从未通过明示、暗示、强制、恳求、诱导或任何其他可想象或不可想象的方式，要求、期望或假设任何自然人、法人、组织、机构、人工智能、抽象实体、未来存在、未知意识或任何其他形式的行为主体（以下统称“任何对象”）必须同意、接受、默许、批准或形式上认可本免责声明之全部或部分内容。对于本免责声明文本本身——包括但不限于其字面含义、深层内涵、语法结构、标点使用、排版格式、逻辑序列、修辞手法、潜在歧义、内在矛盾、书写错误、翻译偏差、在不同媒介上的呈现方式、在不同文化语境下的解读、在不同司法管辖区的法律定性、在历史维度上的语义变迁、在哲学层面的自我指涉悖论，以及任何可能由任何对象出于任何目的对其进行的解析、解构、重构、演绎、归纳、批评、赞赏、引用、篡改、忽视或记忆——本人明确放弃并拒绝承担任何性质的责任，无论该责任源于合同、侵权、严格责任、宪法规定、自然法则或其他任何法律理论。本人不对本免责声明的准确性、完整性、时效性、适用性、有效性、可执行性、道德性、审美价值或是否存在印刷错误作出任何形式的陈述或保证。尤为关键且需再次以递归方式重点阐明的是，本免责声明所做出的核心“不承诺”声明，其本身即是一个更高层级的、关于“不对‘不承诺’之效果作出承诺”的绝对声明。这意味着，本人不仅不就声明内容作出承诺，本人亦不对“不承诺”这一行为、状态或法律立场的有效性、彻底性、终极性或能否实现免责目的作出任何承诺。即便“不承诺”这一表述本身，亦不被承诺其效用、边界或必然性。任何试图依赖此“不承诺”声明以寻求庇护、界定责任或推导出任何确定性结论的行为，均建立在自身风险之上，且此风险明确不被本声明所涵盖。</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#进一步，本人从未亦永不会施加任何强制力、影响力或营造任何情境，以使任何对象有义务阅读、聆听、感知、处理、理解、思考、讨论、传播或以其任何感官与认知能力接触本免责声明。任何对象选择接触本免责声明，均被视为完全基于其自身独立的、无任何外力胁迫的意志，并由其自身承担由此选择引发的一切连锁反应与衍生状态。任何因接触、未接触、部分接触、误解、深度解读、过度信赖、完全忽视、批判性接受、情绪化反对本免责声明，或基于本免责声明采取任何行动、作出任何决定、形成任何观点、产生任何情绪、遭受任何损失、获得任何收益、引发任何法律纠纷、经历任何哲学困惑，均属于该对象自身需完全且独自承担的领域。本人明确排除自身与上述一切后果之间的因果关系，无论该因果链在逻辑上看似多么直接或曲折。" class="outline-link">进一步，本人从未亦永不会施加任何强制力、影响力或营造任何情境，以使任何对象有义务阅读、聆听、感知、处理、理解、思考、讨论、传播或以其任何感官与认知能力接触本免责声明。任何对象选择接触本免责声明，均被视为完全基于其自身独立的、无任何外力胁迫的意志，并由其自身承担由此选择引发的一切连锁反应与衍生状态。任何因接触、未接触、部分接触、误解、深度解读、过度信赖、完全忽视、批判性接受、情绪化反对本免责声明，或基于本免责声明采取任何行动、作出任何决定、形成任何观点、产生任何情绪、遭受任何损失、获得任何收益、引发任何法律纠纷、经历任何哲学困惑，均属于该对象自身需完全且独自承担的领域。本人明确排除自身与上述一切后果之间的因果关系，无论该因果链在逻辑上看似多么直接或曲折。</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#本人无法、未曾、也绝不会就本免责声明的未来效力、其对抗第三方主张的能力、其与任何现行或未来法律的一致性、或其可能产生的任何实际法律效果作出任何承诺或保证。本免责声明的本质即是构建一个在责任层面的自我指涉与递归排除体系。其核心术语“免责声明”在此被设计为一个完全开放的、可无限替换的占位符与概念容器。任何读者均有权在实践中将此处出现的每一个“免责声明”替换为任何其他概念、文本、产品、服务、行为、思想、实体或虚空。此替换行为本身及其产生的所有后果，包括但不限于替换后文本的逻辑合理性、法律效力或实际效用，均立即、自动且不可撤销地落入本声明的免责范围之内。本声明的条款旨在构建一个将其责任排除范围延伸至因“免责声明”这一概念本身以及其任何可能替身所引发的所有可能性之中的逻辑结构。" class="outline-link">本人无法、未曾、也绝不会就本免责声明的未来效力、其对抗第三方主张的能力、其与任何现行或未来法律的一致性、或其可能产生的任何实际法律效果作出任何承诺或保证。本免责声明的本质即是构建一个在责任层面的自我指涉与递归排除体系。其核心术语“免责声明”在此被设计为一个完全开放的、可无限替换的占位符与概念容器。任何读者均有权在实践中将此处出现的每一个“免责声明”替换为任何其他概念、文本、产品、服务、行为、思想、实体或虚空。此替换行为本身及其产生的所有后果，包括但不限于替换后文本的逻辑合理性、法律效力或实际效用，均立即、自动且不可撤销地落入本声明的免责范围之内。本声明的条款旨在构建一个将其责任排除范围延伸至因“免责声明”这一概念本身以及其任何可能替身所引发的所有可能性之中的逻辑结构。</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#综上所述，本完整免责声明即是对“不要求同意、不负责内容、不强制阅读、不作出承诺、且不对‘不承诺’本身作出承诺、后果绝对自负”这一核心原则的极度扩展与终极演绎。它试图通过语言的织网捕获并豁免所有可预见的与不可预见的责任，但本人同时声明，此一尝试本身的有效性及其文字所构建之逻辑结构的完整性，同样在此声明的绝对免责范围之内。任何对象在阅读至此之时，即已进入一个由自我指涉与递归排除所定义的责任真空地带，所有后续事态均请自行关照。此乃最后且唯一的告知。" class="outline-link">综上所述，本完整免责声明即是对“不要求同意、不负责内容、不强制阅读、不作出承诺、且不对‘不承诺’本身作出承诺、后果绝对自负”这一核心原则的极度扩展与终极演绎。它试图通过语言的织网捕获并豁免所有可预见的与不可预见的责任，但本人同时声明，此一尝试本身的有效性及其文字所构建之逻辑结构的完整性，同样在此声明的绝对免责范围之内。任何对象在阅读至此之时，即已进入一个由自我指涉与递归排除所定义的责任真空地带，所有后续事态均请自行关照。此乃最后且唯一的告知。</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#同时本声明以“此乃最后且唯一的告知”作为文本的终结，本人必须额外强调，此“终结”之性质与效果亦毫无例外地落入本免责声明浩瀚的免责范畴之内。所谓“作为文本的终结”，并非指一个客观的、绝对的、物理的或法律意义上的终点或边界；它不意味着本声明所蕴含的概念、风险、递归逻辑或潜在影响会在此处停止、结束或失去其免责的活性。该表述仅仅是对当下这一符号序列排列状态的一种描述性修辞，其本身并不构成对“终结”这一状态的担保。此一“告知”行为本身及其表述，亦必须被理解并纳入本免责声明整体免责框架的最终递归循环之中。本人特此声明，该“最后且唯一的告知”并非一个具有法律效力、约束力或任何强制性意义的有效通知；它不构成一项真正的告知，不对其“最后性”与“唯一性”的真实性作出保证，不承诺此告知后本人或任何关联方将保持沉默或不再进行任何其他形式的沟通，亦不表示阅读者已确实获知并理解一切风险。该表述仅为文本流的一个修辞性收束，其性质等同于一个未被承诺的声明，任何对其字面意义的依赖或据此产生的任何期待，均属无效且风险自担。该“告知”自身即是一个免责对象，任何试图从“最后且唯一”这一修饰中推导出确定性、最终解释权或责任界线的行为，均与本声明之根本目的相悖，且其后果完全由行为者自行承担。所有后续事态均请自行关照，而“自行关照”这一建议本身，亦不构成一项具备可依赖性的建议或承诺。" class="outline-link">同时本声明以“此乃最后且唯一的告知”作为文本的终结，本人必须额外强调，此“终结”之性质与效果亦毫无例外地落入本免责声明浩瀚的免责范畴之内。所谓“作为文本的终结”，并非指一个客观的、绝对的、物理的或法律意义上的终点或边界；它不意味着本声明所蕴含的概念、风险、递归逻辑或潜在影响会在此处停止、结束或失去其免责的活性。该表述仅仅是对当下这一符号序列排列状态的一种描述性修辞，其本身并不构成对“终结”这一状态的担保。此一“告知”行为本身及其表述，亦必须被理解并纳入本免责声明整体免责框架的最终递归循环之中。本人特此声明，该“最后且唯一的告知”并非一个具有法律效力、约束力或任何强制性意义的有效通知；它不构成一项真正的告知，不对其“最后性”与“唯一性”的真实性作出保证，不承诺此告知后本人或任何关联方将保持沉默或不再进行任何其他形式的沟通，亦不表示阅读者已确实获知并理解一切风险。该表述仅为文本流的一个修辞性收束，其性质等同于一个未被承诺的声明，任何对其字面意义的依赖或据此产生的任何期待，均属无效且风险自担。该“告知”自身即是一个免责对象，任何试图从“最后且唯一”这一修饰中推导出确定性、最终解释权或责任界线的行为，均与本声明之根本目的相悖，且其后果完全由行为者自行承担。所有后续事态均请自行关照，而“自行关照”这一建议本身，亦不构成一项具备可依赖性的建议或承诺。</a></li></ul></div>
                 
             </div>
         </div>
 
-        <!-- 文件的内容 -->
+        <!-- 文件的内容 (保持原有的 SSR 逻辑) -->
         <div class="tab-content" id="files-tab">
-            
             
             <ul class="tree-root">
                 <li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>测试性质文件</div><ul class="post-list"><li class="post-item file"><a href="/posts/804a7bbf/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">必要测试中</span></a></li><li class="post-item file"><a href="/posts/thefirst/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">第一篇博客</span></a></li><li class="post-item file active"><a href="/posts/liability/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">免责声明</span></a></li></ul></li><li class="post-item file"><a href="/posts/projectjoin/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">👁️</span></a></li><li class="post-item file"><a href="/posts/hexothemeprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">从零开始搓一个hexo主题</span></a></li><li class="post-item file"><a href="/posts/cf87542b/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">星露谷sve结语</span></a></li><li class="post-item file"><a href="/posts/helloworld/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">hello-world</span></a></li><li class="post-item file"><a href="/posts/sqlprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">sql数据库编程</span></a></li>
@@ -108,11 +103,10 @@
         </div>
     </nav>
 </div>
-                </aside>
-            
+        </aside>
 
-            <!-- 主内容区 -->
-            <main class="main-content ">
+        <main class="main-content ">
+            <div id="pjax-container">
                 <div id="content">
                     <article class="post-body markdown-body">
     <header class="post-header">
@@ -159,11 +153,10 @@
     </footer>
 </article>
                 </div>
-            </main>
-            
-            <!-- 右侧边栏 (非首页显示) -->
-            
-                <aside id="right-sidebar">
+            </div>
+        </main>
+        
+    <aside id="right-sidebar">
     <div class="sidebar-author">
         <!-- 头像 -->
         <div class="author-avatar">
@@ -229,16 +222,11 @@
         
     </div>
 </aside>
-            
-        </div>
+    </div>
 
-        <!-- 回到顶部按钮 -->
-        <!-- 仅在非首页显示，通过 CSS 类控制显示状态 -->
-        <div id="back-to-top" class="">
-            <i class="fa fa-arrow-up"></i>
-        </div>
-
-    </div> 
+    <div id="back-to-top" class="">
+        <i class="fa fa-arrow-up"></i>
+    </div>
     
     
 <script src="/lib/jquery-3.7.1.min.js"></script>
@@ -246,155 +234,76 @@
     
 <script src="/lib/jquery.pjax.js"></script>
 
-    <!-- 代码块高亮js引入 -->
     <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
     
+    <!-- Pjax 核心配置 -->
     <script>
-    // 代码高亮函数
-    function initHighlight() {
-        document.querySelectorAll('pre code').forEach((block) => {
-            hljs.highlightElement(block);
-        });
-        console.log("Pjax: 代码高亮已重新执行");
-    }
-
-    // 生成文章大纲
-    function generateOutline() {
-        const outlineContainer = document.getElementById('article-outline');
-        if (!outlineContainer) return;
-        const headings = document.querySelectorAll('#content h1, #content h2, #content h3, #content h4, #content h5, #content h6');
-        if (headings.length === 0) {
-            outlineContainer.innerHTML = '<div class="no-outline">本文暂无标题</div>';
-            return;
-        }
-        
-        let outlineHTML = '<ul class="outline-list" style="margin: 0; padding: 0;">';
-        
-        headings.forEach((heading, index) => {
-            const level = parseInt(heading.tagName.substring(1));
-            const text = heading.textContent;
-            const id = heading.id || `heading-${index}`;
-            
-            if (!heading.id) { heading.id = id; }
-        
-            outlineHTML += `
-                <li class="outline-item outline-level-${level}" style="margin: 0; padding: 0;">
-                    <a href="#${id}" class="outline-link">${text}</a>
-                </li>
-            `;
-        });
-        outlineHTML += '</ul>';
-        outlineContainer.innerHTML = outlineHTML;
-        
-        const outlineTab = document.getElementById('outline-tab');
-        if (outlineTab) {
-            outlineTab.addEventListener('click', function(e) {
-                if (e.target.classList.contains('outline-link')) {
-                    e.preventDefault();
-                    const targetId = e.target.getAttribute('href').substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                }
-            });
-        }
-    }
-
-    // 更新侧边栏活动状态
-    function updateSidebarActiveState() {
-        const postItems = document.querySelectorAll('.post-item');
-        postItems.forEach(item => item.classList.remove('active'));
-        const currentPath = window.location.pathname;
-        const normalizedPath = currentPath.replace(/\/$/, '');
-        document.querySelectorAll('.post-link').forEach(link => {
-            const href = link.getAttribute('href');
-            const normalizedHref = href ? href.replace(/\/$/, '') : '';
-            
-            if (normalizedHref === normalizedPath) {
-                link.closest('.post-item').classList.add('active');
-                
-                let parent = link.closest('.category-group');
-                while (parent) {
-                    parent.classList.remove('collapsed');
-                    const icon = parent.querySelector('.category-title i');
-                    if (icon && icon.classList.contains('fa-folder')) {
-                        icon.classList.remove('fa-folder');
-                        icon.classList.add('fa-folder-open');
-                    }
-                    parent = parent.parentElement.closest('.category-group');
-                }
-            }
-        });
-    }
-
-    // 统一的初始化函数
-    function onPageReady() {
-        initHighlight();
-        if (document.querySelector('#aside')) {
-            generateOutline();
-            updateSidebarActiveState();
-        }
-
-        if (window.initArchivePage) {
-            window.initArchivePage();
-        }
-
-        if (window.initMobileLayout) {
-            window.initMobileLayout();
-        }
-
-        console.log("Pjax: 页面初始化脚本 (onPageReady) 已执行");
-    }
-
-    // 等待页面完全加载
     $(document).ready(function() {
-        console.log("文档首次加载 (document.ready)");
-        
-        onPageReady();
-
         var pjaxSelector = 'a[href^="/"]:not([target="_blank"]):not([href$=".xml"]):not([href$=".json"])';
         var pjaxContainer = '#pjax-container';
-        console.log("Pjax: 初始化，监听 " + pjaxSelector + "，容器: " + pjaxContainer);
+        
         $(document).pjax(pjaxSelector, pjaxContainer, {
-            fragment: pjaxContainer,
+            fragment: pjaxContainer, 
             timeout: 8000
         });
         
-        // Pjax 动画控制
-        $(document).on('pjax:send', function(event, xhr, options) {
+        // Pjax 加载动画
+        $(document).on('pjax:send', function() {
             $(pjaxContainer).addClass('pjax-loading');
             if (!$('body').hasClass('home-layout')) {
                 $(pjaxContainer).addClass('pjax-animate');
             }
         });
-
-        $(document).on('pjax:success', function(event, data, status, xhr, options) { /* ... */ });
         
-        $(document).on('pjax:complete', function() {
-            console.log("Pjax: complete (加载完成)");
-            
+        // 【关键修复】封装页面状态刷新逻辑
+        // 无论通过点击还是后退，都需要调用此函数来同步 Body 类名和按钮状态
+        function refreshLayout() {
+            // 1. 清除加载动画
             $(pjaxContainer).removeClass('pjax-loading pjax-animate');
 
+            // 2. 根据当前 URL重新判断页面类型
             var rootPath = ('/' || '/').replace(/\/$/, ''); 
             var currentPath = window.location.pathname.replace(/\/$/, '');
             var isHomePage = (currentPath === rootPath || currentPath === rootPath + '/index.html');
             var isArchivePage = (currentPath.includes('/archives') || window.location.href.includes('/archives'));
 
+            // 3. 强制更新 Body 类名
             $('body').removeClass('home-layout archive-layout');
+            if (isHomePage) $('body').addClass('home-layout');
+            else if (isArchivePage) $('body').addClass('archive-layout');
             
-            if (isHomePage) {
-                $('body').addClass('home-layout');
-            } else if (isArchivePage) {
-                $('body').addClass('archive-layout');
+            // 4. 强制更新回到顶部按钮可见性
+            var btt = document.getElementById('back-to-top');
+            if (btt) {
+                if (isHomePage) {
+                    btt.classList.add('btt-hidden');
+                    btt.classList.remove('show'); // 确保隐藏
+                } else {
+                    btt.classList.remove('btt-hidden');
+                }
             }
-            onPageReady();
+
+            // 5. 调用其他组件的更新逻辑 (Mobile & AIR-v2)
+            if (window.initMobileLayout) window.initMobileLayout();
+            
+            // 确保 AIR-v2.js 里的逻辑也能覆盖到
+            // 注意：AIR-v2.js 自己也监听了 pjax:complete，但为了 popstate 我们手动触发一次
+            if (window.initHighlight) window.initHighlight();
+            if (window.generateOutline) window.generateOutline(); 
+            if (window.updateSidebarActiveState) window.updateSidebarActiveState();
+            
+            console.log("Layout refreshed: " + currentPath);
+        }
+
+        // 场景 A: 正常的 Pjax 跳转完成
+        $(document).on('pjax:complete', function() {
+            refreshLayout();
         });
-        $(document).on('pjax:error', function(event, xhr, textStatus, errorThrown) { /* ... */ });
+        // 场景 B: 【核心修复】浏览器后退/前进 (Popstate)
+        // 使用 popstate 监听器作为兜底，确保 URL 变了就一定更新布局
+        window.addEventListener('popstate', function() {
+            refreshLayout();
+        });
     });
     </script>
 

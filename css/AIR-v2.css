@@ -41,8 +41,6 @@
 @import url('https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-webfont/1.7.0/lxgwwenkai-regular.css');
 /* 霞鹜文楷等宽字体 已引入cdn */
 @import url('https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-webfont/1.7.0/lxgwwenkaimono-regular.css');
-/* font-awesome图标引入 */
-@import url('https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 /* 代码块高亮引入 */
 @import url('https://cdn.bootcdn.net/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css');
 
@@ -643,6 +641,7 @@ hr {
 .post-meta {
     font-size: 0.9em;
     color: var(--v-gray-700);
+    margin-top: 1rem;
 }
 
 .post-meta i {
@@ -700,6 +699,13 @@ hr {
   十五、主布局样式 
   (已适配三栏布局)
   ========================================================================== */
+/* 首页 (home-layout) 和 归档页 (archive-layout) 隐藏侧边栏 */
+body.home-layout #aside,
+body.home-layout #right-sidebar,
+body.archive-layout #aside,
+body.archive-layout #right-sidebar {
+    display: none !important;
+}
 
 /* 基本框架 */
 #main {
@@ -741,6 +747,16 @@ hr {
     min-width: 0; 
 }
 
+/* 首页下的内容宽度 */
+body.home-layout .main-content {
+    max-width: 100%;
+}
+/* 归档页下的内容宽度 */
+body.archive-layout .main-content {
+    max-width: 100%;
+    padding: 0;
+}
+
 #content {
     max-width: 960px;       /* 修改正文宽度 */
     margin: 0 auto;
@@ -780,6 +796,7 @@ hr {
 
 /* 1. 给内容区域 (#content) 设置基础过渡属性 */
 #content {
+    flex: 1; /* 撑满 main-content */
     opacity: 1;
     transform: none;
     filter: blur(0px);
@@ -795,7 +812,7 @@ hr {
 /* 2. 加载中状态 */
 /* 关键修改：只有当 #pjax-container 同时拥有 .pjax-loading 和 .pjax-animate 时才触发 */
 /* 这样我们在 JS 里如果不加 .pjax-animate，就不会有动画 */
-#pjax-container.pjax-loading.pjax-animate #content {
+#pjax-container.pjax-loading.pjax-animate {
     opacity: 0.01 !important;  
     filter: blur(5px);        
 }

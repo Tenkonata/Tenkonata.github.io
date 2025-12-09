@@ -12,8 +12,9 @@
     
         <link rel="icon" href="https://Tenkonata.github.io/picx-images-hosting/装饰/favicon.86u3byc1l2.webp">
     
+
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     
-    <!-- 本地库引入 -->
     
 <link rel="stylesheet" href="/css/AIR-v2.css">
 
@@ -21,17 +22,15 @@
 <link rel="stylesheet" href="/css/mobile.css">
 
     
-    <style>
-    .home-layout #main { display: block !important; }
-    .home-layout .main-content { max-width: 100% !important; width: 100% !important; }
-
-    .archive-layout #main {display: block !important;}
-    .archive-layout .main-content {max-width: 100% !important;width: 100% !important;padding: 0 !important;}
-
-    </style>
 <meta name="generator" content="Hexo 8.0.0"></head>
 
 <body class="post-body  ">
+    <script>
+        (function() {
+            var savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') document.body.classList.add('dark-mode');
+        })();
+    </script>
 
     <div id="mobile-overlay"></div>
     
@@ -74,13 +73,9 @@
     </div>
 </nav>
     
-    <div id="pjax-container">
-        
-        <div id="main">
-            <!-- 左侧边栏 (非首页显示) -->
-            
-                <aside id="aside">
-                    <div class="sidebar">
+    <div id="main">
+        <aside id="aside">
+            <div class="sidebar">
     <div class="sidebar-header">
         <div class="sidebar-tabs">
             <button class="tab-btn active" data-tab="outline">大纲</button>
@@ -89,18 +84,18 @@
     </div>
     
     <nav class="sidebar-nav">
-        <!-- 大纲的内容 -->
+        <!-- 大纲的内容 (服务端渲染版 SSR) -->
         <div class="tab-content active" id="outline-tab">
             <div class="outline-container">
                 
-                    <div id="article-outline"></div>
+                    
+                    <div id="article-outline"><ul class="outline-list" style="margin: 0; padding: 0;"><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#一、标题" class="outline-link">一、标题</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#这是二级标题" class="outline-link">这是二级标题</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#三级标题" class="outline-link">三级标题</a></li><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#二、段落" class="outline-link">二、段落</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#分割线" class="outline-link">分割线</a></li><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#三、字体显示" class="outline-link">三、字体显示</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#上下标" class="outline-link">上下标</a></li><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#四、列表" class="outline-link">四、列表</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#无序列表" class="outline-link">无序列表</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#有序列表" class="outline-link">有序列表</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#任务列表" class="outline-link">任务列表</a></li><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#五、区块" class="outline-link">五、区块</a></li><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#六、代码显示" class="outline-link">六、代码显示</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#行内代码" class="outline-link">行内代码</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#代码块" class="outline-link">代码块</a></li><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#七、链接" class="outline-link">七、链接</a></li><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#八、脚注" class="outline-link">八、脚注</a></li><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#九、插入图片" class="outline-link">九、插入图片</a></li><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#十、表格" class="outline-link">十、表格</a></li><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#十一、流程图" class="outline-link">十一、流程图</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#横向流程图" class="outline-link">横向流程图</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#竖向流程图" class="outline-link">竖向流程图</a></li><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#十二、表情符号" class="outline-link">十二、表情符号</a></li><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#十三、数学公式" class="outline-link">十三、数学公式</a></li><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#十四、支持的HTML元素" class="outline-link">十四、支持的HTML元素</a></li></ul></div>
                 
             </div>
         </div>
 
-        <!-- 文件的内容 -->
+        <!-- 文件的内容 (保持原有的 SSR 逻辑) -->
         <div class="tab-content" id="files-tab">
-            
             
             <ul class="tree-root">
                 <li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>测试性质文件</div><ul class="post-list"><li class="post-item file"><a href="/posts/804a7bbf/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">必要测试中</span></a></li><li class="post-item file active"><a href="/posts/thefirst/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">第一篇博客</span></a></li><li class="post-item file"><a href="/posts/liability/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">免责声明</span></a></li></ul></li><li class="post-item file"><a href="/posts/projectjoin/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">👁️</span></a></li><li class="post-item file"><a href="/posts/hexothemeprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">从零开始搓一个hexo主题</span></a></li><li class="post-item file"><a href="/posts/cf87542b/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">星露谷sve结语</span></a></li><li class="post-item file"><a href="/posts/helloworld/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">hello-world</span></a></li><li class="post-item file"><a href="/posts/sqlprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">sql数据库编程</span></a></li>
@@ -108,11 +103,10 @@
         </div>
     </nav>
 </div>
-                </aside>
-            
+        </aside>
 
-            <!-- 主内容区 -->
-            <main class="main-content ">
+        <main class="main-content ">
+            <div id="pjax-container">
                 <div id="content">
                     <article class="post-body markdown-body">
     <header class="post-header">
@@ -259,11 +253,10 @@ int main()
     </footer>
 </article>
                 </div>
-            </main>
-            
-            <!-- 右侧边栏 (非首页显示) -->
-            
-                <aside id="right-sidebar">
+            </div>
+        </main>
+        
+    <aside id="right-sidebar">
     <div class="sidebar-author">
         <!-- 头像 -->
         <div class="author-avatar">
@@ -329,16 +322,11 @@ int main()
         
     </div>
 </aside>
-            
-        </div>
+    </div>
 
-        <!-- 回到顶部按钮 -->
-        <!-- 仅在非首页显示，通过 CSS 类控制显示状态 -->
-        <div id="back-to-top" class="">
-            <i class="fa fa-arrow-up"></i>
-        </div>
-
-    </div> 
+    <div id="back-to-top" class="">
+        <i class="fa fa-arrow-up"></i>
+    </div>
     
     
 <script src="/lib/jquery-3.7.1.min.js"></script>
@@ -346,155 +334,76 @@ int main()
     
 <script src="/lib/jquery.pjax.js"></script>
 
-    <!-- 代码块高亮js引入 -->
     <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
     
+    <!-- Pjax 核心配置 -->
     <script>
-    // 代码高亮函数
-    function initHighlight() {
-        document.querySelectorAll('pre code').forEach((block) => {
-            hljs.highlightElement(block);
-        });
-        console.log("Pjax: 代码高亮已重新执行");
-    }
-
-    // 生成文章大纲
-    function generateOutline() {
-        const outlineContainer = document.getElementById('article-outline');
-        if (!outlineContainer) return;
-        const headings = document.querySelectorAll('#content h1, #content h2, #content h3, #content h4, #content h5, #content h6');
-        if (headings.length === 0) {
-            outlineContainer.innerHTML = '<div class="no-outline">本文暂无标题</div>';
-            return;
-        }
-        
-        let outlineHTML = '<ul class="outline-list" style="margin: 0; padding: 0;">';
-        
-        headings.forEach((heading, index) => {
-            const level = parseInt(heading.tagName.substring(1));
-            const text = heading.textContent;
-            const id = heading.id || `heading-${index}`;
-            
-            if (!heading.id) { heading.id = id; }
-        
-            outlineHTML += `
-                <li class="outline-item outline-level-${level}" style="margin: 0; padding: 0;">
-                    <a href="#${id}" class="outline-link">${text}</a>
-                </li>
-            `;
-        });
-        outlineHTML += '</ul>';
-        outlineContainer.innerHTML = outlineHTML;
-        
-        const outlineTab = document.getElementById('outline-tab');
-        if (outlineTab) {
-            outlineTab.addEventListener('click', function(e) {
-                if (e.target.classList.contains('outline-link')) {
-                    e.preventDefault();
-                    const targetId = e.target.getAttribute('href').substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                }
-            });
-        }
-    }
-
-    // 更新侧边栏活动状态
-    function updateSidebarActiveState() {
-        const postItems = document.querySelectorAll('.post-item');
-        postItems.forEach(item => item.classList.remove('active'));
-        const currentPath = window.location.pathname;
-        const normalizedPath = currentPath.replace(/\/$/, '');
-        document.querySelectorAll('.post-link').forEach(link => {
-            const href = link.getAttribute('href');
-            const normalizedHref = href ? href.replace(/\/$/, '') : '';
-            
-            if (normalizedHref === normalizedPath) {
-                link.closest('.post-item').classList.add('active');
-                
-                let parent = link.closest('.category-group');
-                while (parent) {
-                    parent.classList.remove('collapsed');
-                    const icon = parent.querySelector('.category-title i');
-                    if (icon && icon.classList.contains('fa-folder')) {
-                        icon.classList.remove('fa-folder');
-                        icon.classList.add('fa-folder-open');
-                    }
-                    parent = parent.parentElement.closest('.category-group');
-                }
-            }
-        });
-    }
-
-    // 统一的初始化函数
-    function onPageReady() {
-        initHighlight();
-        if (document.querySelector('#aside')) {
-            generateOutline();
-            updateSidebarActiveState();
-        }
-
-        if (window.initArchivePage) {
-            window.initArchivePage();
-        }
-
-        if (window.initMobileLayout) {
-            window.initMobileLayout();
-        }
-
-        console.log("Pjax: 页面初始化脚本 (onPageReady) 已执行");
-    }
-
-    // 等待页面完全加载
     $(document).ready(function() {
-        console.log("文档首次加载 (document.ready)");
-        
-        onPageReady();
-
         var pjaxSelector = 'a[href^="/"]:not([target="_blank"]):not([href$=".xml"]):not([href$=".json"])';
         var pjaxContainer = '#pjax-container';
-        console.log("Pjax: 初始化，监听 " + pjaxSelector + "，容器: " + pjaxContainer);
+        
         $(document).pjax(pjaxSelector, pjaxContainer, {
-            fragment: pjaxContainer,
+            fragment: pjaxContainer, 
             timeout: 8000
         });
         
-        // Pjax 动画控制
-        $(document).on('pjax:send', function(event, xhr, options) {
+        // Pjax 加载动画
+        $(document).on('pjax:send', function() {
             $(pjaxContainer).addClass('pjax-loading');
             if (!$('body').hasClass('home-layout')) {
                 $(pjaxContainer).addClass('pjax-animate');
             }
         });
-
-        $(document).on('pjax:success', function(event, data, status, xhr, options) { /* ... */ });
         
-        $(document).on('pjax:complete', function() {
-            console.log("Pjax: complete (加载完成)");
-            
+        // 【关键修复】封装页面状态刷新逻辑
+        // 无论通过点击还是后退，都需要调用此函数来同步 Body 类名和按钮状态
+        function refreshLayout() {
+            // 1. 清除加载动画
             $(pjaxContainer).removeClass('pjax-loading pjax-animate');
 
+            // 2. 根据当前 URL重新判断页面类型
             var rootPath = ('/' || '/').replace(/\/$/, ''); 
             var currentPath = window.location.pathname.replace(/\/$/, '');
             var isHomePage = (currentPath === rootPath || currentPath === rootPath + '/index.html');
             var isArchivePage = (currentPath.includes('/archives') || window.location.href.includes('/archives'));
 
+            // 3. 强制更新 Body 类名
             $('body').removeClass('home-layout archive-layout');
+            if (isHomePage) $('body').addClass('home-layout');
+            else if (isArchivePage) $('body').addClass('archive-layout');
             
-            if (isHomePage) {
-                $('body').addClass('home-layout');
-            } else if (isArchivePage) {
-                $('body').addClass('archive-layout');
+            // 4. 强制更新回到顶部按钮可见性
+            var btt = document.getElementById('back-to-top');
+            if (btt) {
+                if (isHomePage) {
+                    btt.classList.add('btt-hidden');
+                    btt.classList.remove('show'); // 确保隐藏
+                } else {
+                    btt.classList.remove('btt-hidden');
+                }
             }
-            onPageReady();
+
+            // 5. 调用其他组件的更新逻辑 (Mobile & AIR-v2)
+            if (window.initMobileLayout) window.initMobileLayout();
+            
+            // 确保 AIR-v2.js 里的逻辑也能覆盖到
+            // 注意：AIR-v2.js 自己也监听了 pjax:complete，但为了 popstate 我们手动触发一次
+            if (window.initHighlight) window.initHighlight();
+            if (window.generateOutline) window.generateOutline(); 
+            if (window.updateSidebarActiveState) window.updateSidebarActiveState();
+            
+            console.log("Layout refreshed: " + currentPath);
+        }
+
+        // 场景 A: 正常的 Pjax 跳转完成
+        $(document).on('pjax:complete', function() {
+            refreshLayout();
         });
-        $(document).on('pjax:error', function(event, xhr, textStatus, errorThrown) { /* ... */ });
+        // 场景 B: 【核心修复】浏览器后退/前进 (Popstate)
+        // 使用 popstate 监听器作为兜底，确保 URL 变了就一定更新布局
+        window.addEventListener('popstate', function() {
+            refreshLayout();
+        });
     });
     </script>
 
