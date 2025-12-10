@@ -812,7 +812,7 @@ body.archive-layout .main-content {
 /* 2. 加载中状态 */
 /* 关键修改：只有当 #pjax-container 同时拥有 .pjax-loading 和 .pjax-animate 时才触发 */
 /* 这样我们在 JS 里如果不加 .pjax-animate，就不会有动画 */
-#pjax-container.pjax-loading.pjax-animate {
+#pjax-container.pjax-loading.pjax-animate #content {
     opacity: 0.01 !important;  
     filter: blur(5px);        
 }

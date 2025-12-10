@@ -206,17 +206,13 @@ body.archive-layout {
     opacity: 1;
     max-height: 500px; /* 足夠大的高度，容納內容 */
     margin-bottom: 20px;
-    transform: translateY(0) scale(1);
     transform-origin: top center;
-    
     /* 關鍵過渡配置：所有屬性平滑過渡 */
     transition: 
         opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
         transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
         max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
         margin-bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        
-    overflow: hidden; /* 必須，否則 max-height 收縮時內容會溢出 */
     will-change: transform, opacity, max-height, margin-bottom;
 }
 
@@ -264,7 +260,6 @@ body.archive-layout {
     opacity: 0;
     transition: opacity 0.3s;
 }
-.archive-card:hover::before { opacity: 1; }
 
 /* 卡片内容 */
 .card-meta {
@@ -613,6 +608,8 @@ window.initArchivePage = function() {
             
                 <p>正在改写所有使用逻辑！</p>
             
+                <p>“我不会再修复任何刷新问题”“trash,waste,rubbish,etc.”</p>
+            
         </div>
         
         
@@ -722,9 +719,6 @@ window.initArchivePage = function() {
 
             // 5. 调用其他组件的更新逻辑 (Mobile & AIR-v2)
             if (window.initMobileLayout) window.initMobileLayout();
-            
-            // 确保 AIR-v2.js 里的逻辑也能覆盖到
-            // 注意：AIR-v2.js 自己也监听了 pjax:complete，但为了 popstate 我们手动触发一次
             if (window.initHighlight) window.initHighlight();
             if (window.generateOutline) window.generateOutline(); 
             if (window.updateSidebarActiveState) window.updateSidebarActiveState();

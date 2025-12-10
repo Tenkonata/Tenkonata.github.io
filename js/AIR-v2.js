@@ -181,21 +181,3 @@ document.addEventListener('DOMContentLoaded', function() {
         btt.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
     }
 });
-
-// ==========================================================
-// Pjax 完整处理逻辑
-// ==========================================================
-$(document).on('pjax:complete', function() {
-    // 页面内容变了，必须重新执行所有逻辑
-    window.initHighlight();
-    window.generateOutline();       // 重算大纲
-    window.updateSidebarActiveState(); // 重算侧边栏高亮
-    
-    // 隐藏回到顶部
-    const btt = document.getElementById('back-to-top');
-    if(btt) btt.classList.remove('show');
-    
-    // 如果有归档页或移动端的特定逻辑，也需要在这里调用
-    if (window.initArchivePage) window.initArchivePage();
-    if (window.initMobileLayout) window.initMobileLayout();
-});

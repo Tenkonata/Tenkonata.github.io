@@ -850,6 +850,8 @@ create table list_name
             
                 <p>正在改写所有使用逻辑！</p>
             
+                <p>“我不会再修复任何刷新问题”“trash,waste,rubbish,etc.”</p>
+            
         </div>
         
         
@@ -959,9 +961,6 @@ create table list_name
 
             // 5. 调用其他组件的更新逻辑 (Mobile & AIR-v2)
             if (window.initMobileLayout) window.initMobileLayout();
-            
-            // 确保 AIR-v2.js 里的逻辑也能覆盖到
-            // 注意：AIR-v2.js 自己也监听了 pjax:complete，但为了 popstate 我们手动触发一次
             if (window.initHighlight) window.initHighlight();
             if (window.generateOutline) window.generateOutline(); 
             if (window.updateSidebarActiveState) window.updateSidebarActiveState();
