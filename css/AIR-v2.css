@@ -659,6 +659,10 @@ hr {
     font-size: 1rem;      /* 字体大小 */
 }
 
+.post-content p {
+    margin-bottom: 1.5em; /* 恢复段落之间的空隙 */
+}
+
 /* 文章底部导航 */
 .post-footer {
     margin-top: 3rem;

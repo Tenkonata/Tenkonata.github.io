@@ -11,9 +11,12 @@ window.generateOutline = function() {
     if (!outlineWrapper || !content) return;
 
     const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
-    
-    let listHTML = '<ul class="outline-list" style="margin: 0; padding: 0;">';
-    headings.forEach((heading, index) => {
+    if (headings.length === 0) {
+        outlineWrapper.innerHTML = '<div class="no-outline">暂无大纲</div>';
+    }
+    else{
+        let listHTML = '<ul class="outline-list" style="margin: 0; padding: 0;">';
+        headings.forEach((heading, index) => {
         const level = parseInt(heading.tagName.substring(1));
         const text = heading.textContent;
         const id = heading.id || `heading-${index}`;
@@ -29,6 +32,8 @@ window.generateOutline = function() {
     
     // 直接覆盖，无需比对
     outlineWrapper.innerHTML = `<div id="article-outline">${listHTML}</div>`;
+    }
+    
     
     // 自动切换到大纲 Tab 并播放动画
     const sidebar = document.querySelector('.sidebar');
@@ -153,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const id = tabBtn.getAttribute('data-tab');
             const sidebar = tabBtn.closest('.sidebar');
             
-            sidebar.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
+            sidebar.querySelectorAll('.tab-btn.active, .tab-content.active').forEach(el => el.classList.remove('active'));
             tabBtn.classList.add('active');
             
             const content = sidebar.querySelector(`#${id}-tab`);

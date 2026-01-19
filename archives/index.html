@@ -88,8 +88,6 @@
         <div class="tab-content active" id="outline-tab">
             <div class="outline-container">
                 
-                    <div class="no-outline">请打开一篇文章查看大纲</div>
-                
             </div>
         </div>
 
@@ -97,7 +95,7 @@
         <div class="tab-content" id="files-tab">
             
             <ul class="tree-root">
-                <li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>测试性质文件</div><ul class="post-list"><li class="post-item file"><a href="/posts/804a7bbf/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">必要测试中</span></a></li><li class="post-item file"><a href="/posts/thefirst/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">第一篇博客</span></a></li><li class="post-item file"><a href="/posts/liability/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">免责声明</span></a></li></ul></li><li class="post-item file"><a href="/posts/projectjoin/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">👁️</span></a></li><li class="post-item file"><a href="/posts/hexothemeprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">从零开始搓一个hexo主题</span></a></li><li class="post-item file"><a href="/posts/cf87542b/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">星露谷sve结语</span></a></li><li class="post-item file"><a href="/posts/helloworld/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">hello-world</span></a></li><li class="post-item file"><a href="/posts/sqlprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">sql数据库编程</span></a></li>
+                <li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>测试性质文件</div><ul class="post-list"><li class="post-item file"><a href="/posts/804a7bbf/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">必要测试中</span></a></li><li class="post-item file"><a href="/posts/thefirst/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">第一篇博客</span></a></li><li class="post-item file"><a href="/posts/liability/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">免责声明</span></a></li></ul></li><li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>天马行空</div><ul class="post-list"><li class="post-item file"><a href="/posts/Snippet1/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">Snippet_1</span></a></li><li class="post-item file"><a href="/posts/Snippet2/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">Snippet_2</span></a></li></ul></li><li class="post-item file"><a href="/posts/projectjoin/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">👁️</span></a></li><li class="post-item file"><a href="/posts/hexothemeprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">从零开始搓一个hexo主题</span></a></li><li class="post-item file"><a href="/posts/cf87542b/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">星露谷sve结语</span></a></li><li class="post-item file"><a href="/posts/helloworld/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">hello-world</span></a></li><li class="post-item file"><a href="/posts/sqlprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">sql数据库编程</span></a></li>
             </ul>
         </div>
     </nav>
@@ -200,23 +198,25 @@ body.archive-layout {
     gap: 0; 
 }
 
-/* 文章卡片容器 (用於包裹內容，負責高度和間距動畫) */
+/* 文章卡片容器 */
 .archive-card-wrapper {
-    /* 默認狀態 */
     opacity: 1;
-    max-height: 500px; /* 足夠大的高度，容納內容 */
+    max-height: 500px;
     margin-bottom: 20px;
+    transform: translateY(0) scale(1);
     transform-origin: top center;
-    /* 關鍵過渡配置：所有屬性平滑過渡 */
+    
     transition: 
         opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
         transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
         max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
         margin-bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        
+    overflow: hidden; 
     will-change: transform, opacity, max-height, margin-bottom;
 }
 
-/* 文章卡片本體 (負責樣式) */
+/* 文章卡片本体 */
 .archive-card {
     background: var(--v-white-100);
     border-radius: 12px;
@@ -260,6 +260,7 @@ body.archive-layout {
     opacity: 0;
     transition: opacity 0.3s;
 }
+.archive-card:hover::before { opacity: 1; }
 
 /* 卡片内容 */
 .card-meta {
@@ -340,8 +341,52 @@ body.archive-layout {
     <div class="archive-list" id="archive-container">
         
             <div class="archive-card-wrapper" 
-                 data-search-text="必要测试中 2025-12-07 测试">
+                 data-search-text="snippet_2 2026-01-19 ">
                 <div class="archive-card" style="--i: 0;">
+                    <div class="card-meta">
+                        2026/01/19
+                    </div>
+
+                    <a href="/posts/Snippet2/" class="card-title">
+                        Snippet_2
+                    </a>
+
+                    <div class="card-tags">
+                        <span class="tag-item" style="margin-right: 10px;">
+                            <i class="fa fa-tag"></i> 
+                            
+                                笔记
+                            
+                        </span>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="archive-card-wrapper" 
+                 data-search-text="snippet_1 2025-12-12 随笔">
+                <div class="archive-card" style="--i: 1;">
+                    <div class="card-meta">
+                        2025/12/12
+                    </div>
+
+                    <a href="/posts/Snippet1/" class="card-title">
+                        Snippet_1
+                    </a>
+
+                    <div class="card-tags">
+                        <span class="tag-item" style="margin-right: 10px;">
+                            <i class="fa fa-tag"></i> 
+                            
+                                随笔
+                            
+                        </span>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="archive-card-wrapper" 
+                 data-search-text="必要测试中 2025-12-07 测试">
+                <div class="archive-card" style="--i: 2;">
                     <div class="card-meta">
                         2025/12/07
                     </div>
@@ -363,7 +408,7 @@ body.archive-layout {
         
             <div class="archive-card-wrapper" 
                  data-search-text="免责声明 2025-12-01 ">
-                <div class="archive-card" style="--i: 1;">
+                <div class="archive-card" style="--i: 3;">
                     <div class="card-meta">
                         2025/12/01
                     </div>
@@ -385,7 +430,7 @@ body.archive-layout {
         
             <div class="archive-card-wrapper" 
                  data-search-text="星露谷sve结语 2025-11-23 ">
-                <div class="archive-card" style="--i: 2;">
+                <div class="archive-card" style="--i: 4;">
                     <div class="card-meta">
                         2025/11/23
                     </div>
@@ -407,7 +452,7 @@ body.archive-layout {
         
             <div class="archive-card-wrapper" 
                  data-search-text="sql server 数据库编程 2025-11-13 ">
-                <div class="archive-card" style="--i: 3;">
+                <div class="archive-card" style="--i: 5;">
                     <div class="card-meta">
                         2025/11/13
                     </div>
@@ -429,7 +474,7 @@ body.archive-layout {
         
             <div class="archive-card-wrapper" 
                  data-search-text="hexo主题开发及部署教程 2025-11-02 ">
-                <div class="archive-card" style="--i: 4;">
+                <div class="archive-card" style="--i: 6;">
                     <div class="card-meta">
                         2025/11/02
                     </div>
@@ -451,7 +496,7 @@ body.archive-layout {
         
             <div class="archive-card-wrapper" 
                  data-search-text="👁️ 2025-10-28 ">
-                <div class="archive-card" style="--i: 5;">
+                <div class="archive-card" style="--i: 7;">
                     <div class="card-meta">
                         2025/10/28
                     </div>
@@ -473,7 +518,7 @@ body.archive-layout {
         
             <div class="archive-card-wrapper" 
                  data-search-text="第一篇博客 2025-10-20 ">
-                <div class="archive-card" style="--i: 6;">
+                <div class="archive-card" style="--i: 8;">
                     <div class="card-meta">
                         2025/10/20
                     </div>
@@ -495,7 +540,7 @@ body.archive-layout {
         
             <div class="archive-card-wrapper" 
                  data-search-text="hello world 2025-10-12 ">
-                <div class="archive-card" style="--i: 7;">
+                <div class="archive-card" style="--i: 9;">
                     <div class="card-meta">
                         2025/10/12
                     </div>
@@ -524,18 +569,25 @@ body.archive-layout {
 
 <script>
 window.initArchivePage = function() {
-    const searchInput = document.getElementById('archive-search');
-    // 如果找不到搜索框，说明当前不是归档页，直接退出
-    if (!searchInput) return;
+    // 1. 获取当前页面的搜索框
+    const activeInput = document.getElementById('archive-search');
+    
+    // 如果找不到搜索框（非归档页），直接退出
+    if (!activeInput) return;
+
+    // 【关键修复】检查是否已初始化，防止重复绑定
+    // 使用 dataset 标记，如果已存在标记，说明事件已绑定，无需重复操作
+    if (activeInput.dataset.init === 'true') {
+        console.log("Archive search already initialized.");
+        return;
+    }
+    
+    // 标记为已初始化
+    activeInput.dataset.init = 'true';
 
     const cardWrappers = document.querySelectorAll('.archive-card-wrapper');
     const noResult = document.getElementById('no-result');
-
-    const newSearchInput = searchInput.cloneNode(true);
-    searchInput.parentNode.replaceChild(newSearchInput, searchInput);
-
-    const activeInput = document.getElementById('archive-search');
-
+    
     let isComposing = false;
 
     function doSearch() {
@@ -566,6 +618,7 @@ window.initArchivePage = function() {
         }
     }
 
+    // 绑定事件
     activeInput.addEventListener('compositionstart', function() {isComposing = true;});
     activeInput.addEventListener('compositionend', function() {isComposing = false;doSearch();});
 
@@ -617,7 +670,7 @@ window.initArchivePage = function() {
         <div class="site-state-wrap">
             <a href="/archives/" class="site-state-item">
                 <span class="site-state-item-name">POSTS</span>
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
             </a>
             <div class="site-state-item">
                 <span class="site-state-item-name">LIKES</span>
@@ -689,7 +742,7 @@ window.initArchivePage = function() {
             }
         });
         
-        // 【关键修复】封装页面状态刷新逻辑
+        // 封装页面状态刷新逻辑
         // 无论通过点击还是后退，都需要调用此函数来同步 Body 类名和按钮状态
         function refreshLayout() {
             // 1. 清除加载动画
@@ -722,6 +775,7 @@ window.initArchivePage = function() {
             if (window.initHighlight) window.initHighlight();
             if (window.generateOutline) window.generateOutline(); 
             if (window.updateSidebarActiveState) window.updateSidebarActiveState();
+            if (window.initArchivePage) window.initArchivePage();
             
             console.log("Layout refreshed: " + currentPath);
         }
@@ -730,6 +784,7 @@ window.initArchivePage = function() {
         $(document).on('pjax:complete', function() {
             refreshLayout();
         });
+        refreshLayout();
         // 场景 B: 【核心修复】浏览器后退/前进 (Popstate)
         // 使用 popstate 监听器作为兜底，确保 URL 变了就一定更新布局
         window.addEventListener('popstate', function() {

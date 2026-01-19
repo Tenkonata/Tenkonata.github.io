@@ -98,7 +98,7 @@
         <div class="tab-content" id="files-tab">
             
             <ul class="tree-root">
-                <li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>测试性质文件</div><ul class="post-list"><li class="post-item file"><a href="/posts/804a7bbf/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">必要测试中</span></a></li><li class="post-item file"><a href="/posts/thefirst/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">第一篇博客</span></a></li><li class="post-item file"><a href="/posts/liability/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">免责声明</span></a></li></ul></li><li class="post-item file"><a href="/posts/projectjoin/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">👁️</span></a></li><li class="post-item file active"><a href="/posts/hexothemeprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">从零开始搓一个hexo主题</span></a></li><li class="post-item file"><a href="/posts/cf87542b/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">星露谷sve结语</span></a></li><li class="post-item file"><a href="/posts/helloworld/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">hello-world</span></a></li><li class="post-item file"><a href="/posts/sqlprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">sql数据库编程</span></a></li>
+                <li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>测试性质文件</div><ul class="post-list"><li class="post-item file"><a href="/posts/804a7bbf/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">必要测试中</span></a></li><li class="post-item file"><a href="/posts/thefirst/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">第一篇博客</span></a></li><li class="post-item file"><a href="/posts/liability/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">免责声明</span></a></li></ul></li><li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>天马行空</div><ul class="post-list"><li class="post-item file"><a href="/posts/Snippet1/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">Snippet_1</span></a></li><li class="post-item file"><a href="/posts/Snippet2/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">Snippet_2</span></a></li></ul></li><li class="post-item file"><a href="/posts/projectjoin/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">👁️</span></a></li><li class="post-item file active"><a href="/posts/hexothemeprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">从零开始搓一个hexo主题</span></a></li><li class="post-item file"><a href="/posts/cf87542b/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">星露谷sve结语</span></a></li><li class="post-item file"><a href="/posts/helloworld/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">hello-world</span></a></li><li class="post-item file"><a href="/posts/sqlprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">sql数据库编程</span></a></li>
             </ul>
         </div>
     </nav>
@@ -256,7 +256,7 @@
         <div class="site-state-wrap">
             <a href="/archives/" class="site-state-item">
                 <span class="site-state-item-name">POSTS</span>
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
             </a>
             <div class="site-state-item">
                 <span class="site-state-item-name">LIKES</span>
@@ -328,7 +328,7 @@
             }
         });
         
-        // 【关键修复】封装页面状态刷新逻辑
+        // 封装页面状态刷新逻辑
         // 无论通过点击还是后退，都需要调用此函数来同步 Body 类名和按钮状态
         function refreshLayout() {
             // 1. 清除加载动画
@@ -361,6 +361,7 @@
             if (window.initHighlight) window.initHighlight();
             if (window.generateOutline) window.generateOutline(); 
             if (window.updateSidebarActiveState) window.updateSidebarActiveState();
+            if (window.initArchivePage) window.initArchivePage();
             
             console.log("Layout refreshed: " + currentPath);
         }
@@ -369,6 +370,7 @@
         $(document).on('pjax:complete', function() {
             refreshLayout();
         });
+        refreshLayout();
         // 场景 B: 【核心修复】浏览器后退/前进 (Popstate)
         // 使用 popstate 监听器作为兜底，确保 URL 变了就一定更新布局
         window.addEventListener('popstate', function() {
