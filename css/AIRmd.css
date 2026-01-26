@@ -1,0 +1,360 @@
+/* ==========================================================================
+   AIR-v3 Markdown 独立样式表 (AIRmd.css)
+   说明: 专门处理文章内容(Markdown渲染后)的样式，适配深色深空主题
+   ========================================================================== */
+
+:root {
+    /* --- 核心色板 (Dark Mode 适配) --- */
+    --md-text-color: #e0e0e0;          /* 正文颜色 */
+    --md-heading-color: #ffffff;       /* 标题颜色 */
+    --md-primary-color: #52aeff;       /* 主色调 (链接、重点) */
+    --md-link-hover-color: #ffc069;    /* 链接悬停色 */
+    
+    /* --- 标题指示条颜色 --- */
+    --md-h1-indicator: #ff7875;        /* 红 */
+    --md-h2-indicator: #ff9c6e;        /* 橙 */
+    --md-h3-indicator: #ffc069;        /* 黄 */
+    --md-h4-indicator: #95de64;        /* 绿 */
+    --md-h5-indicator: #5cdbd3;        /* 青 */
+    --md-h6-indicator: #597ef7;        /* 蓝 */
+
+    /* --- 功能组件颜色 --- */
+    --md-quote-bg: rgba(82, 174, 255, 0.1);      /* 引用块背景 (半透明蓝) */
+    --md-quote-border: #52aeff;                  /* 引用块左边框 */
+    
+    --md-code-block-bg: #1e222d;                 /* 代码块背景 (比卡片背景稍深) */
+    --md-code-block-header: #282c34;             /* 代码块顶部栏背景 */
+    --md-code-text: #abb2bf;                     /* 代码文字颜色 */
+    
+    --md-inline-code-bg: rgba(255, 255, 255, 0.15); /* 行内代码背景 */
+    --md-inline-code-text: #ff9c6e;                 /* 行内代码文字 */
+
+    --md-border-color: rgba(255, 255, 255, 0.1);    /* 通用边框/分割线 */
+    
+    --md-table-head-bg: rgba(82, 174, 255, 0.2);    /* 表头背景 */
+    --md-table-row-even: rgba(255, 255, 255, 0.05); /* 偶数行背景 */
+
+    --md-highlight-bg: #fadb14;                   /* 高亮背景 (亮黄) */
+    --md-highlight-text: #000000;                 /* 高亮文字 (黑) */
+}
+
+/* 容器类名约定: .post-content
+   请在 post.ejs 中使用 <div class="post-content"><%- post.content %></div> 
+*/
+
+/* =========================================
+   1. 基础排版
+   ========================================= */
+.post-content {
+    color: var(--md-text-color);
+    line-height: 1.8;
+    font-size: 1.1rem;
+    word-wrap: break-word;
+}
+
+.post-content p {
+    margin: 1em 0;
+}
+
+/* =========================================
+   2. 标题样式框架
+   ========================================= */
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+    position: relative;
+    padding-left: 16px;
+    margin: 40px 0 20px 0;
+    color: var(--md-heading-color);
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+/* 标题左侧指示条 (伪元素) */
+.post-content h1::before,
+.post-content h2::before,
+.post-content h3::before,
+.post-content h4::before,
+.post-content h5::before,
+.post-content h6::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.15em;
+    bottom: 0.15em;
+    width: 4px;
+    border-radius: 2px;
+}
+
+.post-content h1::before { background-color: var(--md-h1-indicator); }
+.post-content h2::before { background-color: var(--md-h2-indicator); }
+.post-content h3::before { background-color: var(--md-h3-indicator); }
+.post-content h4::before { background-color: var(--md-h4-indicator); }
+.post-content h5::before { background-color: var(--md-h5-indicator); }
+.post-content h6::before { background-color: var(--md-h6-indicator); }
+
+.post-content h1 { font-size: 1.8em; }
+.post-content h2 { font-size: 1.6em; }
+.post-content h3 { font-size: 1.4em; }
+.post-content h4 { font-size: 1.2em; }
+.post-content h5 { font-size: 1.1em; }
+.post-content h6 { font-size: 1em; }
+
+/* 紧跟标题的元素去除顶部边距 */
+.post-content h1 + *, .post-content h2 + *, .post-content h3 + *, 
+.post-content h4 + *, .post-content h5 + *, .post-content h6 + * {
+    margin-top: 0;
+}
+
+/* =========================================
+   3. 引用块样式框架
+   ========================================= */
+.post-content blockquote {
+    margin: 20px 0;
+    padding: 12px 16px;
+    background: var(--md-quote-bg);
+    border-left: 4px solid var(--md-quote-border);
+    border-radius: 4px;
+    color: var(--md-text-color);
+}
+
+.post-content blockquote p {
+    margin: 8px 0;
+}
+
+.post-content blockquote > *:first-child { margin-top: 0; }
+.post-content blockquote > *:last-child { margin-bottom: 0; }
+
+/* =========================================
+   4. 链接样式框架
+   ========================================= */
+.post-content a {
+    color: var(--md-primary-color);
+    text-decoration: none;
+    position: relative;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.post-content a:hover {
+    color: var(--md-link-hover-color);
+}
+
+/* 链接底部横线动画 (排除图片链接) */
+.post-content a:not(:has(img))::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background-color: var(--md-link-hover-color);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease-out;
+}
+
+.post-content a:hover::after {
+    transform: scaleX(1);
+}
+
+/* =========================================
+   5. 文本高亮样式框架
+   ========================================= */
+.post-content mark {
+    background-color: var(--md-highlight-bg);
+    color: var(--md-highlight-text);
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+/* =========================================
+   6. 水平分割线样式框架
+   ========================================= */
+.post-content hr {
+    margin: 40px 0;
+    border: none;
+    height: 1px;
+    background-image: linear-gradient(
+        to right, 
+        rgba(255, 255, 255, 0), 
+        var(--md-border-color), 
+        rgba(255, 255, 255, 0)
+    );
+}
+
+/* =========================================
+   7. 行内代码样式框架
+   ========================================= */
+.post-content :not(pre) > code {
+    padding: 2px 6px;
+    margin: 0 4px;
+    font-family: "Consolas", "Monaco", monospace;
+    font-size: 0.9em;
+    background-color: var(--md-inline-code-bg);
+    color: var(--md-inline-code-text);
+    border-radius: 4px;
+}
+
+/* =========================================
+   8. 列表样式框架
+   ========================================= */
+.post-content ul, 
+.post-content ol {
+    margin: 16px 0;
+    padding-left: 2em;
+}
+
+.post-content li {
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+/* 无序列表自定义样式 (短横线) */
+/* 仅当 li 不包含 checkbox 时生效，避免影响 todo list */
+.post-content ul {
+    list-style: none; /* 移除默认圆点 */
+    padding-left: 1.5em;
+}
+
+.post-content ul li:not(:has(input[type="checkbox"])) {
+    position: relative;
+}
+
+.post-content ul li:not(:has(input[type="checkbox"]))::before {
+    content: "";
+    position: absolute;
+    left: -1em;
+    top: 0.7em; /* 垂直居中调整 */
+    width: 8px;
+    height: 2px;
+    background-color: var(--md-primary-color);
+    opacity: 0.7;
+}
+
+/* =========================================
+   9. 图片样式框架
+   ========================================= */
+.post-content img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s;
+}
+
+.post-content img:hover {
+    transform: scale(1.02);
+}
+
+/* =========================================
+   10. 表格样式框架
+   ========================================= */
+.post-content table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 20px 0;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid var(--md-border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.post-content th,
+.post-content td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--md-border-color);
+}
+
+.post-content th {
+    background-color: var(--md-table-head-bg);
+    font-weight: bold;
+    color: #fff;
+    border-bottom: 2px solid var(--md-border-color);
+}
+
+.post-content tr:last-child td {
+    border-bottom: none;
+}
+
+/* 斑马纹 */
+.post-content tbody tr:nth-child(even) {
+    background-color: var(--md-table-row-even);
+}
+.post-content tbody tr:nth-child(odd) {
+    background-color: var(--md-table-row-odd);
+}
+
+.post-content tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* =========================================
+   11. 代码块样式框架 (MacOS 风格 + Highlight.js 适配)
+   ========================================= */
+.post-content pre {
+    /* 1. 基础容器样式 */
+    background-color: var(--md-code-block-bg); /* 使用我们自己的深色背景 */
+    color: var(--md-code-text);
+    border-radius: 8px;
+    margin: 20px 0;
+    padding: 0; /* Highlight.js 的 hljs 类通常会有 padding，这里清空外层 pre 的 padding */
+    position: relative;
+    overflow: hidden; /* 防止圆角溢出 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* MacOS 红黄绿 窗口控制点 (装饰) */
+.post-content pre::before {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ff5f56; /* 红色 */
+    box-shadow: 
+        20px 0 0 #ffbd2e,  /* 黄色 */
+        40px 0 0 #27c93f;  /* 绿色 */
+    z-index: 10;
+}
+
+/* 调整 Highlight.js 生成的 code 块位置 */
+.post-content pre code.hljs {
+    padding: 40px 16px 16px 16px !important; /* 顶部留出 40px 给红绿灯 */
+    font-family: "Consolas", "Monaco", monospace;
+    font-size: 0.95em;
+    line-height: 1.6;
+    border-radius: 8px; 
+    
+    /* 强制移除 Atom One Dark 的背景色，使用透明，透出 pre 的背景 */
+    background: transparent !important; 
+}
+
+/*  滚动条美化 - 增强选择器权重，确保覆盖 */
+/* 针对所有 pre 下的 code，包括带 .hljs 类的 */
+.post-content pre code::-webkit-scrollbar,
+.post-content pre code.hljs::-webkit-scrollbar {
+    height: 6px !important;
+    background: transparent !important;
+}
+
+.post-content pre code::-webkit-scrollbar-thumb,
+.post-content pre code.hljs::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    border-radius: 3px !important;
+}
+
+.post-content pre code::-webkit-scrollbar-thumb:hover,
+.post-content pre code.hljs::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.4) !important;
+}

@@ -1,624 +1,384 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        
-            AIR-v2 
-        
-    </title>
-    
-    
-        <link rel="icon" href="https://Tenkonata.github.io/picx-images-hosting/装饰/favicon.86u3byc1l2.webp">
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIR-v3</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <!-- Highlight.js Atom One Dark 样式 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
 
-    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    
-    
-<link rel="stylesheet" href="/css/AIR-v2.css">
-
-    
-<link rel="stylesheet" href="/css/mobile.css">
-
-    
+  <link rel="stylesheet" href="/css/AIRv3.css">
+  <!-- 引入 Markdown 独立样式表 -->
+  <link rel="stylesheet" href="/css/AIRmd.css">
+  <!-- 引入移动端响应式适配样式 -->
+  <link rel="stylesheet" href="/css/AIRv3media.css">
 <meta name="generator" content="Hexo 8.0.0"></head>
+<body>
 
-<body class="post-body home-layout ">
-    <script>
-        (function() {
-            var savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') document.body.classList.add('dark-mode');
-        })();
-    </script>
+  <!-- 全局固定背景 -->
+  <!-- 增加 --bg-media 变量用于移动端适配 -->
+  <div class="fixed-bg" 
+       style="background-image: url('https://img.paulzzh.com/touhou/random?size=pc'); 
+              --bg-media: url('https://img.paulzzh.com/touhou/random?size=wap');">
+  </div>
+  <div class="fixed-bg-overlay"></div>
 
-    <div id="mobile-overlay"></div>
+  <!-- 导航栏 Partial -->
+  <nav class="air-nav">
+  <div class="nav-left">
+    <a href="/" class="theme-title">
+      AIR-v3
+    </a>
+  </div>
+  <div class="nav-right">
     
+      
+        <a href="/" class="nav-link">
+          <i class="fa fa-home"></i> 
+          <span>主页</span>
+        </a>
+      
+        <a href="/archives" class="nav-link">
+          <i class="fa fa-archive"></i> 
+          <span>归档</span>
+        </a>
+      
+        <a href="/V3/aboutV3.html" class="nav-link">
+          <i class="fa fa-user"></i> 
+          <span>关于</span>
+        </a>
+      
     
-
-<nav class="main-nav">
-    <div class="nav-content">
-        <!-- 网站品牌 -->
-        <div class="site-brand">
-            <a href="/" class="site-title">
-                AIR-v2
-            </a>
-            
-        </div>
-
-        <!-- 导航菜单 -->
-        <div class="nav-menu">
-            <!-- 主导航项 -->
-            
-                <a href="/" class="nav-link">
-                    主页
-                </a>
-            
-                <a href="/about" class="nav-link">
-                    关于
-                </a>
-            
-                <a href="/archives" class="nav-link">
-                    归档
-                </a>
-            
-                <a href="/updatelog" class="nav-link">
-                    更新日志
-                </a>
-            
-            
-            <!-- 外部链接 -->
-            
-        </div>
-    </div>
+  </div>
 </nav>
-    
-    <div id="main">
-        <aside id="aside">
-            <div class="sidebar">
-    <div class="sidebar-header">
-        <div class="sidebar-tabs">
-            <button class="tab-btn active" data-tab="outline">大纲</button>
-            <button class="tab-btn" data-tab="files">文件</button>
-        </div>
-    </div>
-    
-    <nav class="sidebar-nav">
-        <!-- 大纲的内容 (服务端渲染版 SSR) -->
-        <div class="tab-content active" id="outline-tab">
-            <div class="outline-container">
-                
-            </div>
-        </div>
 
-        <!-- 文件的内容 (保持原有的 SSR 逻辑) -->
-        <div class="tab-content" id="files-tab">
-            
-            <ul class="tree-root">
-                <li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>测试性质文件</div><ul class="post-list"><li class="post-item file"><a href="/posts/804a7bbf/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">必要测试中</span></a></li><li class="post-item file"><a href="/posts/thefirst/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">第一篇博客</span></a></li><li class="post-item file"><a href="/posts/liability/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">免责声明</span></a></li></ul></li><li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>天马行空</div><ul class="post-list"><li class="post-item file"><a href="/posts/Snippet1/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">Snippet_1</span></a></li><li class="post-item file"><a href="/posts/Snippet2/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">Snippet_2</span></a></li></ul></li><li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>hexo主题开发</div><ul class="post-list"><li class="post-item file"><a href="/posts/hexothemeprogram/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">从零开始搓一个hexo主题</span></a></li><li class="post-item file"><a href="/posts/helloworld/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">hello-world</span></a></li><li class="post-item file"><a href="/posts/9a4212eb/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">hexo妙妙小工具</span></a></li></ul></li><li class="post-item file"><a href="/posts/projectjoin/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">👁️</span></a></li><li class="post-item file"><a href="/posts/cf87542b/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">星露谷sve结语</span></a></li><li class="post-item file"><a href="/posts/sqlprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">sql数据库编程</span></a></li>
-            </ul>
-        </div>
-    </nav>
-</div>
-        </aside>
+  <!-- 主体内容 (PJAX 容器) -->
+  <main class="container" id="pjax-container">
+    <!-- 首页 Hero 区域 -->
+<header class="air-hero" id="home-header">
+  
+  <!-- 中间欢迎语 -->
+  <div class="hero-center">
+    <h1 class="welcome-text fade-in-up">Welcome to AIR-v3</h1>
+  </div>
 
-        <main class="main-content home-main">
-            <div id="pjax-container">
-                <div id="content">
-                    
-    <style>
-    /* 背景固定 */
-    #pjax-container,
-    #main,
-    .main-content,
-    #content {
-        transform: none !important;
-        will-change: auto !important;
-        filter: none !important;
-        perspective: none !important;
-        -webkit-transform: none !important;
-    }   
+  <!-- 左下角：向下滑动按钮 (带背景卡片样式，去除了文字) -->
+  <div class="hero-bottom-left">
+    <a id="scroll-down-btn" class="scroll-btn card-deep-space">
+      <i class="fa fa-angle-down scroll-icon"></i>
+    </a>
+  </div>
 
-    /* 导航栏样式保持 */
-    .main-nav {
-        position: fixed !important;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
-        background: transparent;
-        border-bottom: none;
-        box-shadow: none;
-        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-    }
-
-    /* 全屏英雄区域 */
-    .home-hero {
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        /* 添加过渡属性，为了离场动画 */
-        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease, filter 0.6s ease;
-        will-change: transform, opacity, filter;
-    }
-
-    /* 背景图片容器 */
-    .hero-background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        z-index: -1;
-        pointer-events: none;
-        /* 添加过渡属性 */
-        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
-        will-change: transform, opacity;
-    }
-
-    .hero-background::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-            rgba(0, 0, 0, 0.3),
-            rgba(0, 0, 0, 0.2)
-        );
-        z-index: 1;
-    }
-
-    /* 背景图 */
-    .hero-bg-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url('https://img.paulzzh.com/touhou/random?size=pc&amp;site=all');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-
-    /* 主内容区域 */
-    .hero-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        color: white;
-        position: relative;
-        z-index: 2;
-        padding: 0 2rem;
-        width: 100%;
-        height: 100%;
-    }
-
-    /* =================================================================
-     * 【重写】打字机字符跳动动画 (Typewriter Jump Effect)
-     * =================================================================
-     */
-    .typewriter-container {
-        /* 确保文字容器居中且不换行错乱 */
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-bottom: 2rem;
-    }
-
-    .typewriter-text {
-        font-size: clamp(2rem, 5vw, 4.5em); 
-        font-weight: 700;
-        line-height: 1.3;
-        color: #0f172a;
-        -webkit-text-stroke: 2px #ffffff; /* 稍微减细一点描边，让文字更精致 */
-        paint-order: stroke fill;
-        display: flex;
-
-        animation-delay: 
-        calc(var(--char-index) * 0.05s), 
-        calc(var(--char-index) * 0.05s + 1s);
-    }
-
-    /* 单个字符样式 */
-    .type-char {
-        display: inline-block; /* 必须是 block 或 inline-block 才能应用 transform */
-        white-space: pre;      /* 保留空格宽度 */
-        opacity: 0;            /* 初始不可见 */
-        transform: translateY(20px) scale(0.8); /* 初始位置：靠下且稍小 */
-
-        animation: 
-            charEnter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,  /* 0.8s 执行一次 */
-            charBounce 4s ease-in-out infinite; /* 花费 4s 循环播放 */
+  <!-- 右下角：社交图标 (带背景卡片样式) -->
+  <div class="hero-bottom-right">
+    <div class="social-links card-deep-space">
+      
         
-        animation-delay: 
-            calc(var(--char-index) * 0.15s), /* 进场延迟 */
-            calc(var(--char-index) * 0.05s + 3s);   /* 跳动延迟 */
-    }
-
-    /* 阶段一：进场 (从下方浮出) */
-    @keyframes charEnter {
-        0% {opacity: 0;transform: translateY(30px) scale(0.8);}
-        100% {opacity: 1;transform: translateY(0) scale(1);}
-    }
-
-    /* 阶段二：持续跳动 (波浪效果) */
-    @keyframes charBounce {
-        0%, 100% {transform: translateY(0);}
-        5% {transform: translateY(-10px);}     /* 跳动高度 */
-        10% {transform: translateY(0);}
-        /* 10% -> 100%: 静止等待下一轮 */       /* 调整方式:charBounce时间减小，5%和10%比例增大 */
-    }
-
-    /* 动态箭头优化 */
-    .scroll-indicator {
-        position: absolute;
-        bottom: 60px;
-        left: 50%;
-        transform: translateX(-50%);
-        animation: bounce 2s infinite;
-        cursor: pointer;
-        z-index: 3;
-        font-size: 2.5rem;
-        color: rgba(255, 255, 255, 0.8);
-        transition: color 0.3s ease;
-    }
-
-    @keyframes bounce {
-        0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
-        40% {transform: translateX(-50%) translateY(-10px);}
-        60% {transform: translateX(-50%) translateY(-5px);}
-    }
-
-    /* 文章列表区域 */
-    .home-posts {
-        position: relative;
-        z-index: 10;
-        min-height: 100vh;
-        padding: 4rem 2rem;
-        display: flex;
-        justify-content: center;
-        background: transparent;
-        /* 添加过渡属性 */
-        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
-        will-change: transform, opacity;
-    }
-
-    .posts-container {
-        max-width: 100%; 
-        width: 100%;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    /* 深空流体卡片样式 */
-    .post-article {
-        color: inherit; 
-        background: linear-gradient(
-            135deg, 
-            rgba(20, 24, 36, 0.8) 0%, 
-            rgba(20, 24, 36, 0.5) 100%
-        );
-        border-radius: 16px; 
-        padding: 1.5rem 2.5rem; 
-        margin-bottom: 2.5rem;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-top: 1px solid rgba(255, 255, 255, 0.15);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-        position: relative;
-        overflow: hidden;
-        cursor: pointer;
-        width: 100%;          
-        max-width: 800px;     
-        height: auto;
+          <a href="https://github.com/Tenkonata" target="_blank" title="github">
+            
+              <!-- 2. 否则使用 FontAwesome 图标  -->
+              <i class="fa fa-github"></i>
+            
+          </a>
         
-        /* 硬件加速与防抖动 */
-        transform: translateZ(0);
-        will-change: transform, box-shadow;
-        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                    background 0.4s ease, 
-                    box-shadow 0.4s ease, 
-                    border-color 0.4s ease;
-    }
+          <a href="https://space.bilibili.com/179767580" target="_blank" title="bilibili">
+            
+              <!-- 1. 如果配置了 svg 字段，使用 custom-icon 渲染 -->
+              <span class="custom-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" ><path d="M18.223 3.08584C18.7112 3.574 18.7112 4.36545 18.223 4.85361L17.08 5.99598L18.25 5.99638C20.3211 5.99638 22 7.67531 22 9.74638V17.2464C22 19.3174 20.3211 20.9964 18.25 20.9964H5.75C3.67893 20.9964 2 19.3174 2 17.2464V9.74638C2 7.67531 3.67893 5.99638 5.75 5.99638L6.91625 5.99598L5.77466 4.85456C5.28651 4.36641 5.28651 3.57495 5.77466 3.0868C6.26282 2.59864 7.05427 2.59864 7.54243 3.0868L10.1941 5.73845C10.2729 5.81729 10.339 5.90403 10.3924 5.99614L13.6046 5.99636C13.6581 5.90382 13.7244 5.81667 13.8036 5.73749L16.4553 3.08584C16.9434 2.59769 17.7349 2.59769 18.223 3.08584ZM18.25 8.50638H5.75C5.09102 8.50638 4.55115 9.0163 4.50343 9.66309L4.5 9.75638V17.2564C4.5 17.9154 5.00992 18.4552 5.65671 18.5029L5.75 18.5064H18.25C18.909 18.5064 19.4489 17.9965 19.4966 17.3497L19.5 17.2564V9.75638C19.5 9.06602 18.9404 8.50638 18.25 8.50638ZM8.25 11.0064C8.94036 11.0064 9.5 11.566 9.5 12.2564V13.5064C9.5 14.1967 8.94036 14.7564 8.25 14.7564C7.55964 14.7564 7 14.1967 7 13.5064V12.2564C7 11.566 7.55964 11.0064 8.25 11.0064ZM15.75 11.0064C16.4404 11.0064 17 11.566 17 12.2564V13.5064C17 14.1967 16.4404 14.7564 15.75 14.7564C15.0596 14.7564 14.5 14.1967 14.5 13.5064V12.2564C14.5 11.566 15.0596 11.0064 15.75 11.0064Z" /></svg></span>
+            
+          </a>
+        
+          <a href="mailto:xi-justice@outlook.com" target="_blank" title="Email">
+            
+              <!-- 2. 否则使用 FontAwesome 图标  -->
+              <i class="fa fa-envelope"></i>
+            
+          </a>
+        
+      
+    </div>
+  </div>
+</header>
 
-    /* 悬停效果 */
-    .post-article:hover {
-        transform: translateY(-8px) scale(1.01) translateZ(0);
-        background: linear-gradient(
-            135deg, 
-            rgba(20, 24, 36, 0.9) 0%, 
-            rgba(20, 24, 36, 0.75) 100%
-        );
-        box-shadow: 
-            0 20px 40px rgba(0, 0, 0, 0.35),
-            0 0 0 1px rgba(82, 174, 255, 0.4); 
-        border-color: rgba(82, 174, 255, 0.5); 
-    }
+<section id="main-content" class="post-list-section">
+  <div class="content-container">
+    
+    <!-- 左侧：固定侧边栏 (Menu + Author) -->
+    <div class="layout-left">
+      <aside class="air-sidebar">
+  
+  <!-- 1. 作者栏位 (已调换至顶部) -->
+  <div class="sidebar-author card-deep-space">
+    <div class="author-avatar">
+      <img src="https://Tenkonata.github.io/picx-images-hosting/装饰/avatar.96a6p4esqw.webp" alt="Author Avatar">
+    </div>
+    <h3 class="author-name">Tenkonata</h3>
+    <p class="author-signature">坐和放宽</p>
+    
+    <!-- 数据统计 -->
+    <div class="author-stats">
+      <div class="stats-item">
+        <span class="stats-count">11</span>
+        <span class="stats-label">Posts</span>
+      </div>
+      <div class="stats-item">
+        <span class="stats-count">2</span>
+        <span class="stats-label">Tags</span>
+      </div>
+      <div class="stats-item">
+        <span class="stats-count">2</span>
+        <span class="stats-label">Categories</span>
+      </div>
+    </div>
+  </div>
 
-    .post-article:hover .article-title {color: var(--v-blue-600);}  /* 悬停标题颜色 */
+  <!-- 2. 侧边导航菜单 (已调换至下方) -->
+  <div class="sidebar-menu card-deep-space">
+    
+      
+        <a href="/" class="sidebar-link">
+          <i class="fa fa-home"></i> 
+          <span>主页</span>
+        </a>
+      
+        <a href="/archives" class="sidebar-link">
+          <i class="fa fa-archive"></i> 
+          <span>归档</span>
+        </a>
+      
+        <a href="/V3/updatelogV3.html" class="sidebar-link">
+          <i class="fa fa-pencil"></i> 
+          <span>更新日志</span>
+        </a>
+      
+        <a href="/V3/aboutV3.html" class="sidebar-link">
+          <i class="fa fa-user"></i> 
+          <span>关于</span>
+        </a>
+      
+    
+  </div>
 
-    .article-title {
-        font-size: 2.0em;
-        color: #ffffff;
-        margin: 0 0 0.8rem 0;
-        line-height: 1.3;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        transition: color 0.3s ease;
-    }
-
-    .article-meta {
-        display: flex;
-        gap: 2rem;
-        font-size: 0.95em;
-        color: rgba(255, 255, 255, 0.8);
-        margin-bottom: 1rem;
-        flex-wrap: wrap;
-    }
-
-    .article-excerpt {
-        color: rgba(255, 255, 255, 0.85);
-        line-height: 1.6;
-        margin-bottom: 2rem;
-        font-size: 1.1em;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-    }
-
-    .article-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-top: 1.2rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.1); 
-    }
-
-    /* 主页离场动画 */
-    /* 1. Hero 区域：向上浮动 + 模糊 + 淡出 */
-    body.home-exiting .home-hero {transform: translateY(-80px); opacity: 0; filter: blur(10px); }
-    /* 2. 文章列表：向下沉降 + 淡出 */
-    body.home-exiting .home-posts {transform: translateY(80px);opacity: 0;}
-    /* 3. 背景图：逐渐透明 */
-    body.home-exiting .hero-background {opacity: 0;}
-    </style>
-
-    <!-- 全屏背景 -->
-    <div class="hero-background">
-        <div class="hero-bg-image"></div>
+</aside>
     </div>
 
-    <!-- 主页内容 -->
-    <div class="home-hero">
-        <div class="hero-content">
-            <div class="typewriter-container">
-                <div class="typewriter-text">
-                    
-                        <span class="type-char" style="--char-index: 0;">T</span>
-                    
-                        <span class="type-char" style="--char-index: 1;">e</span>
-                    
-                        <span class="type-char" style="--char-index: 2;">n</span>
-                    
-                        <span class="type-char" style="--char-index: 3;">k</span>
-                    
-                        <span class="type-char" style="--char-index: 4;">o</span>
-                    
-                        <span class="type-char" style="--char-index: 5;">n</span>
-                    
-                        <span class="type-char" style="--char-index: 6;">a</span>
-                    
-                        <span class="type-char" style="--char-index: 7;">t</span>
-                    
-                        <span class="type-char" style="--char-index: 8;">a</span>
-                    
-                        <span class="type-char" style="--char-index: 9;">&#39;</span>
-                    
-                        <span class="type-char" style="--char-index: 10;">s</span>
-                    
-                        <span class="type-char" style="--char-index: 11;"> </span>
-                    
-                        <span class="type-char" style="--char-index: 12;">B</span>
-                    
-                        <span class="type-char" style="--char-index: 13;">l</span>
-                    
-                        <span class="type-char" style="--char-index: 14;">o</span>
-                    
-                        <span class="type-char" style="--char-index: 15;">g</span>
-                    
-                </div>
-            </div>
-            
-            <div class="scroll-indicator" onclick="scrollToPosts()">
-                <i class="fa fa-angle-down"></i>
-            </div>
-        </div>
-    </div>
+    <!-- 右侧：文章列表 (滚动) -->
+    <div class="layout-right">
+      
+        <!-- 整个卡片就是一个链接，点击即跳转 -->
+<a href="/posts/9a4212eb/" class="post-card card-deep-space fade-in-up">
+  
+  <!-- 标题 -->
+  <h2 class="post-title">
+    hexo妙妙小工具
+  </h2>
 
-    <section class="home-posts">
-        <div class="posts-container">
-            
-                
-                    <a href="/posts/9a4212eb/" class="post-article">
-                        <div class="article-header">
-                            <h3 class="article-title">
-                                hexo妙妙小工具
-                            </h3>
-                            
-                            <div class="article-meta">
-                                <div class="meta-item">
-                                    <i class="fa fa-calendar"></i>
-                                    <time datetime="2026-01-19T11:40:15.097Z">
-                                        2026-01-19
-                                    </time>
-                                </div>
+  <!-- 2. Meta 信息: 创建日期 -> 更新日期 -> Tags -> Categories -->
+  <div class="post-meta">
+    
+    <!-- 1. 创建日期 -->
+    <span class="meta-item">
+      <i class="fa fa-calendar"></i> 2026-01-19
+    </span>
 
-                                
-                                    <div class="meta-item">
-                                        <i class="fa fa-edit"></i>
-                                        <time datetime="2026-01-19T12:12:06.214Z">
-                                            2026-01-19
-                                        </time>
-                                    </div>
-                                
-                            </div>
-                        </div>
-                        
-                        <div class="article-excerpt">
-                            
-                            别再使用日期分类文件夹使用插件hexo-abbrlink
+    <!-- 2. 更新日期  -->
+    
+      <span class="meta-item" title="Updated: 2026-01-19">
+        <i class="fa fa-edit"></i> 2026-01-19
+      </span>
+    
+    
+    <!-- 3. 标签  -->
+    
+
+    <!-- 4. 分类  -->
+    
+  </div>
+
+  <!-- 摘要 -->
+  <div class="post-excerpt">
+    别再使用日期分类文件夹使用插件hexo-abbrlink
 一个可视化后台管理插件hexo-pro: 专为 Hexo 静态博客框架打造的后台管理系统插件（但有点不符合我的使用习惯）
-图床一切上云！ PicX : 一款基于 GitHub API...
-                        </div>
-                        
-                        <div class="article-footer">
-                        <!-- 尚无内容 -->
-                        </div>
-                    </a>
-                
-                    <a href="/posts/hexothemeprogram/" class="post-article">
-                        <div class="article-header">
-                            <h3 class="article-title">
-                                hexo主题开发及部署教程
-                            </h3>
-                            
-                            <div class="article-meta">
-                                <div class="meta-item">
-                                    <i class="fa fa-calendar"></i>
-                                    <time datetime="2025-11-01T16:00:00.000Z">
-                                        2025-11-02
-                                    </time>
-                                </div>
+图床一切上云！ PicX : 一款基于 GitHub API 开发的图床工具
+Github托管并可在线访问推荐：手把手教...
+  </div>
+</a>
+      
+        <!-- 整个卡片就是一个链接，点击即跳转 -->
+<a href="/posts/hexothemeprogram/" class="post-card card-deep-space fade-in-up">
+  
+  <!-- 标题 -->
+  <h2 class="post-title">
+    hexo主题开发及部署教程
+  </h2>
 
-                                
-                                    <div class="meta-item">
-                                        <i class="fa fa-edit"></i>
-                                        <time datetime="2026-01-19T11:38:56.947Z">
-                                            2026-01-19
-                                        </time>
-                                    </div>
-                                
-                            </div>
-                        </div>
-                        
-                        <div class="article-excerpt">
-                            
-                            本文仅作为个人开发时的碰见的各类情况而总结出来的建议，逻辑混乱敬请见谅，建议根据标题寻找对应情况
+  <!-- 2. Meta 信息: 创建日期 -> 更新日期 -> Tags -> Categories -->
+  <div class="post-meta">
+    
+    <!-- 1. 创建日期 -->
+    <span class="meta-item">
+      <i class="fa fa-calendar"></i> 2025-11-02
+    </span>
+
+    <!-- 2. 更新日期  -->
+    
+      <span class="meta-item" title="Updated: 2026-01-19">
+        <i class="fa fa-edit"></i> 2026-01-19
+      </span>
+    
+    
+    <!-- 3. 标签  -->
+    
+
+    <!-- 4. 分类  -->
+    
+  </div>
+
+  <!-- 摘要 -->
+  <div class="post-excerpt">
+    
+本文仅作为个人开发时的碰见的各类情况而总结出来的建议，逻辑混乱敬请见谅，建议根据标题寻找对应情况
 
 推荐：一步一步地撰写开发：Hexo主题开发 - ﹏猴子请来的救兵 这是个非常好的教程！
 文件树
-在你的theme文件夹下右键打开cmd，输...
-                        </div>
-                        
-                        <div class="article-footer">
-                        <!-- 尚无内容 -->
-                        </div>
-                    </a>
-                
-                    <a href="/posts/Snippet2/" class="post-article">
-                        <div class="article-header">
-                            <h3 class="article-title">
-                                Snippet_2
-                            </h3>
-                            
-                            <div class="article-meta">
-                                <div class="meta-item">
-                                    <i class="fa fa-calendar"></i>
-                                    <time datetime="2026-01-19T10:12:50.000Z">
-                                        2026-01-19
-                                    </time>
-                                </div>
+在你的theme文件夹下右键打开cmd，输入tree /f
 
-                                
-                                    <div class="meta-item">
-                                        <i class="fa fa-edit"></i>
-                                        <time datetime="2026-01-19T10:15:16.832Z">
-                                            2026-01-19
-                                        </time>
-                                    </div>
-                                
-                            </div>
-                        </div>
-                        
-                        <div class="article-excerpt">
-                            
-                            讨伐魔王这种事，既然王公贵族不曾上心，“勇者”又为何要鞠躬尽瘁？试问，大陆上出现能够危及全人类性命的“魔王”，各国为什么不联合起来攻打魔王？也可以换个情景，某一大国边境出现魔王，其他国家束之高阁，反正不在自己地盘，狭隘眼光。那这个被魔王威胁...
-                        </div>
-                        
-                        <div class="article-footer">
-                        <!-- 尚无内容 -->
-                        </div>
-                    </a>
-                
-                    <a href="/posts/Snippet1/" class="post-article">
-                        <div class="article-header">
-                            <h3 class="article-title">
-                                Snippet_1
-                            </h3>
-                            
-                            <div class="article-meta">
-                                <div class="meta-item">
-                                    <i class="fa fa-calendar"></i>
-                                    <time datetime="2025-12-12T15:18:08.064Z">
-                                        2025-12-12
-                                    </time>
-                                </div>
+你的tree大致应该长这样，但实际可以随...
+  </div>
+</a>
+      
+        <!-- 整个卡片就是一个链接，点击即跳转 -->
+<a href="/posts/Snippet2/" class="post-card card-deep-space fade-in-up">
+  
+  <!-- 标题 -->
+  <h2 class="post-title">
+    Snippet_2
+  </h2>
 
-                                
-                                    <div class="meta-item">
-                                        <i class="fa fa-edit"></i>
-                                        <time datetime="2025-12-12T15:24:34.990Z">
-                                            2025-12-12
-                                        </time>
-                                    </div>
-                                
-                            </div>
-                        </div>
-                        
-                        <div class="article-excerpt">
-                            
-                            CREATE和ANALYZE，一个创造，一个解析。解析任意的事物，并通过灵重新创造出来。
-“拥有创造程度的能力”。试想一下，走累了，随时随地能创造出一把椅子，如果想惬意点，还可以躺床上。手边的事物永远不会遗失，因为可以创造出无限多的副本。生...
-                        </div>
-                        
-                        <div class="article-footer">
-                        <!-- 尚无内容 -->
-                        </div>
-                    </a>
-                
-                    <a href="/posts/804a7bbf/" class="post-article">
-                        <div class="article-header">
-                            <h3 class="article-title">
-                                必要测试中
-                            </h3>
-                            
-                            <div class="article-meta">
-                                <div class="meta-item">
-                                    <i class="fa fa-calendar"></i>
-                                    <time datetime="2025-12-06T16:00:00.000Z">
-                                        2025-12-07
-                                    </time>
-                                </div>
+  <!-- 2. Meta 信息: 创建日期 -> 更新日期 -> Tags -> Categories -->
+  <div class="post-meta">
+    
+    <!-- 1. 创建日期 -->
+    <span class="meta-item">
+      <i class="fa fa-calendar"></i> 2026-01-19
+    </span>
 
-                                
-                                    <div class="meta-item">
-                                        <i class="fa fa-edit"></i>
-                                        <time datetime="2025-12-07T16:00:00.000Z">
-                                            2025-12-08
-                                        </time>
-                                    </div>
-                                
-                            </div>
-                        </div>
-                        
-                        <div class="article-excerpt">
-                            
-                            四、标题样式框架二级三级四级五级六级正文
+    <!-- 2. 更新日期  -->
+    
+      <span class="meta-item" title="Updated: 2026-01-19">
+        <i class="fa fa-edit"></i> 2026-01-19
+      </span>
+    
+    
+    <!-- 3. 标签  -->
+    
+
+    <!-- 4. 分类  -->
+    
+  </div>
+
+  <!-- 摘要 -->
+  <div class="post-excerpt">
+    讨伐魔王这种事，既然王公贵族不曾上心，“勇者”又为何要鞠躬尽瘁？试问，大陆上出现能够危及全人类性命的“魔王”，各国为什么不联合起来攻打魔王？也可以换个情景，某一大国边境出现魔王，其他国家束之高阁，反正不在自己地盘，狭隘眼光。那这个被魔王威胁的大国，明明有自家养的用于防卫其他国家侵略的军队，为何按兵不...
+  </div>
+</a>
+      
+        <!-- 整个卡片就是一个链接，点击即跳转 -->
+<a href="/posts/Snippet1/" class="post-card card-deep-space fade-in-up">
+  
+  <!-- 标题 -->
+  <h2 class="post-title">
+    Snippet_1
+  </h2>
+
+  <!-- 2. Meta 信息: 创建日期 -> 更新日期 -> Tags -> Categories -->
+  <div class="post-meta">
+    
+    <!-- 1. 创建日期 -->
+    <span class="meta-item">
+      <i class="fa fa-calendar"></i> 2025-12-12
+    </span>
+
+    <!-- 2. 更新日期  -->
+    
+      <span class="meta-item" title="Updated: 2025-12-12">
+        <i class="fa fa-edit"></i> 2025-12-12
+      </span>
+    
+    
+    <!-- 3. 标签  -->
+    
+      <span class="meta-item">
+        <i class="fa fa-tag"></i>
+        
+          <span class="meta-badge">随笔</span>
+        
+      </span>
+    
+
+    <!-- 4. 分类  -->
+    
+  </div>
+
+  <!-- 摘要 -->
+  <div class="post-excerpt">
+    CREATE和ANALYZE，一个创造，一个解析。解析任意的事物，并通过灵重新创造出来。
+“拥有创造程度的能力”。试想一下，走累了，随时随地能创造出一把椅子，如果想惬意点，还可以躺床上。手边的事物永远不会遗失，因为可以创造出无限多的副本。生活上的便利数不胜数，但我们也可以将其推广到战力这番。
+解析了...
+  </div>
+</a>
+      
+        <!-- 整个卡片就是一个链接，点击即跳转 -->
+<a href="/posts/804a7bbf/" class="post-card card-deep-space fade-in-up">
+  
+  <!-- 标题 -->
+  <h2 class="post-title">
+    必要测试中
+  </h2>
+
+  <!-- 2. Meta 信息: 创建日期 -> 更新日期 -> Tags -> Categories -->
+  <div class="post-meta">
+    
+    <!-- 1. 创建日期 -->
+    <span class="meta-item">
+      <i class="fa fa-calendar"></i> 2025-12-07
+    </span>
+
+    <!-- 2. 更新日期  -->
+    
+      <span class="meta-item" title="Updated: 2025-12-08">
+        <i class="fa fa-edit"></i> 2025-12-08
+      </span>
+    
+    
+    <!-- 3. 标签  -->
+    
+      <span class="meta-item">
+        <i class="fa fa-tag"></i>
+        
+          <span class="meta-badge">测试</span>
+        
+      </span>
+    
+
+    <!-- 4. 分类  -->
+    
+      <span class="meta-item">
+        <i class="fa fa-folder-o"></i>
+        
+          <span class="meta-badge">123</span>,
+        
+          <span class="meta-badge">456</span>
+        
+      </span>
+    
+  </div>
+
+  <!-- 摘要 -->
+  <div class="post-excerpt">
+    四、标题样式框架二级三级四级五级六级正文
 五、引用块样式框架
 引用内样式
 
@@ -632,42 +392,44 @@
 [!important]
 .md-alert尚未安装
 
-六、链接样式框架百度一下https://cn.bing....
-                        </div>
-                        
-                        <div class="article-footer">
-                        <!-- 尚无内容 -->
-                        </div>
-                    </a>
-                
-                    <a href="/posts/thefirst/" class="post-article">
-                        <div class="article-header">
-                            <h3 class="article-title">
-                                第一篇博客
-                            </h3>
-                            
-                            <div class="article-meta">
-                                <div class="meta-item">
-                                    <i class="fa fa-calendar"></i>
-                                    <time datetime="2025-10-19T16:00:00.000Z">
-                                        2025-10-20
-                                    </time>
-                                </div>
+六、链接样式框架百度一下https://cn.bing.com
+七、文本高亮样式框架没有markdown扩展语言所以...
+  </div>
+</a>
+      
+        <!-- 整个卡片就是一个链接，点击即跳转 -->
+<a href="/posts/thefirst/" class="post-card card-deep-space fade-in-up">
+  
+  <!-- 标题 -->
+  <h2 class="post-title">
+    第一篇博客
+  </h2>
 
-                                
-                                    <div class="meta-item">
-                                        <i class="fa fa-edit"></i>
-                                        <time datetime="2025-12-02T14:05:52.181Z">
-                                            2025-12-02
-                                        </time>
-                                    </div>
-                                
-                            </div>
-                        </div>
-                        
-                        <div class="article-excerpt">
-                            
-                            一、标题这是二级标题三级标题二、段落小换行小换行
+  <!-- 2. Meta 信息: 创建日期 -> 更新日期 -> Tags -> Categories -->
+  <div class="post-meta">
+    
+    <!-- 1. 创建日期 -->
+    <span class="meta-item">
+      <i class="fa fa-calendar"></i> 2025-10-20
+    </span>
+
+    <!-- 2. 更新日期  -->
+    
+      <span class="meta-item" title="Updated: 2025-12-02">
+        <i class="fa fa-edit"></i> 2025-12-02
+      </span>
+    
+    
+    <!-- 3. 标签  -->
+    
+
+    <!-- 4. 分类  -->
+    
+  </div>
+
+  <!-- 摘要 -->
+  <div class="post-excerpt">
+    一、标题这是二级标题三级标题二、段落小换行小换行
 分割线使用—或***
 
 三、字体显示**这是粗体**
@@ -676,389 +438,228 @@
 *这是斜体*
 ==这是高亮==
 
-这是粗体删除线下划线这是斜体&#x3D;...
-                        </div>
-                        
-                        <div class="article-footer">
-                        <!-- 尚无内容 -->
-                        </div>
-                    </a>
-                
-                    <a href="/posts/helloworld/" class="post-article">
-                        <div class="article-header">
-                            <h3 class="article-title">
-                                Hello World
-                            </h3>
-                            
-                            <div class="article-meta">
-                                <div class="meta-item">
-                                    <i class="fa fa-calendar"></i>
-                                    <time datetime="2025-10-11T16:00:00.000Z">
-                                        2025-10-12
-                                    </time>
-                                </div>
+这是粗体删除线下划线这是斜体&#x3D;&#x3D;这是高亮&#x3D;&#x3D;（这是扩展语法里...
+  </div>
+</a>
+      
+        <!-- 整个卡片就是一个链接，点击即跳转 -->
+<a href="/posts/helloworld/" class="post-card card-deep-space fade-in-up">
+  
+  <!-- 标题 -->
+  <h2 class="post-title">
+    Hello World
+  </h2>
 
-                                
-                                    <div class="meta-item">
-                                        <i class="fa fa-edit"></i>
-                                        <time datetime="2025-12-02T14:05:31.118Z">
-                                            2025-12-02
-                                        </time>
-                                    </div>
-                                
-                            </div>
-                        </div>
-                        
-                        <div class="article-excerpt">
-                            
-                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex...
-                        </div>
-                        
-                        <div class="article-footer">
-                        <!-- 尚无内容 -->
-                        </div>
-                    </a>
-                
-                    <a href="/posts/liability/" class="post-article">
-                        <div class="article-header">
-                            <h3 class="article-title">
-                                免责声明
-                            </h3>
-                            
-                            <div class="article-meta">
-                                <div class="meta-item">
-                                    <i class="fa fa-calendar"></i>
-                                    <time datetime="2025-11-30T16:00:00.000Z">
-                                        2025-12-01
-                                    </time>
-                                </div>
+  <!-- 2. Meta 信息: 创建日期 -> 更新日期 -> Tags -> Categories -->
+  <div class="post-meta">
+    
+    <!-- 1. 创建日期 -->
+    <span class="meta-item">
+      <i class="fa fa-calendar"></i> 2025-10-12
+    </span>
 
-                                
-                                    <div class="meta-item">
-                                        <i class="fa fa-edit"></i>
-                                        <time datetime="2025-12-02T14:04:44.121Z">
-                                            2025-12-02
-                                        </time>
-                                    </div>
-                                
-                            </div>
-                        </div>
-                        
-                        <div class="article-excerpt">
-                            
-                            免责声明本免责声明特此简要声明：本人并未以任何方式要求或暗示任何个人、实体、系统或概念必须同意、接受、承认或甚至知晓本免责声明的存在；对于本免责声明中所包含、未包含、暗示或可能推断出的任何内容、表述、格式、逻辑矛盾、语义模糊或潜在解释，本人...
-                        </div>
-                        
-                        <div class="article-footer">
-                        <!-- 尚无内容 -->
-                        </div>
-                    </a>
-                
-                    <a href="/posts/sqlprogram/" class="post-article">
-                        <div class="article-header">
-                            <h3 class="article-title">
-                                SQL Server 数据库编程
-                            </h3>
-                            
-                            <div class="article-meta">
-                                <div class="meta-item">
-                                    <i class="fa fa-calendar"></i>
-                                    <time datetime="2025-11-13T03:41:35.123Z">
-                                        2025-11-13
-                                    </time>
-                                </div>
+    <!-- 2. 更新日期  -->
+    
+      <span class="meta-item" title="Updated: 2025-12-02">
+        <i class="fa fa-edit"></i> 2025-12-02
+      </span>
+    
+    
+    <!-- 3. 标签  -->
+    
 
-                                
-                                    <div class="meta-item">
-                                        <i class="fa fa-edit"></i>
-                                        <time datetime="2025-12-02T14:00:48.534Z">
-                                            2025-12-02
-                                        </time>
-                                    </div>
-                                
-                            </div>
-                        </div>
-                        
-                        <div class="article-excerpt">
-                            
-                            三、建立数据表1.创建博客系统数据表语法use filename
+    <!-- 4. 分类  -->
+    
+  </div>
+
+  <!-- 摘要 -->
+  <div class="post-excerpt">
+    Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in ...
+  </div>
+</a>
+      
+        <!-- 整个卡片就是一个链接，点击即跳转 -->
+<a href="/posts/liability/" class="post-card card-deep-space fade-in-up">
+  
+  <!-- 标题 -->
+  <h2 class="post-title">
+    免责声明
+  </h2>
+
+  <!-- 2. Meta 信息: 创建日期 -> 更新日期 -> Tags -> Categories -->
+  <div class="post-meta">
+    
+    <!-- 1. 创建日期 -->
+    <span class="meta-item">
+      <i class="fa fa-calendar"></i> 2025-12-01
+    </span>
+
+    <!-- 2. 更新日期  -->
+    
+      <span class="meta-item" title="Updated: 2025-12-02">
+        <i class="fa fa-edit"></i> 2025-12-02
+      </span>
+    
+    
+    <!-- 3. 标签  -->
+    
+
+    <!-- 4. 分类  -->
+    
+  </div>
+
+  <!-- 摘要 -->
+  <div class="post-excerpt">
+    免责声明本免责声明特此简要声明：本人并未以任何方式要求或暗示任何个人、实体、系统或概念必须同意、接受、承认或甚至知晓本免责声明的存在；对于本免责声明中所包含、未包含、暗示或可能推断出的任何内容、表述、格式、逻辑矛盾、语义模糊或潜在解释，本人均不承担任何形式之责任，亦不对此作出任何保证或承诺；本人未曾...
+  </div>
+</a>
+      
+        <!-- 整个卡片就是一个链接，点击即跳转 -->
+<a href="/posts/sqlprogram/" class="post-card card-deep-space fade-in-up">
+  
+  <!-- 标题 -->
+  <h2 class="post-title">
+    SQL Server 数据库编程
+  </h2>
+
+  <!-- 2. Meta 信息: 创建日期 -> 更新日期 -> Tags -> Categories -->
+  <div class="post-meta">
+    
+    <!-- 1. 创建日期 -->
+    <span class="meta-item">
+      <i class="fa fa-calendar"></i> 2025-11-13
+    </span>
+
+    <!-- 2. 更新日期  -->
+    
+      <span class="meta-item" title="Updated: 2025-12-02">
+        <i class="fa fa-edit"></i> 2025-12-02
+      </span>
+    
+    
+    <!-- 3. 标签  -->
+    
+
+    <!-- 4. 分类  -->
+    
+  </div>
+
+  <!-- 摘要 -->
+  <div class="post-excerpt">
+    三、建立数据表1.创建博客系统数据表语法use filename
 GO
 
 create table list_name
 (
     column_name datatype null/not null
-	userID char(6) NOT...
-                        </div>
-                        
-                        <div class="article-footer">
-                        <!-- 尚无内容 -->
-                        </div>
-                    </a>
-                
-                    <a href="/posts/cf87542b/" class="post-article">
-                        <div class="article-header">
-                            <h3 class="article-title">
-                                星露谷sve结语
-                            </h3>
-                            
-                            <div class="article-meta">
-                                <div class="meta-item">
-                                    <i class="fa fa-calendar"></i>
-                                    <time datetime="2025-11-23T15:26:04.000Z">
-                                        2025-11-23
-                                    </time>
-                                </div>
+	userID char(6) NOT NULL
+)
+GO
 
-                                
-                                    <div class="meta-item">
-                                        <i class="fa fa-edit"></i>
-                                        <time datetime="2025-12-02T13:57:39.431Z">
-                                            2025-12-02
-                                        </time>
-                                    </div>
-                                
-                            </div>
-                        </div>
-                        
-                        <div class="article-excerpt">
-                            
-                            星露谷sve百小时完美存档巨献
+数据类型varchar可变长度字符串...
+  </div>
+</a>
+      
+        <!-- 整个卡片就是一个链接，点击即跳转 -->
+<a href="/posts/cf87542b/" class="post-card card-deep-space fade-in-up">
+  
+  <!-- 标题 -->
+  <h2 class="post-title">
+    星露谷sve结语
+  </h2>
+
+  <!-- 2. Meta 信息: 创建日期 -> 更新日期 -> Tags -> Categories -->
+  <div class="post-meta">
+    
+    <!-- 1. 创建日期 -->
+    <span class="meta-item">
+      <i class="fa fa-calendar"></i> 2025-11-23
+    </span>
+
+    <!-- 2. 更新日期  -->
+    
+      <span class="meta-item" title="Updated: 2025-12-02">
+        <i class="fa fa-edit"></i> 2025-12-02
+      </span>
+    
+    
+    <!-- 3. 标签  -->
+    
+
+    <!-- 4. 分类  -->
+    
+  </div>
+
+  <!-- 摘要 -->
+  <div class="post-excerpt">
+    星露谷sve百小时完美存档巨献
 结语自第1年春季1日启，至第3年春季1日结，历时224个早6晚2。达成了100%完美。
 总收入8000余万金，花费4000余万金，如果倾家荡产，大抵是还能凑出1000万金。
 
-sve第三年还有新人物，所以会卡...
-                        </div>
-                        
-                        <div class="article-footer">
-                        <!-- 尚无内容 -->
-                        </div>
-                    </a>
-                
-            
-        </div>
-    </section>
+sve第三年还有新人物，所以会卡住人物好感和配方，但就这样吧，50万金买一个豁免书，99%完...
+  </div>
+</a>
+      
+        <!-- 整个卡片就是一个链接，点击即跳转 -->
+<a href="/posts/projectjoin/" class="post-card card-deep-space fade-in-up">
+  
+  <!-- 标题 -->
+  <h2 class="post-title">
+    👁️
+  </h2>
 
-    <script>
-    function scrollToPosts() {
-        //箭头滚动
-        const postsSection = document.querySelector('.home-posts');
-        if (postsSection) {
-            postsSection.scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    }
+  <!-- 2. Meta 信息: 创建日期 -> 更新日期 -> Tags -> Categories -->
+  <div class="post-meta">
     
-    (function() {
-        //主页切换动画
-        // 1. 强制清理状态 (防止返回时白屏)
-        document.body.classList.remove('home-exiting');
-        // 2. 通用点击处理函数
-        function handleExit(e) {
-            // 【安全检查】确保只在主页触发
-            // 因为导航栏是全局存在的，不加检查会导致在文章页点击导航也触发主页动画
-            if (!document.body.classList.contains('home-layout')) return;
-            // 排除特殊操作 (Ctrl/Cmd点击、新窗口打开)
-            if (e.ctrlKey || e.metaKey || e.shiftKey || this.target === '_blank') return;
-            // 阻止默认跳转
-            e.preventDefault();
-            var targetUrl = this.getAttribute('href');
-            // 触发 CSS 动画
-            document.body.classList.add('home-exiting');
-            // 延迟 500ms 后手动触发 Pjax
-            setTimeout(function() {
-                if (window.jQuery && jQuery.pjax) {
-                    jQuery.pjax({
-                        url: targetUrl,
-                        container: '#pjax-container',
-                        fragment: '#pjax-container',
-                        timeout: 8000
-                    });
-                } else {
-                    window.location.href = targetUrl;
-                }
-            }, 500);
-        }
-        function bindEvents() {
-            if (typeof jQuery === 'undefined') return;
-            //绑定文章卡片
-            $('.home-posts').off('click.homeAnim', '.post-article')
-                            .on('click.homeAnim', '.post-article', handleExit);
-            
-            // 绑定导航栏链接
-            $('.main-nav').off('click.homeAnim', '.nav-link')
-                          .on('click.homeAnim', '.nav-link', handleExit);
-        }
-        if (typeof jQuery === 'undefined') {
-            document.addEventListener('DOMContentLoaded', bindEvents);
-        } else {
-            bindEvents();
-        }
-    })();
-    </script>
-                </div>
-            </div>
-        </main>
-        
-    <aside id="right-sidebar">
-    <div class="sidebar-author">
-        <!-- 头像 -->
-        <div class="author-avatar">
-            <img src="https://Tenkonata.github.io/picx-images-hosting/装饰/avatar.96a6p4esqw.webp" alt="Tenkonata的博客" title="点我切换深/浅色">
-        </div>
-        
-        <!-- 作者名称 -->
-        <h3 class="author-name">Tenkonata的博客</h3>
-        
-        <!-- 签名 -->
-        
-        <div class="author-description">
-            
-                <p>坐和放宽</p>
-            
-                <p>一切上云！</p>
-            
-                <p>正在改写所有使用逻辑！</p>
-            
-                <p>“我不会再修复任何刷新问题”“trash,waste,rubbish,etc.”</p>
-            
-        </div>
-        
-        
-        <!-- 数据统计 (文章数 / 标签数) -->
-        <div class="site-state-wrap">
-            <a href="/archives/" class="site-state-item">
-                <span class="site-state-item-name">POSTS</span>
-                <span class="site-state-item-count">11</span>
-            </a>
-            <div class="site-state-item">
-                <span class="site-state-item-name">LIKES</span>
-                <span class="site-state-item-count">⑨⑨⑨</span>
-            </div>
-        </div>
+    <!-- 1. 创建日期 -->
+    <span class="meta-item">
+      <i class="fa fa-calendar"></i> 2025-10-28
+    </span>
 
-        <!-- RSS 按钮 -->
+    <!-- 2. 更新日期  -->
+    
+      <span class="meta-item" title="Updated: 2025-11-29">
+        <i class="fa fa-edit"></i> 2025-11-29
+      </span>
+    
+    
+    <!-- 3. 标签  -->
+    
 
-       <!-- 社交图标 -->
-        
-        <div class="sidebar-social">
-            
-                <a href="https://github.com/Tenkonata" target="_blank" rel="noopener" title="GitHub">
-                    
-                        <!-- 否则显示 FontAwesome 图标 -->
-                        <i class="fa fa-github"></i>
-                    
-                </a>
-            
-                <a href="mailto:xi-justice@outlook.com" target="_blank" rel="noopener" title="Email">
-                    
-                        <!-- 否则显示 FontAwesome 图标 -->
-                        <i class="fa fa-envelope"></i>
-                    
-                </a>
-            
-                <a href="https://space.bilibili.com/179767580" target="_blank" rel="noopener" title="Bilibili">
-                    
-                        <!-- 如果配置了 image-svg -->
-                        <span class="custom-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" ><path d="M18.223 3.08584C18.7112 3.574 18.7112 4.36545 18.223 4.85361L17.08 5.99598L18.25 5.99638C20.3211 5.99638 22 7.67531 22 9.74638V17.2464C22 19.3174 20.3211 20.9964 18.25 20.9964H5.75C3.67893 20.9964 2 19.3174 2 17.2464V9.74638C2 7.67531 3.67893 5.99638 5.75 5.99638L6.91625 5.99598L5.77466 4.85456C5.28651 4.36641 5.28651 3.57495 5.77466 3.0868C6.26282 2.59864 7.05427 2.59864 7.54243 3.0868L10.1941 5.73845C10.2729 5.81729 10.339 5.90403 10.3924 5.99614L13.6046 5.99636C13.6581 5.90382 13.7244 5.81667 13.8036 5.73749L16.4553 3.08584C16.9434 2.59769 17.7349 2.59769 18.223 3.08584ZM18.25 8.50638H5.75C5.09102 8.50638 4.55115 9.0163 4.50343 9.66309L4.5 9.75638V17.2564C4.5 17.9154 5.00992 18.4552 5.65671 18.5029L5.75 18.5064H18.25C18.909 18.5064 19.4489 17.9965 19.4966 17.3497L19.5 17.2564V9.75638C19.5 9.06602 18.9404 8.50638 18.25 8.50638ZM8.25 11.0064C8.94036 11.0064 9.5 11.566 9.5 12.2564V13.5064C9.5 14.1967 8.94036 14.7564 8.25 14.7564C7.55964 14.7564 7 14.1967 7 13.5064V12.2564C7 11.566 7.55964 11.0064 8.25 11.0064ZM15.75 11.0064C16.4404 11.0064 17 11.566 17 12.2564V13.5064C17 14.1967 16.4404 14.7564 15.75 14.7564C15.0596 14.7564 14.5 14.1967 14.5 13.5064V12.2564C14.5 11.566 15.0596 11.0064 15.75 11.0064Z" /></svg></span>
-                    
-                </a>
-            
-        </div>
-        
-    </div>
-</aside>
+    <!-- 4. 分类  -->
+    
+  </div>
+
+  <!-- 摘要 -->
+  <div class="post-excerpt">
+    你好加入星际餐厅东方project同好会没了...
+  </div>
+</a>
+      
+      
+      <!-- 分页 -->
+      
     </div>
 
-    <div id="back-to-top" class="btt-hidden">
-        <i class="fa fa-arrow-up"></i>
-    </div>
-    
-    
-<script src="/lib/jquery-3.7.1.min.js"></script>
+  </div>
+</section>
+  </main>
 
-    
-<script src="/lib/jquery.pjax.js"></script>
+  <!-- 回到顶部按钮 -->
+  <div id="back-to-top" class="back-to-top card-deep-space">
+    <span class="btt-text">0%</span>
+    <i class="fa fa-arrow-up btt-icon"></i>
+  </div>
 
-    <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-    
-    <!-- Pjax 核心配置 -->
-    <script>
-    $(document).ready(function() {
-        var pjaxSelector = 'a[href^="/"]:not([target="_blank"]):not([href$=".xml"]):not([href$=".json"])';
-        var pjaxContainer = '#pjax-container';
-        
-        $(document).pjax(pjaxSelector, pjaxContainer, {
-            fragment: pjaxContainer, 
-            timeout: 8000
-        });
-        
-        // Pjax 加载动画
-        $(document).on('pjax:send', function() {
-            $(pjaxContainer).addClass('pjax-loading');
-            if (!$('body').hasClass('home-layout')) {
-                $(pjaxContainer).addClass('pjax-animate');
-            }
-        });
-        
-        // 封装页面状态刷新逻辑
-        // 无论通过点击还是后退，都需要调用此函数来同步 Body 类名和按钮状态
-        function refreshLayout() {
-            // 1. 清除加载动画
-            $(pjaxContainer).removeClass('pjax-loading pjax-animate');
-
-            // 2. 根据当前 URL重新判断页面类型
-            var rootPath = ('/' || '/').replace(/\/$/, ''); 
-            var currentPath = window.location.pathname.replace(/\/$/, '');
-            var isHomePage = (currentPath === rootPath || currentPath === rootPath + '/index.html');
-            var isArchivePage = (currentPath.includes('/archives') || window.location.href.includes('/archives'));
-
-            // 3. 强制更新 Body 类名
-            $('body').removeClass('home-layout archive-layout');
-            if (isHomePage) $('body').addClass('home-layout');
-            else if (isArchivePage) $('body').addClass('archive-layout');
-            
-            // 4. 强制更新回到顶部按钮可见性
-            var btt = document.getElementById('back-to-top');
-            if (btt) {
-                if (isHomePage) {
-                    btt.classList.add('btt-hidden');
-                    btt.classList.remove('show'); // 确保隐藏
-                } else {
-                    btt.classList.remove('btt-hidden');
-                }
-            }
-
-            // 5. 调用其他组件的更新逻辑 (Mobile & AIR-v2)
-            if (window.initMobileLayout) window.initMobileLayout();
-            if (window.initHighlight) window.initHighlight();
-            if (window.generateOutline) window.generateOutline(); 
-            if (window.updateSidebarActiveState) window.updateSidebarActiveState();
-            if (window.initArchivePage) window.initArchivePage();
-            
-            console.log("Layout refreshed: " + currentPath);
-        }
-
-        // 场景 A: 正常的 Pjax 跳转完成
-        $(document).on('pjax:complete', function() {
-            refreshLayout();
-        });
-        refreshLayout();
-        // 场景 B: 【核心修复】浏览器后退/前进 (Popstate)
-        // 使用 popstate 监听器作为兜底，确保 URL 变了就一定更新布局
-        window.addEventListener('popstate', function() {
-            refreshLayout();
-        });
-    });
-    </script>
-
-    
-<script src="/js/AIR-v2.js"></script>
-
-    
-<script src="/js/mobile.js"></script>
-
-
+  <!-- 引入 Pjax 库 -->
+  <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+  
+  <!-- Highlight.js 核心库 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  
+  <!-- 主题逻辑 (包含 Highlight.js 初始化) -->
+  <script src="/js/AIRv3.js"></script>
+  <!-- 移动端响应式逻辑 -->
+  <script src="/js/AIRv3media.js"></script>
 </body>
 </html>

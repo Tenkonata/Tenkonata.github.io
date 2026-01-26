@@ -1,138 +1,163 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        
-            SQL Server 数据库编程 | AIR-v2
-        
-    </title>
-    
-    
-        <link rel="icon" href="https://Tenkonata.github.io/picx-images-hosting/装饰/favicon.86u3byc1l2.webp">
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIR-v3</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <!-- Highlight.js Atom One Dark 样式 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
 
-    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    
-    
-<link rel="stylesheet" href="/css/AIR-v2.css">
-
-    
-<link rel="stylesheet" href="/css/mobile.css">
-
-    
+  <link rel="stylesheet" href="/css/AIRv3.css">
+  <!-- 引入 Markdown 独立样式表 -->
+  <link rel="stylesheet" href="/css/AIRmd.css">
+  <!-- 引入移动端响应式适配样式 -->
+  <link rel="stylesheet" href="/css/AIRv3media.css">
 <meta name="generator" content="Hexo 8.0.0"></head>
+<body>
 
-<body class="post-body  ">
-    <script>
-        (function() {
-            var savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') document.body.classList.add('dark-mode');
-        })();
-    </script>
+  <!-- 全局固定背景 -->
+  <!-- 增加 --bg-media 变量用于移动端适配 -->
+  <div class="fixed-bg" 
+       style="background-image: url('https://img.paulzzh.com/touhou/random?size=pc'); 
+              --bg-media: url('https://img.paulzzh.com/touhou/random?size=wap');">
+  </div>
+  <div class="fixed-bg-overlay"></div>
 
-    <div id="mobile-overlay"></div>
+  <!-- 导航栏 Partial -->
+  <nav class="air-nav">
+  <div class="nav-left">
+    <a href="/" class="theme-title">
+      AIR-v3
+    </a>
+  </div>
+  <div class="nav-right">
     
+      
+        <a href="/" class="nav-link">
+          <i class="fa fa-home"></i> 
+          <span>主页</span>
+        </a>
+      
+        <a href="/archives" class="nav-link">
+          <i class="fa fa-archive"></i> 
+          <span>归档</span>
+        </a>
+      
+        <a href="/V3/aboutV3.html" class="nav-link">
+          <i class="fa fa-user"></i> 
+          <span>关于</span>
+        </a>
+      
     
-
-<nav class="main-nav">
-    <div class="nav-content">
-        <!-- 网站品牌 -->
-        <div class="site-brand">
-            <a href="/" class="site-title">
-                AIR-v2
-            </a>
-            
-        </div>
-
-        <!-- 导航菜单 -->
-        <div class="nav-menu">
-            <!-- 主导航项 -->
-            
-                <a href="/" class="nav-link">
-                    主页
-                </a>
-            
-                <a href="/about" class="nav-link">
-                    关于
-                </a>
-            
-                <a href="/archives" class="nav-link">
-                    归档
-                </a>
-            
-                <a href="/updatelog" class="nav-link">
-                    更新日志
-                </a>
-            
-            
-            <!-- 外部链接 -->
-            
-        </div>
-    </div>
+  </div>
 </nav>
+
+  <!-- 主体内容 (PJAX 容器) -->
+  <main class="container" id="pjax-container">
+    <!-- 文章页无需 Hero 区域，直接进入内容区 -->
+<section class="post-list-section" style="padding-top: 100px;">
+  <div class="content-container">
     
-    <div id="main">
-        <aside id="aside">
-            <div class="sidebar">
-    <div class="sidebar-header">
-        <div class="sidebar-tabs">
-            <button class="tab-btn active" data-tab="outline">大纲</button>
-            <button class="tab-btn" data-tab="files">文件</button>
-        </div>
+    <!-- 左侧：固定侧边栏 (复用) -->
+    <div class="layout-left">
+      <aside class="air-sidebar">
+  
+  <!-- 1. 作者栏位 (已调换至顶部) -->
+  <div class="sidebar-author card-deep-space">
+    <div class="author-avatar">
+      <img src="https://Tenkonata.github.io/picx-images-hosting/装饰/avatar.96a6p4esqw.webp" alt="Author Avatar">
     </div>
+    <h3 class="author-name">Tenkonata</h3>
+    <p class="author-signature">坐和放宽</p>
     
-    <nav class="sidebar-nav">
-        <!-- 大纲的内容 (服务端渲染版 SSR) -->
-        <div class="tab-content active" id="outline-tab">
-            <div class="outline-container">
-                
-                    
-                    <div id="article-outline"><ul class="outline-list" style="margin: 0; padding: 0;"><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#三、建立数据表" class="outline-link">三、建立数据表</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#1-创建博客系统数据表" class="outline-link">1.创建博客系统数据表</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#语法" class="outline-link">语法</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#数据类型" class="outline-link">数据类型</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#2-设置主键" class="outline-link">2.设置主键</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#语法：" class="outline-link">语法：</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#3-博客用户表添加标识列" class="outline-link">3. 博客用户表添加标识列</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#语法-1" class="outline-link">语法</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#注意" class="outline-link">注意</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#4-创建主外键关系" class="outline-link">4.创建主外键关系</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#语法-2" class="outline-link">语法</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#5-博客用户邮箱添加检查约束" class="outline-link">5.博客用户邮箱添加检查约束</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#语法-3" class="outline-link">语法</a></li><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#四、数据管理" class="outline-link">四、数据管理</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#1-插入博客管理数据" class="outline-link">1.插入博客管理数据</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#语法-4" class="outline-link">语法</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#2-更新博客系统数据" class="outline-link">2.更新博客系统数据</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#语法-5" class="outline-link">语法</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#3-删除部分数据" class="outline-link">3.删除部分数据</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#语法-6" class="outline-link">语法</a></li><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#五、数据查询" class="outline-link">五、数据查询</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#1-博客系统基础查询" class="outline-link">1.博客系统基础查询</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#语法-7" class="outline-link">语法</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#2-按发表日期排序博客" class="outline-link">2.按发表日期排序博客</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#语法-8" class="outline-link">语法</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#3-函数" class="outline-link">3.函数</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#实例" class="outline-link">实例</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#4-博客模糊查询" class="outline-link">4.博客模糊查询</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#语法-9" class="outline-link">语法</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#5-博客评论中的聚合函数" class="outline-link">5.博客评论中的聚合函数</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#语法-10" class="outline-link">语法</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#6-按博客分组统计评论数" class="outline-link">6.按博客分组统计评论数</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#语法-11" class="outline-link">语法</a></li><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#六、高级查询的应用" class="outline-link">六、高级查询的应用</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#1-查询博客的完整信息" class="outline-link">1.查询博客的完整信息</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#实例-1" class="outline-link">实例</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#2-查询博客的完整信息并把未发表博客的用户信息显示出来" class="outline-link">2.查询博客的完整信息并把未发表博客的用户信息显示出来</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#实例-2" class="outline-link">实例</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#3-简单子查询——按博主查询博客" class="outline-link">3.简单子查询——按博主查询博客</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#实例-3" class="outline-link">实例</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#4-in子查询" class="outline-link">4.in子查询</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#实例-4" class="outline-link">实例</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#5-exists查询——标记冷门博客" class="outline-link">5.exists查询——标记冷门博客</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#实例-5" class="outline-link">实例</a></li><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#七、T-SQL编程" class="outline-link">七、T-SQL编程</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#1-变量" class="outline-link">1.变量</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#实例-6" class="outline-link">实例</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#2-if条件" class="outline-link">2.if条件</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#语法-12" class="outline-link">语法</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#实例-7" class="outline-link">实例</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#3-while循环" class="outline-link">3.while循环</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#语法-13" class="outline-link">语法</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#实例-8" class="outline-link">实例</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#4-case多分支" class="outline-link">4. case多分支</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#实例-9" class="outline-link">实例</a></li><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#八、索引与视图" class="outline-link">八、索引与视图</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#1-按博客的发表日期建立索引" class="outline-link">1.按博客的发表日期建立索引</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#语法-14" class="outline-link">语法</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#2-显示用户发表博客情况的视图" class="outline-link">2.显示用户发表博客情况的视图</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#语法-15" class="outline-link">语法</a></li><li class="outline-item outline-level-1" style="margin: 0; padding: 0;"><a href="#九、存储过程" class="outline-link">九、存储过程</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#1-查看单击率均值及低于均值博客的存储过程" class="outline-link">1.查看单击率均值及低于均值博客的存储过程</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#语法：用T-SQL创建存储过程" class="outline-link">语法：用T-SQL创建存储过程</a></li><li class="outline-item outline-level-3" style="margin: 0; padding: 0;"><a href="#语法：调用存储过程" class="outline-link">语法：调用存储过程</a></li><li class="outline-item outline-level-2" style="margin: 0; padding: 0;"><a href="#2-创建存储过程实现输入用户姓名查看其博客详情" class="outline-link">2.创建存储过程实现输入用户姓名查看其博客详情</a></li></ul></div>
-                
-            </div>
-        </div>
+    <!-- 数据统计 -->
+    <div class="author-stats">
+      <div class="stats-item">
+        <span class="stats-count">11</span>
+        <span class="stats-label">Posts</span>
+      </div>
+      <div class="stats-item">
+        <span class="stats-count">2</span>
+        <span class="stats-label">Tags</span>
+      </div>
+      <div class="stats-item">
+        <span class="stats-count">2</span>
+        <span class="stats-label">Categories</span>
+      </div>
+    </div>
+  </div>
 
-        <!-- 文件的内容 (保持原有的 SSR 逻辑) -->
-        <div class="tab-content" id="files-tab">
-            
-            <ul class="tree-root">
-                <li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>测试性质文件</div><ul class="post-list"><li class="post-item file"><a href="/posts/804a7bbf/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">必要测试中</span></a></li><li class="post-item file"><a href="/posts/thefirst/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">第一篇博客</span></a></li><li class="post-item file"><a href="/posts/liability/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">免责声明</span></a></li></ul></li><li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>天马行空</div><ul class="post-list"><li class="post-item file"><a href="/posts/Snippet1/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">Snippet_1</span></a></li><li class="post-item file"><a href="/posts/Snippet2/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">Snippet_2</span></a></li></ul></li><li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>hexo主题开发</div><ul class="post-list"><li class="post-item file"><a href="/posts/hexothemeprogram/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">从零开始搓一个hexo主题</span></a></li><li class="post-item file"><a href="/posts/helloworld/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">hello-world</span></a></li><li class="post-item file"><a href="/posts/9a4212eb/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">hexo妙妙小工具</span></a></li></ul></li><li class="post-item file"><a href="/posts/projectjoin/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">👁️</span></a></li><li class="post-item file"><a href="/posts/cf87542b/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">星露谷sve结语</span></a></li><li class="post-item file active"><a href="/posts/sqlprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">sql数据库编程</span></a></li>
-            </ul>
-        </div>
-    </nav>
-</div>
-        </aside>
+  <!-- 2. 侧边导航菜单 (已调换至下方) -->
+  <div class="sidebar-menu card-deep-space">
+    
+      
+        <a href="/" class="sidebar-link">
+          <i class="fa fa-home"></i> 
+          <span>主页</span>
+        </a>
+      
+        <a href="/archives" class="sidebar-link">
+          <i class="fa fa-archive"></i> 
+          <span>归档</span>
+        </a>
+      
+        <a href="/V3/updatelogV3.html" class="sidebar-link">
+          <i class="fa fa-pencil"></i> 
+          <span>更新日志</span>
+        </a>
+      
+        <a href="/V3/aboutV3.html" class="sidebar-link">
+          <i class="fa fa-user"></i> 
+          <span>关于</span>
+        </a>
+      
+    
+  </div>
 
-        <main class="main-content ">
-            <div id="pjax-container">
-                <div id="content">
-                    <article class="post-body markdown-body">
-    <header class="post-header">
+</aside>
+    </div>
+
+    <!-- 右侧：文章详情 -->
+    <div class="layout-right">
+      <article class="post-card post-page-card card-deep-space fade-in-up">
         
-        
-        <div class="post-meta">
-            <!-- 创建日期 -->
-            <time class="post-date" datetime="2025-11-13T03:41:35.123Z" title="创建日期">
-                <i class="fa fa-calendar"></i> 2025-11-13
-            </time>
-
-            <!-- 修改日期 -->
-            <!-- 只有当 updated 存在且晚于 date 时才显示，避免重复 -->
+        <!-- 文章头信息 -->
+        <header class="post-header">
+          <h1 class="post-title">SQL Server 数据库编程</h1>
+          
+          <div class="post-meta">
             
-            <time class="post-date" datetime="2025-12-02T14:00:48.534Z" title="修改日期">
+            <!-- 1. 创建时间 -->
+            <span class="meta-item" title="Created: 2025-11-13 11:41">
+              <i class="fa fa-calendar"></i> 2025-11-13
+            </span>
+
+            <!-- 2. 更新时间 -->
+            
+              <span class="meta-item" title="Updated: 2025-12-02 22:00">
                 <i class="fa fa-edit"></i> 2025-12-02
-            </time>
+              </span>
             
+
+            <!-- 3. 标签 -->
             
+
+            <!-- 4. 分类  -->
             
-        </div>
-        
-    </header>
-    
-    <div class="post-content">
-        <h1 id="三、建立数据表"><a href="#三、建立数据表" class="headerlink" title="三、建立数据表"></a>三、建立数据表</h1><h2 id="1-创建博客系统数据表"><a href="#1-创建博客系统数据表" class="headerlink" title="1.创建博客系统数据表"></a>1.创建博客系统数据表</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><pre><code class="language-sql">use filename
+
+            <!-- 字数统计 -->
+            
+          </div>
+        </header>
+
+        <!-- 分割线 -->
+        <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
+
+        <!-- 正文内容 -->
+        <div class="post-content">
+          <h1 id="三、建立数据表"><a href="#三、建立数据表" class="headerlink" title="三、建立数据表"></a>三、建立数据表</h1><h2 id="1-创建博客系统数据表"><a href="#1-创建博客系统数据表" class="headerlink" title="1.创建博客系统数据表"></a>1.创建博客系统数据表</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><pre><code class="language-sql">use filename
 GO
 
 create table list_name
@@ -481,187 +506,63 @@ use blogDB
 exec proc_clickNum
 </code></pre>
 <h2 id="2-创建存储过程实现输入用户姓名查看其博客详情"><a href="#2-创建存储过程实现输入用户姓名查看其博客详情" class="headerlink" title="2.创建存储过程实现输入用户姓名查看其博客详情"></a>2.创建存储过程实现输入用户姓名查看其博客详情</h2>
-    </div>
-    
-    <footer class="post-footer">
-        <!-- 上一篇下一篇导航 -->
-        <div class="post-nav">
-            
-                <a href="/posts/cf87542b/" class="post-nav-prev">
-                    <i class="fa fa-arrow-left"></i> 星露谷sve结语
-                </a>
-            
-            
-            
-                <a href="/posts/hexothemeprogram/" class="post-nav-next">
-                    hexo主题开发及部署教程 <i class="fa fa-arrow-right"></i>
-                </a>
-            
-        </div>
-    </footer>
-</article>
-                </div>
-            </div>
-        </main>
-        
-    <aside id="right-sidebar">
-    <div class="sidebar-author">
-        <!-- 头像 -->
-        <div class="author-avatar">
-            <img src="https://Tenkonata.github.io/picx-images-hosting/装饰/avatar.96a6p4esqw.webp" alt="Tenkonata的博客" title="点我切换深/浅色">
-        </div>
-        
-        <!-- 作者名称 -->
-        <h3 class="author-name">Tenkonata的博客</h3>
-        
-        <!-- 签名 -->
-        
-        <div class="author-description">
-            
-                <p>坐和放宽</p>
-            
-                <p>一切上云！</p>
-            
-                <p>正在改写所有使用逻辑！</p>
-            
-                <p>“我不会再修复任何刷新问题”“trash,waste,rubbish,etc.”</p>
-            
-        </div>
-        
-        
-        <!-- 数据统计 (文章数 / 标签数) -->
-        <div class="site-state-wrap">
-            <a href="/archives/" class="site-state-item">
-                <span class="site-state-item-name">POSTS</span>
-                <span class="site-state-item-count">11</span>
-            </a>
-            <div class="site-state-item">
-                <span class="site-state-item-name">LIKES</span>
-                <span class="site-state-item-count">⑨⑨⑨</span>
-            </div>
         </div>
 
-        <!-- RSS 按钮 -->
+        <!-- 上一篇/下一篇 导航 -->
+        <nav class="post-nav">
+          <div class="post-nav-prev" style="max-width: 45%;">
+            
+              <a href="/posts/cf87542b/" title="星露谷sve结语">
+                <i class="fa fa-chevron-left"></i> 
+                <span>星露谷sve结语</span>
+              </a>
+            
+          </div>
+          <div class="post-nav-next" style="max-width: 45%; text-align: right;">
+            
+              <a href="/posts/hexothemeprogram/" title="hexo主题开发及部署教程">
+                <span>hexo主题开发及部署教程</span>
+                <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </nav>
 
-       <!-- 社交图标 -->
-        
-        <div class="sidebar-social">
-            
-                <a href="https://github.com/Tenkonata" target="_blank" rel="noopener" title="GitHub">
-                    
-                        <!-- 否则显示 FontAwesome 图标 -->
-                        <i class="fa fa-github"></i>
-                    
-                </a>
-            
-                <a href="mailto:xi-justice@outlook.com" target="_blank" rel="noopener" title="Email">
-                    
-                        <!-- 否则显示 FontAwesome 图标 -->
-                        <i class="fa fa-envelope"></i>
-                    
-                </a>
-            
-                <a href="https://space.bilibili.com/179767580" target="_blank" rel="noopener" title="Bilibili">
-                    
-                        <!-- 如果配置了 image-svg -->
-                        <span class="custom-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" ><path d="M18.223 3.08584C18.7112 3.574 18.7112 4.36545 18.223 4.85361L17.08 5.99598L18.25 5.99638C20.3211 5.99638 22 7.67531 22 9.74638V17.2464C22 19.3174 20.3211 20.9964 18.25 20.9964H5.75C3.67893 20.9964 2 19.3174 2 17.2464V9.74638C2 7.67531 3.67893 5.99638 5.75 5.99638L6.91625 5.99598L5.77466 4.85456C5.28651 4.36641 5.28651 3.57495 5.77466 3.0868C6.26282 2.59864 7.05427 2.59864 7.54243 3.0868L10.1941 5.73845C10.2729 5.81729 10.339 5.90403 10.3924 5.99614L13.6046 5.99636C13.6581 5.90382 13.7244 5.81667 13.8036 5.73749L16.4553 3.08584C16.9434 2.59769 17.7349 2.59769 18.223 3.08584ZM18.25 8.50638H5.75C5.09102 8.50638 4.55115 9.0163 4.50343 9.66309L4.5 9.75638V17.2564C4.5 17.9154 5.00992 18.4552 5.65671 18.5029L5.75 18.5064H18.25C18.909 18.5064 19.4489 17.9965 19.4966 17.3497L19.5 17.2564V9.75638C19.5 9.06602 18.9404 8.50638 18.25 8.50638ZM8.25 11.0064C8.94036 11.0064 9.5 11.566 9.5 12.2564V13.5064C9.5 14.1967 8.94036 14.7564 8.25 14.7564C7.55964 14.7564 7 14.1967 7 13.5064V12.2564C7 11.566 7.55964 11.0064 8.25 11.0064ZM15.75 11.0064C16.4404 11.0064 17 11.566 17 12.2564V13.5064C17 14.1967 16.4404 14.7564 15.75 14.7564C15.0596 14.7564 14.5 14.1967 14.5 13.5064V12.2564C14.5 11.566 15.0596 11.0064 15.75 11.0064Z" /></svg></span>
-                    
-                </a>
-            
-        </div>
-        
+      </article>
     </div>
+
+  </div>
+</section>
+
+<!-- 悬浮 TOC 抽屉 (仅在有目录时显示) -->
+
+<aside class="toc-drawer">
+  <div class="toc-toggle-btn">
+    <i class="fa fa-chevron-left"></i>
+  </div>
+  <div class="toc-content card-deep-space">
+    <h3 class="toc-header">大纲</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="toc-text">三、建立数据表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="toc-text">1.创建博客系统数据表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-text">语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">数据类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%AE%BE%E7%BD%AE%E4%B8%BB%E9%94%AE"><span class="toc-text">2.设置主键</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%EF%BC%9A"><span class="toc-text">语法：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%8D%9A%E5%AE%A2%E7%94%A8%E6%88%B7%E8%A1%A8%E6%B7%BB%E5%8A%A0%E6%A0%87%E8%AF%86%E5%88%97"><span class="toc-text">3. 博客用户表添加标识列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-1"><span class="toc-text">语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%88%9B%E5%BB%BA%E4%B8%BB%E5%A4%96%E9%94%AE%E5%85%B3%E7%B3%BB"><span class="toc-text">4.创建主外键关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-2"><span class="toc-text">语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%8D%9A%E5%AE%A2%E7%94%A8%E6%88%B7%E9%82%AE%E7%AE%B1%E6%B7%BB%E5%8A%A0%E6%A3%80%E6%9F%A5%E7%BA%A6%E6%9D%9F"><span class="toc-text">5.博客用户邮箱添加检查约束</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-3"><span class="toc-text">语法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86"><span class="toc-text">四、数据管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%8F%92%E5%85%A5%E5%8D%9A%E5%AE%A2%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE"><span class="toc-text">1.插入博客管理数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-4"><span class="toc-text">语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9B%B4%E6%96%B0%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E6%95%B0%E6%8D%AE"><span class="toc-text">2.更新博客系统数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-5"><span class="toc-text">语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%88%A0%E9%99%A4%E9%83%A8%E5%88%86%E6%95%B0%E6%8D%AE"><span class="toc-text">3.删除部分数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-6"><span class="toc-text">语法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2"><span class="toc-text">五、数据查询</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2"><span class="toc-text">1.博客系统基础查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-7"><span class="toc-text">语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%8C%89%E5%8F%91%E8%A1%A8%E6%97%A5%E6%9C%9F%E6%8E%92%E5%BA%8F%E5%8D%9A%E5%AE%A2"><span class="toc-text">2.按发表日期排序博客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-8"><span class="toc-text">语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%87%BD%E6%95%B0"><span class="toc-text">3.函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%8D%9A%E5%AE%A2%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2"><span class="toc-text">4.博客模糊查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-9"><span class="toc-text">语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E4%B8%AD%E7%9A%84%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0"><span class="toc-text">5.博客评论中的聚合函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-10"><span class="toc-text">语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%8C%89%E5%8D%9A%E5%AE%A2%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1%E8%AF%84%E8%AE%BA%E6%95%B0"><span class="toc-text">6.按博客分组统计评论数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-11"><span class="toc-text">语法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-text">六、高级查询的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9F%A5%E8%AF%A2%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%AE%8C%E6%95%B4%E4%BF%A1%E6%81%AF"><span class="toc-text">1.查询博客的完整信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-1"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9F%A5%E8%AF%A2%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%AE%8C%E6%95%B4%E4%BF%A1%E6%81%AF%E5%B9%B6%E6%8A%8A%E6%9C%AA%E5%8F%91%E8%A1%A8%E5%8D%9A%E5%AE%A2%E7%9A%84%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E6%98%BE%E7%A4%BA%E5%87%BA%E6%9D%A5"><span class="toc-text">2.查询博客的完整信息并把未发表博客的用户信息显示出来</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-2"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%AE%80%E5%8D%95%E5%AD%90%E6%9F%A5%E8%AF%A2%E2%80%94%E2%80%94%E6%8C%89%E5%8D%9A%E4%B8%BB%E6%9F%A5%E8%AF%A2%E5%8D%9A%E5%AE%A2"><span class="toc-text">3.简单子查询——按博主查询博客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-3"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-in%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="toc-text">4.in子查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-4"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-exists%E6%9F%A5%E8%AF%A2%E2%80%94%E2%80%94%E6%A0%87%E8%AE%B0%E5%86%B7%E9%97%A8%E5%8D%9A%E5%AE%A2"><span class="toc-text">5.exists查询——标记冷门博客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-5"><span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83%E3%80%81T-SQL%E7%BC%96%E7%A8%8B"><span class="toc-text">七、T-SQL编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%8F%98%E9%87%8F"><span class="toc-text">1.变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-6"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-if%E6%9D%A1%E4%BB%B6"><span class="toc-text">2.if条件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-12"><span class="toc-text">语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-7"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-while%E5%BE%AA%E7%8E%AF"><span class="toc-text">3.while循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-13"><span class="toc-text">语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-8"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-case%E5%A4%9A%E5%88%86%E6%94%AF"><span class="toc-text">4. case多分支</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-9"><span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E7%B4%A2%E5%BC%95%E4%B8%8E%E8%A7%86%E5%9B%BE"><span class="toc-text">八、索引与视图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%8C%89%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%8F%91%E8%A1%A8%E6%97%A5%E6%9C%9F%E5%BB%BA%E7%AB%8B%E7%B4%A2%E5%BC%95"><span class="toc-text">1.按博客的发表日期建立索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-14"><span class="toc-text">语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%98%BE%E7%A4%BA%E7%94%A8%E6%88%B7%E5%8F%91%E8%A1%A8%E5%8D%9A%E5%AE%A2%E6%83%85%E5%86%B5%E7%9A%84%E8%A7%86%E5%9B%BE"><span class="toc-text">2.显示用户发表博客情况的视图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-15"><span class="toc-text">语法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">九、存储过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9F%A5%E7%9C%8B%E5%8D%95%E5%87%BB%E7%8E%87%E5%9D%87%E5%80%BC%E5%8F%8A%E4%BD%8E%E4%BA%8E%E5%9D%87%E5%80%BC%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">1.查看单击率均值及低于均值博客的存储过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%EF%BC%9A%E7%94%A8T-SQL%E5%88%9B%E5%BB%BA%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">语法：用T-SQL创建存储过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%EF%BC%9A%E8%B0%83%E7%94%A8%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">语法：调用存储过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BA%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%AE%9E%E7%8E%B0%E8%BE%93%E5%85%A5%E7%94%A8%E6%88%B7%E5%A7%93%E5%90%8D%E6%9F%A5%E7%9C%8B%E5%85%B6%E5%8D%9A%E5%AE%A2%E8%AF%A6%E6%83%85"><span class="toc-text">2.创建存储过程实现输入用户姓名查看其博客详情</span></a></li></ol></li></ol>
+  </div>
 </aside>
-    </div>
 
-    <div id="back-to-top" class="">
-        <i class="fa fa-arrow-up"></i>
-    </div>
-    
-    
-<script src="/lib/jquery-3.7.1.min.js"></script>
+  </main>
 
-    
-<script src="/lib/jquery.pjax.js"></script>
+  <!-- 回到顶部按钮 -->
+  <div id="back-to-top" class="back-to-top card-deep-space">
+    <span class="btt-text">0%</span>
+    <i class="fa fa-arrow-up btt-icon"></i>
+  </div>
 
-    <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-    
-    <!-- Pjax 核心配置 -->
-    <script>
-    $(document).ready(function() {
-        var pjaxSelector = 'a[href^="/"]:not([target="_blank"]):not([href$=".xml"]):not([href$=".json"])';
-        var pjaxContainer = '#pjax-container';
-        
-        $(document).pjax(pjaxSelector, pjaxContainer, {
-            fragment: pjaxContainer, 
-            timeout: 8000
-        });
-        
-        // Pjax 加载动画
-        $(document).on('pjax:send', function() {
-            $(pjaxContainer).addClass('pjax-loading');
-            if (!$('body').hasClass('home-layout')) {
-                $(pjaxContainer).addClass('pjax-animate');
-            }
-        });
-        
-        // 封装页面状态刷新逻辑
-        // 无论通过点击还是后退，都需要调用此函数来同步 Body 类名和按钮状态
-        function refreshLayout() {
-            // 1. 清除加载动画
-            $(pjaxContainer).removeClass('pjax-loading pjax-animate');
-
-            // 2. 根据当前 URL重新判断页面类型
-            var rootPath = ('/' || '/').replace(/\/$/, ''); 
-            var currentPath = window.location.pathname.replace(/\/$/, '');
-            var isHomePage = (currentPath === rootPath || currentPath === rootPath + '/index.html');
-            var isArchivePage = (currentPath.includes('/archives') || window.location.href.includes('/archives'));
-
-            // 3. 强制更新 Body 类名
-            $('body').removeClass('home-layout archive-layout');
-            if (isHomePage) $('body').addClass('home-layout');
-            else if (isArchivePage) $('body').addClass('archive-layout');
-            
-            // 4. 强制更新回到顶部按钮可见性
-            var btt = document.getElementById('back-to-top');
-            if (btt) {
-                if (isHomePage) {
-                    btt.classList.add('btt-hidden');
-                    btt.classList.remove('show'); // 确保隐藏
-                } else {
-                    btt.classList.remove('btt-hidden');
-                }
-            }
-
-            // 5. 调用其他组件的更新逻辑 (Mobile & AIR-v2)
-            if (window.initMobileLayout) window.initMobileLayout();
-            if (window.initHighlight) window.initHighlight();
-            if (window.generateOutline) window.generateOutline(); 
-            if (window.updateSidebarActiveState) window.updateSidebarActiveState();
-            if (window.initArchivePage) window.initArchivePage();
-            
-            console.log("Layout refreshed: " + currentPath);
-        }
-
-        // 场景 A: 正常的 Pjax 跳转完成
-        $(document).on('pjax:complete', function() {
-            refreshLayout();
-        });
-        refreshLayout();
-        // 场景 B: 【核心修复】浏览器后退/前进 (Popstate)
-        // 使用 popstate 监听器作为兜底，确保 URL 变了就一定更新布局
-        window.addEventListener('popstate', function() {
-            refreshLayout();
-        });
-    });
-    </script>
-
-    
-<script src="/js/AIR-v2.js"></script>
-
-    
-<script src="/js/mobile.js"></script>
-
-
+  <!-- 引入 Pjax 库 -->
+  <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+  
+  <!-- Highlight.js 核心库 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  
+  <!-- 主题逻辑 (包含 Highlight.js 初始化) -->
+  <script src="/js/AIRv3.js"></script>
+  <!-- 移动端响应式逻辑 -->
+  <script src="/js/AIRv3media.js"></script>
 </body>
 </html>

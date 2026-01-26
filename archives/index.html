@@ -1,826 +1,554 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        
-            归档 | AIR-v2
-        
-    </title>
-    
-    
-        <link rel="icon" href="https://Tenkonata.github.io/picx-images-hosting/装饰/favicon.86u3byc1l2.webp">
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIR-v3</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <!-- Highlight.js Atom One Dark 样式 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
 
-    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    
-    
-<link rel="stylesheet" href="/css/AIR-v2.css">
-
-    
-<link rel="stylesheet" href="/css/mobile.css">
-
-    
+  <link rel="stylesheet" href="/css/AIRv3.css">
+  <!-- 引入 Markdown 独立样式表 -->
+  <link rel="stylesheet" href="/css/AIRmd.css">
+  <!-- 引入移动端响应式适配样式 -->
+  <link rel="stylesheet" href="/css/AIRv3media.css">
 <meta name="generator" content="Hexo 8.0.0"></head>
+<body>
 
-<body class="post-body  archive-layout">
-    <script>
-        (function() {
-            var savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') document.body.classList.add('dark-mode');
-        })();
-    </script>
+  <!-- 全局固定背景 -->
+  <!-- 增加 --bg-media 变量用于移动端适配 -->
+  <div class="fixed-bg" 
+       style="background-image: url('https://img.paulzzh.com/touhou/random?size=pc'); 
+              --bg-media: url('https://img.paulzzh.com/touhou/random?size=wap');">
+  </div>
+  <div class="fixed-bg-overlay"></div>
 
-    <div id="mobile-overlay"></div>
+  <!-- 导航栏 Partial -->
+  <nav class="air-nav">
+  <div class="nav-left">
+    <a href="/" class="theme-title">
+      AIR-v3
+    </a>
+  </div>
+  <div class="nav-right">
     
+      
+        <a href="/" class="nav-link">
+          <i class="fa fa-home"></i> 
+          <span>主页</span>
+        </a>
+      
+        <a href="/archives" class="nav-link">
+          <i class="fa fa-archive"></i> 
+          <span>归档</span>
+        </a>
+      
+        <a href="/V3/aboutV3.html" class="nav-link">
+          <i class="fa fa-user"></i> 
+          <span>关于</span>
+        </a>
+      
     
-
-<nav class="main-nav">
-    <div class="nav-content">
-        <!-- 网站品牌 -->
-        <div class="site-brand">
-            <a href="/" class="site-title">
-                AIR-v2
-            </a>
-            
-        </div>
-
-        <!-- 导航菜单 -->
-        <div class="nav-menu">
-            <!-- 主导航项 -->
-            
-                <a href="/" class="nav-link">
-                    主页
-                </a>
-            
-                <a href="/about" class="nav-link">
-                    关于
-                </a>
-            
-                <a href="/archives" class="nav-link">
-                    归档
-                </a>
-            
-                <a href="/updatelog" class="nav-link">
-                    更新日志
-                </a>
-            
-            
-            <!-- 外部链接 -->
-            
-        </div>
-    </div>
+  </div>
 </nav>
+
+  <!-- 主体内容 (PJAX 容器) -->
+  <main class="container" id="pjax-container">
+    <!-- 归档页无需 Hero，直接 Padding 顶出导航栏 -->
+<section class="post-list-section" style="padding-top: 100px;">
+  <div class="content-container">
     
-    <div id="main">
-        <aside id="aside">
-            <div class="sidebar">
-    <div class="sidebar-header">
-        <div class="sidebar-tabs">
-            <button class="tab-btn active" data-tab="outline">大纲</button>
-            <button class="tab-btn" data-tab="files">文件</button>
-        </div>
+    <!-- 左侧：固定侧边栏 (复用) -->
+    <div class="layout-left">
+      <aside class="air-sidebar">
+  
+  <!-- 1. 作者栏位 (已调换至顶部) -->
+  <div class="sidebar-author card-deep-space">
+    <div class="author-avatar">
+      <img src="https://Tenkonata.github.io/picx-images-hosting/装饰/avatar.96a6p4esqw.webp" alt="Author Avatar">
     </div>
+    <h3 class="author-name">Tenkonata</h3>
+    <p class="author-signature">坐和放宽</p>
     
-    <nav class="sidebar-nav">
-        <!-- 大纲的内容 (服务端渲染版 SSR) -->
-        <div class="tab-content active" id="outline-tab">
-            <div class="outline-container">
-                
-            </div>
-        </div>
-
-        <!-- 文件的内容 (保持原有的 SSR 逻辑) -->
-        <div class="tab-content" id="files-tab">
-            
-            <ul class="tree-root">
-                <li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>测试性质文件</div><ul class="post-list"><li class="post-item file"><a href="/posts/804a7bbf/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">必要测试中</span></a></li><li class="post-item file"><a href="/posts/thefirst/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">第一篇博客</span></a></li><li class="post-item file"><a href="/posts/liability/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">免责声明</span></a></li></ul></li><li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>天马行空</div><ul class="post-list"><li class="post-item file"><a href="/posts/Snippet1/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">Snippet_1</span></a></li><li class="post-item file"><a href="/posts/Snippet2/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">Snippet_2</span></a></li></ul></li><li class="category-group" style="padding-left: 0px"><div class="category-title"><i class="fa fa-folder-open"></i>hexo主题开发</div><ul class="post-list"><li class="post-item file"><a href="/posts/hexothemeprogram/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">从零开始搓一个hexo主题</span></a></li><li class="post-item file"><a href="/posts/helloworld/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">hello-world</span></a></li><li class="post-item file"><a href="/posts/9a4212eb/" class="post-link" style="padding-left: 36px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">hexo妙妙小工具</span></a></li></ul></li><li class="post-item file"><a href="/posts/projectjoin/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">👁️</span></a></li><li class="post-item file"><a href="/posts/cf87542b/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">星露谷sve结语</span></a></li><li class="post-item file"><a href="/posts/sqlprogram/" class="post-link" style="padding-left: 20px"><span class="post-icon"><i class="fa fa-file-text-o"></i></span><span class="post-title">sql数据库编程</span></a></li>
-            </ul>
-        </div>
-    </nav>
-</div>
-        </aside>
-
-        <main class="main-content ">
-            <div id="pjax-container">
-                <div id="content">
-                    <style>
-/* =========================================
-   归档页面专用样式
-   ========================================= */
-/* 覆盖通用背景 */
-body.archive-layout {
-    background-color: var(--v-white-200);
-}
-
-/* 归档主容器 */
-.archive-main {
-    flex: 1;
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 100px 20px 60px;
-}
-
-/* 标题区域 */
-.archive-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-.archive-title {
-    font-size: 2em;
-    font-weight: 700;
-    color: var(--v-blue-700);
-    margin-bottom: 10px;
-}
-
-/* 搜索栏容器 */
-.search-section {
-    margin-bottom: 40px;
-    position: relative;
-    width: 100%;
-}
-
-.search-wrapper {
-    position: relative;
-    width: 100%;
-    z-index: 10; 
-}
-
-/* 搜索框样式 */
-.search-input {
-    width: 100%;
-    padding: 18px 24px;
-    padding-left: 55px;
-    font-size: 1.1em;
-    border: 2px solid transparent;
-    border-radius: 12px;
-    background: var(--v-white-100);
-    color: var(--v-gray-1000);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease;
-    outline: none;
-    box-sizing: border-box;
-    position: relative; 
-    z-index: 2; 
-}
-
-.search-input:focus {
-    border-color: var(--v-blue-700);
-    box-shadow: 0 8px 24px rgba(0, 114, 245, 0.15);
-    transform: translateY(-2px);
-    background: var(--v-white-100); 
-}
-
-.search-icon {
-    position: absolute;
-    left: 22px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--v-gray-600);
-    font-size: 1.2em;
-    pointer-events: none;
-    z-index: 10; 
-    transition: transform 0.3s ease;
-}
-
-.search-input:focus + .search-icon {
-    color: var(--v-blue-700);
-    transform: translateY(-12px);
-}
-
-/* 列表区域 */
-.archive-list {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 0; 
-}
-
-/* 文章卡片容器 */
-.archive-card-wrapper {
-    opacity: 1;
-    max-height: 500px;
-    margin-bottom: 20px;
-    transform: translateY(0) scale(1);
-    transform-origin: top center;
-    
-    transition: 
-        opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-        max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-        margin-bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        
-    overflow: hidden; 
-    will-change: transform, opacity, max-height, margin-bottom;
-}
-
-/* 文章卡片本体 */
-.archive-card {
-    background: var(--v-white-100);
-    border-radius: 12px;
-    padding: 24px 30px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    /* 初始進場動畫 */
-    animation: fadeInUp 0.5s ease backwards;
-    animation-delay: calc(var(--i) * 0.05s);
-}
-
-/* 隱藏狀態 (上隱抽屜效果) */
-.archive-card-wrapper.hidden {
-    opacity: 0;
-    /* 向上位移並稍微縮小，模擬被抽走的感覺 */
-    transform: translateY(-30px) scale(0.98); 
-    max-height: 0;
-    margin-bottom: 0;
-    /* 確保鼠標無法交互 */
-    pointer-events: none;
-}
-
-.archive-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-    border-color: rgba(0, 114, 245, 0.3);
-}
-
-/* 左侧装饰条 */
-.archive-card::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 24px;
-    bottom: 24px;
-    width: 4px;
-    background: var(--v-blue-700);
-    border-radius: 0 4px 4px 0;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-.archive-card:hover::before { opacity: 1; }
-
-/* 卡片内容 */
-.card-meta {
-    font-size: 0.85em;
-    color: var(--v-gray-700);
-    margin-bottom: 8px;
-    font-family: var(--monospace);
-}
-
-.card-title {
-    display: block;
-    font-size: 1.35em;
-    font-weight: 700;
-    color: var(--v-gray-1000);
-    text-decoration: none;
-    margin-bottom: 12px;
-    line-height: 1.4;
-    transition: color 0.2s;
-}
-.card-title:hover { color: var(--v-blue-700); }
-
-.card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.tag-item {
-    font-size: 0.8em;
-    color: var(--v-gray-600);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    background: transparent;
-    padding: 0;
-}
-
-.tag-item i { font-size: 0.9em; opacity: 0.7; }
-
-/* 无结果提示 */
-.no-result {
-    text-align: center;
-    padding: 60px;
-    color: var(--v-gray-600);
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-.no-result.show {
-    display: block;
-    opacity: 1;
-}
-
-/* 动画关键帧 */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-</style>
-
-<!-- 独立容器 -->
-<div class="archive-main">
-    
-    <div class="archive-header">
-        <div class="archive-title">Archives</div>
+    <!-- 数据统计 -->
+    <div class="author-stats">
+      <div class="stats-item">
+        <span class="stats-count">11</span>
+        <span class="stats-label">Posts</span>
+      </div>
+      <div class="stats-item">
+        <span class="stats-count">2</span>
+        <span class="stats-label">Tags</span>
+      </div>
+      <div class="stats-item">
+        <span class="stats-count">2</span>
+        <span class="stats-label">Categories</span>
+      </div>
     </div>
+  </div>
 
-    <!-- 搜索栏 -->
-    <div class="search-section">
-        <div class="search-wrapper">
-            <input type="text" id="archive-search" class="search-input" placeholder="Type to search..." autocomplete="off">
-            <i class="fa fa-search search-icon"></i>
-        </div>
-    </div>
-
-    <!-- 文章列表 -->
-    <div class="archive-list" id="archive-container">
-        
-            <div class="archive-card-wrapper" 
-                 data-search-text="hexo妙妙小工具 2026-01-19 ">
-                <div class="archive-card" style="--i: 0;">
-                    <div class="card-meta">
-                        2026/01/19
-                    </div>
-
-                    <a href="/posts/9a4212eb/" class="card-title">
-                        hexo妙妙小工具
-                    </a>
-
-                    <div class="card-tags">
-                        <span class="tag-item" style="margin-right: 10px;">
-                            <i class="fa fa-tag"></i> 
-                            
-                                笔记
-                            
-                        </span>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="archive-card-wrapper" 
-                 data-search-text="snippet_2 2026-01-19 ">
-                <div class="archive-card" style="--i: 1;">
-                    <div class="card-meta">
-                        2026/01/19
-                    </div>
-
-                    <a href="/posts/Snippet2/" class="card-title">
-                        Snippet_2
-                    </a>
-
-                    <div class="card-tags">
-                        <span class="tag-item" style="margin-right: 10px;">
-                            <i class="fa fa-tag"></i> 
-                            
-                                笔记
-                            
-                        </span>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="archive-card-wrapper" 
-                 data-search-text="snippet_1 2025-12-12 随笔">
-                <div class="archive-card" style="--i: 2;">
-                    <div class="card-meta">
-                        2025/12/12
-                    </div>
-
-                    <a href="/posts/Snippet1/" class="card-title">
-                        Snippet_1
-                    </a>
-
-                    <div class="card-tags">
-                        <span class="tag-item" style="margin-right: 10px;">
-                            <i class="fa fa-tag"></i> 
-                            
-                                随笔
-                            
-                        </span>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="archive-card-wrapper" 
-                 data-search-text="必要测试中 2025-12-07 测试">
-                <div class="archive-card" style="--i: 3;">
-                    <div class="card-meta">
-                        2025/12/07
-                    </div>
-
-                    <a href="/posts/804a7bbf/" class="card-title">
-                        必要测试中
-                    </a>
-
-                    <div class="card-tags">
-                        <span class="tag-item" style="margin-right: 10px;">
-                            <i class="fa fa-tag"></i> 
-                            
-                                测试
-                            
-                        </span>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="archive-card-wrapper" 
-                 data-search-text="免责声明 2025-12-01 ">
-                <div class="archive-card" style="--i: 4;">
-                    <div class="card-meta">
-                        2025/12/01
-                    </div>
-
-                    <a href="/posts/liability/" class="card-title">
-                        免责声明
-                    </a>
-
-                    <div class="card-tags">
-                        <span class="tag-item" style="margin-right: 10px;">
-                            <i class="fa fa-tag"></i> 
-                            
-                                笔记
-                            
-                        </span>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="archive-card-wrapper" 
-                 data-search-text="星露谷sve结语 2025-11-23 ">
-                <div class="archive-card" style="--i: 5;">
-                    <div class="card-meta">
-                        2025/11/23
-                    </div>
-
-                    <a href="/posts/cf87542b/" class="card-title">
-                        星露谷sve结语
-                    </a>
-
-                    <div class="card-tags">
-                        <span class="tag-item" style="margin-right: 10px;">
-                            <i class="fa fa-tag"></i> 
-                            
-                                笔记
-                            
-                        </span>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="archive-card-wrapper" 
-                 data-search-text="sql server 数据库编程 2025-11-13 ">
-                <div class="archive-card" style="--i: 6;">
-                    <div class="card-meta">
-                        2025/11/13
-                    </div>
-
-                    <a href="/posts/sqlprogram/" class="card-title">
-                        SQL Server 数据库编程
-                    </a>
-
-                    <div class="card-tags">
-                        <span class="tag-item" style="margin-right: 10px;">
-                            <i class="fa fa-tag"></i> 
-                            
-                                笔记
-                            
-                        </span>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="archive-card-wrapper" 
-                 data-search-text="hexo主题开发及部署教程 2025-11-02 ">
-                <div class="archive-card" style="--i: 7;">
-                    <div class="card-meta">
-                        2025/11/02
-                    </div>
-
-                    <a href="/posts/hexothemeprogram/" class="card-title">
-                        hexo主题开发及部署教程
-                    </a>
-
-                    <div class="card-tags">
-                        <span class="tag-item" style="margin-right: 10px;">
-                            <i class="fa fa-tag"></i> 
-                            
-                                笔记
-                            
-                        </span>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="archive-card-wrapper" 
-                 data-search-text="👁️ 2025-10-28 ">
-                <div class="archive-card" style="--i: 8;">
-                    <div class="card-meta">
-                        2025/10/28
-                    </div>
-
-                    <a href="/posts/projectjoin/" class="card-title">
-                        👁️
-                    </a>
-
-                    <div class="card-tags">
-                        <span class="tag-item" style="margin-right: 10px;">
-                            <i class="fa fa-tag"></i> 
-                            
-                                笔记
-                            
-                        </span>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="archive-card-wrapper" 
-                 data-search-text="第一篇博客 2025-10-20 ">
-                <div class="archive-card" style="--i: 9;">
-                    <div class="card-meta">
-                        2025/10/20
-                    </div>
-
-                    <a href="/posts/thefirst/" class="card-title">
-                        第一篇博客
-                    </a>
-
-                    <div class="card-tags">
-                        <span class="tag-item" style="margin-right: 10px;">
-                            <i class="fa fa-tag"></i> 
-                            
-                                笔记
-                            
-                        </span>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="archive-card-wrapper" 
-                 data-search-text="hello world 2025-10-12 ">
-                <div class="archive-card" style="--i: 10;">
-                    <div class="card-meta">
-                        2025/10/12
-                    </div>
-
-                    <a href="/posts/helloworld/" class="card-title">
-                        Hello World
-                    </a>
-
-                    <div class="card-tags">
-                        <span class="tag-item" style="margin-right: 10px;">
-                            <i class="fa fa-tag"></i> 
-                            
-                                笔记
-                            
-                        </span>
-                    </div>
-                </div>
-            </div>
-        
-    </div>
-
-    <div id="no-result" class="no-result">
-        <div>No results found</div>
-    </div>
-</div>
-
-<script>
-window.initArchivePage = function() {
-    // 1. 获取当前页面的搜索框
-    const activeInput = document.getElementById('archive-search');
+  <!-- 2. 侧边导航菜单 (已调换至下方) -->
+  <div class="sidebar-menu card-deep-space">
     
-    // 如果找不到搜索框（非归档页），直接退出
-    if (!activeInput) return;
-
-    // 【关键修复】检查是否已初始化，防止重复绑定
-    // 使用 dataset 标记，如果已存在标记，说明事件已绑定，无需重复操作
-    if (activeInput.dataset.init === 'true') {
-        console.log("Archive search already initialized.");
-        return;
-    }
+      
+        <a href="/" class="sidebar-link">
+          <i class="fa fa-home"></i> 
+          <span>主页</span>
+        </a>
+      
+        <a href="/archives" class="sidebar-link">
+          <i class="fa fa-archive"></i> 
+          <span>归档</span>
+        </a>
+      
+        <a href="/V3/updatelogV3.html" class="sidebar-link">
+          <i class="fa fa-pencil"></i> 
+          <span>更新日志</span>
+        </a>
+      
+        <a href="/V3/aboutV3.html" class="sidebar-link">
+          <i class="fa fa-user"></i> 
+          <span>关于</span>
+        </a>
+      
     
-    // 标记为已初始化
-    activeInput.dataset.init = 'true';
+  </div>
 
-    const cardWrappers = document.querySelectorAll('.archive-card-wrapper');
-    const noResult = document.getElementById('no-result');
-    
-    let isComposing = false;
-
-    function doSearch() {
-        const query = activeInput.value.trim().toLowerCase();
-        let matchCount = 0;
-
-        cardWrappers.forEach(wrapper => {
-            const searchText = wrapper.getAttribute('data-search-text') || '';
-            
-            if (searchText.includes(query)) {
-                wrapper.classList.remove('hidden');
-                matchCount++;
-            } else {
-                wrapper.classList.add('hidden');
-            }
-        });
-
-        if (noResult) {
-            if (matchCount === 0) {
-                noResult.classList.add('show');
-                noResult.style.display = 'block'; 
-            } else {
-                noResult.classList.remove('show');
-                setTimeout(() => {
-                    if (!noResult.classList.contains('show')) noResult.style.display = 'none';
-                }, 300);
-            }
-        }
-    }
-
-    // 绑定事件
-    activeInput.addEventListener('compositionstart', function() {isComposing = true;});
-    activeInput.addEventListener('compositionend', function() {isComposing = false;doSearch();});
-
-    activeInput.addEventListener('input', function() {
-        if (isComposing) return;
-        doSearch();
-    });
-
-    activeInput.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            isComposing = false; 
-            doSearch();
-            this.blur();
-        }
-    });
-};
-</script>
-                </div>
-            </div>
-        </main>
-        
-    <aside id="right-sidebar">
-    <div class="sidebar-author">
-        <!-- 头像 -->
-        <div class="author-avatar">
-            <img src="https://Tenkonata.github.io/picx-images-hosting/装饰/avatar.96a6p4esqw.webp" alt="Tenkonata的博客" title="点我切换深/浅色">
-        </div>
-        
-        <!-- 作者名称 -->
-        <h3 class="author-name">Tenkonata的博客</h3>
-        
-        <!-- 签名 -->
-        
-        <div class="author-description">
-            
-                <p>坐和放宽</p>
-            
-                <p>一切上云！</p>
-            
-                <p>正在改写所有使用逻辑！</p>
-            
-                <p>“我不会再修复任何刷新问题”“trash,waste,rubbish,etc.”</p>
-            
-        </div>
-        
-        
-        <!-- 数据统计 (文章数 / 标签数) -->
-        <div class="site-state-wrap">
-            <a href="/archives/" class="site-state-item">
-                <span class="site-state-item-name">POSTS</span>
-                <span class="site-state-item-count">11</span>
-            </a>
-            <div class="site-state-item">
-                <span class="site-state-item-name">LIKES</span>
-                <span class="site-state-item-count">⑨⑨⑨</span>
-            </div>
-        </div>
-
-        <!-- RSS 按钮 -->
-
-       <!-- 社交图标 -->
-        
-        <div class="sidebar-social">
-            
-                <a href="https://github.com/Tenkonata" target="_blank" rel="noopener" title="GitHub">
-                    
-                        <!-- 否则显示 FontAwesome 图标 -->
-                        <i class="fa fa-github"></i>
-                    
-                </a>
-            
-                <a href="mailto:xi-justice@outlook.com" target="_blank" rel="noopener" title="Email">
-                    
-                        <!-- 否则显示 FontAwesome 图标 -->
-                        <i class="fa fa-envelope"></i>
-                    
-                </a>
-            
-                <a href="https://space.bilibili.com/179767580" target="_blank" rel="noopener" title="Bilibili">
-                    
-                        <!-- 如果配置了 image-svg -->
-                        <span class="custom-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" ><path d="M18.223 3.08584C18.7112 3.574 18.7112 4.36545 18.223 4.85361L17.08 5.99598L18.25 5.99638C20.3211 5.99638 22 7.67531 22 9.74638V17.2464C22 19.3174 20.3211 20.9964 18.25 20.9964H5.75C3.67893 20.9964 2 19.3174 2 17.2464V9.74638C2 7.67531 3.67893 5.99638 5.75 5.99638L6.91625 5.99598L5.77466 4.85456C5.28651 4.36641 5.28651 3.57495 5.77466 3.0868C6.26282 2.59864 7.05427 2.59864 7.54243 3.0868L10.1941 5.73845C10.2729 5.81729 10.339 5.90403 10.3924 5.99614L13.6046 5.99636C13.6581 5.90382 13.7244 5.81667 13.8036 5.73749L16.4553 3.08584C16.9434 2.59769 17.7349 2.59769 18.223 3.08584ZM18.25 8.50638H5.75C5.09102 8.50638 4.55115 9.0163 4.50343 9.66309L4.5 9.75638V17.2564C4.5 17.9154 5.00992 18.4552 5.65671 18.5029L5.75 18.5064H18.25C18.909 18.5064 19.4489 17.9965 19.4966 17.3497L19.5 17.2564V9.75638C19.5 9.06602 18.9404 8.50638 18.25 8.50638ZM8.25 11.0064C8.94036 11.0064 9.5 11.566 9.5 12.2564V13.5064C9.5 14.1967 8.94036 14.7564 8.25 14.7564C7.55964 14.7564 7 14.1967 7 13.5064V12.2564C7 11.566 7.55964 11.0064 8.25 11.0064ZM15.75 11.0064C16.4404 11.0064 17 11.566 17 12.2564V13.5064C17 14.1967 16.4404 14.7564 15.75 14.7564C15.0596 14.7564 14.5 14.1967 14.5 13.5064V12.2564C14.5 11.566 15.0596 11.0064 15.75 11.0064Z" /></svg></span>
-                    
-                </a>
-            
-        </div>
-        
-    </div>
 </aside>
     </div>
 
-    <div id="back-to-top" class="">
-        <i class="fa fa-arrow-up"></i>
+    <!-- 右侧：归档内容 -->
+    <div class="layout-right">
+      
+      <div class="archive-main">
+        <!-- 头部 -->
+        <div class="archive-header">
+            <h1 class="archive-title">Archives</h1>
+        </div>
+    
+        <!-- 搜索栏 -->
+        <div class="search-section">
+            <div class="search-wrapper">
+                <input type="text" id="archive-search" class="search-input" placeholder="Type to search..." autocomplete="off">
+                <i class="fa fa-search search-icon"></i>
+            </div>
+        </div>
+    
+        <!-- 文章列表 -->
+        <div class="archive-list" id="archive-container">
+            
+                <div class="archive-card-wrapper" 
+                     data-search-text="hexo妙妙小工具 2026-01-19 "
+                     style="--i: 0;">
+                    
+                    <!-- 复用 Deep Space 卡片样式 -->
+                    <div class="archive-card card-deep-space">
+                        <div class="archive-card-left">
+                            <a href="/posts/9a4212eb/" class="archive-card-title">
+                                hexo妙妙小工具
+                            </a>
+                            <div class="archive-card-meta">
+                                <!-- 4. [修改] 使用统一格式显示发布与更新时间 -->
+                                <!-- 发布时间 -->
+                                <span class="meta-item">
+                                    <i class="fa fa-calendar"></i> 2026-01-19
+                                </span>
+
+                                <!-- 更新时间 (仅当存在且晚于发布时间) -->
+                                
+                                    <span class="meta-item" title="Updated: 2026-01-19">
+                                        <i class="fa fa-edit"></i> 2026-01-19
+                                    </span>
+                                
+                            </div>
+                        </div>
+
+                        <!-- 右侧标签 -->
+                        <div class="archive-card-tags">
+                             
+                        </div>
+                    </div>
+
+                </div>
+            
+                <div class="archive-card-wrapper" 
+                     data-search-text="snippet_2 2026-01-19 "
+                     style="--i: 1;">
+                    
+                    <!-- 复用 Deep Space 卡片样式 -->
+                    <div class="archive-card card-deep-space">
+                        <div class="archive-card-left">
+                            <a href="/posts/Snippet2/" class="archive-card-title">
+                                Snippet_2
+                            </a>
+                            <div class="archive-card-meta">
+                                <!-- 4. [修改] 使用统一格式显示发布与更新时间 -->
+                                <!-- 发布时间 -->
+                                <span class="meta-item">
+                                    <i class="fa fa-calendar"></i> 2026-01-19
+                                </span>
+
+                                <!-- 更新时间 (仅当存在且晚于发布时间) -->
+                                
+                                    <span class="meta-item" title="Updated: 2026-01-19">
+                                        <i class="fa fa-edit"></i> 2026-01-19
+                                    </span>
+                                
+                            </div>
+                        </div>
+
+                        <!-- 右侧标签 -->
+                        <div class="archive-card-tags">
+                             
+                        </div>
+                    </div>
+
+                </div>
+            
+                <div class="archive-card-wrapper" 
+                     data-search-text="snippet_1 2025-12-12 随笔"
+                     style="--i: 2;">
+                    
+                    <!-- 复用 Deep Space 卡片样式 -->
+                    <div class="archive-card card-deep-space">
+                        <div class="archive-card-left">
+                            <a href="/posts/Snippet1/" class="archive-card-title">
+                                Snippet_1
+                            </a>
+                            <div class="archive-card-meta">
+                                <!-- 4. [修改] 使用统一格式显示发布与更新时间 -->
+                                <!-- 发布时间 -->
+                                <span class="meta-item">
+                                    <i class="fa fa-calendar"></i> 2025-12-12
+                                </span>
+
+                                <!-- 更新时间 (仅当存在且晚于发布时间) -->
+                                
+                                    <span class="meta-item" title="Updated: 2025-12-12">
+                                        <i class="fa fa-edit"></i> 2025-12-12
+                                    </span>
+                                
+                            </div>
+                        </div>
+
+                        <!-- 右侧标签 -->
+                        <div class="archive-card-tags">
+                             
+                                <span class="meta-badge">
+                                    <i class="fa fa-tag"></i> 随笔
+                                </span>
+                            
+                        </div>
+                    </div>
+
+                </div>
+            
+                <div class="archive-card-wrapper" 
+                     data-search-text="必要测试中 2025-12-07 测试"
+                     style="--i: 3;">
+                    
+                    <!-- 复用 Deep Space 卡片样式 -->
+                    <div class="archive-card card-deep-space">
+                        <div class="archive-card-left">
+                            <a href="/posts/804a7bbf/" class="archive-card-title">
+                                必要测试中
+                            </a>
+                            <div class="archive-card-meta">
+                                <!-- 4. [修改] 使用统一格式显示发布与更新时间 -->
+                                <!-- 发布时间 -->
+                                <span class="meta-item">
+                                    <i class="fa fa-calendar"></i> 2025-12-07
+                                </span>
+
+                                <!-- 更新时间 (仅当存在且晚于发布时间) -->
+                                
+                                    <span class="meta-item" title="Updated: 2025-12-08">
+                                        <i class="fa fa-edit"></i> 2025-12-08
+                                    </span>
+                                
+                            </div>
+                        </div>
+
+                        <!-- 右侧标签 -->
+                        <div class="archive-card-tags">
+                             
+                                <span class="meta-badge">
+                                    <i class="fa fa-tag"></i> 测试
+                                </span>
+                            
+                        </div>
+                    </div>
+
+                </div>
+            
+                <div class="archive-card-wrapper" 
+                     data-search-text="免责声明 2025-12-01 "
+                     style="--i: 4;">
+                    
+                    <!-- 复用 Deep Space 卡片样式 -->
+                    <div class="archive-card card-deep-space">
+                        <div class="archive-card-left">
+                            <a href="/posts/liability/" class="archive-card-title">
+                                免责声明
+                            </a>
+                            <div class="archive-card-meta">
+                                <!-- 4. [修改] 使用统一格式显示发布与更新时间 -->
+                                <!-- 发布时间 -->
+                                <span class="meta-item">
+                                    <i class="fa fa-calendar"></i> 2025-12-01
+                                </span>
+
+                                <!-- 更新时间 (仅当存在且晚于发布时间) -->
+                                
+                                    <span class="meta-item" title="Updated: 2025-12-02">
+                                        <i class="fa fa-edit"></i> 2025-12-02
+                                    </span>
+                                
+                            </div>
+                        </div>
+
+                        <!-- 右侧标签 -->
+                        <div class="archive-card-tags">
+                             
+                        </div>
+                    </div>
+
+                </div>
+            
+                <div class="archive-card-wrapper" 
+                     data-search-text="星露谷sve结语 2025-11-23 "
+                     style="--i: 5;">
+                    
+                    <!-- 复用 Deep Space 卡片样式 -->
+                    <div class="archive-card card-deep-space">
+                        <div class="archive-card-left">
+                            <a href="/posts/cf87542b/" class="archive-card-title">
+                                星露谷sve结语
+                            </a>
+                            <div class="archive-card-meta">
+                                <!-- 4. [修改] 使用统一格式显示发布与更新时间 -->
+                                <!-- 发布时间 -->
+                                <span class="meta-item">
+                                    <i class="fa fa-calendar"></i> 2025-11-23
+                                </span>
+
+                                <!-- 更新时间 (仅当存在且晚于发布时间) -->
+                                
+                                    <span class="meta-item" title="Updated: 2025-12-02">
+                                        <i class="fa fa-edit"></i> 2025-12-02
+                                    </span>
+                                
+                            </div>
+                        </div>
+
+                        <!-- 右侧标签 -->
+                        <div class="archive-card-tags">
+                             
+                        </div>
+                    </div>
+
+                </div>
+            
+                <div class="archive-card-wrapper" 
+                     data-search-text="sql server 数据库编程 2025-11-13 "
+                     style="--i: 6;">
+                    
+                    <!-- 复用 Deep Space 卡片样式 -->
+                    <div class="archive-card card-deep-space">
+                        <div class="archive-card-left">
+                            <a href="/posts/sqlprogram/" class="archive-card-title">
+                                SQL Server 数据库编程
+                            </a>
+                            <div class="archive-card-meta">
+                                <!-- 4. [修改] 使用统一格式显示发布与更新时间 -->
+                                <!-- 发布时间 -->
+                                <span class="meta-item">
+                                    <i class="fa fa-calendar"></i> 2025-11-13
+                                </span>
+
+                                <!-- 更新时间 (仅当存在且晚于发布时间) -->
+                                
+                                    <span class="meta-item" title="Updated: 2025-12-02">
+                                        <i class="fa fa-edit"></i> 2025-12-02
+                                    </span>
+                                
+                            </div>
+                        </div>
+
+                        <!-- 右侧标签 -->
+                        <div class="archive-card-tags">
+                             
+                        </div>
+                    </div>
+
+                </div>
+            
+                <div class="archive-card-wrapper" 
+                     data-search-text="hexo主题开发及部署教程 2025-11-02 "
+                     style="--i: 7;">
+                    
+                    <!-- 复用 Deep Space 卡片样式 -->
+                    <div class="archive-card card-deep-space">
+                        <div class="archive-card-left">
+                            <a href="/posts/hexothemeprogram/" class="archive-card-title">
+                                hexo主题开发及部署教程
+                            </a>
+                            <div class="archive-card-meta">
+                                <!-- 4. [修改] 使用统一格式显示发布与更新时间 -->
+                                <!-- 发布时间 -->
+                                <span class="meta-item">
+                                    <i class="fa fa-calendar"></i> 2025-11-02
+                                </span>
+
+                                <!-- 更新时间 (仅当存在且晚于发布时间) -->
+                                
+                                    <span class="meta-item" title="Updated: 2026-01-19">
+                                        <i class="fa fa-edit"></i> 2026-01-19
+                                    </span>
+                                
+                            </div>
+                        </div>
+
+                        <!-- 右侧标签 -->
+                        <div class="archive-card-tags">
+                             
+                        </div>
+                    </div>
+
+                </div>
+            
+                <div class="archive-card-wrapper" 
+                     data-search-text="👁️ 2025-10-28 "
+                     style="--i: 8;">
+                    
+                    <!-- 复用 Deep Space 卡片样式 -->
+                    <div class="archive-card card-deep-space">
+                        <div class="archive-card-left">
+                            <a href="/posts/projectjoin/" class="archive-card-title">
+                                👁️
+                            </a>
+                            <div class="archive-card-meta">
+                                <!-- 4. [修改] 使用统一格式显示发布与更新时间 -->
+                                <!-- 发布时间 -->
+                                <span class="meta-item">
+                                    <i class="fa fa-calendar"></i> 2025-10-28
+                                </span>
+
+                                <!-- 更新时间 (仅当存在且晚于发布时间) -->
+                                
+                                    <span class="meta-item" title="Updated: 2025-11-29">
+                                        <i class="fa fa-edit"></i> 2025-11-29
+                                    </span>
+                                
+                            </div>
+                        </div>
+
+                        <!-- 右侧标签 -->
+                        <div class="archive-card-tags">
+                             
+                        </div>
+                    </div>
+
+                </div>
+            
+                <div class="archive-card-wrapper" 
+                     data-search-text="第一篇博客 2025-10-20 "
+                     style="--i: 9;">
+                    
+                    <!-- 复用 Deep Space 卡片样式 -->
+                    <div class="archive-card card-deep-space">
+                        <div class="archive-card-left">
+                            <a href="/posts/thefirst/" class="archive-card-title">
+                                第一篇博客
+                            </a>
+                            <div class="archive-card-meta">
+                                <!-- 4. [修改] 使用统一格式显示发布与更新时间 -->
+                                <!-- 发布时间 -->
+                                <span class="meta-item">
+                                    <i class="fa fa-calendar"></i> 2025-10-20
+                                </span>
+
+                                <!-- 更新时间 (仅当存在且晚于发布时间) -->
+                                
+                                    <span class="meta-item" title="Updated: 2025-12-02">
+                                        <i class="fa fa-edit"></i> 2025-12-02
+                                    </span>
+                                
+                            </div>
+                        </div>
+
+                        <!-- 右侧标签 -->
+                        <div class="archive-card-tags">
+                             
+                        </div>
+                    </div>
+
+                </div>
+            
+                <div class="archive-card-wrapper" 
+                     data-search-text="hello world 2025-10-12 "
+                     style="--i: 10;">
+                    
+                    <!-- 复用 Deep Space 卡片样式 -->
+                    <div class="archive-card card-deep-space">
+                        <div class="archive-card-left">
+                            <a href="/posts/helloworld/" class="archive-card-title">
+                                Hello World
+                            </a>
+                            <div class="archive-card-meta">
+                                <!-- 4. [修改] 使用统一格式显示发布与更新时间 -->
+                                <!-- 发布时间 -->
+                                <span class="meta-item">
+                                    <i class="fa fa-calendar"></i> 2025-10-12
+                                </span>
+
+                                <!-- 更新时间 (仅当存在且晚于发布时间) -->
+                                
+                                    <span class="meta-item" title="Updated: 2025-12-02">
+                                        <i class="fa fa-edit"></i> 2025-12-02
+                                    </span>
+                                
+                            </div>
+                        </div>
+
+                        <!-- 右侧标签 -->
+                        <div class="archive-card-tags">
+                             
+                        </div>
+                    </div>
+
+                </div>
+            
+        </div>
+    
+        <div id="no-result" class="no-result">
+            <div><i class="fa fa-frown-o"></i> No results found</div>
+        </div>
+      </div>
+
     </div>
-    
-    
-<script src="/lib/jquery-3.7.1.min.js"></script>
 
-    
-<script src="/lib/jquery.pjax.js"></script>
+  </div>
+</section>
+  </main>
 
-    <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-    
-    <!-- Pjax 核心配置 -->
-    <script>
-    $(document).ready(function() {
-        var pjaxSelector = 'a[href^="/"]:not([target="_blank"]):not([href$=".xml"]):not([href$=".json"])';
-        var pjaxContainer = '#pjax-container';
-        
-        $(document).pjax(pjaxSelector, pjaxContainer, {
-            fragment: pjaxContainer, 
-            timeout: 8000
-        });
-        
-        // Pjax 加载动画
-        $(document).on('pjax:send', function() {
-            $(pjaxContainer).addClass('pjax-loading');
-            if (!$('body').hasClass('home-layout')) {
-                $(pjaxContainer).addClass('pjax-animate');
-            }
-        });
-        
-        // 封装页面状态刷新逻辑
-        // 无论通过点击还是后退，都需要调用此函数来同步 Body 类名和按钮状态
-        function refreshLayout() {
-            // 1. 清除加载动画
-            $(pjaxContainer).removeClass('pjax-loading pjax-animate');
+  <!-- 回到顶部按钮 -->
+  <div id="back-to-top" class="back-to-top card-deep-space">
+    <span class="btt-text">0%</span>
+    <i class="fa fa-arrow-up btt-icon"></i>
+  </div>
 
-            // 2. 根据当前 URL重新判断页面类型
-            var rootPath = ('/' || '/').replace(/\/$/, ''); 
-            var currentPath = window.location.pathname.replace(/\/$/, '');
-            var isHomePage = (currentPath === rootPath || currentPath === rootPath + '/index.html');
-            var isArchivePage = (currentPath.includes('/archives') || window.location.href.includes('/archives'));
-
-            // 3. 强制更新 Body 类名
-            $('body').removeClass('home-layout archive-layout');
-            if (isHomePage) $('body').addClass('home-layout');
-            else if (isArchivePage) $('body').addClass('archive-layout');
-            
-            // 4. 强制更新回到顶部按钮可见性
-            var btt = document.getElementById('back-to-top');
-            if (btt) {
-                if (isHomePage) {
-                    btt.classList.add('btt-hidden');
-                    btt.classList.remove('show'); // 确保隐藏
-                } else {
-                    btt.classList.remove('btt-hidden');
-                }
-            }
-
-            // 5. 调用其他组件的更新逻辑 (Mobile & AIR-v2)
-            if (window.initMobileLayout) window.initMobileLayout();
-            if (window.initHighlight) window.initHighlight();
-            if (window.generateOutline) window.generateOutline(); 
-            if (window.updateSidebarActiveState) window.updateSidebarActiveState();
-            if (window.initArchivePage) window.initArchivePage();
-            
-            console.log("Layout refreshed: " + currentPath);
-        }
-
-        // 场景 A: 正常的 Pjax 跳转完成
-        $(document).on('pjax:complete', function() {
-            refreshLayout();
-        });
-        refreshLayout();
-        // 场景 B: 【核心修复】浏览器后退/前进 (Popstate)
-        // 使用 popstate 监听器作为兜底，确保 URL 变了就一定更新布局
-        window.addEventListener('popstate', function() {
-            refreshLayout();
-        });
-    });
-    </script>
-
-    
-<script src="/js/AIR-v2.js"></script>
-
-    
-<script src="/js/mobile.js"></script>
-
-
+  <!-- 引入 Pjax 库 -->
+  <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+  
+  <!-- Highlight.js 核心库 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  
+  <!-- 主题逻辑 (包含 Highlight.js 初始化) -->
+  <script src="/js/AIRv3.js"></script>
+  <!-- 移动端响应式逻辑 -->
+  <script src="/js/AIRv3media.js"></script>
 </body>
 </html>

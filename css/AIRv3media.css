@@ -1,0 +1,148 @@
+/* ==========================================================================
+   AIR-v3 Media Queries (响应式适配 - 权宜之计版)
+   生效范围: 屏幕宽度小于 960px (平板及手机)
+   ========================================================================== */
+
+@media screen and (max-width: 960px) {
+
+     /* --- 0.  移动端背景图切换 --- */
+    .fixed-bg {
+        /* 使用 layout.ejs 中传入的 CSS 变量覆盖内联样式 */
+        background-image: var(--bg-media) !important;
+    }
+
+    /* --- 1. 全局容器调整 --- */
+    .content-container {
+        flex-direction: column; /* 改为垂直排列 */
+        max-width: 100%;
+        gap: 20px; /* 减小模块间距 */
+    }
+
+    /* --- 2. 布局重排 (内容在前，侧边栏在后) --- */
+    .layout-right {
+        order: 1; /* 内容优先显示 */
+        width: 100%;
+        min-width: 0; /* 防止 flex 子项溢出 */
+    }
+
+    .layout-left {
+        order: 2; /* 侧边栏沉底 */
+        width: 100%;
+        position: relative; /* 取消 sticky 定位 */
+        top: 0;
+        margin-top: 20px;
+    }
+
+    /* --- 3. 导航栏适配 --- */
+    .air-nav {
+        padding: 0 15px; /* 减小左右内边距 */
+        height: 56px; /* 稍微减小高度 */
+    }
+
+    .theme-title {
+        font-size: 1.2rem;
+    }
+
+    /* 移动端导航链接：减小间距，字体变小 */
+    .nav-link {
+        margin-left: 10px;
+        font-size: 0.9rem;
+    }
+    
+    /* 如果屏幕非常窄 (手机)，隐藏文字只留图标，或允许滚动 */
+    @media (max-width: 480px) {
+        .nav-right {
+            display: flex;
+            gap: 5px;
+        }
+        .nav-link span {
+            display: none; /* 隐藏文字，只显图标 */
+        }
+        .nav-link {
+            font-size: 1.2rem; /* 图标放大点 */
+            margin-left: 15px;
+        }
+    }
+
+    /* --- 4. Hero 区域适配 --- */
+    .welcome-text {
+        font-size: 2rem; /* 减小欢迎语字号 */
+        padding: 0 20px;
+    }
+
+    .hero-bottom-left, 
+    .hero-bottom-right {
+        bottom: 3vh; /* 底部间距减小 */
+    }
+    
+    /* 手机端隐藏底部左右的装饰，留给滚动按钮更多空间，或者简化显示 */
+    @media (max-width: 480px) {
+        .hero-bottom-right {
+            display: none; /* 手机端暂时隐藏社交图标，避免遮挡 */
+        }
+        .hero-bottom-left {
+            left: 50%;
+            transform: translateX(-50%); /* 滚动按钮居中 */
+        }
+    }
+
+    /* --- 5. 卡片样式调整 --- */
+    .post-card, .post-page-card {
+        padding: 20px; /* 大幅减小卡片内边距 */
+        margin-bottom: 20px;
+    }
+
+    .post-title {
+        font-size: 1.4rem; /* 减小标题字号 */
+    }
+
+    .post-excerpt {
+        display: none;/* 隐藏摘要 */
+    }
+
+    /* --- 6. 侧边栏调整 --- */
+    /* 在移动端，侧边栏变为底部区域 */
+    .air-sidebar {
+        flex-direction: column; /* 让菜单在下，作者在上(或者保持原样) */
+        gap: 15px;
+        padding-bottom: 40px; /* 底部留白 */
+    }
+
+    /* 隐藏重复的侧边菜单 (因为顶部导航已有)，只保留作者栏 */
+    /* 如果你想保留底部菜单，请注释掉下面这行 */
+    /*.sidebar-menu {
+        display: none; 
+    }*/
+
+    .sidebar-author {
+        margin: 0 10px; /* 左右留点缝隙 */
+    }
+
+    /* --- 7. TOC 目录隐藏 --- */
+    /* 移动端屏幕空间宝贵，悬浮抽屉体验不佳，直接隐藏 */
+    .toc-drawer {
+        display: none !important;
+    }
+
+    /* --- 8. 归档页适配 --- */
+    .archive-header {
+        margin-bottom: 20px;
+    }
+    .archive-title {
+        font-size: 1.5em;
+    }
+    .archive-card {
+        padding: 15px 20px;
+        flex-direction: column; /* 竖排 */
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .archive-card-left {
+        width: 100%;
+    }
+    .archive-card-tags {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+}
