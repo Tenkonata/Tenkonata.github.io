@@ -101,8 +101,9 @@ a {
   color: #fff;
 }
 
-/* 文章详情页卡片特殊处理：移除位置移动/缩放动画 */
-.post-page-card.card-deep-space:hover {
+/* 文章详情页卡片、侧边栏Tag/Category卡片特殊处理：移除位置移动/缩放动画 */
+.post-page-card.card-deep-space:hover,
+.sidebar-widget.card-deep-space:hover {
   transform: none !important;
 }
 
