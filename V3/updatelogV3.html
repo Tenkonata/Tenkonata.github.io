@@ -77,7 +77,7 @@
     <div class="layout-left">
       <aside class="air-sidebar">
   
-  <!-- 1. 作者栏位 (已调换至顶部) -->
+  <!-- 1. 作者栏位 (保持在文档流中) -->
   <div class="sidebar-author card-deep-space">
     <div class="author-avatar">
       <img src="https://Tenkonata.github.io/picx-images-hosting/装饰/avatar.96a6p4esqw.webp" alt="Author Avatar">
@@ -86,48 +86,154 @@
     <p class="author-signature">坐和放宽</p>
     
     <!-- 数据统计 -->
+    <!-- [修改] 调整了顺序：Posts - Categories - Tags，视觉上更对称 -->
     <div class="author-stats">
+      
+      <!-- 1. Posts -->
       <div class="stats-item">
         <span class="stats-count">11</span>
         <span class="stats-label">Posts</span>
       </div>
+
+      <!-- 2. Categories (原第3位，移到中间) -->
       <div class="stats-item">
-        <span class="stats-count">2</span>
-        <span class="stats-label">Tags</span>
-      </div>
-      <div class="stats-item">
-        <span class="stats-count">2</span>
+        <span class="stats-count">3</span>
         <span class="stats-label">Categories</span>
       </div>
+
+      <!-- 3. Tags (原第2位，移到最后) -->
+      <div class="stats-item">
+        <span class="stats-count">9</span>
+        <span class="stats-label">Tags</span>
+      </div>
+
     </div>
   </div>
 
-  <!-- 2. 侧边导航菜单 (已调换至下方) -->
-  <div class="sidebar-menu card-deep-space">
+  <!-- 内部 sticky 容器 -->
+  <div class="sidebar-sticky">
     
+    <!-- 2. 侧边导航菜单 (常驻显示) -->
+    <div class="sidebar-menu card-deep-space">
       
-        <a href="/" class="sidebar-link">
-          <i class="fa fa-home"></i> 
-          <span>主页</span>
-        </a>
+        
+          <a href="/" class="sidebar-link">
+            <i class="fa fa-home"></i> 
+            <span>home</span>
+          </a>
+        
+          <a href="/archives" class="sidebar-link">
+            <i class="fa fa-archive"></i> 
+            <span>archive</span>
+          </a>
+        
+          <a href="/V3/updatelogV3.html" class="sidebar-link">
+            <i class="fa fa-pencil"></i> 
+            <span>updatelogV3</span>
+          </a>
+        
+          <a href="/V3/aboutV3.html" class="sidebar-link">
+            <i class="fa fa-user"></i> 
+            <span>aboutV3</span>
+          </a>
+        
       
-        <a href="/archives" class="sidebar-link">
-          <i class="fa fa-archive"></i> 
-          <span>归档</span>
-        </a>
-      
-        <a href="/V3/updatelogV3.html" class="sidebar-link">
-          <i class="fa fa-pencil"></i> 
-          <span>更新日志</span>
-        </a>
-      
-        <a href="/V3/aboutV3.html" class="sidebar-link">
-          <i class="fa fa-user"></i> 
-          <span>关于</span>
-        </a>
-      
+    </div>
+
+    <!-- 3. Categories 卡片 (可折叠) -->
     
-  </div>
+    <div class="sidebar-widget card-deep-space collapsible-widget">
+      <!-- 标题部分 -->
+      <h3 class="sidebar-title toggle-trigger">
+        <span><i class="fa fa-folder-open-o"></i> Categories</span>
+        <i class="fa fa-chevron-down arrow-icon"></i>
+      </h3>
+      
+      <!-- 内容盒子 -->
+      <div class="sidebar-content-box">
+        <ul class="category-list">
+          
+            <li class="category-list-item">
+              <a class="category-list-link" href="/categories/123/">
+                <span class="category-name">123</span>
+                <span class="category-count">1</span>
+              </a>
+            </li>
+          
+            <li class="category-list-item">
+              <a class="category-list-link" href="/categories/123/456/">
+                <span class="category-name">456</span>
+                <span class="category-count">1</span>
+              </a>
+            </li>
+          
+            <li class="category-list-item">
+              <a class="category-list-link" href="/categories/123/456/789/">
+                <span class="category-name">789</span>
+                <span class="category-count">1</span>
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+    <!-- 4. Tags 卡片 (可折叠) -->
+    
+    <div class="sidebar-widget card-deep-space collapsible-widget">
+      <!-- 标题部分 -->
+      <h3 class="sidebar-title toggle-trigger">
+        <span><i class="fa fa-tags"></i> Tags</span>
+        <i class="fa fa-chevron-down arrow-icon"></i>
+      </h3>
+      
+      <!-- 内容盒子 -->
+      <div class="sidebar-content-box">
+        <div class="tag-cloud-list">
+          
+            <a href="/tags/%E9%9A%8F%E7%AC%94/" class="tag-cloud-item">
+              随笔
+            </a>
+          
+            <a href="/tags/%E6%B5%8B%E8%AF%95/" class="tag-cloud-item">
+              测试
+            </a>
+          
+            <a href="/tags/%EF%BC%9F%EF%BC%9F%EF%BC%9F/" class="tag-cloud-item">
+              ？？？
+            </a>
+          
+            <a href="/tags/1/" class="tag-cloud-item">
+              1
+            </a>
+          
+            <a href="/tags/2/" class="tag-cloud-item">
+              2
+            </a>
+          
+            <a href="/tags/3/" class="tag-cloud-item">
+              3
+            </a>
+          
+            <a href="/tags/4/" class="tag-cloud-item">
+              4
+            </a>
+          
+            <a href="/tags/5/" class="tag-cloud-item">
+              5
+            </a>
+          
+            <a href="/tags/6/" class="tag-cloud-item">
+              6
+            </a>
+          
+        </div>
+      </div>
+    </div>
+    
+
+  </div> <!-- End .sidebar-sticky -->
 
 </aside>
     </div>
@@ -143,17 +249,21 @@
           <div class="post-meta">
             
             <!-- 1. 创建时间 -->
-            <span class="meta-item" title="Created: 2026-01-27 00:30">
+            <span class="meta-item" title="Created: 2026-01-27 21:43">
               <i class="fa fa-calendar"></i> 2026-01-27
             </span>
 
             <!-- 2. 更新时间 -->
             
-
-            <!-- 3. 标签 -->
+              <span class="meta-item" title="Updated: 2026-01-27 21:43">
+                <i class="fa fa-edit"></i> 2026-01-27
+              </span>
             
 
-            <!-- 4. 分类  -->
+            <!-- 3. 标签 (移除逗号) -->
+            
+
+            <!-- 4. 分类 (移除逗号) -->
             
 
             <!-- 字数统计 -->
@@ -166,7 +276,19 @@
 
         <!-- 正文内容 -->
         <div class="post-content">
-          <h2 id="2026-01-27"><a href="#2026-01-27" class="headerlink" title="2026&#x2F;01&#x2F;27"></a>2026&#x2F;01&#x2F;27</h2><p>基础功能全部实现！杜绝v2满地拉什ejs里乱加css和js<br>细化各个模块，不再一股脑想啥是啥<br>pjax再也不用稀里糊涂了</p>
+          <h2 id="2026-01-28"><a href="#2026-01-28" class="headerlink" title="2026&#x2F;01&#x2F;28"></a>2026&#x2F;01&#x2F;28</h2><ul>
+<li>开始拉什</li>
+<li>回归同质化，v2删掉的tags和categories插件下回来了</li>
+<li>更新标签与分类页面</li>
+<li>codeblock添加复制与语言标识</li>
+<li>侧边栏逻辑优化</li>
+<li>糊弄了下media</li>
+<li>把v2的文字动画抄过来了</li>
+</ul>
+<h2 id="2026-01-27"><a href="#2026-01-27" class="headerlink" title="2026&#x2F;01&#x2F;27"></a>2026&#x2F;01&#x2F;27</h2><ul>
+<li>基础功能全部实现！杜绝v2满地拉什ejs里乱加css和js<br>细化各个模块，不再一股脑想啥是啥</li>
+<li>pjax再也不用稀里糊涂了</li>
+</ul>
 
         </div>
 
@@ -194,7 +316,7 @@
   </div>
   <div class="toc-content card-deep-space">
     <h3 class="toc-header">大纲</h3>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2026-01-27"><span class="toc-text">2026&#x2F;01&#x2F;27</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2026-01-28"><span class="toc-text">2026&#x2F;01&#x2F;28</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2026-01-27"><span class="toc-text">2026&#x2F;01&#x2F;27</span></a></li></ol>
   </div>
 </aside>
 

@@ -77,7 +77,7 @@
     <div class="layout-left">
       <aside class="air-sidebar">
   
-  <!-- 1. 作者栏位 (已调换至顶部) -->
+  <!-- 1. 作者栏位 (保持在文档流中) -->
   <div class="sidebar-author card-deep-space">
     <div class="author-avatar">
       <img src="https://Tenkonata.github.io/picx-images-hosting/装饰/avatar.96a6p4esqw.webp" alt="Author Avatar">
@@ -86,48 +86,154 @@
     <p class="author-signature">坐和放宽</p>
     
     <!-- 数据统计 -->
+    <!-- [修改] 调整了顺序：Posts - Categories - Tags，视觉上更对称 -->
     <div class="author-stats">
+      
+      <!-- 1. Posts -->
       <div class="stats-item">
         <span class="stats-count">11</span>
         <span class="stats-label">Posts</span>
       </div>
+
+      <!-- 2. Categories (原第3位，移到中间) -->
       <div class="stats-item">
-        <span class="stats-count">2</span>
-        <span class="stats-label">Tags</span>
-      </div>
-      <div class="stats-item">
-        <span class="stats-count">2</span>
+        <span class="stats-count">3</span>
         <span class="stats-label">Categories</span>
       </div>
+
+      <!-- 3. Tags (原第2位，移到最后) -->
+      <div class="stats-item">
+        <span class="stats-count">9</span>
+        <span class="stats-label">Tags</span>
+      </div>
+
     </div>
   </div>
 
-  <!-- 2. 侧边导航菜单 (已调换至下方) -->
-  <div class="sidebar-menu card-deep-space">
+  <!-- 内部 sticky 容器 -->
+  <div class="sidebar-sticky">
     
+    <!-- 2. 侧边导航菜单 (常驻显示) -->
+    <div class="sidebar-menu card-deep-space">
       
-        <a href="/" class="sidebar-link">
-          <i class="fa fa-home"></i> 
-          <span>主页</span>
-        </a>
+        
+          <a href="/" class="sidebar-link">
+            <i class="fa fa-home"></i> 
+            <span>home</span>
+          </a>
+        
+          <a href="/archives" class="sidebar-link">
+            <i class="fa fa-archive"></i> 
+            <span>archive</span>
+          </a>
+        
+          <a href="/V3/updatelogV3.html" class="sidebar-link">
+            <i class="fa fa-pencil"></i> 
+            <span>updatelogV3</span>
+          </a>
+        
+          <a href="/V3/aboutV3.html" class="sidebar-link">
+            <i class="fa fa-user"></i> 
+            <span>aboutV3</span>
+          </a>
+        
       
-        <a href="/archives" class="sidebar-link">
-          <i class="fa fa-archive"></i> 
-          <span>归档</span>
-        </a>
-      
-        <a href="/V3/updatelogV3.html" class="sidebar-link">
-          <i class="fa fa-pencil"></i> 
-          <span>更新日志</span>
-        </a>
-      
-        <a href="/V3/aboutV3.html" class="sidebar-link">
-          <i class="fa fa-user"></i> 
-          <span>关于</span>
-        </a>
-      
+    </div>
+
+    <!-- 3. Categories 卡片 (可折叠) -->
     
-  </div>
+    <div class="sidebar-widget card-deep-space collapsible-widget">
+      <!-- 标题部分 -->
+      <h3 class="sidebar-title toggle-trigger">
+        <span><i class="fa fa-folder-open-o"></i> Categories</span>
+        <i class="fa fa-chevron-down arrow-icon"></i>
+      </h3>
+      
+      <!-- 内容盒子 -->
+      <div class="sidebar-content-box">
+        <ul class="category-list">
+          
+            <li class="category-list-item">
+              <a class="category-list-link" href="/categories/123/">
+                <span class="category-name">123</span>
+                <span class="category-count">1</span>
+              </a>
+            </li>
+          
+            <li class="category-list-item">
+              <a class="category-list-link" href="/categories/123/456/">
+                <span class="category-name">456</span>
+                <span class="category-count">1</span>
+              </a>
+            </li>
+          
+            <li class="category-list-item">
+              <a class="category-list-link" href="/categories/123/456/789/">
+                <span class="category-name">789</span>
+                <span class="category-count">1</span>
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+    <!-- 4. Tags 卡片 (可折叠) -->
+    
+    <div class="sidebar-widget card-deep-space collapsible-widget">
+      <!-- 标题部分 -->
+      <h3 class="sidebar-title toggle-trigger">
+        <span><i class="fa fa-tags"></i> Tags</span>
+        <i class="fa fa-chevron-down arrow-icon"></i>
+      </h3>
+      
+      <!-- 内容盒子 -->
+      <div class="sidebar-content-box">
+        <div class="tag-cloud-list">
+          
+            <a href="/tags/%E9%9A%8F%E7%AC%94/" class="tag-cloud-item">
+              随笔
+            </a>
+          
+            <a href="/tags/%E6%B5%8B%E8%AF%95/" class="tag-cloud-item">
+              测试
+            </a>
+          
+            <a href="/tags/%EF%BC%9F%EF%BC%9F%EF%BC%9F/" class="tag-cloud-item">
+              ？？？
+            </a>
+          
+            <a href="/tags/1/" class="tag-cloud-item">
+              1
+            </a>
+          
+            <a href="/tags/2/" class="tag-cloud-item">
+              2
+            </a>
+          
+            <a href="/tags/3/" class="tag-cloud-item">
+              3
+            </a>
+          
+            <a href="/tags/4/" class="tag-cloud-item">
+              4
+            </a>
+          
+            <a href="/tags/5/" class="tag-cloud-item">
+              5
+            </a>
+          
+            <a href="/tags/6/" class="tag-cloud-item">
+              6
+            </a>
+          
+        </div>
+      </div>
+    </div>
+    
+
+  </div> <!-- End .sidebar-sticky -->
 
 </aside>
     </div>
@@ -154,7 +260,7 @@
               </span>
             
 
-            <!-- 3. 标签 -->
+            <!-- 3. 标签 (移除逗号) -->
             
               <span class="meta-item">
                 <i class="fa fa-tag"></i>
@@ -162,19 +268,35 @@
                   
                     <a href="/tags/%E6%B5%8B%E8%AF%95/" class="meta-badge">测试</a>
                   
+                    <a href="/tags/%EF%BC%9F%EF%BC%9F%EF%BC%9F/" class="meta-badge">？？？</a>
+                  
+                    <a href="/tags/1/" class="meta-badge">1</a>
+                  
+                    <a href="/tags/2/" class="meta-badge">2</a>
+                  
+                    <a href="/tags/3/" class="meta-badge">3</a>
+                  
+                    <a href="/tags/4/" class="meta-badge">4</a>
+                  
+                    <a href="/tags/5/" class="meta-badge">5</a>
+                  
+                    <a href="/tags/6/" class="meta-badge">6</a>
+                  
                 </span>
               </span>
             
 
-            <!-- 4. 分类  -->
+            <!-- 4. 分类 (移除逗号) -->
             
               <span class="meta-item">
                 <i class="fa fa-folder-o"></i>
                 <span>
                   
-                    <a href="/categories/123/" class="meta-badge">123</a>,
+                    <a href="/categories/123/" class="meta-badge">123</a>
                   
                     <a href="/categories/123/456/" class="meta-badge">456</a>
+                  
+                    <a href="/categories/123/456/789/" class="meta-badge">789</a>
                   
                 </span>
               </span>

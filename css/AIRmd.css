@@ -328,9 +328,65 @@
     z-index: 10;
 }
 
+/* [新增] 代码块顶部工具栏容器 (由 JS 插入，或用伪元素模拟背景) */
+/* 为了让红绿灯和按钮看起来在一个 Header 条上，我们可以用 pre::after 或者单独的 header 元素 */
+/* 这里简单处理：让红绿灯悬浮，按钮也悬浮 */
+
+/* [新增] 代码语言标识 */
+.code-lang-tag {
+    position: absolute;
+    top: 10px;
+    right: 50px; /* 在复制按钮左侧 */
+    color: #abb2bf;
+    font-size: 0.75rem;
+    font-family: "Consolas", monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.05);
+    padding: 2px 8px;
+    border-radius: 4px;
+    pointer-events: none; /* 不阻挡点击 */
+    z-index: 10;
+    opacity: 0.7;
+}
+
+/* [新增] 复制按钮 */
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    width: 28px;
+    height: 28px;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    border-radius: 4px;
+    color: #ccc;
+    cursor: pointer;
+    z-index: 11;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: rgba(82, 174, 255, 0.2);
+    color: #fff;
+}
+
+.copy-btn i {
+    font-size: 0.9rem;
+}
+
+/* 复制成功后的状态 */
+.copy-btn.copied {
+    background: rgba(40, 199, 111, 0.2);
+    color: #28c76f;
+}
+
 /* 调整 Highlight.js 生成的 code 块位置 */
 .post-content pre code.hljs {
-    padding: 40px 16px 16px 16px !important; /* 顶部留出 40px 给红绿灯 */
+    padding: 45px 16px 16px 16px !important; /* [修改] 顶部留出 45px 给工具栏 */
     font-family: "Consolas", "Monaco", monospace;
     font-size: 0.95em;
     line-height: 1.6;
@@ -340,21 +396,11 @@
     background: transparent !important; 
 }
 
-/*  滚动条美化 - 增强选择器权重，确保覆盖 */
+/* 滚动条美化 - 增强选择器权重，确保覆盖 */
 /* 针对所有 pre 下的 code，包括带 .hljs 类的 */
 .post-content pre code::-webkit-scrollbar,
 .post-content pre code.hljs::-webkit-scrollbar {
     height: 6px !important;
     background: transparent !important;
 }
-
-.post-content pre code::-webkit-scrollbar-thumb,
-.post-content pre code.hljs::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.2) !important;
-    border-radius: 3px !important;
-}
-
-.post-content pre code::-webkit-scrollbar-thumb:hover,
-.post-content pre code.hljs::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(255, 255, 255, 0.4) !important;
-}
+/* ... existing code ... */

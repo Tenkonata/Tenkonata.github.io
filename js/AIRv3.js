@@ -1,5 +1,7 @@
 // 声明全局 pjax 变量
 var pjax;
+// 标记变量：用于判断是否点击了分页器
+var isPaginationClick = false;
 
 // 1. 定义初始化函数 (处理每次页面切换后需要运行的逻辑)
 function initAIRTheme() {
@@ -7,9 +9,12 @@ function initAIRTheme() {
   // --- 背景模糊控制 ---
   var fixedBg = document.querySelector('.fixed-bg');
   var isPostPage = document.querySelector('.post-page-card'); 
+  // 检测是否为 Timeline 页面 (Tags / Categories)
+  var isTimelinePage = document.querySelector('.timeline-section');
   
   if (fixedBg) {
-    if (isPostPage) {
+    // 如果是文章详情页 或者 Tags/Categories 时间线页，应用背景模糊
+    if (isPostPage || isTimelinePage) {
       requestAnimationFrame(() => fixedBg.classList.add('blur-mode'));
     } else {
       fixedBg.classList.remove('blur-mode');
@@ -43,12 +48,14 @@ function initAIRTheme() {
     };
   });
 
+  // --- 初始化侧边栏折叠功能 (Tags & Categories) ---
+  // CSS Hover 模式下无需 JS 逻辑，保留函数调用防止报错
+  // initSidebarExpand(); 
+
   // --- 初始化归档页搜索功能 ---
   if (typeof initArchiveSearch === 'function') {
     initArchiveSearch();
   } else if (document.getElementById('archive-search')) {
-      // 容错：如果 initArchiveSearch 尚未定义（可能是加载顺序问题），这里可以内联或者稍后执行
-      // 通常 AIRv3.js 包含所有逻辑，所以直接调用下面的定义即可
       initArchiveSearch();
   }
 
@@ -59,16 +66,130 @@ function initAIRTheme() {
       initTocSmoothScroll();
   }
 
-  // --- [新增] Highlight.js 初始化 ---
-  // 检查 hljs 是否已加载
+  // --- [顺序调整] Highlight.js 初始化 (先高亮) ---
   if (typeof hljs !== 'undefined') {
     document.querySelectorAll('pre code').forEach((el) => {
       hljs.highlightElement(el);
     });
   }
+
+  // --- [新增] 代码块增强 (复制按钮 + 语言标识) (后添加按钮) ---
+  initCodeBlocks();
 }
 
-// [新增] TOC 平滑滚动处理函数
+// [新增] 代码块增强功能初始化
+function initCodeBlocks() {
+  // 选择所有文章内容下的 pre 标签
+  var preTags = document.querySelectorAll('.post-content pre');
+  
+  preTags.forEach(function(pre) {
+    // 1. 避免重复添加
+    if (pre.querySelector('.copy-btn')) return;
+
+    // 2. 获取代码容器 code
+    var code = pre.querySelector('code');
+    if (!code) return; // 如果 pre 里没有 code，跳过
+
+    // 3. 智能获取语言类型
+    var langName = 'TEXT';
+    // Highlight.js 处理后，类名通常在 code 上
+    var classes = code.className.split(/\s+/);
+    
+    classes.forEach(function(cls) {
+      if (cls === 'hljs') return; // 忽略基础类
+      if (cls.startsWith('language-')) {
+        langName = cls.replace('language-', '').toUpperCase();
+      } else if (cls.startsWith('lang-')) {
+        langName = cls.replace('lang-', '').toUpperCase();
+      } else if (cls.length > 0 && langName === 'TEXT') {
+        // 如果没有 standard 前缀，尝试取第一个非空类名
+        langName = cls.toUpperCase();
+      }
+    });
+    
+    // 如果 code 上没找到，尝试从 pre 上找 (Hexo 默认有时会加在 pre 上)
+    if (langName === 'TEXT') {
+        var preClasses = pre.className.split(/\s+/);
+        preClasses.forEach(function(cls) {
+             if (cls.startsWith('language-') || cls.startsWith('lang-')) {
+                langName = cls.replace(/^language-|^lang-/, '').toUpperCase();
+             }
+        });
+    }
+
+    // 4. 创建语言标签
+    var langTag = document.createElement('span');
+    langTag.className = 'code-lang-tag';
+    langTag.innerText = langName;
+    pre.appendChild(langTag);
+
+    // 5. 创建复制按钮
+    var copyBtn = document.createElement('button');
+    copyBtn.className = 'copy-btn';
+    copyBtn.innerHTML = '<i class="fa fa-copy"></i>';
+    copyBtn.setAttribute('aria-label', 'Copy Code');
+    
+    // 6. 绑定点击复制事件
+    copyBtn.addEventListener('click', function() {
+      // 获取纯文本 (innerText 会忽略 HTML 标签)
+      var codeText = code.innerText; 
+      
+      // 优先使用现代 Clipboard API
+      if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(codeText).then(function() {
+              showCopiedState(copyBtn);
+          }).catch(function(err) {
+              console.error('Copy failed:', err);
+              fallbackCopyTextToClipboard(codeText, copyBtn);
+          });
+      } else {
+          // 降级方案
+          fallbackCopyTextToClipboard(codeText, copyBtn);
+      }
+    });
+
+    pre.appendChild(copyBtn);
+  });
+}
+
+// [新增] 复制成功视觉反馈
+function showCopiedState(btn) {
+    btn.classList.add('copied');
+    btn.innerHTML = '<i class="fa fa-check"></i>'; // 变成对勾
+    
+    setTimeout(function() {
+        btn.classList.remove('copied');
+        btn.innerHTML = '<i class="fa fa-copy"></i>'; // 变回图标
+    }, 2000);
+}
+
+// [新增] 兼容旧浏览器的复制方案
+function fallbackCopyTextToClipboard(text, btn) {
+  var textArea = document.createElement("textarea");
+  textArea.value = text;
+  
+  // 确保文本域不可见但可选中
+  textArea.style.position = "fixed";
+  textArea.style.left = "-9999px";
+  textArea.style.top = "0";
+
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    if (successful) {
+        showCopiedState(btn);
+    }
+  } catch (err) {
+    console.error('Fallback copy failed', err);
+  }
+
+  document.body.removeChild(textArea);
+}
+
+// TOC 平滑滚动处理函数
 function initTocSmoothScroll() {
   var tocLinks = document.querySelectorAll('.toc-link');
   
@@ -197,6 +318,14 @@ function initBackToTop() {
 window.removeEventListener('scroll', handleScroll);
 window.addEventListener('scroll', handleScroll);
 
+// [新增] 全局点击监听，判断是否点击了分页导航
+document.addEventListener('click', function(e) {
+  // 检查点击的目标元素是否在 .page-nav 分页容器内部
+  if (e.target.closest('.page-nav')) {
+    isPaginationClick = true;
+  }
+});
+
 // 4. 生命周期初始化
 document.addEventListener('DOMContentLoaded', function() {
   
@@ -221,7 +350,26 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('pjax:success', function() {
   initAIRTheme();
   initBackToTop(); 
-  window.scrollTo(0, 0); 
+
+  // [修改] Pjax 跳转后的滚动逻辑修复
+  // 1. 获取首页 Hero 元素 (仅首页/首页分页存在)
+  var homeHeader = document.getElementById('home-header');
+  var mainContent = document.getElementById('main-content');
+  
+  // 2. 判断是否为 "翻页" 状态 (URL包含分页特征)
+  var isPaginationUrl = /\/(page|p)\/\d+/.test(window.location.pathname);
+
+  // 3. 只有当：存在 Hero (首页模板) 且 (是URL分页状态 OR 是通过点击分页器跳转的) 时，才跳转到内容区
+  if (homeHeader && mainContent && (isPaginationUrl || isPaginationClick)) {
+      // Case A: 首页的分页跳转 (含跳回第一页)，跳过 Hero，直接滚动到文章列表
+      mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+      // Case B: 其他情况 (回到真正的首页、文章页、归档页等)，直接回顶
+      window.scrollTo({ top: 0, behavior: 'smooth' }); 
+  }
+
+  // 重置点击标记
+  isPaginationClick = false;
 });
 
 console.log('AIR-v3 theme loaded with Pjax.');

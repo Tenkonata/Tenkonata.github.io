@@ -10,7 +10,7 @@
   <!-- [修改] 页面标题逻辑 -->
   <title>
     
-      hexo妙妙小工具 | AIR-v3
+      AIR-v3 | Tenkonata&#39;s Blog
     
   </title>
 
@@ -69,7 +69,7 @@
 
   <!-- 主体内容 (PJAX 容器) -->
   <main class="container" id="pjax-container">
-    <!-- 文章页无需 Hero 区域，直接进入内容区 -->
+    <!-- 归档页无需 Hero，直接 Padding 顶出导航栏 -->
 <section class="post-list-section" style="padding-top: 100px;">
   <div class="content-container">
     
@@ -238,90 +238,53 @@
 </aside>
     </div>
 
-    <!-- 右侧：文章详情 -->
+    <!-- 右侧：内容区域 -->
     <div class="layout-right">
-      <article class="post-card post-page-card card-deep-space fade-in-up">
+      
+      
+        <!-- ============================================= -->
+        <!--  CASE 1: 标签(Tag) 或 分类(Category) 详情页  -->
+        <!--  使用时间线 (Timeline) 布局                     -->
+        <!-- ============================================= -->
         
-        <!-- 文章头信息 -->
-        <header class="post-header">
-          <h1 class="post-title">hexo妙妙小工具</h1>
-          
-          <div class="post-meta">
+        <div class="timeline-section">
             
-            <!-- 1. 创建时间 -->
-            <span class="meta-item" title="Created: 2026-01-19 19:40">
-              <i class="fa fa-calendar"></i> 2026-01-19
-            </span>
+            <!-- 1. 左上角标题区域 -->
+            <div class="timeline-header">
+                
+                    <span class="timeline-title-meta">Tag</span>
+                    <h1 class="timeline-title">
+                        <i class="fa fa-hashtag"></i>
+                        1
+                    </h1>
+                
+            </div>
 
-            <!-- 2. 更新时间 -->
+            <!-- 2. 时间线列表 -->
+            <div class="timeline-wrap">
+                
+                    <div class="timeline-item">
+                        <div class="timeline-date">
+                            2025-12-07
+                        </div>
+                        <a href="/posts/804a7bbf/" class="timeline-post-title">
+                            必要测试中
+                        </a>
+                    </div>
+                
+            </div>
+
+            <!-- 分页 -->
             
-              <span class="meta-item" title="Updated: 2026-01-19 20:12">
-                <i class="fa fa-edit"></i> 2026-01-19
-              </span>
-            
-
-            <!-- 3. 标签 (移除逗号) -->
-            
-
-            <!-- 4. 分类 (移除逗号) -->
-            
-
-            <!-- 字数统计 -->
-            
-          </div>
-        </header>
-
-        <!-- 分割线 -->
-        <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
-
-        <!-- 正文内容 -->
-        <div class="post-content">
-          <h4 id="别再使用日期分类文件夹"><a href="#别再使用日期分类文件夹" class="headerlink" title="别再使用日期分类文件夹"></a>别再使用日期分类文件夹</h4><p>使用插件<a target="_blank" rel="noopener" href="https://github.com/ohroy/hexo-abbrlink">hexo-abbrlink</a></p>
-<h4 id="一个可视化后台管理插件"><a href="#一个可视化后台管理插件" class="headerlink" title="一个可视化后台管理插件"></a>一个可视化后台管理插件</h4><p><a target="_blank" rel="noopener" href="https://github.com/wuzheng228/hexo-pro">hexo-pro: 专为 Hexo 静态博客框架打造的后台管理系统插件</a><del>（但有点不符合我的使用习惯）</del></p>
-<h4 id="图床"><a href="#图床" class="headerlink" title="图床"></a>图床</h4><p>一切上云！<a target="_blank" rel="noopener" href="https://github.com/XPoet/picx"> PicX : 一款基于 GitHub API 开发的图床工具</a></p>
-<h4 id="Github托管并可在线访问"><a href="#Github托管并可在线访问" class="headerlink" title="Github托管并可在线访问"></a>Github托管并可在线访问</h4><p>推荐：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1cW411A7Jx">手把手教你搭建属于自己的 hexo + Github 博客</a><br>之后单开一个图文教程</p>
-<h4 id="字体舒适感"><a href="#字体舒适感" class="headerlink" title="字体舒适感"></a>字体舒适感</h4><p>推荐：<a target="_blank" rel="noopener" href="https://github.com/lxgw/LxgwWenKai">lxgw: 一款非专业的开源中文字体</a></p>
-<h4 id="图标舒适感"><a href="#图标舒适感" class="headerlink" title="图标舒适感"></a>图标舒适感</h4><p>推荐：<a target="_blank" rel="noopener" href="https://fontawesome.dashgame.com/">Font Awesome 4.70</a></p>
-<h4 id="建议将字体和图标使用CDN"><a href="#建议将字体和图标使用CDN" class="headerlink" title="建议将字体和图标使用CDN"></a>建议将字体和图标使用CDN</h4><p>国内cdn：<a target="_blank" rel="noopener" href="https://www.bootcdn.cn/">BootCDN</a><br>国外cdn：<a target="_blank" rel="noopener" href="https://cdnjs.cloudflare.com/">cdnjs.cloudflare</a></p>
-<h4 id="代码块高亮"><a href="#代码块高亮" class="headerlink" title="代码块高亮"></a>代码块高亮</h4><p>推荐使用atom-one-dark样式	<a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a><br>也使用cdn</p>
-<h4 id="文章按更新日期排序"><a href="#文章按更新日期排序" class="headerlink" title="文章按更新日期排序"></a>文章按更新日期排序</h4><p>而不是创建日期排序<br>hexo的总_config.yml，找到index_generator，将order_by改为’-updated’</p>
-<h4 id="防止每一步操作都刷新页面"><a href="#防止每一步操作都刷新页面" class="headerlink" title="防止每一步操作都刷新页面"></a>防止每一步操作都刷新页面</h4><p>别再页面一直闪瞎眼	<a target="_blank" rel="noopener" href="https://github.com/defunkt/jquery-pjax">jquery-pjax: pushState + ajax &#x3D; pjax</a></p>
 
         </div>
 
-        <!-- 上一篇/下一篇 导航 -->
-        <nav class="post-nav">
-          <div class="post-nav-prev" style="max-width: 45%;">
-            
-          </div>
-          <div class="post-nav-next" style="max-width: 45%; text-align: right;">
-            
-              <a href="/posts/Snippet2/" title="Snippet_2">
-                <span>Snippet_2</span>
-                <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </nav>
+      
 
-      </article>
     </div>
 
   </div>
 </section>
-
-<!-- 悬浮 TOC 抽屉 (仅在有目录时显示) -->
-
-<aside class="toc-drawer">
-  <div class="toc-toggle-btn">
-    <i class="fa fa-chevron-left"></i>
-  </div>
-  <div class="toc-content card-deep-space">
-    <h3 class="toc-header">大纲</h3>
-    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%AB%E5%86%8D%E4%BD%BF%E7%94%A8%E6%97%A5%E6%9C%9F%E5%88%86%E7%B1%BB%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-text">别再使用日期分类文件夹</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E5%8F%AF%E8%A7%86%E5%8C%96%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E6%8F%92%E4%BB%B6"><span class="toc-text">一个可视化后台管理插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E5%BA%8A"><span class="toc-text">图床</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Github%E6%89%98%E7%AE%A1%E5%B9%B6%E5%8F%AF%E5%9C%A8%E7%BA%BF%E8%AE%BF%E9%97%AE"><span class="toc-text">Github托管并可在线访问</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E4%BD%93%E8%88%92%E9%80%82%E6%84%9F"><span class="toc-text">字体舒适感</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E6%A0%87%E8%88%92%E9%80%82%E6%84%9F"><span class="toc-text">图标舒适感</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BB%BA%E8%AE%AE%E5%B0%86%E5%AD%97%E4%BD%93%E5%92%8C%E5%9B%BE%E6%A0%87%E4%BD%BF%E7%94%A8CDN"><span class="toc-text">建议将字体和图标使用CDN</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%9D%97%E9%AB%98%E4%BA%AE"><span class="toc-text">代码块高亮</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E6%8C%89%E6%9B%B4%E6%96%B0%E6%97%A5%E6%9C%9F%E6%8E%92%E5%BA%8F"><span class="toc-text">文章按更新日期排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E6%AD%A2%E6%AF%8F%E4%B8%80%E6%AD%A5%E6%93%8D%E4%BD%9C%E9%83%BD%E5%88%B7%E6%96%B0%E9%A1%B5%E9%9D%A2"><span class="toc-text">防止每一步操作都刷新页面</span></a></li></ol>
-  </div>
-</aside>
-
   </main>
 
   <!-- 回到顶部按钮 -->

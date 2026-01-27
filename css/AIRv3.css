@@ -206,6 +206,8 @@ a {
 }
 
 .hero-center { z-index: 10; text-align: center; }
+
+/* 欢迎语容器 */
 .welcome-text {
   font-size: clamp(2rem, 5vw, 4.5em); 
   font-weight: 700;
@@ -213,11 +215,38 @@ a {
   color: #0f172a;
   -webkit-text-stroke: 2px #ffffff;
   paint-order: stroke fill;
-  display: flex;
+  /* 移除之前的 flex 和 animation-delay，改由子元素控制 */
+  display: block; 
+}
 
-  animation-delay: 
-  calc(var(--char-index) * 0.05s), 
-  calc(var(--char-index) * 0.05s + 1s);
+/* 单个字符样式 */
+.type-char {
+    display: inline-block; /* 必须是 block 或 inline-block 才能应用 transform */
+    white-space: pre;      /* 保留空格宽度 */
+    opacity: 0;            /* 初始不可见 */
+    transform: translateY(20px) scale(0.8); /* 初始位置：靠下且稍小 */
+
+    animation: 
+        charEnter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,  /* 0.8s 执行一次进场 */
+        charBounce 4s ease-in-out infinite; /* 4s 循环播放跳动 */
+    
+    animation-delay: 
+        calc(var(--char-index) * 0.15s), /* 进场延迟 */
+        calc(var(--char-index) * 0.05s + 3s);   /* 跳动延迟 (进场完后等一会儿再跳) */
+}
+
+/* 阶段一：进场 (从下方浮出) */
+@keyframes charEnter {
+    0% {opacity: 0;transform: translateY(30px) scale(0.8);}
+    100% {opacity: 1;transform: translateY(0) scale(1);}
+}
+
+/* 阶段二：持续跳动 (波浪效果) */
+@keyframes charBounce {
+    0%, 100% {transform: translateY(0);}
+    5% {transform: translateY(-10px);}     /* 跳动高度 */
+    10% {transform: translateY(0);}
+    /* 10% -> 100%: 静止等待下一轮 */    /* 调整方式:charBounce时间减小，5%和10%比例增大 */
 }
 
 .hero-bottom-left {
@@ -295,14 +324,16 @@ a {
     margin: 0 auto;
     display: flex;
     gap: 40px;
-    align-items: flex-start;
+    /* [修改] 移除 align-items: flex-start，使左右两侧等高，确保 sticky 效果正常 */
+    /* align-items: flex-start; */ 
 }
 
 .layout-left {
     width: 280px;
     flex-shrink: 0;
-    position: sticky;
-    top: 80px;
+    /* [修改] 移除外层的 sticky, 交给内部 .sidebar-sticky 控制 */
+    position: relative; 
+    /* top: 80px;  Removed */
 }
 
 .layout-right {
@@ -317,15 +348,46 @@ a {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    height: 100%;
+}
+
+/* [修改] 彻底修复阴影裁剪：极大幅度增加 Padding 和负 Margin */
+.sidebar-sticky {
+    position: sticky;
+    /* [配置] 侧边栏吸顶距离顶部的距离。导航栏高度约64px，建议设置在 70px 左右 (默认 80px -> 改为 70px) */
+    top: 40px; 
+    
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+    /* [修改] 移除最大高度限制，防止内容挤压。依赖页面滚动或用户自行控制内容 */
+    /* max-height: calc(100vh - 100px); */
+    /* overflow-y: auto; */
+    /* scrollbar-width: none; */ 
+    
+    /* 增加到 50px，给 32px 的大阴影足够的渲染空间 */
+    padding: 50px;
+    margin: -50px;
+    /* 宽度补偿：100% + 左右Padding总和 */
+    width: calc(100% + 100px);
+    
+    /* 确保交互层级 */
+    z-index: 10;
+}
+.sidebar-sticky::-webkit-scrollbar {
+    display: none;
 }
 
 .sidebar-menu {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 5px;
     align-items: center; 
     text-align: center;
+    /* [修复] 防止被 flex 容器挤压高度 */
+    flex-shrink: 0;
 }
 
 .sidebar-link {
@@ -388,12 +450,27 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* [新增] 兼容 <a> 标签样式 */
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+/* [新增] 统计项 Hover 效果 */
+.stats-item:hover {
+    transform: translateY(-2px);
+    opacity: 0.8;
 }
 
 .stats-count {
     font-weight: bold;
     font-size: 1.1rem;
     color: #fff;
+    transition: color 0.3s;
+}
+
+.stats-item:hover .stats-count {
+    color: #52aeff;
 }
 
 .stats-label {
@@ -401,6 +478,153 @@ a {
     color: #888;
     text-transform: uppercase;
     margin-top: 2px;
+}
+
+/* --- Sidebar Widget (Tags & Categories) --- */
+.sidebar-widget {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    /* gap: 15px;  [移除] 由 content-box margin-top 控制间距，实现平滑效果 */
+    /* [修复] 防止被 flex 容器挤压高度 */
+    flex-shrink: 0;
+}
+
+/* 可折叠标题样式 */
+.sidebar-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 0; /* 改为0，由内容区域控制间距 */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 箭头靠右 */
+    gap: 8px;
+    padding-bottom: 5px; /* 减小一点 */
+    /* [修改] 移除底部边框 */
+    border-bottom: none;
+    
+    /* 交互属性 */
+    cursor: default; /* 改为默认光标，暗示悬停即可 */
+    transition: color 0.3s;
+}
+
+.sidebar-title span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 整个 Widget Hover 时标题变色 */
+.sidebar-widget:hover .sidebar-title {
+    color: #52aeff;
+}
+
+.sidebar-title i {
+    color: #52aeff;
+}
+
+/* 箭头旋转动画 */
+.arrow-icon {
+    font-size: 0.9rem;
+    color: #888 !important; /* 默认灰色 */
+    transition: transform 0.3s ease, color 0.3s;
+}
+
+/* [修改] 使用 hover 触发旋转 */
+.sidebar-widget:hover .arrow-icon {
+    transform: rotate(180deg);
+    color: #52aeff !important;
+}
+
+/* [核心修改] 手风琴内容盒子 (默认折叠) */
+.sidebar-content-box {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* [核心修改] 使用 Hover 展开状态 */
+.sidebar-widget:hover .sidebar-content-box {
+    opacity: 1;
+    margin-top: 15px; /* 展开时才添加间距 */
+    max-height: 2000px; /* 设置一个足够大的高度以容纳内容 */
+}
+
+/* Categories 列表样式 */
+.category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.category-list-item {
+    margin-bottom: 8px;
+}
+
+.category-list-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: #ccc;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+}
+
+.category-list-link:hover {
+    background: rgba(82, 174, 255, 0.15);
+    color: #52aeff;
+}
+
+.category-count {
+    background: rgba(255,255,255,0.1);
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    color: #888;
+    transition: all 0.3s;
+}
+
+.category-list-link:hover .category-count {
+    background: #52aeff;
+    color: #fff;
+}
+
+/* Tags 云样式 (圆角胶囊) */
+.tag-cloud-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tag-cloud-item {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 20px; /* 胶囊圆角 */
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ccc;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.tag-cloud-item:hover {
+    background: rgba(82, 174, 255, 0.2);
+    border-color: #52aeff;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(82, 174, 255, 0.3);
+}
+
+.tag-count {
+    font-size: 0.75rem;
+    margin-left: 6px;
+    opacity: 0.6;
 }
 
 /* =========================================
@@ -614,15 +838,11 @@ a {
 .archive-card-wrapper {
     /* 2. [修正] 使用 overflow: visible 解决阴影裁剪(透明矩形)问题 */
     padding: 10px 5px; 
-    margin-bottom: 10px; 
-
     overflow: visible; /* 默认显示阴影 */
-    
     /* 初始状态：显示 */
     max-height: 500px; /* 给足够的高度 */
     opacity: 1;
     transform: translateY(0);
-
     /* 定义过渡属性 */
     transition: 
         max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
@@ -703,6 +923,113 @@ a {
     animation: fadeInUp 0.5s ease;
 }
 
+
+/* =========================================
+   Timeline Styling (Tags & Categories)
+   ========================================= */
+.timeline-section {
+    padding: 0 20px;
+    animation: fadeInUp 0.8s ease;
+}
+
+/* 页面顶部标题区域 */
+.timeline-header {
+    position: relative;
+    margin-bottom: 60px;
+    padding-left: 20px;
+}
+
+.timeline-title-meta {
+    font-size: 1.2rem;
+    color: #52aeff;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.timeline-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.timeline-title i {
+    opacity: 0.15;
+    position: absolute;
+    top: -20px;
+    left: -40px;
+    font-size: 6rem;
+    transform: rotate(-15deg);
+    z-index: -1;
+    color: #52aeff;
+}
+
+/* 时间线主体容器 */
+/* [修改] 移除 border-left (白色细线) */
+.timeline-wrap {
+    position: relative;
+    padding-left: 40px; 
+}
+
+/* 节点项目 */
+.timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+    padding-left: 30px; 
+    transition: transform 0.3s;
+}
+
+.timeline-item:hover {
+    transform: translateX(10px);
+}
+
+/* 时间轴上的圆点 */
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -47px; /* 线条位置 (-40px padding - 2px border) + 居中调整 */
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    background: #141824; 
+    border: 3px solid #52aeff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(82, 174, 255, 0.5);
+    z-index: 1;
+    transition: all 0.3s;
+}
+
+.timeline-item:hover::before {
+    background: #52aeff;
+    box-shadow: 0 0 20px rgba(82, 174, 255, 0.8);
+    transform: scale(1.2);
+}
+
+/* 日期文本 */
+.timeline-date {
+    font-size: 0.9rem;
+    color: #e0e0e0;
+    margin-bottom: 8px;
+    font-family: Consolas, monospace;
+}
+
+/* 文章标题链接 */
+.timeline-post-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #e0e0e0;
+    text-decoration: none;
+    transition: color 0.3s;
+    display: inline-block;
+}
+
+.timeline-post-title:hover {
+    color: #52aeff;
+}
 
 /* =========================================
    Floating TOC Drawer (文章大纲悬浮抽屉)

@@ -1,9 +1,17 @@
 /* ==========================================================================
-   AIR-v3 Media Queries (响应式适配 - 权宜之计版)
+   AIR-v3 Media Queries (响应式适配 - 修复版)
    生效范围: 屏幕宽度小于 960px (平板及手机)
    ========================================================================== */
 
 @media screen and (max-width: 960px) {
+
+    /* --- [核心修复] 强制禁止横向滚动 --- */
+    /* 解决页面左右晃动导致 nav 和 back-to-top 位置错乱的问题 */
+    html, body {
+        overflow-x: hidden !important;
+        width: 100%;
+        position: relative;
+    }
 
      /* --- 0.  移动端背景图切换 --- */
     .fixed-bg {
@@ -16,6 +24,7 @@
         flex-direction: column; /* 改为垂直排列 */
         max-width: 100%;
         gap: 20px; /* 减小模块间距 */
+        overflow: hidden; /* 防止子元素撑开容器 */
     }
 
     /* --- 2. 布局重排 (内容在前，侧边栏在后) --- */
@@ -35,32 +44,52 @@
 
     /* --- 3. 导航栏适配 --- */
     .air-nav {
-        padding: 0 15px; /* 减小左右内边距 */
-        height: 56px; /* 稍微减小高度 */
+        padding: 0 15px; /* 左右保留安全距离 */
+        height: 56px; 
+        width: 100%; /* 确保占满屏幕 */
     }
 
     .theme-title {
         font-size: 1.2rem;
+        flex-shrink: 0; /* 防止标题被压缩 */
+        margin-right: auto; /* 靠左，把右侧菜单挤过去 */
+        max-width: 50%; /* 防止标题太长把菜单挤没 */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
-    /* 移动端导航链接：减小间距，字体变小 */
+    /* 导航右侧菜单容器 */
+    .nav-right {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex-shrink: 0; /* 防止菜单被压缩 */
+    }
+
+    /* 移动端导航链接默认样式 */
     .nav-link {
-        margin-left: 10px;
+        margin-left: 12px;
         font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
     }
     
-    /* 如果屏幕非常窄 (手机)，隐藏文字只留图标，或允许滚动 */
+    /* [优化] 手机竖屏模式 (< 480px) */
     @media (max-width: 480px) {
-        .nav-right {
-            display: flex;
-            gap: 5px;
+        .theme-title {
+            font-size: 1.1rem;
         }
-        .nav-link span {
-            display: none; /* 隐藏文字，只显图标 */
-        }
+
         .nav-link {
-            font-size: 1.2rem; /* 图标放大点 */
-            margin-left: 15px;
+            margin-left: 15px; /* 增加图标间距，便于点击 */
+            font-size: 1.2rem; /* 放大图标 */
+        }
+
+        /* [核心] 隐藏文字描述，只留图标 */
+        .nav-link span {
+            display: none !important;
         }
     }
 
@@ -68,17 +97,19 @@
     .welcome-text {
         font-size: 2rem; /* 减小欢迎语字号 */
         padding: 0 20px;
+        width: 100%;
+        word-wrap: break-word; /* 防止长单词撑开屏幕 */
     }
 
     .hero-bottom-left, 
     .hero-bottom-right {
-        bottom: 3vh; /* 底部间距减小 */
+        bottom: 5vh; /* 稍微抬高 */
     }
     
-    /* 手机端隐藏底部左右的装饰，留给滚动按钮更多空间，或者简化显示 */
+    /* 手机端隐藏底部右侧装饰，避免误触和遮挡 */
     @media (max-width: 480px) {
         .hero-bottom-right {
-            display: none; /* 手机端暂时隐藏社交图标，避免遮挡 */
+            display: none; 
         }
         .hero-bottom-left {
             left: 50%;
@@ -90,36 +121,47 @@
     .post-card, .post-page-card {
         padding: 20px; /* 大幅减小卡片内边距 */
         margin-bottom: 20px;
+        width: 100%; /* 确保不超宽 */
     }
 
     .post-title {
         font-size: 1.4rem; /* 减小标题字号 */
+        word-wrap: break-word;
     }
 
     .post-excerpt {
         display: none;/* 隐藏摘要 */
     }
-
-    /* --- 6. 侧边栏调整 --- */
-    /* 在移动端，侧边栏变为底部区域 */
-    .air-sidebar {
-        flex-direction: column; /* 让菜单在下，作者在上(或者保持原样) */
-        gap: 15px;
-        padding-bottom: 40px; /* 底部留白 */
+    
+    /* 修复代码块在移动端撑开页面的问题 */
+    .post-content pre {
+        max-width: 100%;
+        overflow-x: auto; /* 允许代码块内部滚动，而不是撑开页面 */
+    }
+    
+    .post-content table {
+        display: block;
+        overflow-x: auto; /* 允许表格滚动 */
     }
 
-    /* 隐藏重复的侧边菜单 (因为顶部导航已有)，只保留作者栏 */
-    /* 如果你想保留底部菜单，请注释掉下面这行 */
-    /*.sidebar-menu {
-        display: none; 
-    }*/
+    /* --- 6. 侧边栏调整 --- */
+    .air-sidebar {
+        flex-direction: column; 
+        gap: 15px;
+        padding-bottom: 60px; /* 底部多留白，防止被回到顶部按钮遮挡 */
+        width: 100%;
+    }
 
     .sidebar-author {
-        margin: 0 10px; /* 左右留点缝隙 */
+        margin: 0; /* 移除额外边距 */
+    }
+    
+    /* 移动端侧边栏卡片也要防止溢出 */
+    .sidebar-widget, .sidebar-menu {
+        width: 100%;
     }
 
     /* --- 7. TOC 目录隐藏 --- */
-    /* 移动端屏幕空间宝贵，悬浮抽屉体验不佳，直接隐藏 */
     .toc-drawer {
         display: none !important;
     }
@@ -132,7 +174,7 @@
         font-size: 1.5em;
     }
     .archive-card {
-        padding: 15px 20px;
+        padding: 15px;
         flex-direction: column; /* 竖排 */
         align-items: flex-start;
         gap: 10px;
@@ -144,5 +186,30 @@
         width: 100%;
         justify-content: flex-start;
         flex-wrap: wrap;
+    }
+    
+    /* [关键修复] Timeline 样式溢出修复 */
+    .timeline-section {
+        overflow: hidden; /* 防止内容溢出 */
+    }
+    .timeline-title {
+        font-size: 2rem;
+        word-break: break-all;
+    }
+    .timeline-title i {
+        font-size: 3rem; /* 减小装饰图标 */
+        left: -5px;      /* 调整位置防止超出左边界 */
+        top: -5px;
+        opacity: 0.1;
+    }
+    .timeline-wrap {
+        padding-left: 30px; /* 增加左侧内边距，给圆点留空间 */
+        margin-left: 0;
+    }
+    .timeline-item::before {
+        left: -29px; /* 调整圆点位置，确保在 padding 范围内 */
+    }
+    .timeline-item {
+        padding-left: 15px;
     }
 }
