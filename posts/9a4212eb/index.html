@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- [新增] 站点描述 -->
+  <meta name="description" content="a hexo blog by Tenkonata">
+
+  <!-- [修改] 页面标题逻辑 -->
+  <title>
+    
+      hexo妙妙小工具 | AIR-v3
+    
+  </title>
+
+  <!-- [新增] 网站图标 -->
+  <link rel="icon" href="https://Tenkonata.github.io/picx-images-hosting/装饰/favicon.86u3byc1l2.webp">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <!-- Highlight.js Atom One Dark 样式 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+  <link rel="stylesheet" href="/css/AIRv3.css">
+  <!-- 引入 Markdown 独立样式表 -->
+  <link rel="stylesheet" href="/css/AIRmd.css">
+  <!-- 引入移动端响应式适配样式 -->
+  <link rel="stylesheet" href="/css/AIRv3media.css">
+  
+  <!-- [新增] KaTeX 公式渲染样式 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  
+  <!-- [新增] 浅色模式专属样式 -->
+  <link rel="stylesheet" href="/css/AIRv3light.css">
+  
+  <!-- 主题模式初始化 (防止闪烁) -->
+  <script>
+    (function() {
+      var savedTheme = localStorage.getItem('air-theme-mode');
+      var defaultTheme = 'dark';
+      if (savedTheme === 'light' || (!savedTheme && defaultTheme === 'light')) {
+        document.documentElement.classList.add('light-mode');
+      }
+    })();
+  </script>
+<meta name="generator" content="Hexo 8.0.0"></head>
+<body>
+
+  <!-- 全局固定背景 -->
+  <!-- [修改] 增加 --bg-media 变量用于移动端适配 -->
+  <div class="fixed-bg" 
+       style="background-image: url('https://img.paulzzh.com/touhou/random?size=pc'); 
+              --bg-media: url('https://img.paulzzh.com/touhou/random?size=wap');">
+  </div>
+  <div class="fixed-bg-overlay"></div>
+
+  <!-- 导航栏 Partial -->
+  <nav class="air-nav">
+  <div class="nav-left">
+    <a href="/" class="theme-title">
+      AIR-v3
+    </a>
+    <a href="javascript:void(0);" id="theme-toggle" class="nav-link" style="margin-left: 15px; font-size: 1.2rem;">
+      <i class="fa fa-moon-o"></i>
+    </a>
+  </div>
+  <div class="nav-right">
+    
+      
+        <a href="/" class="nav-link">
+          <i class="fa fa-home"></i> 
+          <span>主页</span>
+        </a>
+      
+        <a href="/archives" class="nav-link">
+          <i class="fa fa-archive"></i> 
+          <span>归档</span>
+        </a>
+      
+        <a href="/V3/aboutV3.html" class="nav-link">
+          <i class="fa fa-user"></i> 
+          <span>关于</span>
+        </a>
+      
+    
+  </div>
+</nav>
+
+  <!-- 主体内容 (PJAX 容器) -->
+  <main class="container" id="pjax-container">
+    <!-- 文章页无需 Hero 区域，直接进入内容区 -->
+<section class="post-list-section" style="padding-top: 100px;">
+  <div class="content-container">
+    
+    <!-- 左侧：固定侧边栏 (复用) -->
+    <div class="layout-left">
+      <aside class="air-sidebar">
+  
+  <!-- 1. 作者栏位 (保持在文档流中) -->
+  <div class="sidebar-author card-deep-space">
+    <div class="author-avatar">
+      <img src="https://Tenkonata.github.io/picx-images-hosting/装饰/avatar.96a6p4esqw.webp" alt="Author Avatar">
+    </div>
+    <h3 class="author-name">Tenkonata</h3>
+    <p class="author-signature">坐和放宽</p>
+    
+    <!-- 数据统计 -->
+    <!-- [修改] 调整了顺序：Posts - Categories - Tags，视觉上更对称 -->
+    <div class="author-stats">
+      
+      <!-- 1. Posts -->
+      <div class="stats-item">
+        <span class="stats-count">10</span>
+        <span class="stats-label">Posts</span>
+      </div>
+
+      <!-- 2. Categories (原第3位，移到中间) -->
+      <div class="stats-item">
+        <span class="stats-count">1</span>
+        <span class="stats-label">Categories</span>
+      </div>
+
+      <!-- 3. Tags (原第2位，移到最后) -->
+      <div class="stats-item">
+        <span class="stats-count">4</span>
+        <span class="stats-label">Tags</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 内部 sticky 容器 -->
+  <div class="sidebar-sticky">
+    
+    <!-- 2. 侧边导航菜单 (常驻显示) -->
+    <div class="sidebar-menu card-deep-space">
+      
+        
+          <a href="/" class="sidebar-link">
+            <i class="fa fa-home"></i> 
+            <span>home</span>
+          </a>
+        
+          <a href="/archives" class="sidebar-link">
+            <i class="fa fa-archive"></i> 
+            <span>archive</span>
+          </a>
+        
+          <a href="/V3/updatelogV3.html" class="sidebar-link">
+            <i class="fa fa-pencil"></i> 
+            <span>updatelogV3</span>
+          </a>
+        
+          <a href="/V3/aboutV3.html" class="sidebar-link">
+            <i class="fa fa-user"></i> 
+            <span>aboutV3</span>
+          </a>
+        
+      
+    </div>
+
+    <!-- 3. Categories 卡片 (可折叠) -->
+    
+    <div class="sidebar-widget card-deep-space collapsible-widget">
+      <!-- 标题部分 -->
+      <h3 class="sidebar-title toggle-trigger">
+        <span><i class="fa fa-folder-open-o"></i> Categories</span>
+        <i class="fa fa-chevron-down arrow-icon"></i>
+      </h3>
+      
+      <!-- 内容盒子 -->
+      <div class="sidebar-content-box">
+        <ul class="category-list">
+          
+            <li class="category-list-item">
+              <a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">
+                <span class="category-name">随笔</span>
+                <span class="category-count">2</span>
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+    <!-- 4. Tags 卡片 (可折叠) -->
+    
+    <div class="sidebar-widget card-deep-space collapsible-widget">
+      <!-- 标题部分 -->
+      <h3 class="sidebar-title toggle-trigger">
+        <span><i class="fa fa-tags"></i> Tags</span>
+        <i class="fa fa-chevron-down arrow-icon"></i>
+      </h3>
+      
+      <!-- 内容盒子 -->
+      <div class="sidebar-content-box">
+        <div class="tag-cloud-list">
+          
+            <a href="/tags/hexo/" class="tag-cloud-item">
+              hexo
+            </a>
+          
+            <a href="/tags/%E5%A4%A9%E9%A9%AC%E8%A1%8C%E7%A9%BA/" class="tag-cloud-item">
+              天马行空
+            </a>
+          
+            <a href="/tags/%E6%B5%8B%E8%AF%95/" class="tag-cloud-item">
+              测试
+            </a>
+          
+            <a href="/tags/%E6%B8%B8%E6%88%8F/" class="tag-cloud-item">
+              游戏
+            </a>
+          
+        </div>
+      </div>
+    </div>
+    
+
+  </div> <!-- End .sidebar-sticky -->
+
+</aside>
+    </div>
+
+    <!-- 右侧：文章详情 -->
+    <div class="layout-right">
+      <article class="post-card post-page-card card-deep-space fade-in-up">
+        
+        <!-- 文章头信息 -->
+        <header class="post-header">
+          <h1 class="post-title">hexo妙妙小工具</h1>
+          
+          <div class="post-meta">
+            
+            <!-- 1. 创建时间 -->
+            <span class="meta-item" title="Created: 2026-01-19 19:40">
+              <i class="fa fa-calendar"></i> 2026-01-19
+            </span>
+
+            <!-- 2. 更新时间 -->
+            
+              <span class="meta-item" title="Updated: 2026-01-27 22:00">
+                <i class="fa fa-edit"></i> 2026-01-27
+              </span>
+            
+
+            <!-- 3. 标签 (移除逗号) -->
+            
+              <span class="meta-item">
+                <i class="fa fa-tag"></i>
+                <span>
+                  
+                    <a href="/tags/hexo/" class="meta-badge">hexo</a>
+                  
+                </span>
+              </span>
+            
+
+            <!-- 4. 分类 (移除逗号) -->
+            
+
+            <!-- 字数统计 -->
+            
+          </div>
+        </header>
+
+        <!-- 分割线 -->
+        <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
+
+        <!-- 正文内容 -->
+        <div class="post-content">
+          <h4 id="别再使用日期分类文件夹"><a href="#别再使用日期分类文件夹" class="headerlink" title="别再使用日期分类文件夹"></a>别再使用日期分类文件夹</h4><p>使用插件<a target="_blank" rel="noopener" href="https://github.com/ohroy/hexo-abbrlink">hexo-abbrlink</a></p>
+<h4 id="一个可视化后台管理插件"><a href="#一个可视化后台管理插件" class="headerlink" title="一个可视化后台管理插件"></a>一个可视化后台管理插件</h4><p><a target="_blank" rel="noopener" href="https://github.com/wuzheng228/hexo-pro">hexo-pro: 专为 Hexo 静态博客框架打造的后台管理系统插件</a><del>（但有点不符合我的使用习惯）</del></p>
+<h4 id="图床"><a href="#图床" class="headerlink" title="图床"></a>图床</h4><p>一切上云！<a target="_blank" rel="noopener" href="https://github.com/XPoet/picx"> PicX : 一款基于 GitHub API 开发的图床工具</a></p>
+<h4 id="Github托管并可在线访问"><a href="#Github托管并可在线访问" class="headerlink" title="Github托管并可在线访问"></a>Github托管并可在线访问</h4><p>推荐：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1cW411A7Jx">手把手教你搭建属于自己的 hexo + Github 博客</a><br>之后单开一个图文教程</p>
+<h4 id="字体舒适感"><a href="#字体舒适感" class="headerlink" title="字体舒适感"></a>字体舒适感</h4><p>推荐：<a target="_blank" rel="noopener" href="https://github.com/lxgw/LxgwWenKai">lxgw: 一款非专业的开源中文字体</a></p>
+<h4 id="图标舒适感"><a href="#图标舒适感" class="headerlink" title="图标舒适感"></a>图标舒适感</h4><p>推荐：<a target="_blank" rel="noopener" href="https://fontawesome.dashgame.com/">Font Awesome 4.70</a></p>
+<h4 id="建议将字体和图标使用CDN"><a href="#建议将字体和图标使用CDN" class="headerlink" title="建议将字体和图标使用CDN"></a>建议将字体和图标使用CDN</h4><p>国内cdn：<a target="_blank" rel="noopener" href="https://www.bootcdn.cn/">BootCDN</a><br>国外cdn：<a target="_blank" rel="noopener" href="https://cdnjs.cloudflare.com/">cdnjs.cloudflare</a></p>
+<h4 id="代码块高亮"><a href="#代码块高亮" class="headerlink" title="代码块高亮"></a>代码块高亮</h4><p>推荐使用atom-one-dark样式	<a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a><br>也使用cdn</p>
+<h4 id="文章按更新日期排序"><a href="#文章按更新日期排序" class="headerlink" title="文章按更新日期排序"></a>文章按更新日期排序</h4><p>而不是创建日期排序<br>hexo的总_config.yml，找到index_generator，将order_by改为’-updated’</p>
+<h4 id="防止每一步操作都刷新页面"><a href="#防止每一步操作都刷新页面" class="headerlink" title="防止每一步操作都刷新页面"></a>防止每一步操作都刷新页面</h4><p>别再页面一直闪瞎眼	<a target="_blank" rel="noopener" href="https://github.com/defunkt/jquery-pjax">jquery-pjax: pushState + ajax &#x3D; pjax</a></p>
+
+        </div>
+
+        <!-- 上一篇/下一篇 导航 -->
+        <nav class="post-nav">
+          <div class="post-nav-prev" style="max-width: 45%;">
+            
+              <a href="/posts/ThemeTest/" title="ThemeShowCase">
+                <i class="fa fa-chevron-left"></i> 
+                <span>ThemeShowCase</span>
+              </a>
+            
+          </div>
+          <div class="post-nav-next" style="max-width: 45%; text-align: right;">
+            
+              <a href="/posts/Snippet2/" title="Snippet_2">
+                <span>Snippet_2</span>
+                <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </nav>
+
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<!-- 悬浮 TOC 抽屉 (仅在有目录时显示) -->
+
+<aside class="toc-drawer">
+  <div class="toc-toggle-btn">
+    <i class="fa fa-chevron-left"></i>
+  </div>
+  <div class="toc-content card-deep-space">
+    <h3 class="toc-header">大纲</h3>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%AB%E5%86%8D%E4%BD%BF%E7%94%A8%E6%97%A5%E6%9C%9F%E5%88%86%E7%B1%BB%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-text">别再使用日期分类文件夹</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E5%8F%AF%E8%A7%86%E5%8C%96%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E6%8F%92%E4%BB%B6"><span class="toc-text">一个可视化后台管理插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E5%BA%8A"><span class="toc-text">图床</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Github%E6%89%98%E7%AE%A1%E5%B9%B6%E5%8F%AF%E5%9C%A8%E7%BA%BF%E8%AE%BF%E9%97%AE"><span class="toc-text">Github托管并可在线访问</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E4%BD%93%E8%88%92%E9%80%82%E6%84%9F"><span class="toc-text">字体舒适感</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E6%A0%87%E8%88%92%E9%80%82%E6%84%9F"><span class="toc-text">图标舒适感</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BB%BA%E8%AE%AE%E5%B0%86%E5%AD%97%E4%BD%93%E5%92%8C%E5%9B%BE%E6%A0%87%E4%BD%BF%E7%94%A8CDN"><span class="toc-text">建议将字体和图标使用CDN</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%9D%97%E9%AB%98%E4%BA%AE"><span class="toc-text">代码块高亮</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E6%8C%89%E6%9B%B4%E6%96%B0%E6%97%A5%E6%9C%9F%E6%8E%92%E5%BA%8F"><span class="toc-text">文章按更新日期排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E6%AD%A2%E6%AF%8F%E4%B8%80%E6%AD%A5%E6%93%8D%E4%BD%9C%E9%83%BD%E5%88%B7%E6%96%B0%E9%A1%B5%E9%9D%A2"><span class="toc-text">防止每一步操作都刷新页面</span></a></li></ol>
+  </div>
+</aside>
+
+  </main>
+
+  <!-- 回到顶部按钮 -->
+  <div id="back-to-top" class="back-to-top card-deep-space">
+    <span class="btt-text">0%</span>
+    <i class="fa fa-arrow-up btt-icon"></i>
+  </div>
+
+  <!-- 引入 Pjax 库 -->
+  <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+  
+  <!-- Highlight.js 核心库 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  
+  <!-- 主题逻辑 (包含 Highlight.js 初始化) -->
+  <script src="/js/AIRv3.js"></script>
+  <!-- 移动端响应式逻辑 -->
+  <script src="/js/AIRv3media.js"></script>
+  
+  <!-- [恢复] 原版 KaTeX 公式解析脚本 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script>
+    function renderKaTeX() {
+      if (typeof katex === 'undefined') return;
+      document.querySelectorAll('script[type^="math/tex"]').forEach(function(el) {
+        var isDisplay = el.type.includes('mode=display');
+        var span = document.createElement('span');
+        try {
+          katex.render(el.innerText, span, { displayMode: isDisplay, throwOnError: false });
+          el.parentNode.replaceChild(span, el);
+        } catch(e) { console.error("KaTeX error:", e); }
+      });
+    }
+    document.addEventListener("DOMContentLoaded", renderKaTeX);
+    document.addEventListener("pjax:success", renderKaTeX);
+  </script>
+  
+  <!-- Markdown 专属独立交互脚本 (代码块、Alert等) -->
+  <script src="/js/AIRmd.js"></script>
+</body>
+</html>

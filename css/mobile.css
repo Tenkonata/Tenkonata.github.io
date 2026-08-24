@@ -1,0 +1,210 @@
+/*
+ * ----------------------------------------------------------------
+ * 響應式佈局 (Mobile) 
+ * ----------------------------------------------------------------
+ */
+
+/* 1. 移動端按鈕通用樣式 (漢堡 & 主題) */
+.mobile-menu-toggle,
+.mobile-theme-toggle {
+    display: none; /* 默認隱藏，由媒體查詢控制顯示 */
+    background: transparent;
+    border: none;
+    padding: 0.5rem; /* 增加觸摸區域 */
+    cursor: pointer;
+    z-index: 1001;
+    color: var(--v-blue-700);
+    font-size: 1.2rem; /*圖標大小*/
+    line-height: 1;
+    margin-left: 0.5rem;
+}
+
+/* 2. 遮罩層 (保持不變) */
+#mobile-overlay {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999; 
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+#mobile-overlay.mobile-overlay-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* * ----------------------------------------------------------------
+ * 3. 媒體查詢 (900px 以下) - 手机端通用样式
+ * ----------------------------------------------------------------
+ */
+@media (max-width: 1000px) {
+
+    /* ======================================================= */
+    /* 3.1 非主頁 (文章頁、關於頁等) 的導航欄 */
+    /* ======================================================= */
+
+    /* 顯示移動端按鈕 */
+    body:not(.home-layout) .mobile-menu-toggle,
+    body:not(.home-layout) .mobile-theme-toggle {
+        display: block;
+    }
+
+    /* 隱藏桌面端導航菜單 */
+    body:not(.home-layout) .nav-menu {
+        display: none;
+    }
+    
+    /* 導航欄內容佈局調整 */
+    body:not(.home-layout) .nav-content {
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    body:not(.home-layout) .post-meta {
+        display: flex;
+        flex-wrap: wrap;       /* 允许标签组整体换行 */
+        gap: 0.5rem;           /* 标签之间的间距 */
+        justify-content: flex-start;
+    }
+    
+    /* ======================================================= */
+    /* 3.2 主页调整 (Home Layout) */
+    /* ======================================================= */
+    
+    .home-layout .site-title {
+        font-size: 1.4em; 
+    }
+    
+    .home-layout .nav-link {
+        font-size: clamp(0.75em, 3.5vw, 1.5rem);        
+        padding: 0.1rem 0.1rem;
+    } 
+    
+    .home-layout .typewriter-text {
+        font-size: clamp(1.8rem, 7vw, 4rem);
+    }  
+
+    /* [新增] 移动端隐藏主页文章摘要，使卡片更紧凑 */
+    .home-layout .article-excerpt {
+        display: none !important;
+    }
+
+    /* [修改] 优化元数据布局，解决跨行间距过大问题 */
+    .home-layout .article-meta {
+        margin-bottom: 0.5rem !important; 
+        
+        /* 关键修改：减小项目间距 */
+        gap: 0.8rem !important;      /* 水平间距 */
+        row-gap: 0.2rem !important;  /* 垂直间距 (控制跨行后的行高) */
+        
+        flex-wrap: wrap !important;  /* 允许换行 */
+        justify-content: flex-start !important;
+        align-items: center;
+        line-height: 1.4;            /* 收紧行高 */
+    }
+    
+    /* 针对里面的每个小项目 */
+    .home-layout .meta-item {
+        font-size: 0.85em;           /* 稍微缩小字体 */
+        margin: 0 !important;        /* 清除可能存在的旧边距 */
+        display: inline-flex;
+        align-items: center;
+    }
+
+    /* [优化] 调整卡片内边距，减少留白 */
+    .home-layout .post-article {
+        padding: 1.2rem 1.5rem !important;
+    }
+
+    
+    /* ======================================================= */
+    /* 3.3 通用佈局調整 (側邊欄、主內容) (保持不變) */
+    /* ======================================================= */
+    
+    #aside {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 300px; 
+        z-index: 1000;
+        transform: translateX(-100%); 
+        transition: transform 0.3s ease-in-out;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        display: block;
+    }
+    #aside.mobile-open {
+        transform: translateX(0); 
+    }
+    .main-content {
+        max-width: 100%; 
+        width: 100%;
+    }
+    #mobile-overlay {
+        display: block; 
+    }
+
+}
+
+/* * ----------------------------------------------------------------
+ * 4.平板与小屏桌面适配 (1001px - 1280px)
+ * 说明：在此区间内保持三栏布局，但缩小两侧边栏宽度，防止中间过窄。
+ * ----------------------------------------------------------------
+ */
+@media (min-width: 1001px) and (max-width: 1280px) {
+    /* 左侧文件树：280px -> 220px */
+    #aside {
+        width: 220px;
+    }
+
+    /* 右侧作者栏：280px -> 220px */
+    #right-sidebar {
+        width: 220px;
+        padding: 2rem 1rem; /* 稍微减小内边距防止溢出 */
+    }
+
+    /* 主内容区计算：100% - 220px(左) - 220px(右) = 440px */
+    .main-content {max-width: calc(100% - 440px);}
+    
+    /* 稍微减小文章内容的内边距 */
+    #content {padding: 2rem 1.5rem;}
+}
+
+/* * ----------------------------------------------------------------
+ * 5. 竖屏平板与手机 (1000px 以下) - 隐藏右侧栏
+ * ----------------------------------------------------------------
+ */
+@media (max-width: 1000px) {
+    #right-sidebar {
+        display: none;
+    }
+    
+    /* 隐藏右边栏后，主内容区域自动撑满剩余空间 */
+    .main-content {
+        max-width: 100%; 
+    }
+}
+/* * ----------------------------------------------------------------
+ * 7. 其他组件适配
+ * ----------------------------------------------------------------
+ */
+
+/* 回到顶部按钮适配 - 优化移动端体验 */
+@media (max-width: 1000px) {
+    #back-to-top {
+        bottom: 25px;       /* 稍微提高，避免贴底 */
+        left: 50%;
+        margin-left: -22px; /* 宽度(44px)的一半，使其水平居中 */
+        right: auto;        /* 清除桌面端的 right 定位 */
+        width: 44px;        /* 增大触控区域 */
+        height: 44px;
+        font-size: 1.1em;   /* 图标稍微放大 */
+        opacity: 0.9;       /* 移动端常显时略微透明，避免太抢眼 */
+    }
+}

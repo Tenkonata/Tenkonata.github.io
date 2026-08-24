@@ -1,0 +1,474 @@
+/* ==========================================================================
+   AIR-v3 Light Mode (护眼科技浅色主题)
+   ========================================================================== */
+
+html.light-mode {
+  /* --- 颜色变量池 (经典明快灰白组合版) --- */
+  --light-bg-body: #f0f0f0; /* 比 e3e3e3 清透很多，摆脱了沉闷感，但依然能衬托卡片 */
+  --light-bg-card: #f7f7f7; /* 卡片使用更明亮的 #f7f7f7 与背景形成层次 */
+  --light-bg-card-hover: #ffffff; /* 悬停浮现纯白 */
+  
+  --light-text-main: #1a1a1a; /* 配合灰度的文字黑 */
+  --light-text-sub: #666666;
+  
+  --light-primary: #0072f5;
+  --light-primary-bg: transparent; /* 取消背景色反馈，纯文字变色 */
+  
+  --light-border: rgba(0, 0, 0, 0.05);
+
+  /* --- 动态映射原版深色变量到浅色 --- */
+  --text-dark: var(--light-text-main);
+  --text-light: var(--light-text-main);
+  --theme-primary: var(--light-primary);
+  --text-hero: #0f172a;
+  --text-main: var(--light-text-main);
+  --text-sub: var(--light-text-sub);
+  --text-sub-light: var(--light-text-sub);
+  --theme-accent: #f5b047;
+  --bg-dark-solid: var(--light-bg-card);
+
+  --bg-card-grad-1: var(--light-bg-card);
+  --bg-card-grad-2: var(--light-bg-card);
+  --bg-card-hover-grad-1: var(--light-bg-card-hover);
+  --bg-card-hover-grad-2: var(--light-bg-card-hover);
+  --bg-card-solid-95: var(--light-bg-card);
+  --bg-blur: rgba(247, 247, 247, 0.1);
+
+  --border-light-08: var(--light-border);
+  --border-light-15: var(--light-border);
+  --border-light-10: var(--light-border);
+  --border-light-20: var(--light-border);
+  --bg-light-05: transparent;
+
+  --shadow-20: rgba(0,0,0,0.03);
+  --shadow-25: rgba(0,0,0,0.03);
+  --shadow-30: rgba(0,0,0,0.03);
+  --shadow-35: rgba(0,0,0,0.03);
+  --shadow-50: rgba(0,0,0,0.08);
+
+  --primary-alpha-15: transparent;
+  --primary-alpha-20: transparent;
+  --primary-alpha-30: rgba(0, 114, 245, 0.15);
+  --primary-alpha-40: rgba(0, 114, 245, 0.2);
+  --primary-alpha-50: rgba(0, 114, 245, 0.3);
+  --primary-alpha-80: var(--light-primary);
+  
+  /* --- Markdown 专属变量 (类 Apple 浅色版) --- */
+  --md-text-color: #1a1a1a;
+  --md-heading-color: #0f172a;
+  --md-primary-color: #0072f5;
+  --md-link-hover-color: #f5b047;
+  
+  --md-quote-bg: rgba(62, 105, 215, 0.06);
+  --md-quote-border: #52aeff;
+  
+  /* 配合背景变亮的浅色代码块 */
+  --md-code-block-bg: #ebebeb;
+  --md-code-block-header: #dfdfdf;
+  --md-code-text: #24292e;
+  
+  --md-inline-code-bg: rgba(0, 0, 0, 0.05);
+  --md-inline-code-text: #2f479f;
+  
+  --md-border-color: rgba(0, 0, 0, 0.05);
+  
+  --md-table-head-bg: rgba(0, 0, 0, 0.04);
+  --md-table-row-even: rgba(0, 0, 0, 0.02);
+  
+  --md-highlight-bg: #fde047;
+  --md-highlight-text: #000000;
+
+  --md-h1-indicator: #E4374B;
+  --md-h2-indicator: #0EB54F;
+  --md-h3-indicator: #076DDD;
+  --md-h4-indicator: #876CE0;
+  --md-h5-indicator: #D2A852;
+  --md-h6-indicator: #E0E5D5;
+}
+
+/* --- 1. 背景处理 (深浅色分开逻辑) --- */
+:root {
+  --bg-blur: rgba(20, 24, 36, 0.6);
+}
+html.light-mode {
+  --bg-wave: var(--light-bg-body);
+  --bg-blur: rgba(247, 247, 247, 0.65);
+}
+
+/* 浅色模式恢复大图 */
+html.light-mode .fixed-bg { opacity: 1 ; }
+/* 浅色模式取消毛玻璃遮罩，保持图片原汁原味 */
+html.light-mode .fixed-bg-overlay { opacity: 0 ; }
+/* 浅色模式设置 body 颜色 */
+html.light-mode body { background-color: var(--light-bg-body) ; }
+
+/* 保证阅读区为实色，全局遮盖下方背景图（仅浅色模式应用实色底盘） */
+html.light-mode .post-list-section {
+  background-color: var(--bg-wave) ;
+  position: relative;
+}
+
+/* --- 多层波浪云过渡动画 (深色保留通透感，浅色连接底盘) --- */
+
+/* 第一层波浪（全局生效：深色模式仅作微弱感知，浅色模式为云层基底） */
+.air-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 65px; 
+  /* 深色模式：从 8% 白色渐变到完全透明，完美消除底部的截断直线 */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%);
+  opacity: 1;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,50 Q150,0 300,50 T600,50 T900,50 T1200,50 L1200,100 L0,100 Z'/%3E%3C/svg%3E");
+  -webkit-mask-size: 200% 100%;
+  -webkit-mask-repeat: repeat-x;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,50 Q150,0 300,50 T600,50 T900,50 T1200,50 L1200,100 L0,100 Z'/%3E%3C/svg%3E");
+  mask-size: 200% 100%;
+  mask-repeat: repeat-x;
+  animation: waveAnimation 16s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 第二层波浪（全局生效：深色中层微弱感知） */
+#main-content::after {
+  content: '';
+  position: absolute;
+  top: -54px; 
+  left: 0;
+  width: 100%;
+  height: 55px;
+  /* 深色模式：从 12% 白色渐变到完全透明 */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 100%);
+  opacity: 1;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,50 Q150,0 300,50 T600,50 T900,50 T1200,50 L1200,100 L0,100 Z'/%3E%3C/svg%3E");
+  -webkit-mask-size: 200% 100%;
+  -webkit-mask-repeat: repeat-x;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,50 Q150,0 300,50 T600,50 T900,50 T1200,50 L1200,100 L0,100 Z'/%3E%3C/svg%3E");
+  mask-size: 200% 100%;
+  mask-repeat: repeat-x;
+  animation: waveAnimation 22s linear infinite reverse; 
+  pointer-events: none;
+  z-index: 9;
+}
+
+/* 补齐缺失的顶层波浪 (全局生效) */
+#main-content::before {
+  content: '';
+  position: absolute;
+  top: -39px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  /* 深色模式：从 18% 白色渐变到完全透明 */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 100%);
+  opacity: 1;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,50 Q150,0 300,50 T600,50 T900,50 T1200,50 L1200,100 L0,100 Z'/%3E%3C/svg%3E");
+  -webkit-mask-size: 200% 100%;
+  -webkit-mask-repeat: repeat-x;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,50 Q150,0 300,50 T600,50 T900,50 T1200,50 L1200,100 L0,100 Z'/%3E%3C/svg%3E");
+  mask-size: 200% 100%;
+  mask-repeat: repeat-x;
+  animation: waveAnimation 28s linear infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* 浅色模式波浪重置：覆盖渐变为实色的 var(--bg-wave) */
+html.light-mode .air-hero::after { background: var(--bg-wave); opacity: 0.3; }
+html.light-mode #main-content::after { background: var(--bg-wave); opacity: 0.6; }
+html.light-mode #main-content::before { background: var(--bg-wave); opacity: 1; }
+
+@keyframes waveAnimation {
+  0% { -webkit-mask-position: 0% 0%; mask-position: 0% 0%; }
+  100% { -webkit-mask-position: 200% 0%; mask-position: 200% 0%; }
+}
+
+/* --- 全局毛玻璃 (导航栏由底层 AIRv3.css 接管，实现无缝渐变) --- */
+
+/* 首页底部按钮 毛玻璃 (仅限浅色页面) */
+html.light-mode .hero-bottom-left .scroll-btn,
+html.light-mode .hero-bottom-right .social-links {
+  background: var(--bg-blur) ;
+  backdrop-filter: blur(10px) ;
+  -webkit-backdrop-filter: blur(10px) ;
+  border: 1px solid rgba(0, 0, 0, 0.05); 
+  border-radius: 12px ;
+}
+
+/* --- 2. 所有卡片颜色调换 (融合式卡片) --- */
+html.light-mode .card-deep-space,
+html.light-mode .sidebar-widget,
+html.light-mode .sidebar-author,
+html.light-mode .sidebar-menu {
+  color: var(--light-text-main) ;
+  background: var(--light-bg-card) ;
+  border: 1px solid var(--light-border) ;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03) ;
+}
+
+html.light-mode .card-deep-space:hover,
+html.light-mode .sidebar-widget:hover {
+  background: var(--light-bg-card-hover) ;
+  box-shadow: 0 8px 25px rgba(0, 114, 245, 0.12) ; /* 彩色弥散呼吸阴影 */
+  border-color: rgba(0, 114, 245, 0.2) ; /* 边缘微蓝光晕 */
+}
+
+/* 阻止文章详情页的卡片在大面积滚动时产生纯白刺眼的 hover 变色和光效，让阅读区保持安静 */
+html.light-mode .post-page-card:hover {
+  background: var(--light-bg-card) ;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03) ;
+  border-color: var(--light-border) ;
+}
+
+/* --- 2.1 削弱 Markdown 元素默认阴影 --- */
+html.light-mode .post-content pre {
+  box-shadow: none ;
+  border: 1px solid var(--light-border) ;
+}
+html.light-mode .post-content img,
+html.light-mode .post-content table {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03) ;
+}
+
+/* --- 3. 首页文字与图标 --- */
+/* welcome-text 恢复系统默认的白色并带有文字阴影，保证在取消遮罩的底图上能够清晰显示 */
+html.light-mode .scroll-btn,
+html.light-mode .hero-bottom-right a {
+  color: var(--light-text-sub) ;
+}
+html.light-mode .hero-bottom-right a:hover i,
+html.light-mode .scroll-btn:hover {
+  color: var(--light-primary) ;
+}
+
+
+
+/* 修复 Markdown 表格表头硬编码的白色文字 */
+html.light-mode .post-content th {
+  color: var(--light-text-main) ;
+}
+html.light-mode :is(.theme-title, .nav-link) {
+  color: var(--light-text-main) ;
+}
+/* nav悬停取消蓝色背景，只变蓝色文字 */
+html.light-mode :is(.theme-title:hover, .nav-link:hover, .nav-link.active) {
+  color: var(--light-primary) ;
+  background: transparent ;
+}
+/* 必须覆盖原版对 icon/span 的硬编码 */
+html.light-mode :is(.nav-link, .sidebar-link) :is(span, i) {
+  color: inherit ;
+}
+
+/* --- 5. 侧边栏所有文字与卡片内部元素 --- */
+html.light-mode :is(
+  .author-name, .sidebar-title, .category-name,
+  .stats-label, .stats-count, .sidebar-link,
+  .archive-card-title, .post-title, .archive-title
+) {
+  color: var(--light-text-main) ;
+}
+
+/* 覆盖组件内子元素的硬编码颜色 */
+html.light-mode :is(.sidebar-title) * {
+  color: inherit ;
+}
+
+/* 侧边栏及组件 Hover 悬停状态 (全面修正，统一转蓝) */
+html.light-mode :is(
+  .sidebar-link:hover, .sidebar-link.active,
+  .stats-item:hover,
+  .tag-cloud-item:hover,
+  .sidebar-widget:hover .sidebar-title,
+  .sidebar-widget:hover .arrow-icon
+) {
+  color: var(--light-primary) ;
+  background: transparent ;
+}
+/* Hover 状态下，所有的子文字也跟随父节点颜色 */
+html.light-mode :is(.category-list-link, .stats-item):hover * {
+  color: inherit ;
+}
+
+/* Tags 云基础样式 */
+html.light-mode .tag-cloud-item {
+  background: rgba(0, 0, 0, 0.03) ;
+  border-color: var(--light-border) ;
+  color: var(--light-text-main) ;
+}
+
+/* --- 6. 归档、列表卡片、文章底部导航 --- */
+html.light-mode .archive-card-title:hover {
+  color: var(--light-primary) ;
+}
+html.light-mode .meta-item,
+html.light-mode .archive-card-time {
+  color: var(--light-text-sub) ;
+}
+html.light-mode .archive-card-wrapper {
+  border-left-color: var(--light-border) ;
+}
+html.light-mode .archive-card-wrapper::before {
+  background: var(--light-text-sub) ;
+  border-color: var(--light-bg-body) ;
+}
+/* 文章底部的上一篇/下一篇链接 */
+html.light-mode .post-nav a,
+html.light-mode .post-nav a .post-nav-title {
+  color: var(--light-primary) ;
+}
+html.light-mode .post-nav a:hover,
+html.light-mode .post-nav a:hover .post-nav-title {
+  color: #f5b047 ;
+}
+
+/* --- 7. TOC 抽屉浅色化 --- */
+/* TOC 抽屉主体与触发按钮 */
+html.light-mode .toc-toggle-btn {
+  background: var(--light-bg-card) ;
+  border-color: var(--light-border) ;
+}
+html.light-mode .toc-header {
+  color: var(--light-text-main) ;
+  border-bottom: 1px solid var(--light-border) ;
+}
+html.light-mode .toc-toggle-btn i {
+  color: var(--light-text-sub) ;
+}
+html.light-mode .toc-drawer:hover .toc-toggle-btn i {
+  color: var(--light-primary) ;
+}
+html.light-mode .toc-link {
+  color: var(--light-text-sub) ;
+}
+html.light-mode .toc-link:hover, 
+html.light-mode .toc-link.active,
+html.light-mode .toc-link:hover .toc-text,
+html.light-mode .toc-link.active .toc-text {
+  color: var(--light-primary) ;
+}
+
+/* --- 8. 分页与搜索 --- */
+html.light-mode .page-nav .page-number, 
+html.light-mode .page-nav .extend {
+  background: var(--light-bg-card) ;
+  color: var(--light-text-sub) ;
+  border-color: var(--light-border) ;
+}
+html.light-mode .page-nav .current {
+  background: var(--light-primary) ;
+  color: #ffffff ;
+  border-color: var(--light-primary) ;
+}
+html.light-mode .search-input {
+  background: var(--light-bg-card) ;
+  color: var(--light-text-main) ;
+  border: 1px solid var(--light-border) ;
+}
+html.light-mode .search-input:focus {
+  background: #ffffff ;
+  border-color: var(--light-primary) ;
+  box-shadow: 0 0 15px rgba(0, 114, 245, 0.15) ;
+}
+html.light-mode .search-icon {
+  color: var(--light-text-sub) ;
+}
+
+/* --- 9. 全局平滑过渡类 --- */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *:before,
+html.theme-transition *:after {
+  transition: all 0.4s ease ;
+  transition-delay: 0 ;
+}
+
+
+/* --- 10. Timeline (Categories / Tags Pages) --- */
+html.light-mode .timeline-title-meta {
+  color: var(--light-primary) ;
+}
+html.light-mode .timeline-title {
+  color: var(--light-text-main) ;
+  text-shadow: none ;
+}
+html.light-mode .timeline-title i {
+  color: var(--light-primary) ;
+  opacity: 0.1 ;
+}
+html.light-mode .timeline-item::before {
+  background: var(--light-bg-body) ;
+  border-color: var(--light-primary) ;
+  box-shadow: none ;
+}
+html.light-mode .timeline-item:hover::before {
+  background: var(--light-primary) ;
+  box-shadow: 0 0 10px rgba(0, 114, 245, 0.4) ;
+}
+html.light-mode .timeline-date {
+  color: var(--light-text-sub) ;
+}
+html.light-mode .timeline-post-title {
+  color: var(--light-text-main) ;
+}
+html.light-mode .timeline-post-title:hover {
+  color: var(--light-primary) ;
+}
+
+
+/* --- View Transitions API 涟漪动画完全纯 CSS 实现 --- */
+@keyframes ripple-expand {
+  0% { clip-path: circle(0px at var(--x, 50%) var(--y, 50%)); }
+  100% { clip-path: circle(var(--r, 100vw) at var(--x, 50%) var(--y, 50%)); }
+}
+@keyframes ripple-shrink {
+  0% { clip-path: circle(var(--r, 100vw) at var(--x, 50%) var(--y, 50%)); }
+  100% { clip-path: circle(0px at var(--x, 50%) var(--y, 50%)); }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none ;
+  mix-blend-mode: normal ;
+  display: block;
+}
+
+/* 深->浅：当前变为了浅色(.light-mode)，新的浅色在上面扩散 */
+html.light-mode::view-transition-new(root) {
+  z-index: 2;
+  animation: ripple-expand 0.6s ease-in-out forwards ;
+}
+html.light-mode::view-transition-old(root) {
+  z-index: 1;
+}
+
+/* 浅->深：当前变为了深色(没有 .light-mode)，旧的浅色在上面收缩 */
+html:not(.light-mode)::view-transition-old(root) {
+  z-index: 2;
+  animation: ripple-shrink 0.6s ease-in-out forwards ;
+}
+html:not(.light-mode)::view-transition-new(root) {
+  z-index: 1;
+}
+
+
+/* =========================================
+   修复浅色模式下分类列表 Hover 效果
+   ========================================= */
+html.light-mode .category-list-link:hover {
+    background: rgba(10, 102, 194, 0.1); /* 浅色模式的淡蓝色背景 */
+    color: var(--light-primary);
+}
+
+html.light-mode .category-list-link .category-count {
+    background: rgba(0, 0, 0, 0.05); /* 默认淡灰背景 */
+    color: var(--light-text-sub);
+}
+
+html.light-mode .category-list-link:hover .category-count {
+    background: var(--light-primary); /* Hover 时科技蓝背景 */
+    color: #fff !important; /* 白色文字，覆盖 inherit */
+}

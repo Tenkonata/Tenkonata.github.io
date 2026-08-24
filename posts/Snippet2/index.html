@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- [新增] 站点描述 -->
+  <meta name="description" content="a hexo blog by Tenkonata">
+
+  <!-- [修改] 页面标题逻辑 -->
+  <title>
+    
+      Snippet_2 | AIR-v3
+    
+  </title>
+
+  <!-- [新增] 网站图标 -->
+  <link rel="icon" href="https://Tenkonata.github.io/picx-images-hosting/装饰/favicon.86u3byc1l2.webp">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <!-- Highlight.js Atom One Dark 样式 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+  <link rel="stylesheet" href="/css/AIRv3.css">
+  <!-- 引入 Markdown 独立样式表 -->
+  <link rel="stylesheet" href="/css/AIRmd.css">
+  <!-- 引入移动端响应式适配样式 -->
+  <link rel="stylesheet" href="/css/AIRv3media.css">
+  
+  <!-- [新增] KaTeX 公式渲染样式 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  
+  <!-- [新增] 浅色模式专属样式 -->
+  <link rel="stylesheet" href="/css/AIRv3light.css">
+  
+  <!-- 主题模式初始化 (防止闪烁) -->
+  <script>
+    (function() {
+      var savedTheme = localStorage.getItem('air-theme-mode');
+      var defaultTheme = 'dark';
+      if (savedTheme === 'light' || (!savedTheme && defaultTheme === 'light')) {
+        document.documentElement.classList.add('light-mode');
+      }
+    })();
+  </script>
+<meta name="generator" content="Hexo 8.0.0"></head>
+<body>
+
+  <!-- 全局固定背景 -->
+  <!-- [修改] 增加 --bg-media 变量用于移动端适配 -->
+  <div class="fixed-bg" 
+       style="background-image: url('https://img.paulzzh.com/touhou/random?size=pc'); 
+              --bg-media: url('https://img.paulzzh.com/touhou/random?size=wap');">
+  </div>
+  <div class="fixed-bg-overlay"></div>
+
+  <!-- 导航栏 Partial -->
+  <nav class="air-nav">
+  <div class="nav-left">
+    <a href="/" class="theme-title">
+      AIR-v3
+    </a>
+    <a href="javascript:void(0);" id="theme-toggle" class="nav-link" style="margin-left: 15px; font-size: 1.2rem;">
+      <i class="fa fa-moon-o"></i>
+    </a>
+  </div>
+  <div class="nav-right">
+    
+      
+        <a href="/" class="nav-link">
+          <i class="fa fa-home"></i> 
+          <span>主页</span>
+        </a>
+      
+        <a href="/archives" class="nav-link">
+          <i class="fa fa-archive"></i> 
+          <span>归档</span>
+        </a>
+      
+        <a href="/V3/aboutV3.html" class="nav-link">
+          <i class="fa fa-user"></i> 
+          <span>关于</span>
+        </a>
+      
+    
+  </div>
+</nav>
+
+  <!-- 主体内容 (PJAX 容器) -->
+  <main class="container" id="pjax-container">
+    <!-- 文章页无需 Hero 区域，直接进入内容区 -->
+<section class="post-list-section" style="padding-top: 100px;">
+  <div class="content-container">
+    
+    <!-- 左侧：固定侧边栏 (复用) -->
+    <div class="layout-left">
+      <aside class="air-sidebar">
+  
+  <!-- 1. 作者栏位 (保持在文档流中) -->
+  <div class="sidebar-author card-deep-space">
+    <div class="author-avatar">
+      <img src="https://Tenkonata.github.io/picx-images-hosting/装饰/avatar.96a6p4esqw.webp" alt="Author Avatar">
+    </div>
+    <h3 class="author-name">Tenkonata</h3>
+    <p class="author-signature">坐和放宽</p>
+    
+    <!-- 数据统计 -->
+    <!-- [修改] 调整了顺序：Posts - Categories - Tags，视觉上更对称 -->
+    <div class="author-stats">
+      
+      <!-- 1. Posts -->
+      <div class="stats-item">
+        <span class="stats-count">10</span>
+        <span class="stats-label">Posts</span>
+      </div>
+
+      <!-- 2. Categories (原第3位，移到中间) -->
+      <div class="stats-item">
+        <span class="stats-count">1</span>
+        <span class="stats-label">Categories</span>
+      </div>
+
+      <!-- 3. Tags (原第2位，移到最后) -->
+      <div class="stats-item">
+        <span class="stats-count">4</span>
+        <span class="stats-label">Tags</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 内部 sticky 容器 -->
+  <div class="sidebar-sticky">
+    
+    <!-- 2. 侧边导航菜单 (常驻显示) -->
+    <div class="sidebar-menu card-deep-space">
+      
+        
+          <a href="/" class="sidebar-link">
+            <i class="fa fa-home"></i> 
+            <span>home</span>
+          </a>
+        
+          <a href="/archives" class="sidebar-link">
+            <i class="fa fa-archive"></i> 
+            <span>archive</span>
+          </a>
+        
+          <a href="/V3/updatelogV3.html" class="sidebar-link">
+            <i class="fa fa-pencil"></i> 
+            <span>updatelogV3</span>
+          </a>
+        
+          <a href="/V3/aboutV3.html" class="sidebar-link">
+            <i class="fa fa-user"></i> 
+            <span>aboutV3</span>
+          </a>
+        
+      
+    </div>
+
+    <!-- 3. Categories 卡片 (可折叠) -->
+    
+    <div class="sidebar-widget card-deep-space collapsible-widget">
+      <!-- 标题部分 -->
+      <h3 class="sidebar-title toggle-trigger">
+        <span><i class="fa fa-folder-open-o"></i> Categories</span>
+        <i class="fa fa-chevron-down arrow-icon"></i>
+      </h3>
+      
+      <!-- 内容盒子 -->
+      <div class="sidebar-content-box">
+        <ul class="category-list">
+          
+            <li class="category-list-item">
+              <a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">
+                <span class="category-name">随笔</span>
+                <span class="category-count">2</span>
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+    <!-- 4. Tags 卡片 (可折叠) -->
+    
+    <div class="sidebar-widget card-deep-space collapsible-widget">
+      <!-- 标题部分 -->
+      <h3 class="sidebar-title toggle-trigger">
+        <span><i class="fa fa-tags"></i> Tags</span>
+        <i class="fa fa-chevron-down arrow-icon"></i>
+      </h3>
+      
+      <!-- 内容盒子 -->
+      <div class="sidebar-content-box">
+        <div class="tag-cloud-list">
+          
+            <a href="/tags/hexo/" class="tag-cloud-item">
+              hexo
+            </a>
+          
+            <a href="/tags/%E5%A4%A9%E9%A9%AC%E8%A1%8C%E7%A9%BA/" class="tag-cloud-item">
+              天马行空
+            </a>
+          
+            <a href="/tags/%E6%B5%8B%E8%AF%95/" class="tag-cloud-item">
+              测试
+            </a>
+          
+            <a href="/tags/%E6%B8%B8%E6%88%8F/" class="tag-cloud-item">
+              游戏
+            </a>
+          
+        </div>
+      </div>
+    </div>
+    
+
+  </div> <!-- End .sidebar-sticky -->
+
+</aside>
+    </div>
+
+    <!-- 右侧：文章详情 -->
+    <div class="layout-right">
+      <article class="post-card post-page-card card-deep-space fade-in-up">
+        
+        <!-- 文章头信息 -->
+        <header class="post-header">
+          <h1 class="post-title">Snippet_2</h1>
+          
+          <div class="post-meta">
+            
+            <!-- 1. 创建时间 -->
+            <span class="meta-item" title="Created: 2026-01-19 18:12">
+              <i class="fa fa-calendar"></i> 2026-01-19
+            </span>
+
+            <!-- 2. 更新时间 -->
+            
+              <span class="meta-item" title="Updated: 2026-01-19 00:00">
+                <i class="fa fa-edit"></i> 2026-01-19
+              </span>
+            
+
+            <!-- 3. 标签 (移除逗号) -->
+            
+              <span class="meta-item">
+                <i class="fa fa-tag"></i>
+                <span>
+                  
+                    <a href="/tags/%E5%A4%A9%E9%A9%AC%E8%A1%8C%E7%A9%BA/" class="meta-badge">天马行空</a>
+                  
+                </span>
+              </span>
+            
+
+            <!-- 4. 分类 (移除逗号) -->
+            
+
+            <!-- 字数统计 -->
+            
+          </div>
+        </header>
+
+        <!-- 分割线 -->
+        <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
+
+        <!-- 正文内容 -->
+        <div class="post-content">
+          <p>讨伐魔王这种事，既然王公贵族不曾上心，“勇者”又为何要鞠躬尽瘁？<br>试问，大陆上出现能够危及全人类性命的“魔王”，各国为什么不联合起来攻打魔王？<br>也可以换个情景，某一大国边境出现魔王，其他国家束之高阁，反正不在自己地盘，狭隘眼光。<br>那这个被魔王威胁的大国，明明有自家养的用于防卫其他国家侵略的军队，为何按兵不动，反倒派遣“冒险者”，让他们去领取悬赏解决魔物？<br>说白了，如果举全国之力去攻打魔王，那岂不是国中空城，反被他国乘虚而入？<br>所以说那群王公贵族相比于尚在边境，无危于王城的魔王，反而更重视他国的虎视眈眈嘛，<br>根本不考虑边境小城的死活嘛。<br>寄托于冒险者领着悬赏去讨伐，达成略微的抗衡，但有点螳臂当车的意味。<br>按照惯常设定，越居于魔王中心的魔物便越强，同时魔王领地会愈发扩张。<br>颇有点王国扩张领地的意味。<br>所以说一个大国因为这是“魔物”而不是“人”构成的“国家”，所以便轻视它，任由它崛起？<br>“女神”为了避免魔王终变成最强大国也无法匹敌的存在（因为他们的短视（笑）），所以必须要降下“勇者”。<br>稍有点脑子的“勇者”，不是靠着“友情啊羁绊啊”的热血笨蛋都能看出端倪。<br>龙傲天的勇者打败了魔王，但奴隶，封建的社会依旧。<br>“勇者”想过吗？有着世上最强的实力，你隶属的国家是否会招你作为将军，去侵略他国？<br>那时候，杀的不是“魔物”，而是“人”。<br>凭一己之力能屠城的，那不叫“勇者”，那叫“魔王”。</p>
+<hr>
+<p>于是勇者拒绝了“攻击”，决定“防御”。<br>守在边境村落，冒险者公会的最前线，作为村子的护卫，不容任何魔物侵略的事情发生。<br>但同时，也不迈出村外半步，不做任何主动讨伐的行为。<br>最坚固的防线便诞生了，暂时的。<br>勇者分身乏术，而魔王可以横向扩张。<br>边境线很长，尽管勇者所守护的村落是离魔王城最近的，但数里的边境村落都逐渐受到魔物威胁，形单影只的勇者终是无法守护。<br>边境城的领主知道勇者的存在，发觉了勇者的不作为。<br>因为绝对安全所以欣欣向荣的村落，他们善良的管理者“村长”受嘉奖晋升了，将会派遣新的村长。<br>村长临走前，告诉勇者，勇者自身也早已明白。<br>有讨伐魔王的实力却偏安一隅，王公贵族派人来施压了。<br>他们要求冒险家，要求勇者，不日便要讨伐魔王。<br>村庄的守卫，划拉几队士兵充数便可。<br>即便黑云压城，自家有“勇者”作为魔王的对策，便不会将此作为举国战争。<br>十分令人作呕的傲慢，认为“勇者”生来便是只为讨伐魔王的工具。<br>接下来就该到熟知的“反智”情节了。</p>
+<hr>
+<p>勇者拒绝冒险者们的白白送命，要求王城派出军队共同讨伐。<br>王城向勇者坦白，他国的威胁不容忽视，而你生来而讨伐魔王。<br>不妨置换，我来守卫王城，军队去讨伐魔王？<br>王公贵族临了是又不相信勇者的实力了？亦或是害怕勇者心中的“正义”？发现王城惨绝人寰的剥削行径？<br>王公贵族拒绝提议，更甚裹挟着与勇者相伴甚久，视作亲人的同伴，以他们的安危命令勇者？！<br>究竟是为什么呢，骨子里的傲慢，还是“女神”下的思想钢印，纵然勇者与魔王匹敌，仍认为勇者就是“勇者”，不是“魔王”？<br>恭喜，勇者讨伐了魔王。<br>所幸，王城也没有弱智部下，勇者的亲人安然无恙。<br>勇者安置了他的亲人，改头换面，去往了绝对安全的地方。<br>次日，抑或是几年，新的“魔王”出现了，誓要将王城搅个天翻地覆，彻底改变这狗屎秩序。<br>王公贵族不曾上心“魔王”的威胁，只知道“女神”降下了新的“勇者”。</p>
+
+        </div>
+
+        <!-- 上一篇/下一篇 导航 -->
+        <nav class="post-nav">
+          <div class="post-nav-prev" style="max-width: 45%;">
+            
+              <a href="/posts/9a4212eb/" title="hexo妙妙小工具">
+                <i class="fa fa-chevron-left"></i> 
+                <span>hexo妙妙小工具</span>
+              </a>
+            
+          </div>
+          <div class="post-nav-next" style="max-width: 45%; text-align: right;">
+            
+              <a href="/posts/Snippet1/" title="Snippet_1">
+                <span>Snippet_1</span>
+                <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </nav>
+
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<!-- 悬浮 TOC 抽屉 (仅在有目录时显示) -->
+
+  </main>
+
+  <!-- 回到顶部按钮 -->
+  <div id="back-to-top" class="back-to-top card-deep-space">
+    <span class="btt-text">0%</span>
+    <i class="fa fa-arrow-up btt-icon"></i>
+  </div>
+
+  <!-- 引入 Pjax 库 -->
+  <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+  
+  <!-- Highlight.js 核心库 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  
+  <!-- 主题逻辑 (包含 Highlight.js 初始化) -->
+  <script src="/js/AIRv3.js"></script>
+  <!-- 移动端响应式逻辑 -->
+  <script src="/js/AIRv3media.js"></script>
+  
+  <!-- [恢复] 原版 KaTeX 公式解析脚本 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script>
+    function renderKaTeX() {
+      if (typeof katex === 'undefined') return;
+      document.querySelectorAll('script[type^="math/tex"]').forEach(function(el) {
+        var isDisplay = el.type.includes('mode=display');
+        var span = document.createElement('span');
+        try {
+          katex.render(el.innerText, span, { displayMode: isDisplay, throwOnError: false });
+          el.parentNode.replaceChild(span, el);
+        } catch(e) { console.error("KaTeX error:", e); }
+      });
+    }
+    document.addEventListener("DOMContentLoaded", renderKaTeX);
+    document.addEventListener("pjax:success", renderKaTeX);
+  </script>
+  
+  <!-- Markdown 专属独立交互脚本 (代码块、Alert等) -->
+  <script src="/js/AIRmd.js"></script>
+</body>
+</html>

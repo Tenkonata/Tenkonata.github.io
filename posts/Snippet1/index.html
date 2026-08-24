@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- [新增] 站点描述 -->
+  <meta name="description" content="a hexo blog by Tenkonata">
+
+  <!-- [修改] 页面标题逻辑 -->
+  <title>
+    
+      Snippet_1 | AIR-v3
+    
+  </title>
+
+  <!-- [新增] 网站图标 -->
+  <link rel="icon" href="https://Tenkonata.github.io/picx-images-hosting/装饰/favicon.86u3byc1l2.webp">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <!-- Highlight.js Atom One Dark 样式 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+  <link rel="stylesheet" href="/css/AIRv3.css">
+  <!-- 引入 Markdown 独立样式表 -->
+  <link rel="stylesheet" href="/css/AIRmd.css">
+  <!-- 引入移动端响应式适配样式 -->
+  <link rel="stylesheet" href="/css/AIRv3media.css">
+  
+  <!-- [新增] KaTeX 公式渲染样式 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  
+  <!-- [新增] 浅色模式专属样式 -->
+  <link rel="stylesheet" href="/css/AIRv3light.css">
+  
+  <!-- 主题模式初始化 (防止闪烁) -->
+  <script>
+    (function() {
+      var savedTheme = localStorage.getItem('air-theme-mode');
+      var defaultTheme = 'dark';
+      if (savedTheme === 'light' || (!savedTheme && defaultTheme === 'light')) {
+        document.documentElement.classList.add('light-mode');
+      }
+    })();
+  </script>
+<meta name="generator" content="Hexo 8.0.0"></head>
+<body>
+
+  <!-- 全局固定背景 -->
+  <!-- [修改] 增加 --bg-media 变量用于移动端适配 -->
+  <div class="fixed-bg" 
+       style="background-image: url('https://img.paulzzh.com/touhou/random?size=pc'); 
+              --bg-media: url('https://img.paulzzh.com/touhou/random?size=wap');">
+  </div>
+  <div class="fixed-bg-overlay"></div>
+
+  <!-- 导航栏 Partial -->
+  <nav class="air-nav">
+  <div class="nav-left">
+    <a href="/" class="theme-title">
+      AIR-v3
+    </a>
+    <a href="javascript:void(0);" id="theme-toggle" class="nav-link" style="margin-left: 15px; font-size: 1.2rem;">
+      <i class="fa fa-moon-o"></i>
+    </a>
+  </div>
+  <div class="nav-right">
+    
+      
+        <a href="/" class="nav-link">
+          <i class="fa fa-home"></i> 
+          <span>主页</span>
+        </a>
+      
+        <a href="/archives" class="nav-link">
+          <i class="fa fa-archive"></i> 
+          <span>归档</span>
+        </a>
+      
+        <a href="/V3/aboutV3.html" class="nav-link">
+          <i class="fa fa-user"></i> 
+          <span>关于</span>
+        </a>
+      
+    
+  </div>
+</nav>
+
+  <!-- 主体内容 (PJAX 容器) -->
+  <main class="container" id="pjax-container">
+    <!-- 文章页无需 Hero 区域，直接进入内容区 -->
+<section class="post-list-section" style="padding-top: 100px;">
+  <div class="content-container">
+    
+    <!-- 左侧：固定侧边栏 (复用) -->
+    <div class="layout-left">
+      <aside class="air-sidebar">
+  
+  <!-- 1. 作者栏位 (保持在文档流中) -->
+  <div class="sidebar-author card-deep-space">
+    <div class="author-avatar">
+      <img src="https://Tenkonata.github.io/picx-images-hosting/装饰/avatar.96a6p4esqw.webp" alt="Author Avatar">
+    </div>
+    <h3 class="author-name">Tenkonata</h3>
+    <p class="author-signature">坐和放宽</p>
+    
+    <!-- 数据统计 -->
+    <!-- [修改] 调整了顺序：Posts - Categories - Tags，视觉上更对称 -->
+    <div class="author-stats">
+      
+      <!-- 1. Posts -->
+      <div class="stats-item">
+        <span class="stats-count">10</span>
+        <span class="stats-label">Posts</span>
+      </div>
+
+      <!-- 2. Categories (原第3位，移到中间) -->
+      <div class="stats-item">
+        <span class="stats-count">1</span>
+        <span class="stats-label">Categories</span>
+      </div>
+
+      <!-- 3. Tags (原第2位，移到最后) -->
+      <div class="stats-item">
+        <span class="stats-count">4</span>
+        <span class="stats-label">Tags</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 内部 sticky 容器 -->
+  <div class="sidebar-sticky">
+    
+    <!-- 2. 侧边导航菜单 (常驻显示) -->
+    <div class="sidebar-menu card-deep-space">
+      
+        
+          <a href="/" class="sidebar-link">
+            <i class="fa fa-home"></i> 
+            <span>home</span>
+          </a>
+        
+          <a href="/archives" class="sidebar-link">
+            <i class="fa fa-archive"></i> 
+            <span>archive</span>
+          </a>
+        
+          <a href="/V3/updatelogV3.html" class="sidebar-link">
+            <i class="fa fa-pencil"></i> 
+            <span>updatelogV3</span>
+          </a>
+        
+          <a href="/V3/aboutV3.html" class="sidebar-link">
+            <i class="fa fa-user"></i> 
+            <span>aboutV3</span>
+          </a>
+        
+      
+    </div>
+
+    <!-- 3. Categories 卡片 (可折叠) -->
+    
+    <div class="sidebar-widget card-deep-space collapsible-widget">
+      <!-- 标题部分 -->
+      <h3 class="sidebar-title toggle-trigger">
+        <span><i class="fa fa-folder-open-o"></i> Categories</span>
+        <i class="fa fa-chevron-down arrow-icon"></i>
+      </h3>
+      
+      <!-- 内容盒子 -->
+      <div class="sidebar-content-box">
+        <ul class="category-list">
+          
+            <li class="category-list-item">
+              <a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">
+                <span class="category-name">随笔</span>
+                <span class="category-count">2</span>
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+    <!-- 4. Tags 卡片 (可折叠) -->
+    
+    <div class="sidebar-widget card-deep-space collapsible-widget">
+      <!-- 标题部分 -->
+      <h3 class="sidebar-title toggle-trigger">
+        <span><i class="fa fa-tags"></i> Tags</span>
+        <i class="fa fa-chevron-down arrow-icon"></i>
+      </h3>
+      
+      <!-- 内容盒子 -->
+      <div class="sidebar-content-box">
+        <div class="tag-cloud-list">
+          
+            <a href="/tags/hexo/" class="tag-cloud-item">
+              hexo
+            </a>
+          
+            <a href="/tags/%E5%A4%A9%E9%A9%AC%E8%A1%8C%E7%A9%BA/" class="tag-cloud-item">
+              天马行空
+            </a>
+          
+            <a href="/tags/%E6%B5%8B%E8%AF%95/" class="tag-cloud-item">
+              测试
+            </a>
+          
+            <a href="/tags/%E6%B8%B8%E6%88%8F/" class="tag-cloud-item">
+              游戏
+            </a>
+          
+        </div>
+      </div>
+    </div>
+    
+
+  </div> <!-- End .sidebar-sticky -->
+
+</aside>
+    </div>
+
+    <!-- 右侧：文章详情 -->
+    <div class="layout-right">
+      <article class="post-card post-page-card card-deep-space fade-in-up">
+        
+        <!-- 文章头信息 -->
+        <header class="post-header">
+          <h1 class="post-title">Snippet_1</h1>
+          
+          <div class="post-meta">
+            
+            <!-- 1. 创建时间 -->
+            <span class="meta-item" title="Created: 2025-12-12 00:00">
+              <i class="fa fa-calendar"></i> 2025-12-12
+            </span>
+
+            <!-- 2. 更新时间 -->
+            
+              <span class="meta-item" title="Updated: 2025-12-12 00:00">
+                <i class="fa fa-edit"></i> 2025-12-12
+              </span>
+            
+
+            <!-- 3. 标签 (移除逗号) -->
+            
+              <span class="meta-item">
+                <i class="fa fa-tag"></i>
+                <span>
+                  
+                    <a href="/tags/%E5%A4%A9%E9%A9%AC%E8%A1%8C%E7%A9%BA/" class="meta-badge">天马行空</a>
+                  
+                </span>
+              </span>
+            
+
+            <!-- 4. 分类 (移除逗号) -->
+            
+
+            <!-- 字数统计 -->
+            
+          </div>
+        </header>
+
+        <!-- 分割线 -->
+        <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
+
+        <!-- 正文内容 -->
+        <div class="post-content">
+          <p><em>CREATE</em>和<em>ANALYZE</em>，一个创造，一个解析。<br>解析任意的事物，并通过<em><strong>灵</strong></em>重新创造出来。</p>
+<p>“拥有创造程度的能力”。<br>试想一下，走累了，随时随地能创造出一把椅子，如果想惬意点，还可以躺床上。<br>手边的事物永远不会遗失，因为可以创造出无限多的副本。<br>生活上的便利数不胜数，但我们也可以将其推广到战力这番。</p>
+<p>解析了枪械和子弹，便拥有了无限的火力。<br>解析了坦克与火箭，便拥有了狂轰滥炸的资本。<br>更别提创造出核武器…………</p>
+<p>还是太小家子气了，<strong>创造</strong>可不仅仅局限于最强单兵。一个人去奔波打仗，要被累死了。<br>在想什么？机器人？通过人工智能，武装一队机器人大军。<br>根本不用计较战损，因为需要多少便可以创造多少。</p>
+<p>当然，前提是<strong>解析</strong>。<br>现在的社会，创建一个完全自主化的AI军队，仅由一人掌管，未免有些天方夜谭。<br>如何突破这个桎梏，真正做到一人成军呢？</p>
+<p>为什么局限于创造“钢铁洪流”？想象力还是太狭隘了。<br>机械苦弱，血肉飞升。<br>机器人的关节的自由度与灵活性远比不上人嘛。<br>况且单机应变能力对于人来说目前也是可悲。<br>所以啊，创造人类。<br>别误会，<strong>解析</strong>细胞，细致到每一条DNA序列，未免有点太高看“造物主”的脑容量了。<br>有这实力，已经不需要创造已有的事物了，时光机也未尝不可。</p>
+<p>只需要人的肉体，至于脑子可维持指令动作就行了。<br>就是那什么，通过电信号刺激脑子发出指令就行了。或者更简单点，洗脑就好了。<br>意思到了就行吧？<br>说简单点，就是僵尸，或者把“造物主”叫做死灵法师就好。</p>
+<p>那么，“新鲜的”人类从何而来？<br>刚才也说过了，“死灵法师”。<br>在正面战场上，到处都是刚殒命的，新鲜的死去的战士。<br>掌管死尸，并通过<strong>创造</strong>重新武装他们，成为有生力量。<br>并且啊，除非炸个稀巴烂，他们的骨骼和肌肉拖着他们前进。<br>越是战争，死亡人数便越多，“造物主”的兵力便越充足。<br>更为戏谑一点，“造物主”大可以将其当作一盘RTS(即时战略游戏)，攻打下来就得到更多的兵，将其派向更多战场。</p>
+<p>为免有些太惨无人道了点。<br>兴许战士们是保家卫国而战死，但死后却成为了攻陷城池的叛徒。<br>对于对方来说，无论军事水平如何发达，在心理层面已然是被踏平。<br>昨天还在畅饮高歌的战友化作死尸朝你开枪，千疮百孔的尸体，用仅剩的一只手臂扒拉着泥土朝你前进，这就是RTS里一个小兵的结局。“死灵法师”才不管这个，点点荧幕，派兵出去。<br>没有任何人能在这地狱挺住。这是注定惨败的战争，最好的结局是在第一个士兵阵亡的时候投降。</p>
+<p><strong>创造</strong>出核威胁大可是最迅速最为有效的办法啦，但最好还是避免核战争(笑)。</p>
+
+        </div>
+
+        <!-- 上一篇/下一篇 导航 -->
+        <nav class="post-nav">
+          <div class="post-nav-prev" style="max-width: 45%;">
+            
+              <a href="/posts/Snippet2/" title="Snippet_2">
+                <i class="fa fa-chevron-left"></i> 
+                <span>Snippet_2</span>
+              </a>
+            
+          </div>
+          <div class="post-nav-next" style="max-width: 45%; text-align: right;">
+            
+              <a href="/posts/liability/" title="免责声明">
+                <span>免责声明</span>
+                <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </nav>
+
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<!-- 悬浮 TOC 抽屉 (仅在有目录时显示) -->
+
+  </main>
+
+  <!-- 回到顶部按钮 -->
+  <div id="back-to-top" class="back-to-top card-deep-space">
+    <span class="btt-text">0%</span>
+    <i class="fa fa-arrow-up btt-icon"></i>
+  </div>
+
+  <!-- 引入 Pjax 库 -->
+  <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+  
+  <!-- Highlight.js 核心库 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  
+  <!-- 主题逻辑 (包含 Highlight.js 初始化) -->
+  <script src="/js/AIRv3.js"></script>
+  <!-- 移动端响应式逻辑 -->
+  <script src="/js/AIRv3media.js"></script>
+  
+  <!-- [恢复] 原版 KaTeX 公式解析脚本 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script>
+    function renderKaTeX() {
+      if (typeof katex === 'undefined') return;
+      document.querySelectorAll('script[type^="math/tex"]').forEach(function(el) {
+        var isDisplay = el.type.includes('mode=display');
+        var span = document.createElement('span');
+        try {
+          katex.render(el.innerText, span, { displayMode: isDisplay, throwOnError: false });
+          el.parentNode.replaceChild(span, el);
+        } catch(e) { console.error("KaTeX error:", e); }
+      });
+    }
+    document.addEventListener("DOMContentLoaded", renderKaTeX);
+    document.addEventListener("pjax:success", renderKaTeX);
+  </script>
+  
+  <!-- Markdown 专属独立交互脚本 (代码块、Alert等) -->
+  <script src="/js/AIRmd.js"></script>
+</body>
+</html>
