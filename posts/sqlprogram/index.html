@@ -44,7 +44,7 @@
       }
     })();
   </script>
-<meta name="generator" content="Hexo 8.0.0"></head>
+<meta name="generator" content="Hexo 8.1.2"></head>
 <body>
 
   <!-- 全局固定背景 -->
@@ -206,12 +206,12 @@
               天马行空
             </a>
           
-            <a href="/tags/%E6%B5%8B%E8%AF%95/" class="tag-cloud-item">
-              测试
-            </a>
-          
             <a href="/tags/%E6%B8%B8%E6%88%8F/" class="tag-cloud-item">
               游戏
+            </a>
+          
+            <a href="/tags/%E6%B5%8B%E8%AF%95/" class="tag-cloud-item">
+              测试
             </a>
           
         </div>
@@ -262,255 +262,317 @@
 
         <!-- 正文内容 -->
         <div class="post-content">
-          <h1 id="三、建立数据表"><a href="#三、建立数据表" class="headerlink" title="三、建立数据表"></a>三、建立数据表</h1><h2 id="1-创建博客系统数据表"><a href="#1-创建博客系统数据表" class="headerlink" title="1.创建博客系统数据表"></a>1.创建博客系统数据表</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><pre><code class="language-sql">use filename
-GO
+          <h1 id="三-建立数据表"><a class="markdownIt-Anchor" href="#三-建立数据表"></a> 三、建立数据表</h1>
+<h2 id="1创建博客系统数据表"><a class="markdownIt-Anchor" href="#1创建博客系统数据表"></a> 1.创建博客系统数据表</h2>
+<h3 id="语法"><a class="markdownIt-Anchor" href="#语法"></a> 语法</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">use</span> filename
+<span class="hljs-keyword">GO</span>
 
-create table list_name
+<span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> list_name
 (
-    column_name datatype null/not null
-	userID char(6) NOT NULL
+    column_name datatype <span class="hljs-literal">null</span>/<span class="hljs-keyword">not</span> <span class="hljs-literal">null</span>
+	userID <span class="hljs-built_in">char</span>(<span class="hljs-number">6</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>
 )
-GO
+<span class="hljs-keyword">GO</span>
 </code></pre>
-<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p><code>varchar</code>可变长度字符串<br><code>numeric</code>精确数字数据类型<br><code>nvarchar</code>类varchar，存储非Unicode字符<br><code>nchar</code>固定长度Unicode字符串</p>
-<h2 id="2-设置主键"><a href="#2-设置主键" class="headerlink" title="2.设置主键"></a>2.设置主键</h2><h3 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h3><pre><code class="language-sql">alter table list_name
-add /*[constraint pk_name]*/ primary key(column_name)
-</code></pre>
-<h2 id="3-博客用户表添加标识列"><a href="#3-博客用户表添加标识列" class="headerlink" title="3. 博客用户表添加标识列"></a>3. 博客用户表添加标识列</h2><h3 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h3><pre><code class="language-sql">alter table list_name add column_name datatype identity(1,1) 
+<h3 id="数据类型"><a class="markdownIt-Anchor" href="#数据类型"></a> 数据类型</h3>
+<p><code>varchar</code>可变长度字符串<br />
+<code>numeric</code>精确数字数据类型<br />
+<code>nvarchar</code>类varchar，存储非Unicode字符<br />
+<code>nchar</code>固定长度Unicode字符串</p>
+<h2 id="2设置主键"><a class="markdownIt-Anchor" href="#2设置主键"></a> 2.设置主键</h2>
+<h3 id="语法-2"><a class="markdownIt-Anchor" href="#语法-2"></a> 语法：</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> list_name
+<span class="hljs-keyword">add</span> <span class="hljs-comment">/*[constraint pk_name]*/</span> primary <span class="hljs-keyword">key</span>(column_name)
 
-#修改需要重新创建表
-create table list_name(
-column_name datatype identity(1,1) null/not null)
-GO
 </code></pre>
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>GUI中                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      表设计器在修改标识列属性时不允许直接更改</p>
+<h2 id="3-博客用户表添加标识列"><a class="markdownIt-Anchor" href="#3-博客用户表添加标识列"></a> 3. 博客用户表添加标识列</h2>
+<h3 id="语法-3"><a class="markdownIt-Anchor" href="#语法-3"></a> 语法</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> list_name <span class="hljs-keyword">add</span> column_name datatype <span class="hljs-keyword">identity</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>) 
+
+<span class="hljs-comment">#修改需要重新创建表</span>
+<span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> list_name(
+column_name datatype <span class="hljs-keyword">identity</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>) <span class="hljs-literal">null</span>/<span class="hljs-keyword">not</span> <span class="hljs-literal">null</span>)
+<span class="hljs-keyword">GO</span>
+</code></pre>
+<h3 id="注意"><a class="markdownIt-Anchor" href="#注意"></a> 注意</h3>
+<p>GUI中                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      表设计器在修改标识列属性时不允许直接更改</p>
 <blockquote>
 <ul>
 <li>解决方法：工具-&gt;选项-&gt;设计器-&gt;表设计器和数据库设计器</li>
 <li>取消选中“阻止保存要求重新创建表的修改”</li>
 </ul>
 </blockquote>
-<h2 id="4-创建主外键关系"><a href="#4-创建主外键关系" class="headerlink" title="4.创建主外键关系"></a>4.创建主外键关系</h2><h3 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h3><pre><code class="language-sql">create xxx(
-column_name datatype foreign key reference list_name(column_name2))
-GO
+<h2 id="4创建主外键关系"><a class="markdownIt-Anchor" href="#4创建主外键关系"></a> 4.创建主外键关系</h2>
+<h3 id="语法-4"><a class="markdownIt-Anchor" href="#语法-4"></a> 语法</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">create</span> xxx(
+column_name datatype <span class="hljs-keyword">foreign</span> <span class="hljs-keyword">key</span> <span class="hljs-keyword">reference</span> list_name(column_name2))
+<span class="hljs-keyword">GO</span>
 
-#追加修改
-alter table list_name add constraint fk_file_list foreign key(column_name) references file_name (column_name)
+<span class="hljs-comment">#追加修改</span>
+<span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> list_name <span class="hljs-keyword">add</span> <span class="hljs-keyword">constraint</span> fk_file_list <span class="hljs-keyword">foreign</span> <span class="hljs-keyword">key</span>(column_name) <span class="hljs-keyword">references</span> file_name (column_name)
 </code></pre>
-<h2 id="5-博客用户邮箱添加检查约束"><a href="#5-博客用户邮箱添加检查约束" class="headerlink" title="5.博客用户邮箱添加检查约束"></a>5.博客用户邮箱添加检查约束</h2><h3 id="语法-3"><a href="#语法-3" class="headerlink" title="语法"></a>语法</h3><pre><code class="language-sql">#创建
-column_name datatype null/not null check(column_name like &#39;keyname&#39;)
+<h2 id="5博客用户邮箱添加检查约束"><a class="markdownIt-Anchor" href="#5博客用户邮箱添加检查约束"></a> 5.博客用户邮箱添加检查约束</h2>
+<h3 id="语法-5"><a class="markdownIt-Anchor" href="#语法-5"></a> 语法</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-comment">#创建</span>
+column_name datatype null/not null <span class="hljs-keyword">check</span>(column_name <span class="hljs-keyword">like</span> <span class="hljs-string">'keyname'</span>)
 
-#修改
-alter table list_name add constraint CK_column check(column_name like &#39;keyname&#39;)
+<span class="hljs-comment">#修改</span>
+<span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> list_name <span class="hljs-keyword">add</span> <span class="hljs-keyword">constraint</span> CK_column <span class="hljs-keyword">check</span>(column_name <span class="hljs-keyword">like</span> <span class="hljs-string">'keyname'</span>)
 </code></pre>
 <blockquote>
 <p>数据库-&gt;表-&gt;约束</p>
 </blockquote>
-<h1 id="四、数据管理"><a href="#四、数据管理" class="headerlink" title="四、数据管理"></a>四、数据管理</h1><table>
+<h1 id="四-数据管理"><a class="markdownIt-Anchor" href="#四-数据管理"></a> 四、数据管理</h1>
+<table>
 <thead>
 <tr>
-<th align="center">通配符</th>
-<th align="center">描述</th>
+<th style="text-align:center">通配符</th>
+<th style="text-align:center">描述</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">%</td>
-<td align="center">替代一个或多个字符</td>
+<tbody>
+<tr>
+<td style="text-align:center">%</td>
+<td style="text-align:center">替代一个或多个字符</td>
 </tr>
 <tr>
-<td align="center">_</td>
-<td align="center">仅替代一个字符</td>
+<td style="text-align:center">_</td>
+<td style="text-align:center">仅替代一个字符</td>
 </tr>
 <tr>
-<td align="center">[charlist]</td>
-<td align="center">字符列中的任何单一字符</td>
+<td style="text-align:center">[charlist]</td>
+<td style="text-align:center">字符列中的任何单一字符</td>
 </tr>
 <tr>
-<td align="center">[^charlist]&#x2F;[!charlist]</td>
-<td align="center">不在字符列中的任何单一字符</td>
+<td style="text-align:center">[^charlist]/[!charlist]</td>
+<td style="text-align:center">不在字符列中的任何单一字符</td>
 </tr>
-</tbody></table>
-<h2 id="1-插入博客管理数据"><a href="#1-插入博客管理数据" class="headerlink" title="1.插入博客管理数据"></a>1.插入博客管理数据</h2><h3 id="语法-4"><a href="#语法-4" class="headerlink" title="语法"></a>语法</h3><pre><code class="language-sql">insert [into] tbl_name [(column_name,...)]{values | value} ({expr |default},...)(...))
+</tbody>
+</table>
+<h2 id="1插入博客管理数据"><a class="markdownIt-Anchor" href="#1插入博客管理数据"></a> 1.插入博客管理数据</h2>
+<h3 id="语法-6"><a class="markdownIt-Anchor" href="#语法-6"></a> 语法</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">insert</span> [<span class="hljs-keyword">into</span>] tbl_name [(column_name,...)]{<span class="hljs-keyword">values</span> | <span class="hljs-keyword">value</span>} ({expr |<span class="hljs-keyword">default</span>},...)(...))
 </code></pre>
 <blockquote>
-<p>table_name：表名<br>column_name：列名</p>
+<p>table_name：表名<br />
+column_name：列名</p>
 </blockquote>
 <p>右键 <code>表</code> -&gt; <code>编辑前两百行</code></p>
-<h2 id="2-更新博客系统数据"><a href="#2-更新博客系统数据" class="headerlink" title="2.更新博客系统数据"></a>2.更新博客系统数据</h2><h3 id="语法-5"><a href="#语法-5" class="headerlink" title="语法"></a>语法</h3><p><a target="_blank" rel="noopener" href="https://www.runoob.com/sql/sql-update.html">SQL UPDATE 语句 | 菜鸟教程</a></p>
-<pre><code class="language-sql">UPDATE table_name
-SET column1 = value1, column2 = value2, ...
-WHERE condition;
+<h2 id="2更新博客系统数据"><a class="markdownIt-Anchor" href="#2更新博客系统数据"></a> 2.更新博客系统数据</h2>
+<h3 id="语法-7"><a class="markdownIt-Anchor" href="#语法-7"></a> 语法</h3>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/sql/sql-update.html">SQL UPDATE 语句 | 菜鸟教程</a></p>
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">UPDATE</span> table_name
+<span class="hljs-keyword">SET</span> column1 = value1, column2 = value2, ...
+<span class="hljs-keyword">WHERE</span> condition;
 
-#全局设置
-update list_name set col_name = &#39;xxx&#39;
+<span class="hljs-comment">#全局设置</span>
+<span class="hljs-keyword">update</span> list_name <span class="hljs-keyword">set</span> col_name = <span class="hljs-string">'xxx'</span>
 </code></pre>
-<h2 id="3-删除部分数据"><a href="#3-删除部分数据" class="headerlink" title="3.删除部分数据"></a>3.删除部分数据</h2><h3 id="语法-6"><a href="#语法-6" class="headerlink" title="语法"></a>语法</h3><pre><code class="language-sql">DELETE FROM table_name
-WHERE condition;
+<h2 id="3删除部分数据"><a class="markdownIt-Anchor" href="#3删除部分数据"></a> 3.删除部分数据</h2>
+<h3 id="语法-8"><a class="markdownIt-Anchor" href="#语法-8"></a> 语法</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> table_name
+<span class="hljs-keyword">WHERE</span> condition;
 
-TRUNCATE TABLE TABLE_NAME;
+<span class="hljs-keyword">TRUNCATE</span> <span class="hljs-keyword">TABLE</span> TABLE_NAME;
 </code></pre>
-<p> 示例：<code>delete from bloguser Where userName = &#39;xxx&#39;</code></p>
-<h1 id="五、数据查询"><a href="#五、数据查询" class="headerlink" title="五、数据查询"></a>五、数据查询</h1><h2 id="1-博客系统基础查询"><a href="#1-博客系统基础查询" class="headerlink" title="1.博客系统基础查询"></a>1.博客系统基础查询</h2><h3 id="语法-7"><a href="#语法-7" class="headerlink" title="语法"></a>语法</h3><pre><code class="language-sql">select [all|distinct]字段列表
-[into]新表 from数据源 [where]条件表达式 
-[group by]分组表达式 [having]搜索表达式 
-[order by]排序表达式 [asc|desc]
-`select * from list_name`查询表中所有信息
-`select column1,column2 from list_name`查询指定信息
-`select column1 as Name1,column2 as Name2 from list_name`查询指定信息并按各列取列名
-`select xxx(同上) where column = &#39;name&#39;`查询对应元素的信息
-`select * from list_name where column is null`查询对应元素为空的信息
-`select top 3 * from list_name`查询前三位
+<p>示例：<code>delete from bloguser Where userName = 'xxx'</code></p>
+<h1 id="五-数据查询"><a class="markdownIt-Anchor" href="#五-数据查询"></a> 五、数据查询</h1>
+<h2 id="1博客系统基础查询"><a class="markdownIt-Anchor" href="#1博客系统基础查询"></a> 1.博客系统基础查询</h2>
+<h3 id="语法-9"><a class="markdownIt-Anchor" href="#语法-9"></a> 语法</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">select</span> [<span class="hljs-keyword">all</span>|<span class="hljs-keyword">distinct</span>]字段列表
+[<span class="hljs-keyword">into</span>]新表 <span class="hljs-keyword">from</span>数据源 [<span class="hljs-keyword">where</span>]条件表达式 
+[<span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span>]分组表达式 [<span class="hljs-keyword">having</span>]搜索表达式 
+[<span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span>]排序表达式 [<span class="hljs-keyword">asc</span>|<span class="hljs-keyword">desc</span>]
+<span class="hljs-string">`select * from list_name`</span>查询表中所有信息
+<span class="hljs-string">`select column1,column2 from list_name`</span>查询指定信息
+<span class="hljs-string">`select column1 as Name1,column2 as Name2 from list_name`</span>查询指定信息并按各列取列名
+<span class="hljs-string">`select xxx(同上) where column = 'name'`</span>查询对应元素的信息
+<span class="hljs-string">`select * from list_name where column is null`</span>查询对应元素为空的信息
+<span class="hljs-string">`select top 3 * from list_name`</span>查询前三位
 </code></pre>
 <blockquote>
-<p>Name1无需添加“” <code>可以加，可读性这一块</code><br>null查找不能“&#x3D;”,使用“is null”或“is not null”</p>
+<p>Name1无需添加“” <code>可以加，可读性这一块</code><br />
+null查找不能“=”,使用“is null”或“is not null”</p>
 </blockquote>
-<h2 id="2-按发表日期排序博客"><a href="#2-按发表日期排序博客" class="headerlink" title="2.按发表日期排序博客"></a>2.按发表日期排序博客</h2><h3 id="语法-8"><a href="#语法-8" class="headerlink" title="语法"></a>语法</h3><p>基于<a href="##1.%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2">博客系统基础查询</a>上添加<code>order by {列名[ASC|DESC] [,...n]}</code></p>
-<pre><code class="language-sql">select *  from list_name order by column_name
-asc升序|desc降序
+<h2 id="2按发表日期排序博客"><a class="markdownIt-Anchor" href="#2按发表日期排序博客"></a> 2.按发表日期排序博客</h2>
+<h3 id="语法-10"><a class="markdownIt-Anchor" href="#语法-10"></a> 语法</h3>
+<p>基于<a href="##1.%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2">博客系统基础查询</a>上添加<code>order by {列名[ASC|DESC] [,...n]}</code></p>
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">select</span> *  <span class="hljs-keyword">from</span> list_name <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> column_name
+<span class="hljs-keyword">asc</span>升序|<span class="hljs-keyword">desc</span>降序
 
-select *  from list_name order by column1
-asc, column2 desc
-#按column1升序排列，相同cloumn1按cloumn2降序排列
+<span class="hljs-keyword">select</span> *  <span class="hljs-keyword">from</span> list_name <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> column1
+<span class="hljs-keyword">asc</span>, column2 <span class="hljs-keyword">desc</span>
+<span class="hljs-comment">#按column1升序排列，相同cloumn1按cloumn2降序排列</span>
 </code></pre>
-<h2 id="3-函数"><a href="#3-函数" class="headerlink" title="3.函数"></a>3.函数</h2><p><a target="_blank" rel="noopener" href="https://www.runoob.com/sql/sql-function.html">SQL 函数 | 菜鸟教程</a></p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><pre><code class="language-sql">#书p102详解
-select 编号=blogNO, 标题=upper(blogTitle),内容=blogcontent,
-发表时间=ltrim(str(year(pubTime))) + &#39;-&#39; + 
-ltrim(str(month(pubTime))) + &#39;-&#39; + ltrim(str(day(pubTime)))
-from blog
+<h2 id="3函数"><a class="markdownIt-Anchor" href="#3函数"></a> 3.函数</h2>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/sql/sql-function.html">SQL 函数 | 菜鸟教程</a></p>
+<h3 id="实例"><a class="markdownIt-Anchor" href="#实例"></a> 实例</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-comment">#书p102详解</span>
+<span class="hljs-keyword">select</span> 编号=blogNO, 标题=<span class="hljs-keyword">upper</span>(blogTitle),内容=blogcontent,
+发表时间=<span class="hljs-keyword">ltrim</span>(<span class="hljs-keyword">str</span>(<span class="hljs-keyword">year</span>(pubTime))) + <span class="hljs-string">'-'</span> + 
+<span class="hljs-keyword">ltrim</span>(<span class="hljs-keyword">str</span>(<span class="hljs-keyword">month</span>(pubTime))) + <span class="hljs-string">'-'</span> + <span class="hljs-keyword">ltrim</span>(<span class="hljs-keyword">str</span>(<span class="hljs-keyword">day</span>(pubTime)))
+<span class="hljs-keyword">from</span> blog
 </code></pre>
-<h2 id="4-博客模糊查询"><a href="#4-博客模糊查询" class="headerlink" title="4.博客模糊查询"></a>4.博客模糊查询</h2><h3 id="语法-9"><a href="#语法-9" class="headerlink" title="语法"></a>语法</h3><pre><code class="language-sql">select xxx from list_name where cloumn like
-&#39;%key_name%&#39;
+<h2 id="4博客模糊查询"><a class="markdownIt-Anchor" href="#4博客模糊查询"></a> 4.博客模糊查询</h2>
+<h3 id="语法-11"><a class="markdownIt-Anchor" href="#语法-11"></a> 语法</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">select</span> xxx <span class="hljs-keyword">from</span> list_name <span class="hljs-keyword">where</span> cloumn <span class="hljs-keyword">like</span>
+<span class="hljs-string">'%key_name%'</span>
 
-select xxx from list_name where cloumn1 like
-&#39;%key1%&#39; or cloumn2 like &#39;%key2%&#39;
+<span class="hljs-keyword">select</span> xxx <span class="hljs-keyword">from</span> list_name <span class="hljs-keyword">where</span> cloumn1 <span class="hljs-keyword">like</span>
+<span class="hljs-string">'%key1%'</span> <span class="hljs-keyword">or</span> cloumn2 <span class="hljs-keyword">like</span> <span class="hljs-string">'%key2%'</span>
 
-select xxx from list_name where cloumn between &#39;xxx&#39; and &#39;xxx&#39;
+<span class="hljs-keyword">select</span> xxx <span class="hljs-keyword">from</span> list_name <span class="hljs-keyword">where</span> cloumn <span class="hljs-keyword">between</span> <span class="hljs-string">'xxx'</span> <span class="hljs-keyword">and</span> <span class="hljs-string">'xxx'</span>
 
-select xxx from list_name where cloumn in 
-(&#39;xxx&#39;,&#39;xxx&#39;,&#39;xxx&#39;)
+<span class="hljs-keyword">select</span> xxx <span class="hljs-keyword">from</span> list_name <span class="hljs-keyword">where</span> cloumn <span class="hljs-keyword">in</span> 
+(<span class="hljs-string">'xxx'</span>,<span class="hljs-string">'xxx'</span>,<span class="hljs-string">'xxx'</span>)
 </code></pre>
 <table>
 <thead>
 <tr>
-<th align="center"><em>搜索条件</em></th>
-<th align="center"><em>条件运算符</em></th>
+<th style="text-align:center"><em>搜索条件</em></th>
+<th style="text-align:center"><em>条件运算符</em></th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">确定范围</td>
-<td align="center">between and, not between and</td>
+<tbody>
+<tr>
+<td style="text-align:center">确定范围</td>
+<td style="text-align:center">between and, not between and</td>
 </tr>
 <tr>
-<td align="center">格式匹配</td>
-<td align="center">like, not like</td>
+<td style="text-align:center">格式匹配</td>
+<td style="text-align:center">like, not like</td>
 </tr>
 <tr>
-<td align="center">确定集合</td>
-<td align="center">in, not in</td>
+<td style="text-align:center">确定集合</td>
+<td style="text-align:center">in, not in</td>
 </tr>
-</tbody></table>
-<h2 id="5-博客评论中的聚合函数"><a href="#5-博客评论中的聚合函数" class="headerlink" title="5.博客评论中的聚合函数"></a>5.博客评论中的聚合函数</h2><h3 id="语法-10"><a href="#语法-10" class="headerlink" title="语法"></a>语法</h3><pre><code class="language-sql">SELECT SUM(column_name) FROM table_name;
-#皆同理
+</tbody>
+</table>
+<h2 id="5博客评论中的聚合函数"><a class="markdownIt-Anchor" href="#5博客评论中的聚合函数"></a> 5.博客评论中的聚合函数</h2>
+<h3 id="语法-12"><a class="markdownIt-Anchor" href="#语法-12"></a> 语法</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">SUM</span>(column_name) <span class="hljs-keyword">FROM</span> table_name;
+<span class="hljs-comment">#皆同理</span>
 </code></pre>
 <p><a target="_blank" rel="noopener" href="https://www.runoob.com/sql/sql-function.html">SQL 函数 | 菜鸟教程</a></p>
 <table>
 <thead>
 <tr>
-<th align="center"><em>函数名</em></th>
-<th align="center"><em>函数功能</em></th>
+<th style="text-align:center"><em>函数名</em></th>
+<th style="text-align:center"><em>函数功能</em></th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">sum()</td>
-<td align="center">计算某一列数值列的和</td>
+<tbody>
+<tr>
+<td style="text-align:center">sum()</td>
+<td style="text-align:center">计算某一列数值列的和</td>
 </tr>
 <tr>
-<td align="center">avg()</td>
-<td align="center">计算某一数值列的平均值</td>
+<td style="text-align:center">avg()</td>
+<td style="text-align:center">计算某一数值列的平均值</td>
 </tr>
 <tr>
-<td align="center">min()</td>
-<td align="center">求某一数值列的最小值</td>
+<td style="text-align:center">min()</td>
+<td style="text-align:center">求某一数值列的最小值</td>
 </tr>
 <tr>
-<td align="center">max()</td>
-<td align="center">求某一数值列的最大值</td>
+<td style="text-align:center">max()</td>
+<td style="text-align:center">求某一数值列的最大值</td>
 </tr>
 <tr>
-<td align="center">count()</td>
-<td align="center">统计满足select语句中指定条件的记录数</td>
+<td style="text-align:center">count()</td>
+<td style="text-align:center">统计满足select语句中指定条件的记录数</td>
 </tr>
-</tbody></table>
-<h2 id="6-按博客分组统计评论数"><a href="#6-按博客分组统计评论数" class="headerlink" title="6.按博客分组统计评论数"></a>6.按博客分组统计评论数</h2><h3 id="语法-11"><a href="#语法-11" class="headerlink" title="语法"></a>语法</h3><p><a target="_blank" rel="noopener" href="https://www.runoob.com/sql/sql-groupby.html">SQL GROUP BY 语句 | 菜鸟教程</a></p>
-<pre><code class="language-sql">#查询list中的column1和count的次数
-select column1 as name1, count(*) as name2 from list_name
-#按column1分组
-group by column1
-#挑选出name2大于3的cloumn
-havinng count(*) &gt;= 3
+</tbody>
+</table>
+<h2 id="6按博客分组统计评论数"><a class="markdownIt-Anchor" href="#6按博客分组统计评论数"></a> 6.按博客分组统计评论数</h2>
+<h3 id="语法-13"><a class="markdownIt-Anchor" href="#语法-13"></a> 语法</h3>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/sql/sql-groupby.html">SQL GROUP BY 语句 | 菜鸟教程</a></p>
+<pre class="highlight"><code class="sql"><span class="hljs-comment">#查询list中的column1和count的次数</span>
+<span class="hljs-keyword">select</span> column1 <span class="hljs-keyword">as</span> name1, <span class="hljs-keyword">count</span>(*) <span class="hljs-keyword">as</span> name2 <span class="hljs-keyword">from</span> list_name
+<span class="hljs-comment">#按column1分组</span>
+<span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> column1
+<span class="hljs-comment">#挑选出name2大于3的cloumn</span>
+havinng <span class="hljs-keyword">count</span>(*) &gt;= <span class="hljs-number">3</span>
 </code></pre>
 <blockquote>
 <p>having子句必须和group by子句连用</p>
 </blockquote>
-<h1 id="六、高级查询的应用"><a href="#六、高级查询的应用" class="headerlink" title="六、高级查询的应用"></a>六、高级查询的应用</h1><ul>
-<li><input disabled="" type="checkbox"> 笛卡尔积</li>
-<li><input disabled="" type="checkbox"> sql连接查询</li>
+<h1 id="六-高级查询的应用"><a class="markdownIt-Anchor" href="#六-高级查询的应用"></a> 六、高级查询的应用</h1>
+<ul>
+<li>[ ] 笛卡尔积</li>
+<li>[ ] sql连接查询</li>
 </ul>
-<pre><code class="language-sql">from join_table join_type join_table
+<pre class="highlight"><code class="sql">from join_table join_type join_table
 [on (join_condition)]
 </code></pre>
-<p><code>join_table</code>进行连接操作的表名<br><code>join_type</code>连接类型<br><code>on(join_condition)</code>连接条件</p>
+<p><code>join_table</code>进行连接操作的表名<br />
+<code>join_type</code>连接类型<br />
+<code>on(join_condition)</code>连接条件</p>
 <ul>
-<li><input disabled="" type="checkbox"> 子查询</li>
+<li>[ ] 子查询</li>
 </ul>
-<h2 id="1-查询博客的完整信息"><a href="#1-查询博客的完整信息" class="headerlink" title="1.查询博客的完整信息"></a>1.查询博客的完整信息</h2><h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><pre><code class="language-sql">select B.blogNO as 编号, B.blogTitle as 标题 
-from blogUser as U inner join blog as B 
-on U.UserNo = B.uerNO
+<h2 id="1查询博客的完整信息"><a class="markdownIt-Anchor" href="#1查询博客的完整信息"></a> 1.查询博客的完整信息</h2>
+<h3 id="实例-2"><a class="markdownIt-Anchor" href="#实例-2"></a> 实例</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">select</span> B.blogNO <span class="hljs-keyword">as</span> 编号, B.blogTitle <span class="hljs-keyword">as</span> 标题 
+<span class="hljs-keyword">from</span> blogUser <span class="hljs-keyword">as</span> U <span class="hljs-keyword">inner</span> <span class="hljs-keyword">join</span> blog <span class="hljs-keyword">as</span> B 
+<span class="hljs-keyword">on</span> U.UserNo = B.uerNO
 </code></pre>
-<h2 id="2-查询博客的完整信息并把未发表博客的用户信息显示出来"><a href="#2-查询博客的完整信息并把未发表博客的用户信息显示出来" class="headerlink" title="2.查询博客的完整信息并把未发表博客的用户信息显示出来"></a>2.查询博客的完整信息并把未发表博客的用户信息显示出来</h2><blockquote>
+<h2 id="2查询博客的完整信息并把未发表博客的用户信息显示出来"><a class="markdownIt-Anchor" href="#2查询博客的完整信息并把未发表博客的用户信息显示出来"></a> 2.查询博客的完整信息并把未发表博客的用户信息显示出来</h2>
+<blockquote>
 <p>即使用外连接，left join左外连接，right join右外连接，full join全外连接</p>
 </blockquote>
-<h3 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h3><pre><code class="language-sql">select B.blogNO as 编号, B.blogTitle as 标题 
-from blogUser as U (left/right) join blog as B 
-on U.UserNo = B.uerNO
+<h3 id="实例-3"><a class="markdownIt-Anchor" href="#实例-3"></a> 实例</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">select</span> B.blogNO <span class="hljs-keyword">as</span> 编号, B.blogTitle <span class="hljs-keyword">as</span> 标题 
+<span class="hljs-keyword">from</span> blogUser <span class="hljs-keyword">as</span> U (<span class="hljs-keyword">left</span>/<span class="hljs-keyword">right</span>) <span class="hljs-keyword">join</span> blog <span class="hljs-keyword">as</span> B 
+<span class="hljs-keyword">on</span> U.UserNo = B.uerNO
 </code></pre>
-<h2 id="3-简单子查询——按博主查询博客"><a href="#3-简单子查询——按博主查询博客" class="headerlink" title="3.简单子查询——按博主查询博客"></a>3.简单子查询——按博主查询博客</h2><h3 id="实例-3"><a href="#实例-3" class="headerlink" title="实例"></a>实例</h3><pre><code class="language-sql">#法1：连接查询
-select B.* from blog as B inner join blogUser as U
-on U.UserNo = B.uerNO and U.userName = &#39;名1&#39;
+<h2 id="3简单子查询按博主查询博客"><a class="markdownIt-Anchor" href="#3简单子查询按博主查询博客"></a> 3.简单子查询——按博主查询博客</h2>
+<h3 id="实例-4"><a class="markdownIt-Anchor" href="#实例-4"></a> 实例</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-comment">#法1：连接查询</span>
+<span class="hljs-keyword">select</span> B.* <span class="hljs-keyword">from</span> blog <span class="hljs-keyword">as</span> B <span class="hljs-keyword">inner</span> <span class="hljs-keyword">join</span> blogUser <span class="hljs-keyword">as</span> U
+<span class="hljs-keyword">on</span> U.UserNo = B.uerNO <span class="hljs-keyword">and</span> U.userName = <span class="hljs-string">'名1'</span>
 
-#法2：子查询
-select * from blog 
-where uerNO = (select UserNo from blogUser where userName = &#39;名1&#39;)
+<span class="hljs-comment">#法2：子查询</span>
+<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> blog 
+<span class="hljs-keyword">where</span> uerNO = (<span class="hljs-keyword">select</span> UserNo <span class="hljs-keyword">from</span> blogUser <span class="hljs-keyword">where</span> userName = <span class="hljs-string">'名1'</span>)
 </code></pre>
 <blockquote>
-<p>子查询释义：<code>where</code>里查询bloguser中username为‘名1’的userNO，再查询blog里uerNO &#x3D; userNO的所有数据</p>
+<p>子查询释义：<code>where</code>里查询bloguser中username为‘名1’的userNO，再查询blog里uerNO = userNO的所有数据</p>
 </blockquote>
-<h2 id="4-in子查询"><a href="#4-in子查询" class="headerlink" title="4.in子查询"></a>4.in子查询</h2><h3 id="实例-4"><a href="#实例-4" class="headerlink" title="实例"></a>实例</h3><pre><code class="language-sql">select userName from blogUser where UserNo 
-in (select distinct uerNO from blog)
+<h2 id="4in子查询"><a class="markdownIt-Anchor" href="#4in子查询"></a> 4.in子查询</h2>
+<h3 id="实例-5"><a class="markdownIt-Anchor" href="#实例-5"></a> 实例</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">select</span> userName <span class="hljs-keyword">from</span> blogUser <span class="hljs-keyword">where</span> UserNo 
+<span class="hljs-keyword">in</span> (<span class="hljs-keyword">select</span> <span class="hljs-keyword">distinct</span> uerNO <span class="hljs-keyword">from</span> blog)
 </code></pre>
 <blockquote>
-<p>1.在blog里查询了userno<br>2.在bloguser里查询userNO第一步对应的username</p>
-<p><code>disstinct</code>去掉重复元素<br><code>not in</code>即‘不在第一步’</p>
+<p>1.在blog里查询了userno<br />
+2.在bloguser里查询userNO第一步对应的username</p>
+<p><code>disstinct</code>去掉重复元素<br />
+<code>not in</code>即‘不在第一步’</p>
 </blockquote>
-<h2 id="5-exists查询——标记冷门博客"><a href="#5-exists查询——标记冷门博客" class="headerlink" title="5.exists查询——标记冷门博客"></a>5.exists查询——标记冷门博客</h2><h3 id="实例-5"><a href="#实例-5" class="headerlink" title="实例"></a>实例</h3><pre><code class="language-sql">update blog set blogTitle = &#39;(冷门博客)&#39; + blogTitle
-where exists (select * from blog where clickNum = 0)
-and clickNum &lt; 10
+<h2 id="5exists查询标记冷门博客"><a class="markdownIt-Anchor" href="#5exists查询标记冷门博客"></a> 5.exists查询——标记冷门博客</h2>
+<h3 id="实例-6"><a class="markdownIt-Anchor" href="#实例-6"></a> 实例</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">update</span> blog <span class="hljs-keyword">set</span> blogTitle = <span class="hljs-string">'(冷门博客)'</span> + blogTitle
+<span class="hljs-keyword">where</span> <span class="hljs-keyword">exists</span> (<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> blog <span class="hljs-keyword">where</span> clickNum = <span class="hljs-number">0</span>)
+<span class="hljs-keyword">and</span> clickNum &lt; <span class="hljs-number">10</span>
 </code></pre>
 <blockquote>
-<p>释义：exists如果存在clickNum&#x3D;0,则将clickNum&lt;10的blogTitle改名</p>
+<p>释义：exists如果存在clickNum=0,则将clickNum&lt;10的blogTitle改名</p>
 </blockquote>
-<h1 id="七、T-SQL编程"><a href="#七、T-SQL编程" class="headerlink" title="七、T-SQL编程"></a>七、T-SQL编程</h1><pre><code class="language-sql">print &#39;xxxx&#39;
-select &#39;xxx&#39; as list_name
+<h1 id="七-t-sql编程"><a class="markdownIt-Anchor" href="#七-t-sql编程"></a> 七、T-SQL编程</h1>
+<pre class="highlight"><code class="sql">print 'xxxx'
+<span class="hljs-keyword">select</span> <span class="hljs-string">'xxx'</span> <span class="hljs-keyword">as</span> list_name
 </code></pre>
 <blockquote>
 <p><code>declare</code>用于声明局部变量</p>
 <blockquote>
-<p>declare @name type<br>声明多个只需添加逗号</p>
+<p>declare @name type<br />
+声明多个只需添加逗号</p>
 </blockquote>
 <p>使用set(或select)赋值</p>
 <blockquote>
-<p>set @name &#x3D; value</p>
+<p>set @name = value</p>
 </blockquote>
 </blockquote>
 <table>
@@ -521,7 +583,8 @@ select &#39;xxx&#39; as list_name
 <th>select</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>同时赋值多个</td>
 <td>否</td>
 <td>是</td>
@@ -536,81 +599,102 @@ select &#39;xxx&#39; as list_name
 <td>赋值为NULL</td>
 <td>保持原值</td>
 </tr>
-</tbody></table>
-<h2 id="1-变量"><a href="#1-变量" class="headerlink" title="1.变量"></a>1.变量</h2><h3 id="实例-6"><a href="#实例-6" class="headerlink" title="实例"></a>实例</h3><pre><code class="language-sql">declare @username varchar(20)
---声明一个局部变量
-set @username = &#39;名2&#39;
---将变量赋值为 名2
-select * from blogUser where userName = @username
---查询符合blogUser里userName符合的全部信息
+</tbody>
+</table>
+<h2 id="1变量"><a class="markdownIt-Anchor" href="#1变量"></a> 1.变量</h2>
+<h3 id="实例-7"><a class="markdownIt-Anchor" href="#实例-7"></a> 实例</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">declare</span> @username <span class="hljs-built_in">varchar</span>(<span class="hljs-number">20</span>)
+<span class="hljs-comment">--声明一个局部变量</span>
+<span class="hljs-keyword">set</span> @username = <span class="hljs-string">'名2'</span>
+<span class="hljs-comment">--将变量赋值为 名2</span>
+<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> blogUser <span class="hljs-keyword">where</span> userName = @username
+<span class="hljs-comment">--查询符合blogUser里userName符合的全部信息</span>
 </code></pre>
-<h2 id="2-if条件"><a href="#2-if条件" class="headerlink" title="2.if条件"></a>2.if条件</h2><h3 id="语法-12"><a href="#语法-12" class="headerlink" title="语法"></a>语法</h3><pre><code class="language-sql">#begin语句
-begin
+<h2 id="2if条件"><a class="markdownIt-Anchor" href="#2if条件"></a> 2.if条件</h2>
+<h3 id="语法-14"><a class="markdownIt-Anchor" href="#语法-14"></a> 语法</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-comment">#begin语句</span>
+<span class="hljs-keyword">begin</span>
 	{sql_statement|statement_block}
-end
+<span class="hljs-keyword">end</span>
 
-#if语句
-if boolean_expression
+<span class="hljs-comment">#if语句</span>
+<span class="hljs-keyword">if</span> boolean_expression
 	{sql_statement1|statement_block1}
-else
+<span class="hljs-keyword">else</span>
 	{sql_statement2|statement_block2}
 </code></pre>
-<h3 id="实例-7"><a href="#实例-7" class="headerlink" title="实例"></a>实例</h3><pre><code class="language-sql">declare @number int
-set @number = 50
-if @number &gt; 100
-	print &#39;xxxxx&gt;100&#39;
-else
-	begin
-		if @number &lt; 10
-			print &#39;xxx&lt;10&#39;
-		else
-			print &#39;xxx&gt;10&lt;100&#39;
-	end
+<h3 id="实例-8"><a class="markdownIt-Anchor" href="#实例-8"></a> 实例</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">declare</span> @<span class="hljs-built_in">number</span> <span class="hljs-built_in">int</span>
+<span class="hljs-keyword">set</span> @<span class="hljs-built_in">number</span> = <span class="hljs-number">50</span>
+<span class="hljs-keyword">if</span> @<span class="hljs-built_in">number</span> &gt; <span class="hljs-number">100</span>
+	print <span class="hljs-string">'xxxxx&gt;100'</span>
+<span class="hljs-keyword">else</span>
+	<span class="hljs-keyword">begin</span>
+		<span class="hljs-keyword">if</span> @<span class="hljs-built_in">number</span> &lt; <span class="hljs-number">10</span>
+			print <span class="hljs-string">'xxx&lt;10'</span>
+		<span class="hljs-keyword">else</span>
+			print <span class="hljs-string">'xxx&gt;10&lt;100'</span>
+	<span class="hljs-keyword">end</span>
 </code></pre>
-<h2 id="3-while循环"><a href="#3-while循环" class="headerlink" title="3.while循环"></a>3.while循环</h2><h3 id="语法-13"><a href="#语法-13" class="headerlink" title="语法"></a>语法</h3><pre><code class="language-sql">while boolean_expression
+<h2 id="3while循环"><a class="markdownIt-Anchor" href="#3while循环"></a> 3.while循环</h2>
+<h3 id="语法-15"><a class="markdownIt-Anchor" href="#语法-15"></a> 语法</h3>
+<pre class="highlight"><code class="sql">while boolean_expression
 	{sql_statement|statement_block|break|continue}
 </code></pre>
-<h3 id="实例-8"><a href="#实例-8" class="headerlink" title="实例"></a>实例</h3><pre><code class="language-sql">declare @num int = 1
-while @num &lt;100
-	begin
-		print @num*2
-		set @num = @num +1
-	end
+<h3 id="实例-9"><a class="markdownIt-Anchor" href="#实例-9"></a> 实例</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">declare</span> @<span class="hljs-keyword">num</span> <span class="hljs-built_in">int</span> = <span class="hljs-number">1</span>
+<span class="hljs-keyword">while</span> @<span class="hljs-keyword">num</span> &lt;<span class="hljs-number">100</span>
+	<span class="hljs-keyword">begin</span>
+		print @<span class="hljs-keyword">num</span>*<span class="hljs-number">2</span>
+		<span class="hljs-keyword">set</span> @<span class="hljs-keyword">num</span> = @<span class="hljs-keyword">num</span> +<span class="hljs-number">1</span>
+	<span class="hljs-keyword">end</span>
 </code></pre>
-<h2 id="4-case多分支"><a href="#4-case多分支" class="headerlink" title="4. case多分支"></a>4. case多分支</h2><h3 id="实例-9"><a href="#实例-9" class="headerlink" title="实例"></a>实例</h3><pre><code class="language-sql">declare @level char(1)
-set @level = &#39;C&#39;
+<h2 id="4-case多分支"><a class="markdownIt-Anchor" href="#4-case多分支"></a> 4. case多分支</h2>
+<h3 id="实例-10"><a class="markdownIt-Anchor" href="#实例-10"></a> 实例</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">declare</span> @<span class="hljs-keyword">level</span> <span class="hljs-built_in">char</span>(<span class="hljs-number">1</span>)
+<span class="hljs-keyword">set</span> @<span class="hljs-keyword">level</span> = <span class="hljs-string">'C'</span>
 
-select &#39;成绩&#39; = 
-	case @level
-		when &#39;A&#39; then &#39;成绩90+&#39;
-		when &#39;B&#39; then &#39;成绩80+&#39;
-		when &#39;C&#39; then &#39;成绩70+&#39;
-		else &#39;NO case&#39;
-end
+<span class="hljs-keyword">select</span> <span class="hljs-string">'成绩'</span> = 
+	<span class="hljs-keyword">case</span> @<span class="hljs-keyword">level</span>
+		<span class="hljs-keyword">when</span> <span class="hljs-string">'A'</span> <span class="hljs-keyword">then</span> <span class="hljs-string">'成绩90+'</span>
+		<span class="hljs-keyword">when</span> <span class="hljs-string">'B'</span> <span class="hljs-keyword">then</span> <span class="hljs-string">'成绩80+'</span>
+		<span class="hljs-keyword">when</span> <span class="hljs-string">'C'</span> <span class="hljs-keyword">then</span> <span class="hljs-string">'成绩70+'</span>
+		<span class="hljs-keyword">else</span> <span class="hljs-string">'NO case'</span>
+<span class="hljs-keyword">end</span>
 </code></pre>
-<h1 id="八、索引与视图"><a href="#八、索引与视图" class="headerlink" title="八、索引与视图"></a>八、索引与视图</h1><h2 id="1-按博客的发表日期建立索引"><a href="#1-按博客的发表日期建立索引" class="headerlink" title="1.按博客的发表日期建立索引"></a>1.按博客的发表日期建立索引</h2><h3 id="语法-14"><a href="#语法-14" class="headerlink" title="语法"></a>语法</h3><pre><code class="language-sql">#创建索引
-create index Idx_pubtime on blog(pubtime)
+<h1 id="八-索引与视图"><a class="markdownIt-Anchor" href="#八-索引与视图"></a> 八、索引与视图</h1>
+<h2 id="1按博客的发表日期建立索引"><a class="markdownIt-Anchor" href="#1按博客的发表日期建立索引"></a> 1.按博客的发表日期建立索引</h2>
+<h3 id="语法-16"><a class="markdownIt-Anchor" href="#语法-16"></a> 语法</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-comment">#创建索引</span>
+<span class="hljs-keyword">create</span> <span class="hljs-keyword">index</span> Idx_pubtime <span class="hljs-keyword">on</span> blog(pubtime)
 
-#修改索引 这里是重命名
-exec sp_rename &#39;blog.idx_pubtime&#39;,&#39;ix_pubtime&#39;
+<span class="hljs-comment">#修改索引 这里是重命名</span>
+exec sp_rename <span class="hljs-string">'blog.idx_pubtime'</span>,<span class="hljs-string">'ix_pubtime'</span>
 
-#删除索引
-drop index blog.ix_pubtime
+<span class="hljs-comment">#删除索引</span>
+<span class="hljs-keyword">drop</span> <span class="hljs-keyword">index</span> blog.ix_pubtime
 </code></pre>
-<h2 id="2-显示用户发表博客情况的视图"><a href="#2-显示用户发表博客情况的视图" class="headerlink" title="2.显示用户发表博客情况的视图"></a>2.显示用户发表博客情况的视图</h2><h3 id="语法-15"><a href="#语法-15" class="headerlink" title="语法"></a>语法</h3><pre><code class="language-sql">
+<h2 id="2显示用户发表博客情况的视图"><a class="markdownIt-Anchor" href="#2显示用户发表博客情况的视图"></a> 2.显示用户发表博客情况的视图</h2>
+<h3 id="语法-17"><a class="markdownIt-Anchor" href="#语法-17"></a> 语法</h3>
+<pre class="highlight"><code class="sql">
 </code></pre>
-<h1 id="九、存储过程"><a href="#九、存储过程" class="headerlink" title="九、存储过程"></a>九、存储过程</h1><h2 id="1-查看单击率均值及低于均值博客的存储过程"><a href="#1-查看单击率均值及低于均值博客的存储过程" class="headerlink" title="1.查看单击率均值及低于均值博客的存储过程"></a>1.查看单击率均值及低于均值博客的存储过程</h2><h3 id="语法：用T-SQL创建存储过程"><a href="#语法：用T-SQL创建存储过程" class="headerlink" title="语法：用T-SQL创建存储过程"></a>语法：用T-SQL创建存储过程</h3><pre><code class="language-sql">create proc[edure] procedure_name [;number] [ {@parameter} data_type] [varying] [=default] [output] ] [,...n] [with { recompile | encryption | recompile, encryption | exeute_as_clause}] [for replication]
-# @参数1 数据类型=默认值 output
-as{
+<h1 id="九-存储过程"><a class="markdownIt-Anchor" href="#九-存储过程"></a> 九、存储过程</h1>
+<h2 id="1查看单击率均值及低于均值博客的存储过程"><a class="markdownIt-Anchor" href="#1查看单击率均值及低于均值博客的存储过程"></a> 1.查看单击率均值及低于均值博客的存储过程</h2>
+<h3 id="语法用t-sql创建存储过程"><a class="markdownIt-Anchor" href="#语法用t-sql创建存储过程"></a> 语法：用T-SQL创建存储过程</h3>
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">create</span> proc[edure] procedure_name [;number] [ {@parameter} data_type] [varying] [=default] [output] ] [,...n] [<span class="hljs-keyword">with</span> { recompile | encryption | recompile, encryption | exeute_as_clause}] [<span class="hljs-keyword">for</span> <span class="hljs-keyword">replication</span>]
+<span class="hljs-comment"># @参数1 数据类型=默认值 output</span>
+<span class="hljs-keyword">as</span>{
 	&lt;sql_statement&gt;[;][...n]
 	|&lt;method_specifier&gt;}[;]
 }
 </code></pre>
-<h3 id="语法：调用存储过程"><a href="#语法：调用存储过程" class="headerlink" title="语法：调用存储过程"></a>语法：调用存储过程</h3><pre><code class="language-sql">exec procedure_name
-use blogDB
+<h3 id="语法调用存储过程"><a class="markdownIt-Anchor" href="#语法调用存储过程"></a> 语法：调用存储过程</h3>
+<pre class="highlight"><code class="sql">exec procedure_name
+<span class="hljs-keyword">use</span> blogDB
 exec proc_clickNum
 </code></pre>
-<h2 id="2-创建存储过程实现输入用户姓名查看其博客详情"><a href="#2-创建存储过程实现输入用户姓名查看其博客详情" class="headerlink" title="2.创建存储过程实现输入用户姓名查看其博客详情"></a>2.创建存储过程实现输入用户姓名查看其博客详情</h2>
+<h2 id="2创建存储过程实现输入用户姓名查看其博客详情"><a class="markdownIt-Anchor" href="#2创建存储过程实现输入用户姓名查看其博客详情"></a> 2.创建存储过程实现输入用户姓名查看其博客详情</h2>
+
         </div>
 
         <!-- 上一篇/下一篇 导航 -->
@@ -647,7 +731,7 @@ exec proc_clickNum
   </div>
   <div class="toc-content card-deep-space">
     <h3 class="toc-header">大纲</h3>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="toc-text">三、建立数据表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="toc-text">1.创建博客系统数据表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-text">语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">数据类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%AE%BE%E7%BD%AE%E4%B8%BB%E9%94%AE"><span class="toc-text">2.设置主键</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%EF%BC%9A"><span class="toc-text">语法：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%8D%9A%E5%AE%A2%E7%94%A8%E6%88%B7%E8%A1%A8%E6%B7%BB%E5%8A%A0%E6%A0%87%E8%AF%86%E5%88%97"><span class="toc-text">3. 博客用户表添加标识列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-1"><span class="toc-text">语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%88%9B%E5%BB%BA%E4%B8%BB%E5%A4%96%E9%94%AE%E5%85%B3%E7%B3%BB"><span class="toc-text">4.创建主外键关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-2"><span class="toc-text">语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%8D%9A%E5%AE%A2%E7%94%A8%E6%88%B7%E9%82%AE%E7%AE%B1%E6%B7%BB%E5%8A%A0%E6%A3%80%E6%9F%A5%E7%BA%A6%E6%9D%9F"><span class="toc-text">5.博客用户邮箱添加检查约束</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-3"><span class="toc-text">语法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86"><span class="toc-text">四、数据管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%8F%92%E5%85%A5%E5%8D%9A%E5%AE%A2%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE"><span class="toc-text">1.插入博客管理数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-4"><span class="toc-text">语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9B%B4%E6%96%B0%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E6%95%B0%E6%8D%AE"><span class="toc-text">2.更新博客系统数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-5"><span class="toc-text">语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%88%A0%E9%99%A4%E9%83%A8%E5%88%86%E6%95%B0%E6%8D%AE"><span class="toc-text">3.删除部分数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-6"><span class="toc-text">语法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2"><span class="toc-text">五、数据查询</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2"><span class="toc-text">1.博客系统基础查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-7"><span class="toc-text">语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%8C%89%E5%8F%91%E8%A1%A8%E6%97%A5%E6%9C%9F%E6%8E%92%E5%BA%8F%E5%8D%9A%E5%AE%A2"><span class="toc-text">2.按发表日期排序博客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-8"><span class="toc-text">语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%87%BD%E6%95%B0"><span class="toc-text">3.函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%8D%9A%E5%AE%A2%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2"><span class="toc-text">4.博客模糊查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-9"><span class="toc-text">语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E4%B8%AD%E7%9A%84%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0"><span class="toc-text">5.博客评论中的聚合函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-10"><span class="toc-text">语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%8C%89%E5%8D%9A%E5%AE%A2%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1%E8%AF%84%E8%AE%BA%E6%95%B0"><span class="toc-text">6.按博客分组统计评论数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-11"><span class="toc-text">语法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-text">六、高级查询的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9F%A5%E8%AF%A2%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%AE%8C%E6%95%B4%E4%BF%A1%E6%81%AF"><span class="toc-text">1.查询博客的完整信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-1"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9F%A5%E8%AF%A2%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%AE%8C%E6%95%B4%E4%BF%A1%E6%81%AF%E5%B9%B6%E6%8A%8A%E6%9C%AA%E5%8F%91%E8%A1%A8%E5%8D%9A%E5%AE%A2%E7%9A%84%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E6%98%BE%E7%A4%BA%E5%87%BA%E6%9D%A5"><span class="toc-text">2.查询博客的完整信息并把未发表博客的用户信息显示出来</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-2"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%AE%80%E5%8D%95%E5%AD%90%E6%9F%A5%E8%AF%A2%E2%80%94%E2%80%94%E6%8C%89%E5%8D%9A%E4%B8%BB%E6%9F%A5%E8%AF%A2%E5%8D%9A%E5%AE%A2"><span class="toc-text">3.简单子查询——按博主查询博客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-3"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-in%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="toc-text">4.in子查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-4"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-exists%E6%9F%A5%E8%AF%A2%E2%80%94%E2%80%94%E6%A0%87%E8%AE%B0%E5%86%B7%E9%97%A8%E5%8D%9A%E5%AE%A2"><span class="toc-text">5.exists查询——标记冷门博客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-5"><span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83%E3%80%81T-SQL%E7%BC%96%E7%A8%8B"><span class="toc-text">七、T-SQL编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%8F%98%E9%87%8F"><span class="toc-text">1.变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-6"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-if%E6%9D%A1%E4%BB%B6"><span class="toc-text">2.if条件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-12"><span class="toc-text">语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-7"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-while%E5%BE%AA%E7%8E%AF"><span class="toc-text">3.while循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-13"><span class="toc-text">语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-8"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-case%E5%A4%9A%E5%88%86%E6%94%AF"><span class="toc-text">4. case多分支</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-9"><span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E7%B4%A2%E5%BC%95%E4%B8%8E%E8%A7%86%E5%9B%BE"><span class="toc-text">八、索引与视图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%8C%89%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%8F%91%E8%A1%A8%E6%97%A5%E6%9C%9F%E5%BB%BA%E7%AB%8B%E7%B4%A2%E5%BC%95"><span class="toc-text">1.按博客的发表日期建立索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-14"><span class="toc-text">语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%98%BE%E7%A4%BA%E7%94%A8%E6%88%B7%E5%8F%91%E8%A1%A8%E5%8D%9A%E5%AE%A2%E6%83%85%E5%86%B5%E7%9A%84%E8%A7%86%E5%9B%BE"><span class="toc-text">2.显示用户发表博客情况的视图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-15"><span class="toc-text">语法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">九、存储过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9F%A5%E7%9C%8B%E5%8D%95%E5%87%BB%E7%8E%87%E5%9D%87%E5%80%BC%E5%8F%8A%E4%BD%8E%E4%BA%8E%E5%9D%87%E5%80%BC%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">1.查看单击率均值及低于均值博客的存储过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%EF%BC%9A%E7%94%A8T-SQL%E5%88%9B%E5%BB%BA%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">语法：用T-SQL创建存储过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%EF%BC%9A%E8%B0%83%E7%94%A8%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">语法：调用存储过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BA%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%AE%9E%E7%8E%B0%E8%BE%93%E5%85%A5%E7%94%A8%E6%88%B7%E5%A7%93%E5%90%8D%E6%9F%A5%E7%9C%8B%E5%85%B6%E5%8D%9A%E5%AE%A2%E8%AF%A6%E6%83%85"><span class="toc-text">2.创建存储过程实现输入用户姓名查看其博客详情</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89-%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="toc-text"> 三、建立数据表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="toc-text"> 1.创建博客系统数据表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-text"> 语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text"> 数据类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E8%AE%BE%E7%BD%AE%E4%B8%BB%E9%94%AE"><span class="toc-text"> 2.设置主键</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-2"><span class="toc-text"> 语法：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%8D%9A%E5%AE%A2%E7%94%A8%E6%88%B7%E8%A1%A8%E6%B7%BB%E5%8A%A0%E6%A0%87%E8%AF%86%E5%88%97"><span class="toc-text"> 3. 博客用户表添加标识列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-3"><span class="toc-text"> 语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-text"> 注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E5%88%9B%E5%BB%BA%E4%B8%BB%E5%A4%96%E9%94%AE%E5%85%B3%E7%B3%BB"><span class="toc-text"> 4.创建主外键关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-4"><span class="toc-text"> 语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E5%8D%9A%E5%AE%A2%E7%94%A8%E6%88%B7%E9%82%AE%E7%AE%B1%E6%B7%BB%E5%8A%A0%E6%A3%80%E6%9F%A5%E7%BA%A6%E6%9D%9F"><span class="toc-text"> 5.博客用户邮箱添加检查约束</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-5"><span class="toc-text"> 语法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B-%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86"><span class="toc-text"> 四、数据管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E6%8F%92%E5%85%A5%E5%8D%9A%E5%AE%A2%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE"><span class="toc-text"> 1.插入博客管理数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-6"><span class="toc-text"> 语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E6%9B%B4%E6%96%B0%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E6%95%B0%E6%8D%AE"><span class="toc-text"> 2.更新博客系统数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-7"><span class="toc-text"> 语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E5%88%A0%E9%99%A4%E9%83%A8%E5%88%86%E6%95%B0%E6%8D%AE"><span class="toc-text"> 3.删除部分数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-8"><span class="toc-text"> 语法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94-%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2"><span class="toc-text"> 五、数据查询</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2"><span class="toc-text"> 1.博客系统基础查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-9"><span class="toc-text"> 语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E6%8C%89%E5%8F%91%E8%A1%A8%E6%97%A5%E6%9C%9F%E6%8E%92%E5%BA%8F%E5%8D%9A%E5%AE%A2"><span class="toc-text"> 2.按发表日期排序博客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-10"><span class="toc-text"> 语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E5%87%BD%E6%95%B0"><span class="toc-text"> 3.函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B"><span class="toc-text"> 实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E5%8D%9A%E5%AE%A2%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2"><span class="toc-text"> 4.博客模糊查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-11"><span class="toc-text"> 语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E4%B8%AD%E7%9A%84%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0"><span class="toc-text"> 5.博客评论中的聚合函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-12"><span class="toc-text"> 语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E6%8C%89%E5%8D%9A%E5%AE%A2%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1%E8%AF%84%E8%AE%BA%E6%95%B0"><span class="toc-text"> 6.按博客分组统计评论数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-13"><span class="toc-text"> 语法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD-%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-text"> 六、高级查询的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E6%9F%A5%E8%AF%A2%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%AE%8C%E6%95%B4%E4%BF%A1%E6%81%AF"><span class="toc-text"> 1.查询博客的完整信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-2"><span class="toc-text"> 实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E6%9F%A5%E8%AF%A2%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%AE%8C%E6%95%B4%E4%BF%A1%E6%81%AF%E5%B9%B6%E6%8A%8A%E6%9C%AA%E5%8F%91%E8%A1%A8%E5%8D%9A%E5%AE%A2%E7%9A%84%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E6%98%BE%E7%A4%BA%E5%87%BA%E6%9D%A5"><span class="toc-text"> 2.查询博客的完整信息并把未发表博客的用户信息显示出来</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-3"><span class="toc-text"> 实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E7%AE%80%E5%8D%95%E5%AD%90%E6%9F%A5%E8%AF%A2%E6%8C%89%E5%8D%9A%E4%B8%BB%E6%9F%A5%E8%AF%A2%E5%8D%9A%E5%AE%A2"><span class="toc-text"> 3.简单子查询——按博主查询博客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-4"><span class="toc-text"> 实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4in%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="toc-text"> 4.in子查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-5"><span class="toc-text"> 实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5exists%E6%9F%A5%E8%AF%A2%E6%A0%87%E8%AE%B0%E5%86%B7%E9%97%A8%E5%8D%9A%E5%AE%A2"><span class="toc-text"> 5.exists查询——标记冷门博客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-6"><span class="toc-text"> 实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83-t-sql%E7%BC%96%E7%A8%8B"><span class="toc-text"> 七、T-SQL编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E5%8F%98%E9%87%8F"><span class="toc-text"> 1.变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-7"><span class="toc-text"> 实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2if%E6%9D%A1%E4%BB%B6"><span class="toc-text"> 2.if条件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-14"><span class="toc-text"> 语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-8"><span class="toc-text"> 实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3while%E5%BE%AA%E7%8E%AF"><span class="toc-text"> 3.while循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-15"><span class="toc-text"> 语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-9"><span class="toc-text"> 实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-case%E5%A4%9A%E5%88%86%E6%94%AF"><span class="toc-text"> 4. case多分支</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B-10"><span class="toc-text"> 实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AB-%E7%B4%A2%E5%BC%95%E4%B8%8E%E8%A7%86%E5%9B%BE"><span class="toc-text"> 八、索引与视图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E6%8C%89%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%8F%91%E8%A1%A8%E6%97%A5%E6%9C%9F%E5%BB%BA%E7%AB%8B%E7%B4%A2%E5%BC%95"><span class="toc-text"> 1.按博客的发表日期建立索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-16"><span class="toc-text"> 语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E6%98%BE%E7%A4%BA%E7%94%A8%E6%88%B7%E5%8F%91%E8%A1%A8%E5%8D%9A%E5%AE%A2%E6%83%85%E5%86%B5%E7%9A%84%E8%A7%86%E5%9B%BE"><span class="toc-text"> 2.显示用户发表博客情况的视图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95-17"><span class="toc-text"> 语法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B9%9D-%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="toc-text"> 九、存储过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E6%9F%A5%E7%9C%8B%E5%8D%95%E5%87%BB%E7%8E%87%E5%9D%87%E5%80%BC%E5%8F%8A%E4%BD%8E%E4%BA%8E%E5%9D%87%E5%80%BC%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="toc-text"> 1.查看单击率均值及低于均值博客的存储过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%E7%94%A8t-sql%E5%88%9B%E5%BB%BA%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="toc-text"> 语法：用T-SQL创建存储过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%E8%B0%83%E7%94%A8%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="toc-text"> 语法：调用存储过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E5%88%9B%E5%BB%BA%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%AE%9E%E7%8E%B0%E8%BE%93%E5%85%A5%E7%94%A8%E6%88%B7%E5%A7%93%E5%90%8D%E6%9F%A5%E7%9C%8B%E5%85%B6%E5%8D%9A%E5%AE%A2%E8%AF%A6%E6%83%85"><span class="toc-text"> 2.创建存储过程实现输入用户姓名查看其博客详情</span></a></li></ol></li></ol>
   </div>
 </aside>
 
