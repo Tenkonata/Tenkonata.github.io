@@ -12,25 +12,27 @@ let avatarClickTimer = null;
 
 
 
-// ========================================
-// 1. 宿命的起点：检查是否被封印
-// ========================================
+
 function initCrazyModeBoot() {
-    // 这个彩蛋太过喧嚣，我们只允许它在首页的主舞台（Welcome Text）表演
+
     if (!document.querySelector('.welcome-text')) return;
 
     injectEasterEggStyles();
     bindAvatarEasterEgg();
 
-    // 翻开封印之书，看看上一次访客是选择将其放出，还是将其镇压
-    const crazyMemory = localStorage.getItem('air-crazy-mode-override');
+
+    let crazyMemory = localStorage.getItem('air-crazy-mode-override');
+
+    if (crazyMemory === null && window.innerWidth <= 768) {
+        crazyMemory = 'false';
+    }
 
     if (crazyMemory === 'false') {
-        // 既然已被封印，那就让它静悄悄地躺在深渊，不要打扰正常的打字机入场
+
         destroyCrazyEffect(true); 
         return;
     }
-    // 封印已破，开始群魔乱舞！
+
     applyCrazyEffect(); 
 }
 
@@ -245,6 +247,10 @@ function destroyCrazyEffect(silent = false) {
     
     welcomeTitle.classList.remove('crazy-rainbow');
 
+    welcomeTitle.style.display = 'none';
+    void welcomeTitle.offsetHeight;
+    welcomeTitle.style.display = '';
+
     const styleNode = document.getElementById('crazy-welcome-style');
     if (styleNode) styleNode.remove();
 }
@@ -298,14 +304,6 @@ function applyCrazyEffect() {
                 50%  { top: var(--w-y2); left: var(--w-x2); scale: var(--w-s2); }
                 75%  { top: var(--w-y3); left: var(--w-x3); scale: var(--w-s3); }
                 100% { top: var(--w-y4); left: var(--w-x4); scale: var(--w-s4); }
-            }
-
-            /* [移动端防崩塌结界] 防止释放魔法时视口被撑爆导致高频闪烁 */
-            @media (max-width: 768px) {
-                body { overflow-x: hidden !important; } /* 死死锁住横向滚动条，防止任何元素溢出引起的视口抽搐 */
-                .type-char.crazy-flip {
-                    margin: 0 2px !important; /* 移动端屏幕太窄，极大收缩灵魂的膨胀间隙 */
-                }
             }
         `;
         document.head.appendChild(style);
