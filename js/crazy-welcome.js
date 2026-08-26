@@ -247,10 +247,6 @@ function destroyCrazyEffect(silent = false) {
     
     welcomeTitle.classList.remove('crazy-rainbow');
 
-    welcomeTitle.style.display = 'none';
-    void welcomeTitle.offsetHeight;
-    welcomeTitle.style.display = '';
-
     const styleNode = document.getElementById('crazy-welcome-style');
     if (styleNode) styleNode.remove();
 }
