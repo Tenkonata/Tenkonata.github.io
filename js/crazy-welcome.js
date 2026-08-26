@@ -297,7 +297,7 @@ function applyCrazyEffect() {
             }
 
 
-            @media (max-width: 1024px) {
+            @media (max-width: 1280px) {
                 .type-char.crazy-flip {
                     text-shadow: 0 0 15px #ff0077 !important;
                     will-change: transform, filter;

@@ -13,17 +13,25 @@ document.addEventListener('pjax:success', function() {
 
 let lastWidth = window.innerWidth;
 
-// 1. 修复移动端 100vh 问题 (去除浏览器地址栏的影响)
+// 1. 修复移动端 100vh 问题，并在拉伸回桌面端时恢复正常
 function setMobileHeight() {
-    if (window.innerWidth > 960) return;
-    let vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-    
-    // 强制修正 fixed-bg 高度
     var fixedBg = document.querySelector('.fixed-bg');
     var fixedOverlay = document.querySelector('.fixed-bg-overlay');
     var hero = document.querySelector('.air-hero');
+
+    if (window.innerWidth > 960) {
+        // [关键修复] 当用户将窗口从移动端拉伸回桌面端时，必须清除 JS 强加的固定像素高度
+        // 否则首屏会被永远锁定在缩小前的高度，导致截断、波浪云上移、底部留白！
+        if (fixedBg) fixedBg.style.height = '';
+        if (fixedOverlay) fixedOverlay.style.height = '';
+        if (hero) hero.style.height = '';
+        return;
+    }
+
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
     
+    // 强制手机端高度，解决 Safari 地址栏带来的 100vh 跳动
     if (fixedBg) fixedBg.style.height = `${window.innerHeight}px`;
     if (fixedOverlay) fixedOverlay.style.height = `${window.innerHeight}px`;
     if (hero) hero.style.height = `${window.innerHeight}px`;
