@@ -40,6 +40,7 @@
         position: relative; /* 取消 sticky 定位 */
         top: 0;
         margin-top: 20px;
+        transform: none; /* [修复] 重置桌面端的 translateX 偏移，防止手机端左侧被切割 */
     }
 
     /* --- 3. 导航栏适配 --- */
@@ -213,3 +214,4 @@
         padding-left: 15px;
     }
 }
+
