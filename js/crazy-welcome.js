@@ -20,14 +20,7 @@ function initCrazyModeBoot() {
     injectEasterEggStyles();
     bindAvatarEasterEgg();
 
-
     let crazyMemory = localStorage.getItem('air-crazy-mode-override');
-
-    // 由于手机端真实的浏览器（如Via、Edge）在处理绝对定位的疯狂位移时，依然会产生严重的性能和视口闪烁问题
-    // 所以我们重新让移动端保持默认的“封印”状态，只允许手动三击召唤
-    if (crazyMemory === null && window.innerWidth <= 768) {
-        crazyMemory = 'false';
-    }
 
     if (crazyMemory === 'false') {
 
@@ -302,6 +295,15 @@ function applyCrazyEffect() {
                 75%  { top: var(--w-y3); left: var(--w-x3); scale: var(--w-s3); }
                 100% { top: var(--w-y4); left: var(--w-x4); scale: var(--w-s4); }
             }
+
+            
+            @media (hover: none) and (pointer: coarse) {
+                .type-char.crazy-flip {
+                    text-shadow: 0 0 15px #ff0077 !important;
+                    will-change: transform, filter;
+                    transform: translateZ(0);
+                }
+            }
         `;
         document.head.appendChild(style);
     }
@@ -320,10 +322,10 @@ function applyCrazyEffect() {
         // [响应式上下浮动]：
         // 在手机端，固定的 800px 极易让字母向上飞出网页顶端（y < 0），从而触发移动端浏览器的橡皮筋回弹/刷新机制导致剧烈闪屏。
         // 所以我们将其限制为屏幕高度的 40%（即上下浮动最多 20%），保证其在屏幕视口内安全游走！
-        const genY = () => (Math.random() - 0.5) * (window.innerHeight * 0.1); 
+        const genY = () => (Math.random() - 0.5) * (window.innerHeight * 0.9); 
         // 同样为横向 X 轴添加自适应。限定在屏幕宽度的 5%（即左右浮动最多 2.5%）
         // 这样在大屏上能有足够的漂移幅度，而在手机上会自动收缩到几像素，绝对不会撑爆边缘
-        const genX = () => (Math.random() - 0.5) * (window.innerWidth * 0.01); 
+        const genX = () => (Math.random() - 0.5) * (window.innerWidth * 0.1); 
         const genScale = () => (Math.random() * 2 + 1).toFixed(2);
 
         char.style.setProperty('--w-x1', genX() + 'px'); char.style.setProperty('--w-y1', genY() + 'px'); char.style.setProperty('--w-s1', genScale());
