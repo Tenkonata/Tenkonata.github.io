@@ -49,6 +49,7 @@ html, body {
   color: var(--text-dark);
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+    min-height: 100lvh;
   position: relative;
   
   background-color: transparent; 
@@ -77,6 +78,7 @@ a {
   left: 0;
   width: 100%;
   height: 100vh;
+    height: 100lvh;
   background-color: #000; 
   background-position: center;
   background-size: cover;
@@ -98,6 +100,7 @@ a {
   left: 0;
   width: 100%;
   height: 100vh;
+    height: 100lvh;
   background: var(--shadow-30);
   z-index: -998;
   pointer-events: none;
@@ -245,6 +248,7 @@ a {
   position: relative;
   width: 100%;
   height: 100vh;
+    height: 100lvh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -358,6 +362,7 @@ a {
    ========================================= */
 .post-list-section {
     min-height: 100vh;
+    min-height: 100lvh;
     background: transparent; 
     position: relative;
     z-index: 5;
@@ -1200,3 +1205,6 @@ a {
 .toc-link:hover, .toc-link.active {
     color: var(--theme-primary);
 }
+
+
+
