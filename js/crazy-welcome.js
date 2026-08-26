@@ -296,8 +296,8 @@ function applyCrazyEffect() {
                 100% { top: var(--w-y4); left: var(--w-x4); scale: var(--w-s4); }
             }
 
-            
-            @media (hover: none) and (pointer: coarse) {
+
+            @media (max-width: 1024px) {
                 .type-char.crazy-flip {
                     text-shadow: 0 0 15px #ff0077 !important;
                     will-change: transform, filter;
