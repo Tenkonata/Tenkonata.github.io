@@ -159,7 +159,7 @@
       
       <!-- 1. Posts -->
       <div class="stats-item">
-        <span class="stats-count">10</span>
+        <span class="stats-count">11</span>
         <span class="stats-label">Posts</span>
       </div>
 
@@ -246,12 +246,12 @@
       <div class="sidebar-content-box">
         <div class="tag-cloud-list">
           
-            <a href="/tags/hexo/" class="tag-cloud-item">
-              hexo
-            </a>
-          
             <a href="/tags/%E5%A4%A9%E9%A9%AC%E8%A1%8C%E7%A9%BA/" class="tag-cloud-item">
               天马行空
+            </a>
+          
+            <a href="/tags/hexo/" class="tag-cloud-item">
+              hexo
             </a>
           
             <a href="/tags/%E6%B8%B8%E6%88%8F/" class="tag-cloud-item">
@@ -274,6 +274,58 @@
 
     <!-- 右侧：文章列表 (滚动) -->
     <div class="layout-right">
+      
+        <!-- 整个卡片就是一个链接，点击即跳转 -->
+<a href="/posts/Snippet3/" class="post-card card-deep-space fade-in-up">
+  
+  <!-- 标题 -->
+  <h2 class="post-title">
+    Snippet_3
+  </h2>
+
+  <!-- 2. Meta 信息: 创建日期 -> 更新日期 -> Tags -> Categories -->
+  <div class="post-meta">
+    
+    <!-- 1. 创建日期 -->
+    <span class="meta-item">
+      <i class="fa fa-calendar"></i> 2026-08-27
+    </span>
+
+    <!-- 2. 更新日期 (始终显示，不进行比较判断) -->
+    
+      <span class="meta-item" title="Updated: 2026-08-27">
+        <i class="fa fa-edit"></i> 2026-08-27
+      </span>
+    
+    
+    <!-- 3. 标签 (移除逗号) -->
+    
+      <span class="meta-item">
+        <i class="fa fa-tag"></i>
+        
+          <span class="meta-badge">天马行空</span>
+        
+      </span>
+    
+
+    <!-- 4. 分类 (移除逗号) -->
+    
+  </div>
+
+  <!-- 摘要 -->
+  <div class="post-excerpt">
+    讨论：这个世界是否存在魔法
+结论：魔法存在，但不可被探知
+驳回：若无必要，勿增实体
+…
+
+不可探知的魔法？
+是的！尽管普通人是发现不了的。
+说到底，“不可探知”是什么意思呢？
+看不见摸不着？
+让我们尝试定义一下吧：首先是“魔法”——在常人的理解中，是指超越常理的超自然现象。其次是“不可探知”——它并...
+  </div>
+</a>
       
         <!-- 整个卡片就是一个链接，点击即跳转 -->
 <a href="/posts/ThemeTest/" class="post-card card-deep-space fade-in-up">
@@ -717,51 +769,12 @@ Hexo主题开发 - ﹏猴子请来的救兵
   </div>
 </a>
       
-        <!-- 整个卡片就是一个链接，点击即跳转 -->
-<a href="/posts/helloworld/" class="post-card card-deep-space fade-in-up">
-  
-  <!-- 标题 -->
-  <h2 class="post-title">
-    Hello World
-  </h2>
-
-  <!-- 2. Meta 信息: 创建日期 -> 更新日期 -> Tags -> Categories -->
-  <div class="post-meta">
-    
-    <!-- 1. 创建日期 -->
-    <span class="meta-item">
-      <i class="fa fa-calendar"></i> 2025-10-12
-    </span>
-
-    <!-- 2. 更新日期 (始终显示，不进行比较判断) -->
-    
-      <span class="meta-item" title="Updated: 2025-10-12">
-        <i class="fa fa-edit"></i> 2025-10-12
-      </span>
-    
-    
-    <!-- 3. 标签 (移除逗号) -->
-    
-      <span class="meta-item">
-        <i class="fa fa-tag"></i>
-        
-          <span class="meta-badge">hexo</span>
-        
-      </span>
-    
-
-    <!-- 4. 分类 (移除逗号) -->
-    
-  </div>
-
-  <!-- 摘要 -->
-  <div class="post-excerpt">
-    Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in ...
-  </div>
-</a>
-      
       
       <!-- 分页 (如果有) -->
+      
+        <nav class="page-nav">
+          <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-chevron-right"></i></a>
+        </nav>
       
     </div>
 
