@@ -38,7 +38,7 @@
   <script>
     (function() {
       var savedTheme = localStorage.getItem('air-theme-mode');
-      var defaultTheme = 'dark';
+      var defaultTheme = 'light';
       if (savedTheme === 'light' || (!savedTheme && defaultTheme === 'light')) {
         document.documentElement.classList.add('light-mode');
       }
@@ -48,7 +48,7 @@
 <body>
 
   <!-- 全局固定背景 -->
-  <!-- [修改] 增加 --bg-media 变量用于移动端适配 -->
+  <!-- 增加 --bg-media 变量用于移动端适配 -->
   <div class="fixed-bg" 
        style="background-image: url('https://img.paulzzh.com/touhou/random?size=pc'); 
               --bg-media: url('https://img.paulzzh.com/touhou/random?size=wap');">
@@ -105,35 +105,19 @@
     <h3 class="author-name">Tenkonata</h3>
     <p class="author-signature">坐和放宽</p>
     
-    <!-- 数据统计 -->
-    <!-- [修改] 调整了顺序：Posts - Categories - Tags，视觉上更对称 -->
-    <div class="author-stats">
-      
-      <!-- 1. Posts -->
-      <div class="stats-item">
-        <span class="stats-count">11</span>
-        <span class="stats-label">Posts</span>
-      </div>
-
-      <!-- 2. Categories (原第3位，移到中间) -->
-      <div class="stats-item">
-        <span class="stats-count">1</span>
-        <span class="stats-label">Categories</span>
-      </div>
-
-      <!-- 3. Tags (原第2位，移到最后) -->
-      <div class="stats-item">
-        <span class="stats-count">4</span>
-        <span class="stats-label">Tags</span>
-      </div>
-
+    <!-- 动态渲染：统计数字、分类、标签，彻底剥离 HTML 与全局数据状态 -->
+    <div class="author-stats" id="sidebar-stats" data-url="/sidebar.json">
+      <!-- 动态注入的 Stats 骨架 -->
+      <div class="stats-item"><span class="stats-count">-</span><span class="stats-label">Posts</span></div>
+      <div class="stats-item"><span class="stats-count">-</span><span class="stats-label">Categories</span></div>
+      <div class="stats-item"><span class="stats-count">-</span><span class="stats-label">Tags</span></div>
     </div>
   </div>
 
   <!-- 内部 sticky 容器 -->
   <div class="sidebar-sticky">
     
-    <!-- 2. 侧边导航菜单 (常驻显示) -->
+    <!-- 2. 侧边菜单 (静态展示) -->
     <div class="sidebar-menu card-deep-space">
       
         
@@ -160,64 +144,35 @@
       
     </div>
 
-    <!-- 3. Categories 卡片 (可折叠) -->
-    
+    <!-- 3. Categories 卡片 (折叠) -->
     <div class="sidebar-widget card-deep-space collapsible-widget">
       <!-- 标题部分 -->
       <h3 class="sidebar-title toggle-trigger">
         <span><i class="fa fa-folder-open-o"></i> Categories</span>
         <i class="fa fa-chevron-down arrow-icon"></i>
       </h3>
-      
-      <!-- 内容盒子 -->
-      <div class="sidebar-content-box">
+      <!-- 内容盒 -->
+      <div class="sidebar-content-box" id="sidebar-categories">
         <ul class="category-list">
-          
-            <li class="category-list-item">
-              <a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">
-                <span class="category-name">随笔</span>
-                <span class="category-count">2</span>
-              </a>
-            </li>
-          
+          <!-- 动态注入 Categories -->
         </ul>
       </div>
     </div>
-    
 
-    <!-- 4. Tags 卡片 (可折叠) -->
-    
+    <!-- 4. Tags 卡片 (折叠) -->
     <div class="sidebar-widget card-deep-space collapsible-widget">
       <!-- 标题部分 -->
       <h3 class="sidebar-title toggle-trigger">
         <span><i class="fa fa-tags"></i> Tags</span>
         <i class="fa fa-chevron-down arrow-icon"></i>
       </h3>
-      
-      <!-- 内容盒子 -->
-      <div class="sidebar-content-box">
+      <!-- 内容盒 -->
+      <div class="sidebar-content-box" id="sidebar-tags">
         <div class="tag-cloud-list">
-          
-            <a href="/tags/%E5%A4%A9%E9%A9%AC%E8%A1%8C%E7%A9%BA/" class="tag-cloud-item">
-              天马行空
-            </a>
-          
-            <a href="/tags/hexo/" class="tag-cloud-item">
-              hexo
-            </a>
-          
-            <a href="/tags/%E6%B8%B8%E6%88%8F/" class="tag-cloud-item">
-              游戏
-            </a>
-          
-            <a href="/tags/%E6%B5%8B%E8%AF%95/" class="tag-cloud-item">
-              测试
-            </a>
-          
+          <!-- 动态注入 Tags -->
         </div>
       </div>
     </div>
-    
 
   </div> <!-- End .sidebar-sticky -->
 
@@ -241,8 +196,8 @@
 
             <!-- 2. 更新时间 -->
             
-              <span class="meta-item" title="Updated: 2026-08-27 01:28">
-                <i class="fa fa-edit"></i> 2026-08-27
+              <span class="meta-item" title="Updated: 2026-08-28 13:50">
+                <i class="fa fa-edit"></i> 2026-08-28
               </span>
             
 
@@ -262,7 +217,13 @@
 
         <!-- 正文内容 -->
         <div class="post-content">
-          <h2 id="20260827"><a class="markdownIt-Anchor" href="#20260827"></a> 2026/08/27</h2>
+          <h2 id="20260828"><a class="markdownIt-Anchor" href="#20260828"></a> 2026/08/28</h2>
+<ul>
+<li>将数据统计剥离html转为json，降低修改次数</li>
+<li>添加了404页面</li>
+<li>添加PJAX顶部进度条</li>
+</ul>
+<h2 id="20260827"><a class="markdownIt-Anchor" href="#20260827"></a> 2026/08/27</h2>
 <ul>
 <li>尝试修复 移动端 彩蛋卡顿问题</li>
 <li>将vh改为了lvh</li>
@@ -270,7 +231,6 @@
 <h2 id="20260826"><a class="markdownIt-Anchor" href="#20260826"></a> 2026/08/26</h2>
 <ul>
 <li>修复了在移动端下侧边栏左侧被异常裁剪的问题</li>
-<li>回应了08/23的计划：<code>首页连击三下作者头像恢复</code></li>
 </ul>
 <h2 id="20260824"><a class="markdownIt-Anchor" href="#20260824"></a> 2026/08/24</h2>
 <ul>
@@ -288,11 +248,6 @@
 <ul>
 <li>添加了浅色模式</li>
 <li>加入了波浪动画作为一个衔接小巧思</li>
-<li>
-<ul>
-<li>[x] <s>计划添加究极无敌吊炸天动画</s></li>
-</ul>
-</li>
 </ul>
 <h2 id="20260822"><a class="markdownIt-Anchor" href="#20260822"></a> 2026/08/22</h2>
 <ul>
@@ -342,7 +297,7 @@
   </div>
   <div class="toc-content card-deep-space">
     <h3 class="toc-header">大纲</h3>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#20260827"><span class="toc-text"> 2026&#x2F;08&#x2F;27</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20260826"><span class="toc-text"> 2026&#x2F;08&#x2F;26</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20260824"><span class="toc-text"> 2026&#x2F;08&#x2F;24</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20260823"><span class="toc-text"> 2026&#x2F;08&#x2F;23</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20260822"><span class="toc-text"> 2026&#x2F;08&#x2F;22</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20260128"><span class="toc-text"> 2026&#x2F;01&#x2F;28</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20260127"><span class="toc-text"> 2026&#x2F;01&#x2F;27</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#20260828"><span class="toc-text"> 2026&#x2F;08&#x2F;28</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20260827"><span class="toc-text"> 2026&#x2F;08&#x2F;27</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20260826"><span class="toc-text"> 2026&#x2F;08&#x2F;26</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20260824"><span class="toc-text"> 2026&#x2F;08&#x2F;24</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20260823"><span class="toc-text"> 2026&#x2F;08&#x2F;23</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20260822"><span class="toc-text"> 2026&#x2F;08&#x2F;22</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20260128"><span class="toc-text"> 2026&#x2F;01&#x2F;28</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20260127"><span class="toc-text"> 2026&#x2F;01&#x2F;27</span></a></li></ol>
   </div>
 </aside>
 
@@ -367,21 +322,7 @@
   
   <!-- [恢复] 原版 KaTeX 公式解析脚本 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
-  <script>
-    function renderKaTeX() {
-      if (typeof katex === 'undefined') return;
-      document.querySelectorAll('script[type^="math/tex"]').forEach(function(el) {
-        var isDisplay = el.type.includes('mode=display');
-        var span = document.createElement('span');
-        try {
-          katex.render(el.innerText, span, { displayMode: isDisplay, throwOnError: false });
-          el.parentNode.replaceChild(span, el);
-        } catch(e) { console.error("KaTeX error:", e); }
-      });
-    }
-    document.addEventListener("DOMContentLoaded", renderKaTeX);
-    document.addEventListener("pjax:success", renderKaTeX);
-  </script>
+  
   
   <!-- Markdown 专属独立交互脚本 (代码块、Alert等) -->
   <script src="/js/AIRmd.js"></script>
@@ -389,5 +330,37 @@
   <!-- 精神污染恶搞模式 -->
   <script src="/js/crazy-welcome.js"></script>
   
+
+  <!--  PJAX 顶部进度条 (NProgress) -->
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css">
+    <style>
+      #nprogress .bar { background: var(--primary-alpha-80) !important; height: 3px !important; }
+      #nprogress .peg { box-shadow: 0 0 10px var(--primary-alpha-80), 0 0 5px var(--primary-alpha-80) !important; }
+      #nprogress .spinner-icon { border-top-color: var(--primary-alpha-80) !important; border-left-color: var(--primary-alpha-80) !important; }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+    <script>
+      NProgress.configure({ showSpinner: false });
+      var nprogressTimeout;
+      document.addEventListener('pjax:send', function() { 
+        // 延迟 200ms 再显示进度条。如果网页秒开，进度条就不会闪烁了！
+        nprogressTimeout = setTimeout(function() {
+          NProgress.start();
+        }, 200);
+      });
+      document.addEventListener('pjax:complete', function() { 
+        clearTimeout(nprogressTimeout);
+        NProgress.done(); 
+      });
+      document.addEventListener('pjax:error', function() { 
+        clearTimeout(nprogressTimeout);
+        NProgress.done(); 
+      });
+    </script>
+  
 </body>
 </html>
+
+
+

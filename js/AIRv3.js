@@ -6,6 +6,12 @@ var isPaginationClick = false;
 // 1. 定义初始化函数 (处理每次页面切换后需要运行的逻辑)
 function initAIRTheme() {
   
+  // 触发动态侧边栏数据加载
+  loadSidebarData();
+
+  // 渲染数学公式
+  renderKaTeX();
+
   // --- 背景模糊控制 ---
   var fixedBg = document.querySelector('.fixed-bg');
   var isPostPage = document.querySelector('.post-page-card'); 
@@ -292,3 +298,76 @@ document.addEventListener('pjax:success', function() {
 
 console.log('AIR-v3 theme loaded with Pjax.');
 
+
+// --- 动态侧边栏数据加载 ---
+let sidebarDataCache = null;
+
+function renderSidebarData(data) {
+    const statsContainer = document.getElementById('sidebar-stats');
+    if (statsContainer) {
+        statsContainer.innerHTML = `
+            <div class="stats-item"><span class="stats-count">${data.stats.posts}</span><span class="stats-label">Posts</span></div>
+            <div class="stats-item"><span class="stats-count">${data.stats.categories}</span><span class="stats-label">Categories</span></div>
+            <div class="stats-item"><span class="stats-count">${data.stats.tags}</span><span class="stats-label">Tags</span></div>
+        `;
+    }
+
+    const catsContainer = document.querySelector('#sidebar-categories .category-list');
+    if (catsContainer) {
+        if (data.categories.length > 0) {
+            catsContainer.innerHTML = data.categories.map(cat => `
+                <li class="category-list-item">
+                    <a class="category-list-link" href="${cat.path}">
+                        <span class="category-name">${cat.name}</span>
+                        <span class="category-count">${cat.count}</span>
+                    </a>
+                </li>
+            `).join('');
+        } else {
+            catsContainer.parentElement.parentElement.style.display = 'none';
+        }
+    }
+
+    const tagsContainer = document.querySelector('#sidebar-tags .tag-cloud-list');
+    if (tagsContainer) {
+        if (data.tags.length > 0) {
+            tagsContainer.innerHTML = data.tags.map(tag => `
+                <a href="${tag.path}" class="tag-cloud-item">${tag.name}</a>
+            `).join('');
+        } else {
+            tagsContainer.parentElement.parentElement.style.display = 'none';
+        }
+    }
+}
+
+function loadSidebarData() {
+    if (sidebarDataCache) {
+        renderSidebarData(sidebarDataCache);
+        return;
+    }
+    
+    // 从 DOM 中获取安全的 Hexo url_for 路径，防止子目录部署时 404
+    const statsContainer = document.getElementById('sidebar-stats');
+    const fetchUrl = statsContainer ? statsContainer.getAttribute('data-url') : '/sidebar.json';
+
+    fetch(fetchUrl)
+        .then(res => res.json())
+        .then(data => {
+            sidebarDataCache = data;
+            renderSidebarData(data);
+        })
+        .catch(err => console.error('Failed to load sidebar data:', err));
+}
+
+// --- KaTeX 数学公式渲染 ---
+function renderKaTeX() {
+  if (typeof katex === 'undefined') return;
+  document.querySelectorAll('script[type^="math/tex"]').forEach(function(el) {
+    var isDisplay = el.type.includes('mode=display');
+    var span = document.createElement('span');
+    try {
+      katex.render(el.innerText, span, { displayMode: isDisplay, throwOnError: false });
+      el.parentNode.replaceChild(span, el);
+    } catch(e) { console.error("KaTeX error:", e); }
+  });
+}

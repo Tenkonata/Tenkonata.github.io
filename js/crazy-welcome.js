@@ -325,7 +325,7 @@ function applyCrazyEffect() {
         const genY = () => (Math.random() - 0.5) * (window.innerHeight * 0.9); 
         // 同样为横向 X 轴添加自适应。限定在屏幕宽度的 5%（即左右浮动最多 2.5%）
         // 这样在大屏上能有足够的漂移幅度，而在手机上会自动收缩到几像素，绝对不会撑爆边缘
-        const genX = () => (Math.random() - 0.5) * (window.innerWidth * 0.08); 
+        const genX = () => (Math.random() - 0.5) * (window.innerWidth * 0.07); 
         const genScale = () => (Math.random() * 2 + 1).toFixed(2);
 
         char.style.setProperty('--w-x1', genX() + 'px'); char.style.setProperty('--w-y1', genY() + 'px'); char.style.setProperty('--w-s1', genScale());
